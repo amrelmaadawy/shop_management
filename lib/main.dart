@@ -21,7 +21,8 @@ class MyApp extends StatelessWidget {
             supportedLocales: S.delegate.supportedLocales,
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
-      theme: ThemeData.dark(),
+      theme: ThemeData(fontFamily: 'RobotoSlab'),
+      themeMode: ThemeMode.dark,
       home: SplashView(),
     );
   }
