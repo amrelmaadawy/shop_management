@@ -21,5 +21,13 @@ class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'en';
 
   final messages = _notInlinedMessages(_notInlinedMessages);
-  static Map<String, Function> _notInlinedMessages(_) => <String, Function>{};
+  static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+    "homeAppBar": MessageLookupByLibrary.simpleMessage("Overview"),
+    "splashTitel": MessageLookupByLibrary.simpleMessage(
+      "Manage your products, track sales, and generate reports with ease.",
+    ),
+    "splashWelcome": MessageLookupByLibrary.simpleMessage(
+      "Welcome To Shope Manager",
+    ),
+  };
 }

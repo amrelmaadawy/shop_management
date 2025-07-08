@@ -53,6 +53,31 @@ class S {
   static S? maybeOf(BuildContext context) {
     return Localizations.of<S>(context, S);
   }
+
+  /// `Welcome To Shope Manager`
+  String get splashWelcome {
+    return Intl.message(
+      'Welcome To Shope Manager',
+      name: 'splashWelcome',
+      desc: 'welcome message on splash screen',
+      args: [],
+    );
+  }
+
+  /// `Manage your products, track sales, and generate reports with ease.`
+  String get splashTitel {
+    return Intl.message(
+      'Manage your products, track sales, and generate reports with ease.',
+      name: 'splashTitel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Overview`
+  String get homeAppBar {
+    return Intl.message('Overview', name: 'homeAppBar', desc: '', args: []);
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

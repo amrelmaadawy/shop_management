@@ -1,3 +1,11 @@
 {
+    "@@locale": "en",
+
+    "splashWelcome":"Welcome To Shope Manager",
+    "@splashWelcome": {"description": "welcome message on splash screen"},
     
+    "splashTitel":"Manage your products, track sales, and generate reports with ease.",
+    "@splashTitel": {},
+    "homeAppBar":"Overview",
+    "@homeAppBar": {}
 }
