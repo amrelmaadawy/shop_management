@@ -7,5 +7,10 @@
     "splashTitel":"Manage your products, track sales, and generate reports with ease.",
     "@splashTitel": {},
     "homeAppBar":"Overview",
-    "@homeAppBar": {}
+    "@homeAppBar": {},
+    "TotalSales":"Total Sales Today",
+    "@TotalSales": {},
+    "compareTo": "Compared to $1,100 yesterday",
+    "@compareTo": {}
+    
 }

@@ -78,6 +78,26 @@ class S {
   String get homeAppBar {
     return Intl.message('Overview', name: 'homeAppBar', desc: '', args: []);
   }
+
+  /// `Total Sales Today`
+  String get TotalSales {
+    return Intl.message(
+      'Total Sales Today',
+      name: 'TotalSales',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Compared to $1,100 yesterday`
+  String get compareTo {
+    return Intl.message(
+      'Compared to \$1,100 yesterday',
+      name: 'compareTo',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

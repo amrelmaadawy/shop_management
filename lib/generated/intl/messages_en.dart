@@ -22,6 +22,10 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+    "TotalSales": MessageLookupByLibrary.simpleMessage("Total Sales Today"),
+    "compareTo": MessageLookupByLibrary.simpleMessage(
+      "Compared to \$1,100 yesterday",
+    ),
     "homeAppBar": MessageLookupByLibrary.simpleMessage("Overview"),
     "splashTitel": MessageLookupByLibrary.simpleMessage(
       "Manage your products, track sales, and generate reports with ease.",
