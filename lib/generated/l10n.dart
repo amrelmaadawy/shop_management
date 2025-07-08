@@ -98,6 +98,41 @@ class S {
       args: [],
     );
   }
+
+  /// `Total Products in Stock`
+  String get Totalproduct {
+    return Intl.message(
+      'Total Products in Stock',
+      name: 'Totalproduct',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Including 5 new items`
+  String get itemsInclude {
+    return Intl.message(
+      'Including 5 new items',
+      name: 'itemsInclude',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sales Summary`
+  String get salesSummary {
+    return Intl.message(
+      'Sales Summary',
+      name: 'salesSummary',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `This Week`
+  String get thisWeek {
+    return Intl.message('This Week', name: 'thisWeek', desc: '', args: []);
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

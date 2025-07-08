@@ -21,7 +21,27 @@ class MainHomeView extends StatelessWidget {
           padding: const EdgeInsets.all(10.0),
           child: Column(
             children: [
-              HomeItem(),
+              HomeItem(
+                title: S.of(context).TotalSales,
+                numbers: '1000LE',
+                description: S.of(context).compareTo,
+                imagePath: 'assets/images/top sales.png',
+                percentage: '+ 16%',
+              ),
+              HomeItem(
+                title: S.of(context).Totalproduct,
+                numbers: '253',
+                description: S.of(context).itemsInclude,
+                imagePath: 'assets/images/sales.png',
+                percentage: '+ 2%',
+              ),
+              HomeItem(
+                title: S.of(context).salesSummary,
+                numbers: '5000LE',
+                description: S.of(context).thisWeek,
+                imagePath: 'assets/images/product.png',
+                percentage: '+ 10%',
+              ),
             ],
           ),
         ),

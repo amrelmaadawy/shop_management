@@ -11,6 +11,14 @@
     "TotalSales":"Total Sales Today",
     "@TotalSales": {},
     "compareTo": "Compared to $1,100 yesterday",
-    "@compareTo": {}
+    "@compareTo": {},
+     "Totalproduct":"Total Products in Stock",
+    "@Totalproduct": {},
+    "itemsInclude":"Including 5 new items",
+    "@itemsInclude": {},
+    "salesSummary":"Sales Summary",
+    "@salesSummary": {},
+    "thisWeek":"This Week",
+    "@thisWeek": {}
     
 }

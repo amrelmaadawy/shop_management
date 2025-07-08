@@ -23,15 +23,23 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
     "TotalSales": MessageLookupByLibrary.simpleMessage("Total Sales Today"),
+    "Totalproduct": MessageLookupByLibrary.simpleMessage(
+      "Total Products in Stock",
+    ),
     "compareTo": MessageLookupByLibrary.simpleMessage(
       "Compared to \$1,100 yesterday",
     ),
     "homeAppBar": MessageLookupByLibrary.simpleMessage("Overview"),
+    "itemsInclude": MessageLookupByLibrary.simpleMessage(
+      "Including 5 new items",
+    ),
+    "salesSummary": MessageLookupByLibrary.simpleMessage("Sales Summary"),
     "splashTitel": MessageLookupByLibrary.simpleMessage(
       "Manage your products, track sales, and generate reports with ease.",
     ),
     "splashWelcome": MessageLookupByLibrary.simpleMessage(
       "Welcome To Shope Manager",
     ),
+    "thisWeek": MessageLookupByLibrary.simpleMessage("This Week"),
   };
 }

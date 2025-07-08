@@ -1,13 +1,20 @@
-
 import 'package:flutter/material.dart';
 import 'package:small_managements/core/utils/app_colors.dart';
-import 'package:small_managements/generated/l10n.dart';
 
 class HomeItem extends StatelessWidget {
   const HomeItem({
     super.key,
+    required this.title,
+    required this.numbers,
+    required this.description,
+    required this.imagePath,
+    required this.percentage,
   });
-
+  final String title;
+  final String numbers;
+  final String description;
+  final String imagePath;
+  final String percentage;
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -16,23 +23,17 @@ class HomeItem extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              S.of(context).TotalSales,
-              style: TextStyle(
-                color: AppColors.khomeTextColor,
-                fontSize: 16,
-              ),
+              title,
+              style: TextStyle(color: AppColors.khomeTextColor, fontSize: 16),
             ),
             SizedBox(height: 5),
             Text(
-              '\$1,000',
-              style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-              ),
+              numbers,
+              style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
             ),
             SizedBox(height: 5),
             Text(
-              S.of(context).compareTo,
+              description,
               style: TextStyle(color: AppColors.khomeTextColor),
             ),
             SizedBox(height: 10),
@@ -46,7 +47,7 @@ class HomeItem extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text('+16%', style: TextStyle(color: Colors.white)),
+                  Text(percentage, style: TextStyle(color: Colors.white)),
                   SizedBox(width: 5),
                   Icon(
                     Icons.arrow_upward_outlined,
@@ -62,7 +63,7 @@ class HomeItem extends StatelessWidget {
         SizedBox(
           width: MediaQuery.of(context).size.width * 0.38,
           height: 150,
-          child: Image.asset('assets/images/top sales.png'),
+          child: Image.asset(imagePath),
         ),
       ],
     );
