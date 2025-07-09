@@ -47,13 +47,9 @@ class HomeItem extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(percentage, style: TextStyle(color: Colors.white)),
+                  Text(percentage),
                   SizedBox(width: 5),
-                  Icon(
-                    Icons.arrow_upward_outlined,
-                    color: Colors.white,
-                    size: 18,
-                  ),
+                  Icon(Icons.arrow_upward_outlined, size: 18),
                 ],
               ),
             ),

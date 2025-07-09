@@ -19,6 +19,9 @@
     "salesSummary":"Sales Summary",
     "@salesSummary": {},
     "thisWeek":"This Week",
-    "@thisWeek": {}
-    
+    "@thisWeek": {},
+     "addProduct":"Add Product",
+    "@addProduct": {},
+    "makeSale":"Make Sale",
+    "@makeSale": {}
 }

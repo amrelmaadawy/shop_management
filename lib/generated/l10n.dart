@@ -133,6 +133,16 @@ class S {
   String get thisWeek {
     return Intl.message('This Week', name: 'thisWeek', desc: '', args: []);
   }
+
+  /// `Add Product`
+  String get addProduct {
+    return Intl.message('Add Product', name: 'addProduct', desc: '', args: []);
+  }
+
+  /// `Make Sale`
+  String get makeSale {
+    return Intl.message('Make Sale', name: 'makeSale', desc: '', args: []);
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

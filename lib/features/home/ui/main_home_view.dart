@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:small_managements/features/home/ui/widgets/home_item.dart';
-import 'package:small_managements/generated/l10n.dart';
+import 'package:small_managements/core/utils/app_colors.dart';
+import 'package:small_managements/features/home/ui/home_view.dart';
 
 class MainHomeView extends StatelessWidget {
   const MainHomeView({super.key});
@@ -8,44 +8,32 @@ class MainHomeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          S.of(context).homeAppBar,
-          style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-        ),
-        centerTitle: true,
-        actions: [IconButton(onPressed: () {}, icon: Icon(Icons.settings))],
-      ),
-      body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(10.0),
-          child: Column(
-            children: [
-              HomeItem(
-                title: S.of(context).TotalSales,
-                numbers: '1000LE',
-                description: S.of(context).compareTo,
-                imagePath: 'assets/images/top sales.png',
-                percentage: '+ 16%',
-              ),
-              HomeItem(
-                title: S.of(context).Totalproduct,
-                numbers: '253',
-                description: S.of(context).itemsInclude,
-                imagePath: 'assets/images/sales.png',
-                percentage: '+ 2%',
-              ),
-              HomeItem(
-                title: S.of(context).salesSummary,
-                numbers: '5000LE',
-                description: S.of(context).thisWeek,
-                imagePath: 'assets/images/product.png',
-                percentage: '+ 10%',
-              ),
-            ],
+      bottomNavigationBar: BottomNavigationBar(
+        selectedItemColor: Colors.white,
+        currentIndex: 1,
+        type: BottomNavigationBarType.fixed,
+        showUnselectedLabels: true,
+        backgroundColor: AppColors.kButtonNavBarColor,
+        unselectedLabelStyle: TextStyle(color: AppColors.kUnselectedIconColor),
+        unselectedItemColor: AppColors.kUnselectedIconColor,
+        items: [
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
+          BottomNavigationBarItem(icon: Icon(Icons.add_box), label: 'Products'),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.leaderboard),
+            label: 'Sales',
           ),
-        ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.report_problem),
+            label: 'reports',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.settings),
+            label: 'settings',
+          ),
+        ],
       ),
+      body: HomeView(),
     );
   }
 }

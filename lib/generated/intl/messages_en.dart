@@ -26,6 +26,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "Totalproduct": MessageLookupByLibrary.simpleMessage(
       "Total Products in Stock",
     ),
+    "addProduct": MessageLookupByLibrary.simpleMessage("Add Product"),
     "compareTo": MessageLookupByLibrary.simpleMessage(
       "Compared to \$1,100 yesterday",
     ),
@@ -33,6 +34,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "itemsInclude": MessageLookupByLibrary.simpleMessage(
       "Including 5 new items",
     ),
+    "makeSale": MessageLookupByLibrary.simpleMessage("Make Sale"),
     "salesSummary": MessageLookupByLibrary.simpleMessage("Sales Summary"),
     "splashTitel": MessageLookupByLibrary.simpleMessage(
       "Manage your products, track sales, and generate reports with ease.",
