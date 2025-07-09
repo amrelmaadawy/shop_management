@@ -35,5 +35,11 @@
     "settings":"Settings",
     "@settings": {},
      "searchProduct":"Search Product",
-    "@searchProduct": {}
+    "@searchProduct": {},
+    "category":"Category",
+    "@category": {},
+    "price":"Price",
+    "@price": {},
+    "stock":"Stock",
+    "@stock": {}
 }

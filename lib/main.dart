@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:small_managements/core/utils/app_colors.dart';
 import 'package:small_managements/features/splash/ui/splash_view.dart';
 import 'package:small_managements/generated/l10n.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -22,8 +23,10 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData.dark().copyWith(
+        scaffoldBackgroundColor: AppColors.kBackgroundColor,
         textTheme: ThemeData.dark().textTheme.apply(
               fontFamily: 'RobotoSlab',
+              
             ),
       ),
       home: SplashView(),

@@ -27,6 +27,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Total Products in Stock",
     ),
     "addProduct": MessageLookupByLibrary.simpleMessage("Add Product"),
+    "category": MessageLookupByLibrary.simpleMessage("Category"),
     "compareTo": MessageLookupByLibrary.simpleMessage(
       "Compared to \$1,100 yesterday",
     ),
@@ -36,6 +37,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Including 5 new items",
     ),
     "makeSale": MessageLookupByLibrary.simpleMessage("Make Sale"),
+    "price": MessageLookupByLibrary.simpleMessage("Price"),
     "products": MessageLookupByLibrary.simpleMessage("Products"),
     "reports": MessageLookupByLibrary.simpleMessage("Reports"),
     "sales": MessageLookupByLibrary.simpleMessage("Sales"),
@@ -48,6 +50,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "splashWelcome": MessageLookupByLibrary.simpleMessage(
       "Welcome To Shope Manager",
     ),
+    "stock": MessageLookupByLibrary.simpleMessage("Stock"),
     "thisWeek": MessageLookupByLibrary.simpleMessage("This Week"),
   };
 }
