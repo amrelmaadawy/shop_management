@@ -30,12 +30,18 @@ class MessageLookup extends MessageLookupByLibrary {
     "compareTo": MessageLookupByLibrary.simpleMessage(
       "Compared to \$1,100 yesterday",
     ),
+    "home": MessageLookupByLibrary.simpleMessage("Home"),
     "homeAppBar": MessageLookupByLibrary.simpleMessage("Overview"),
     "itemsInclude": MessageLookupByLibrary.simpleMessage(
       "Including 5 new items",
     ),
     "makeSale": MessageLookupByLibrary.simpleMessage("Make Sale"),
+    "products": MessageLookupByLibrary.simpleMessage("Products"),
+    "reports": MessageLookupByLibrary.simpleMessage("Reports"),
+    "sales": MessageLookupByLibrary.simpleMessage("Sales"),
     "salesSummary": MessageLookupByLibrary.simpleMessage("Sales Summary"),
+    "searchProduct": MessageLookupByLibrary.simpleMessage("Search Product"),
+    "settings": MessageLookupByLibrary.simpleMessage("Settings"),
     "splashTitel": MessageLookupByLibrary.simpleMessage(
       "Manage your products, track sales, and generate reports with ease.",
     ),

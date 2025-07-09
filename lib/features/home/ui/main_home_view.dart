@@ -5,6 +5,7 @@ import 'package:small_managements/features/products/ui/products_view.dart';
 import 'package:small_managements/features/reports/ui/reports_view.dart';
 import 'package:small_managements/features/sales/ui/sales_view.dart';
 import 'package:small_managements/features/settings/ui/settings_view.dart';
+import 'package:small_managements/generated/l10n.dart';
 
 class MainHomeView extends StatefulWidget {
   const MainHomeView({super.key});
@@ -38,22 +39,22 @@ class _MainHomeViewState extends State<MainHomeView> {
         type: BottomNavigationBarType.fixed,
         showUnselectedLabels: true,
         backgroundColor: AppColors.kButtonNavBarColor,
-        unselectedLabelStyle: TextStyle(color: AppColors.kUnselectedIconColor),
-        unselectedItemColor: AppColors.kUnselectedIconColor,
+        unselectedLabelStyle: TextStyle(color: AppColors.kPrimeryColor),
+        unselectedItemColor: AppColors.kPrimeryColor,
         items: [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-          BottomNavigationBarItem(icon: Icon(Icons.add_box), label: 'Products'),
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: S.of(context).home),
+          BottomNavigationBarItem(icon: Icon(Icons.add_box), label:  S.of(context).products),
           BottomNavigationBarItem(
             icon: Icon(Icons.leaderboard),
-            label: 'Sales',
+            label:  S.of(context).sales,
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.report_problem),
-            label: 'reports',
+            label:  S.of(context).reports,
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.settings),
-            label: 'settings',
+            label:  S.of(context).settings,
           ),
         ],
       ),

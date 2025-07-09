@@ -23,5 +23,17 @@
      "addProduct":"Add Product",
     "@addProduct": {},
     "makeSale":"Make Sale",
-    "@makeSale": {}
+    "@makeSale": {},
+    "home":"Home",
+    "@home": {},
+    "products":"Products",
+    "@products": {},
+    "sales":"Sales",
+    "@sales": {},
+    "reports":"Reports",
+    "@reports": {},
+    "settings":"Settings",
+    "@settings": {},
+     "searchProduct":"Search Product",
+    "@searchProduct": {}
 }

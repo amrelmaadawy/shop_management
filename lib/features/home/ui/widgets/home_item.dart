@@ -24,7 +24,7 @@ class HomeItem extends StatelessWidget {
           children: [
             Text(
               title,
-              style: TextStyle(color: AppColors.khomeTextColor, fontSize: 16),
+              style: TextStyle(color: AppColors.kPrimeryColor, fontSize: 16),
             ),
             SizedBox(height: 5),
             Text(
@@ -34,7 +34,7 @@ class HomeItem extends StatelessWidget {
             SizedBox(height: 5),
             Text(
               description,
-              style: TextStyle(color: AppColors.khomeTextColor),
+              style: TextStyle(color: AppColors.kPrimeryColor),
             ),
             SizedBox(height: 10),
             Container(

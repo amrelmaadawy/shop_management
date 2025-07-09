@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       theme: ThemeData.dark().copyWith(
         textTheme: ThemeData.dark().textTheme.apply(
-              fontFamily: 'Zain',
+              fontFamily: 'RobotoSlab',
             ),
       ),
       home: SplashView(),
