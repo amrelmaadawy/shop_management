@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:small_managements/core/utils/app_colors.dart';
+import 'package:small_managements/features/products/ui/add_product.dart';
 import 'package:small_managements/generated/l10n.dart';
 
 class HomeButtons extends StatelessWidget {
@@ -17,7 +18,10 @@ class HomeButtons extends StatelessWidget {
           style: ElevatedButton.styleFrom(
             backgroundColor: AppColors.kAddProductButtonColor,
           ),
-          onPressed: () {},
+          onPressed: () { Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => AddProduct()),
+          );},
           child: Text(
             S.of(context).addProduct,
             style: TextStyle(

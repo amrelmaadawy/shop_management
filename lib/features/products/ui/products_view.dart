@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:small_managements/core/utils/app_colors.dart';
+import 'package:small_managements/features/products/ui/add_product.dart';
 import 'package:small_managements/features/products/ui/widgets/custom_product_container.dart';
 import 'package:small_managements/features/products/ui/widgets/custom_text_form_field.dart';
 import 'package:small_managements/features/products/ui/widgets/product_item.dart';
@@ -14,7 +15,12 @@ class ProductsView extends StatelessWidget {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         backgroundColor: AppColors.kAddProductButtonColor,
-        onPressed: () {},
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => AddProduct()),
+          );
+        },
         child: Icon(Icons.add, color: Colors.black),
       ),
       body: SafeArea(
@@ -24,7 +30,7 @@ class ProductsView extends StatelessWidget {
             children: [
               Text(
                 S.of(context).products,
-                style: TextStyle(fontSize: 23, fontWeight: FontWeight.bold),
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
               SizedBox(height: 10),
               CustomTextFormField(

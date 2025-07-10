@@ -41,5 +41,19 @@
     "price":"Price",
     "@price": {},
     "stock":"Stock",
-    "@stock": {}
+    "@stock": {},
+    "productName":"Product Name",
+    "@productName": {},
+    "quantity":"Quantity",
+    "@quantity": {},
+     "productImage":"Product Image",
+    "@productImage": {},
+     "addImage":"Add Image",
+    "@addImage": {},
+     "tapToAdd":"Tap to add an image from your gallery or take a new one.",
+    "@tapToAdd": {},
+     "save":"Save",
+    "@save": {},
+     "cancel":"Cancel",
+    "@cancel": {}
 }

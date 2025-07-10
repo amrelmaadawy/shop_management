@@ -193,6 +193,56 @@ class S {
   String get stock {
     return Intl.message('Stock', name: 'stock', desc: '', args: []);
   }
+
+  /// `Product Name`
+  String get productName {
+    return Intl.message(
+      'Product Name',
+      name: 'productName',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Quantity`
+  String get quantity {
+    return Intl.message('Quantity', name: 'quantity', desc: '', args: []);
+  }
+
+  /// `Product Image`
+  String get productImage {
+    return Intl.message(
+      'Product Image',
+      name: 'productImage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Add Image`
+  String get addImage {
+    return Intl.message('Add Image', name: 'addImage', desc: '', args: []);
+  }
+
+  /// `Tap to add an image from your gallery or take a new one.`
+  String get tapToAdd {
+    return Intl.message(
+      'Tap to add an image from your gallery or take a new one.',
+      name: 'tapToAdd',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Save`
+  String get save {
+    return Intl.message('Save', name: 'save', desc: '', args: []);
+  }
+
+  /// `Cancel`
+  String get cancel {
+    return Intl.message('Cancel', name: 'cancel', desc: '', args: []);
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

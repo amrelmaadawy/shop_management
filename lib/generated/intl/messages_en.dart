@@ -26,7 +26,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "Totalproduct": MessageLookupByLibrary.simpleMessage(
       "Total Products in Stock",
     ),
+    "addImage": MessageLookupByLibrary.simpleMessage("Add Image"),
     "addProduct": MessageLookupByLibrary.simpleMessage("Add Product"),
+    "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
     "category": MessageLookupByLibrary.simpleMessage("Category"),
     "compareTo": MessageLookupByLibrary.simpleMessage(
       "Compared to \$1,100 yesterday",
@@ -38,10 +40,14 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "makeSale": MessageLookupByLibrary.simpleMessage("Make Sale"),
     "price": MessageLookupByLibrary.simpleMessage("Price"),
+    "productImage": MessageLookupByLibrary.simpleMessage("Product Image"),
+    "productName": MessageLookupByLibrary.simpleMessage("Product Name"),
     "products": MessageLookupByLibrary.simpleMessage("Products"),
+    "quantity": MessageLookupByLibrary.simpleMessage("Quantity"),
     "reports": MessageLookupByLibrary.simpleMessage("Reports"),
     "sales": MessageLookupByLibrary.simpleMessage("Sales"),
     "salesSummary": MessageLookupByLibrary.simpleMessage("Sales Summary"),
+    "save": MessageLookupByLibrary.simpleMessage("Save"),
     "searchProduct": MessageLookupByLibrary.simpleMessage("Search Product"),
     "settings": MessageLookupByLibrary.simpleMessage("Settings"),
     "splashTitel": MessageLookupByLibrary.simpleMessage(
@@ -51,6 +57,9 @@ class MessageLookup extends MessageLookupByLibrary {
       "Welcome To Shope Manager",
     ),
     "stock": MessageLookupByLibrary.simpleMessage("Stock"),
+    "tapToAdd": MessageLookupByLibrary.simpleMessage(
+      "Tap to add an image from your gallery or take a new one.",
+    ),
     "thisWeek": MessageLookupByLibrary.simpleMessage("This Week"),
   };
 }
