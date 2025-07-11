@@ -14,124 +14,143 @@ class AddProduct extends StatelessWidget {
     TextEditingController quantityController = TextEditingController();
     List<String> categories = ['cups', 'dishies'];
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          S.of(context).addProduct,
-          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
-        ),
-        centerTitle: true,
-      ),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(10.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              CustomTextFormField(
-                controller: productNameController,
-                keyboardType: TextInputType.text,
-                labelText: S.of(context).productName,
-              ),
-              CustomTextFormField(
-                controller: priceController,
-                keyboardType: TextInputType.number,
-                labelText: S.of(context).price,
-              ),
-              CustomTextFormField(
-                controller: quantityController,
-                keyboardType: TextInputType.number,
-                labelText: S.of(context).quantity,
-              ),
-              GestureDetector(
-                onTap: () async {
-                  await showMenu<String>(
-                    context: context,
-                    position: RelativeRect.fromLTRB(100, 300, 100, 100),
-                    items: categories
-                        .map((e) => PopupMenuItem(value: e, child: Text(e)))
-                        .toList(),
-                  );
-                },
-                child: AbsorbPointer(
-                  child: CustomTextFormField(
-                    controller: quantityController,
-                    keyboardType: TextInputType.number,
-                    labelText: S.of(context).category,
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  children: [
+                    IconButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      icon: Icon(Icons.arrow_back_ios),
+                    ),
+                    Text(
+                      S.of(context).addProduct,
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20,
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(height: 10),
+
+                CustomTextFormField(
+                  controller: productNameController,
+                  keyboardType: TextInputType.text,
+                  labelText: S.of(context).productName,
+                ),
+                SizedBox(height: 15),
+                CustomTextFormField(
+                  controller: priceController,
+                  keyboardType: TextInputType.number,
+                  labelText: S.of(context).price,
+                ),
+                SizedBox(height: 15),
+                CustomTextFormField(
+                  controller: quantityController,
+                  keyboardType: TextInputType.number,
+                  labelText: S.of(context).quantity,
+                ),
+                SizedBox(height: 15),
+                GestureDetector(
+                  onTap: () async {
+                    await showMenu<String>(
+                      context: context,
+                      position: RelativeRect.fromLTRB(100, 300, 100, 100),
+                      items: categories
+                          .map((e) => PopupMenuItem(value: e, child: Text(e)))
+                          .toList(),
+                    );
+                  },
+                  child: AbsorbPointer(
+                    child: CustomTextFormField(
+                      controller: quantityController,
+                      keyboardType: TextInputType.number,
+                      labelText: S.of(context).category,
+                    ),
                   ),
                 ),
-              ),
-              Text(
-                S.of(context).productImage,
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-              ),
-              SizedBox(
-                width: MediaQuery.of(context).size.width,
-                height: 250,
-                child: DottedBorder(
-                  options: RectDottedBorderOptions(
-                    color: AppColors.kIncreaseContainerColor,
-                    dashPattern: [10, 5],
-                    strokeWidth: 2,
-                    padding: EdgeInsets.all(16),
-                  ),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      SizedBox(height: 40),
-                      Text(
-                        S.of(context).addImage,
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      Text(S.of(context).tapToAdd),
-                      SizedBox(height: 24),
-
-                      ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: AppColors.kIncreaseContainerColor,
-                        ),
-                        onPressed: () {},
-                        child: Text(
+                SizedBox(height: 20),
+                Text(
+                  S.of(context).productImage,
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                ),
+                SizedBox(height: 10),
+                SizedBox(
+                  width: MediaQuery.of(context).size.width,
+                  height: 250,
+                  child: DottedBorder(
+                    options: RectDottedBorderOptions(
+                      color: AppColors.kIncreaseContainerColor,
+                      dashPattern: [10, 5],
+                      strokeWidth: 2 ,
+                      padding: EdgeInsets.all(16),
+                    ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        SizedBox(height: 40),
+                        Text(
                           S.of(context).addImage,
-                          style: TextStyle(color: Colors.white),
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
-                      ),
-                      SizedBox(height: 40),
-                    ],
+                        Text(S.of(context).tapToAdd),
+                        SizedBox(height: 24),
+
+                        ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: AppColors.kIncreaseContainerColor,
+                          ),
+                          onPressed: () {},
+                          child: Text(
+                            S.of(context).addImage,
+                            style: TextStyle(color: Colors.white),
+                          ),
+                        ),
+                        SizedBox(height: 40),
+                      ],
+                    ),
                   ),
                 ),
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: AppColors.kIncreaseContainerColor,
+                SizedBox(height: 15),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: AppColors.kIncreaseContainerColor,
+                      ),
+                      onPressed: () {},
+                      child: Text(
+                        S.of(context).cancel,
+                        style: TextStyle(color: Colors.white),
+                      ),
                     ),
-                    onPressed: () {},
-                    child: Text(
-                      S.of(context).cancel,
-                      style: TextStyle(color: Colors.white),
-                    ),
-                  ),
 
-                  ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: AppColors.kAddProductButtonColor,
+                    ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: AppColors.kAddProductButtonColor,
+                      ),
+                      onPressed: () {},
+                      child: Text(
+                        S.of(context).save,
+                        style: TextStyle(color: Colors.black),
+                      ),
                     ),
-                    onPressed: () {},
-                    child: Text(
-                      S.of(context).save,
-                      style: TextStyle(color: Colors.black),
-                    ),
-                  ),
-                ],
-              ),
-            ],
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
       ),

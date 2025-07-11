@@ -40,10 +40,14 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "makeSale": MessageLookupByLibrary.simpleMessage("Make Sale"),
     "price": MessageLookupByLibrary.simpleMessage("Price"),
+    "product": MessageLookupByLibrary.simpleMessage("Product"),
     "productImage": MessageLookupByLibrary.simpleMessage("Product Image"),
     "productName": MessageLookupByLibrary.simpleMessage("Product Name"),
     "products": MessageLookupByLibrary.simpleMessage("Products"),
     "quantity": MessageLookupByLibrary.simpleMessage("Quantity"),
+    "recentTransactions": MessageLookupByLibrary.simpleMessage(
+      "Recent Transactions",
+    ),
     "reports": MessageLookupByLibrary.simpleMessage("Reports"),
     "sales": MessageLookupByLibrary.simpleMessage("Sales"),
     "salesSummary": MessageLookupByLibrary.simpleMessage("Sales Summary"),
@@ -61,5 +65,12 @@ class MessageLookup extends MessageLookupByLibrary {
       "Tap to add an image from your gallery or take a new one.",
     ),
     "thisWeek": MessageLookupByLibrary.simpleMessage("This Week"),
+    "totalProductSold": MessageLookupByLibrary.simpleMessage(
+      "Total Product Sold Today",
+    ),
+    "totalProfit": MessageLookupByLibrary.simpleMessage("Total Profit Today"),
+    "totalSalesToday": MessageLookupByLibrary.simpleMessage(
+      "Total Sales Today",
+    ),
   };
 }

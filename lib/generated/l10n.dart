@@ -243,6 +243,51 @@ class S {
   String get cancel {
     return Intl.message('Cancel', name: 'cancel', desc: '', args: []);
   }
+
+  /// `Total Sales Today`
+  String get totalSalesToday {
+    return Intl.message(
+      'Total Sales Today',
+      name: 'totalSalesToday',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Total Product Sold Today`
+  String get totalProductSold {
+    return Intl.message(
+      'Total Product Sold Today',
+      name: 'totalProductSold',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Total Profit Today`
+  String get totalProfit {
+    return Intl.message(
+      'Total Profit Today',
+      name: 'totalProfit',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Recent Transactions`
+  String get recentTransactions {
+    return Intl.message(
+      'Recent Transactions',
+      name: 'recentTransactions',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Product`
+  String get product {
+    return Intl.message('Product', name: 'product', desc: '', args: []);
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

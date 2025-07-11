@@ -55,5 +55,15 @@
      "save":"Save",
     "@save": {},
      "cancel":"Cancel",
-    "@cancel": {}
+    "@cancel": {},
+    "totalSalesToday":"Total Sales Today",
+    "@totalSalesToday": {},
+    "totalProductSold":"Total Product Sold Today",
+    "@totalProductSold": {},
+     "totalProfit":"Total Profit Today",
+    "@totalProfit": {},
+      "recentTransactions":"Recent Transactions",
+    "@recentTransactions": {},
+     "product":"Product",
+    "@product": {}
 }
