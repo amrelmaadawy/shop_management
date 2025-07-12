@@ -33,6 +33,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "compareTo": MessageLookupByLibrary.simpleMessage(
       "Compared to \$1,100 yesterday",
     ),
+    "confirmeSale": MessageLookupByLibrary.simpleMessage("Confirm Sale"),
     "home": MessageLookupByLibrary.simpleMessage("Home"),
     "homeAppBar": MessageLookupByLibrary.simpleMessage("Overview"),
     "itemsInclude": MessageLookupByLibrary.simpleMessage(
@@ -45,6 +46,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "productName": MessageLookupByLibrary.simpleMessage("Product Name"),
     "products": MessageLookupByLibrary.simpleMessage("Products"),
     "quantity": MessageLookupByLibrary.simpleMessage("Quantity"),
+    "quantitySold": MessageLookupByLibrary.simpleMessage("Quantity Sold"),
     "recentTransactions": MessageLookupByLibrary.simpleMessage(
       "Recent Transactions",
     ),
@@ -53,6 +55,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "salesSummary": MessageLookupByLibrary.simpleMessage("Sales Summary"),
     "save": MessageLookupByLibrary.simpleMessage("Save"),
     "searchProduct": MessageLookupByLibrary.simpleMessage("Search Product"),
+    "selectProduct": MessageLookupByLibrary.simpleMessage("Select Product"),
     "settings": MessageLookupByLibrary.simpleMessage("Settings"),
     "splashTitel": MessageLookupByLibrary.simpleMessage(
       "Manage your products, track sales, and generate reports with ease.",

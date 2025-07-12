@@ -64,6 +64,12 @@
     "@totalProfit": {},
       "recentTransactions":"Recent Transactions",
     "@recentTransactions": {},
-     "product":"Product",
-    "@product": {}
+    "product":"Product",
+    "@product": {},
+    "confirmeSale":"Confirm Sale",
+    "@confirmeSale": {},
+    "quantitySold":"Quantity Sold",
+    "@quantitySold": {},
+     "selectProduct":"Select Product",
+    "@selectProduct": {}
 }

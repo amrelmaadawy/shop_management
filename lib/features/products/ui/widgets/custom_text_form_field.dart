@@ -8,11 +8,12 @@ class CustomTextFormField extends StatelessWidget {
     required this.keyboardType,
     this.prefixIcon,
     required this.labelText,
-    this.validator,
+    this.validator, this.suffixIcon,
   });
   final TextEditingController controller;
   final TextInputType keyboardType;
   final Widget? prefixIcon;
+  final Widget? suffixIcon;
   final String labelText;
   final String? Function(String?)? validator;
   @override
@@ -25,6 +26,7 @@ class CustomTextFormField extends StatelessWidget {
       cursorColor: AppColors.kPrimeryColor,
       decoration: InputDecoration(
         prefixIcon: prefixIcon,
+        suffixIcon: suffixIcon,
         labelText: labelText,
         labelStyle: const TextStyle(
           color: AppColors.kPrimeryColor,

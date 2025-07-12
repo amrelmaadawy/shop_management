@@ -12,6 +12,7 @@ class AddProduct extends StatelessWidget {
     TextEditingController productNameController = TextEditingController();
     TextEditingController priceController = TextEditingController();
     TextEditingController quantityController = TextEditingController();
+    TextEditingController categoryController = TextEditingController();
     List<String> categories = ['cups', 'dishies'];
     return Scaffold(
       body: SafeArea(
@@ -70,7 +71,7 @@ class AddProduct extends StatelessWidget {
                   },
                   child: AbsorbPointer(
                     child: CustomTextFormField(
-                      controller: quantityController,
+                      controller: categoryController,
                       keyboardType: TextInputType.number,
                       labelText: S.of(context).category,
                     ),

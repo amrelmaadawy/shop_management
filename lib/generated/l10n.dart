@@ -288,6 +288,36 @@ class S {
   String get product {
     return Intl.message('Product', name: 'product', desc: '', args: []);
   }
+
+  /// `Confirm Sale`
+  String get confirmeSale {
+    return Intl.message(
+      'Confirm Sale',
+      name: 'confirmeSale',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Quantity Sold`
+  String get quantitySold {
+    return Intl.message(
+      'Quantity Sold',
+      name: 'quantitySold',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Select Product`
+  String get selectProduct {
+    return Intl.message(
+      'Select Product',
+      name: 'selectProduct',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
