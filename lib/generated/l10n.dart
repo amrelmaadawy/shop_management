@@ -348,6 +348,51 @@ class S {
   String get sold {
     return Intl.message('Sold', name: 'sold', desc: '', args: []);
   }
+
+  /// `App Prefrances`
+  String get appPrefrance {
+    return Intl.message(
+      'App Prefrances',
+      name: 'appPrefrance',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Dark Mode`
+  String get darkMode {
+    return Intl.message('Dark Mode', name: 'darkMode', desc: '', args: []);
+  }
+
+  /// `Language`
+  String get language {
+    return Intl.message('Language', name: 'language', desc: '', args: []);
+  }
+
+  /// `Business Info`
+  String get businessInfo {
+    return Intl.message(
+      'Business Info',
+      name: 'businessInfo',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Shop Name`
+  String get shopName {
+    return Intl.message('Shop Name', name: 'shopName', desc: '', args: []);
+  }
+
+  /// `Phone Number`
+  String get phoneNumber {
+    return Intl.message(
+      'Phone Number',
+      name: 'phoneNumber',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

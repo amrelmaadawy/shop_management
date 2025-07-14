@@ -52,7 +52,6 @@ class ReportsView extends StatelessWidget {
                     ],
                   ),
                 ),
-
                 Text(S.of(context).dateRange, style: TextStyle(fontSize: 16)),
                 SizedBox(height: 10),
                 CustomTextFormField(

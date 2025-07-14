@@ -80,6 +80,18 @@
     "@orders": {},
     "topSellingItems":"Top Selling Items",
     "@topSellingItems": {},
-      "sold":"Sold",
-    "@sold": {}
+    "sold":"Sold",
+    "@sold": {},
+    "appPrefrance":"App Prefrances",
+    "@appPrefrance": {},
+    "darkMode":"Dark Mode",
+    "@darkMode": {},
+    "language":"Language",
+    "@language": {},
+    "businessInfo":"Business Info",
+    "@businessInfo": {},
+     "shopName":"Shop Name",
+    "@shopName": {},
+     "phoneNumber":"Phone Number",
+    "@phoneNumber": {}
 }
