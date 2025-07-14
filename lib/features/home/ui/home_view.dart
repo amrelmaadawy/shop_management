@@ -23,7 +23,7 @@ class HomeView extends StatelessWidget {
           child: Column(
             children: [
               HomeItem(
-                title: S.of(context).TotalSales,
+                title: S.of(context).TotalSalesToday,
                 numbers: '1000LE',
                 description: S.of(context).compareTo,
                 imagePath: 'assets/images/top sales.png',

@@ -22,7 +22,9 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
-    "TotalSales": MessageLookupByLibrary.simpleMessage("Total Sales Today"),
+    "TotalSalesToday": MessageLookupByLibrary.simpleMessage(
+      "Total Sales Today",
+    ),
     "Totalproduct": MessageLookupByLibrary.simpleMessage(
       "Total Products in Stock",
     ),
@@ -34,12 +36,14 @@ class MessageLookup extends MessageLookupByLibrary {
       "Compared to \$1,100 yesterday",
     ),
     "confirmeSale": MessageLookupByLibrary.simpleMessage("Confirm Sale"),
+    "dateRange": MessageLookupByLibrary.simpleMessage("Date Range"),
     "home": MessageLookupByLibrary.simpleMessage("Home"),
     "homeAppBar": MessageLookupByLibrary.simpleMessage("Overview"),
     "itemsInclude": MessageLookupByLibrary.simpleMessage(
       "Including 5 new items",
     ),
     "makeSale": MessageLookupByLibrary.simpleMessage("Make Sale"),
+    "orders": MessageLookupByLibrary.simpleMessage("Orders"),
     "price": MessageLookupByLibrary.simpleMessage("Price"),
     "product": MessageLookupByLibrary.simpleMessage("Product"),
     "productImage": MessageLookupByLibrary.simpleMessage("Product Image"),
@@ -50,13 +54,14 @@ class MessageLookup extends MessageLookupByLibrary {
     "recentTransactions": MessageLookupByLibrary.simpleMessage(
       "Recent Transactions",
     ),
-    "reports": MessageLookupByLibrary.simpleMessage("Reports"),
+    "reports": MessageLookupByLibrary.simpleMessage("Insights"),
     "sales": MessageLookupByLibrary.simpleMessage("Sales"),
     "salesSummary": MessageLookupByLibrary.simpleMessage("Sales Summary"),
     "save": MessageLookupByLibrary.simpleMessage("Save"),
     "searchProduct": MessageLookupByLibrary.simpleMessage("Search Product"),
     "selectProduct": MessageLookupByLibrary.simpleMessage("Select Product"),
     "settings": MessageLookupByLibrary.simpleMessage("Settings"),
+    "sold": MessageLookupByLibrary.simpleMessage("Sold"),
     "splashTitel": MessageLookupByLibrary.simpleMessage(
       "Manage your products, track sales, and generate reports with ease.",
     ),
@@ -68,10 +73,14 @@ class MessageLookup extends MessageLookupByLibrary {
       "Tap to add an image from your gallery or take a new one.",
     ),
     "thisWeek": MessageLookupByLibrary.simpleMessage("This Week"),
+    "topSellingItems": MessageLookupByLibrary.simpleMessage(
+      "Top Selling Items",
+    ),
     "totalProductSold": MessageLookupByLibrary.simpleMessage(
       "Total Product Sold Today",
     ),
     "totalProfit": MessageLookupByLibrary.simpleMessage("Total Profit Today"),
+    "totalSales": MessageLookupByLibrary.simpleMessage("Total Sales"),
     "totalSalesToday": MessageLookupByLibrary.simpleMessage(
       "Total Sales Today",
     ),

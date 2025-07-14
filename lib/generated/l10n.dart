@@ -80,10 +80,10 @@ class S {
   }
 
   /// `Total Sales Today`
-  String get TotalSales {
+  String get TotalSalesToday {
     return Intl.message(
       'Total Sales Today',
-      name: 'TotalSales',
+      name: 'TotalSalesToday',
       desc: '',
       args: [],
     );
@@ -159,9 +159,9 @@ class S {
     return Intl.message('Sales', name: 'sales', desc: '', args: []);
   }
 
-  /// `Reports`
+  /// `Insights`
   String get reports {
-    return Intl.message('Reports', name: 'reports', desc: '', args: []);
+    return Intl.message('Insights', name: 'reports', desc: '', args: []);
   }
 
   /// `Settings`
@@ -317,6 +317,36 @@ class S {
       desc: '',
       args: [],
     );
+  }
+
+  /// `Date Range`
+  String get dateRange {
+    return Intl.message('Date Range', name: 'dateRange', desc: '', args: []);
+  }
+
+  /// `Total Sales`
+  String get totalSales {
+    return Intl.message('Total Sales', name: 'totalSales', desc: '', args: []);
+  }
+
+  /// `Orders`
+  String get orders {
+    return Intl.message('Orders', name: 'orders', desc: '', args: []);
+  }
+
+  /// `Top Selling Items`
+  String get topSellingItems {
+    return Intl.message(
+      'Top Selling Items',
+      name: 'topSellingItems',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sold`
+  String get sold {
+    return Intl.message('Sold', name: 'sold', desc: '', args: []);
   }
 }
 

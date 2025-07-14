@@ -33,7 +33,6 @@ class _MainHomeViewState extends State<MainHomeView> {
           setState(() {
             currentIndex = index;
           });
-      
         },
         currentIndex: currentIndex,
         type: BottomNavigationBarType.fixed,
@@ -42,19 +41,25 @@ class _MainHomeViewState extends State<MainHomeView> {
         unselectedLabelStyle: TextStyle(color: AppColors.kPrimeryColor),
         unselectedItemColor: AppColors.kPrimeryColor,
         items: [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: S.of(context).home),
-          BottomNavigationBarItem(icon: Icon(Icons.add_box), label:  S.of(context).products),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: S.of(context).home,
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.add_box),
+            label: S.of(context).products,
+          ),
           BottomNavigationBarItem(
             icon: Icon(Icons.leaderboard),
-            label:  S.of(context).sales,
+            label: S.of(context).sales,
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.report_problem),
-            label:  S.of(context).reports,
+            label: S.of(context).reports,
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.settings),
-            label:  S.of(context).settings,
+            label: S.of(context).settings,
           ),
         ],
       ),

@@ -6,5 +6,7 @@ class AppColors {
   static const Color kAddProductButtonColor = Color(0XFF78ADD1);
   static const Color kButtonNavBarColor = Color(0XFF1F2124);
   static const Color kBackgroundColor = Color(0XFF121417);
+  static const Color kBorderColor = Color(0XFF404A4F);
+  static const Color kincreaseColor = Color(0XFF0AD95C);
 
 }
