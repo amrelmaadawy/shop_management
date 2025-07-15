@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:small_managements/features/home/ui/widgets/home_buttons.dart';
 import 'package:small_managements/features/home/ui/widgets/home_item.dart';
@@ -15,7 +16,7 @@ class HomeView extends StatelessWidget {
           style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
-        actions: [IconButton(onPressed: () {}, icon: Icon(Icons.settings))],
+        actions: [IconButton(onPressed: () {}, icon: Icon(CupertinoIcons.settings_solid))],
       ),
       body: SafeArea(
         child: Padding(

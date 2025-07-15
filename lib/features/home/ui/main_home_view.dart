@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:small_managements/core/utils/app_colors.dart';
 import 'package:small_managements/features/home/ui/home_view.dart';
@@ -42,23 +43,23 @@ class _MainHomeViewState extends State<MainHomeView> {
         unselectedItemColor: AppColors.kPrimeryColor,
         items: [
           BottomNavigationBarItem(
-            icon: Icon(Icons.home),
+            icon: Icon(CupertinoIcons.home),
             label: S.of(context).home,
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.add_box),
+            icon: Icon(CupertinoIcons.cube_box),
             label: S.of(context).products,
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.leaderboard),
+            icon: Icon(CupertinoIcons.money_dollar),
             label: S.of(context).sales,
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.report_problem),
+            icon: Icon(CupertinoIcons.chart_bar),
             label: S.of(context).reports,
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.settings),
+            icon: Icon(CupertinoIcons.settings_solid),
             label: S.of(context).settings,
           ),
         ],

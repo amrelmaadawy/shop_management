@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:small_managements/features/products/ui/widgets/custom_text_form_field.dart';
 import 'package:small_managements/features/reports/logic/sales_data.dart';
@@ -46,7 +47,7 @@ class ReportsView extends StatelessWidget {
                         right: 0,
                         child: IconButton(
                           onPressed: () {},
-                          icon: Icon(Icons.print),
+                          icon: Icon(CupertinoIcons.printer),
                         ),
                       ),
                     ],

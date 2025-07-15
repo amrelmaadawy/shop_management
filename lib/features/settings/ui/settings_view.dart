@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:small_managements/core/utils/app_colors.dart';
 import 'package:small_managements/features/settings/ui/widgets/custom_settings_row.dart';
@@ -28,7 +29,7 @@ class SettingsView extends StatelessWidget {
               ),
               SizedBox(height: 15),
               CustomSettingsRow(
-                icon: Icon(Icons.dark_mode_outlined),
+                icon: Icon(CupertinoIcons.moon),
                 text: S.of(context).darkMode,
                 widget: Switch(
                   value: false,
@@ -50,14 +51,14 @@ class SettingsView extends StatelessWidget {
               SizedBox(height: 15),
 
               CustomSettingsRow(
-                icon: Icon(Icons.shopping_basket_sharp),
+                icon: Icon(Icons.store_outlined),
                 text: S.of(context).shopName,
                 widget: Text('My shop'),
               ),
               SizedBox(height: 15),
 
               CustomSettingsRow(
-                icon: Icon(Icons.phone),
+                icon: Icon(CupertinoIcons.phone),
                 text: S.of(context).phoneNumber,
                 widget: Text('01231231234'),
               ),

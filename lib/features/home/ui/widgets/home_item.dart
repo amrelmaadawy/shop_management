@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:small_managements/core/utils/app_colors.dart';
 
@@ -32,10 +33,7 @@ class HomeItem extends StatelessWidget {
               style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
             ),
             SizedBox(height: 5),
-            Text(
-              description,
-              style: TextStyle(color: AppColors.kPrimeryColor),
-            ),
+            Text(description, style: TextStyle(color: AppColors.kPrimeryColor)),
             SizedBox(height: 10),
             Container(
               width: 80,
@@ -49,7 +47,7 @@ class HomeItem extends StatelessWidget {
                 children: [
                   Text(percentage),
                   SizedBox(width: 5),
-                  Icon(Icons.arrow_upward_outlined, size: 18),
+                  Icon(Icons.north_east, size: 18),
                 ],
               ),
             ),
