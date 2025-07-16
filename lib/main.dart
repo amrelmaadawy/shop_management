@@ -9,6 +9,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 
 void main() async {
   await Hive.initFlutter();
+  Hive.registerAdapter(ProductModelAdapter());
   await Hive.openBox<ProductModel>(productBox);
   runApp(const MyApp());
 }

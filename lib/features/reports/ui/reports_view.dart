@@ -56,6 +56,12 @@ class ReportsView extends StatelessWidget {
                 Text(S.of(context).dateRange, style: TextStyle(fontSize: 16)),
                 SizedBox(height: 10),
                 CustomTextFormField(
+                  validator: (value ) {
+                      if(value!.isEmpty)
+                      {
+                        return'Please Enter The Poduct Name';
+                      }else{return null;}
+                      },
                   controller: dateRangeController,
                   keyboardType: TextInputType.text,
                   labelText: '',

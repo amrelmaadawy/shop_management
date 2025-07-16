@@ -35,6 +35,12 @@ class ProductsView extends StatelessWidget {
               ),
               SizedBox(height: 10),
               CustomTextFormField(
+                validator: (value ) {
+                      if(value!.isEmpty)
+                      {
+                        return'Please Enter The Poduct Name';
+                      }else{return null;}
+                      },
                 prefixIcon: Icon(Icons.search),
                 controller: searchController,
                 keyboardType: TextInputType.text,
