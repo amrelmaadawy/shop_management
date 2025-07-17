@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive_flutter/adapters.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:small_managements/core/hive_boxes.dart';
 import 'package:small_managements/core/utils/app_colors.dart';
 import 'package:small_managements/features/products/model/product_model.dart';
@@ -9,17 +10,27 @@ import 'package:small_managements/features/splash/ui/splash_view.dart';
 import 'package:small_managements/generated/l10n.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
-void main() async {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  final prefs = await SharedPreferences.getInstance();
+  final langCode = prefs.getString('lang') ?? 'en';
+
   await Hive.initFlutter();
   Hive.registerAdapter(ProductModelAdapter());
   await Hive.openBox<ProductModel>(productBox);
-  runApp(ProviderScope(child: const MyApp()));
+  runApp(
+    ProviderScope(
+      overrides: [localizationProvider.overrideWith((ref) => Locale(langCode))],
+
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends ConsumerWidget {
   const MyApp({super.key});
   @override
-  Widget build(BuildContext context,  WidgetRef ref) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return MaterialApp(
       locale: ref.watch(localizationProvider),
       localizationsDelegates: [
@@ -28,10 +39,7 @@ class MyApp extends ConsumerWidget {
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
       ],
-      supportedLocales: [
-        Locale('ar'),
-        Locale('en'),
-      ],
+      supportedLocales:const [Locale('ar'), Locale('en')],
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData.dark().copyWith(
