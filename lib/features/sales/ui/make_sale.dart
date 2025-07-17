@@ -21,6 +21,15 @@ class _MakeSaleState extends State<MakeSale> {
   GlobalKey<FormState> formKey = GlobalKey();
   AutovalidateMode autoValidateMode = AutovalidateMode.disabled;
   @override
+  void dispose() {
+    selectProductController.dispose();
+    quantitySoldController.dispose();
+    priceController.dispose();
+    
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
@@ -59,10 +68,8 @@ class _MakeSaleState extends State<MakeSale> {
                           .toList(),
                     );
                     setState(() {
-                      if(selected!=null)
-                      {
-                      selectProductController.text = selected;
-
+                      if (selected != null) {
+                        selectProductController.text = selected;
                       }
                     });
                   },

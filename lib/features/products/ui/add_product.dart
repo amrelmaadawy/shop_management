@@ -20,6 +20,16 @@ class _AddProductState extends State<AddProduct> {
   AutovalidateMode autovalidateMode = AutovalidateMode.disabled;
   List<String> categories = ['cups', 'dishies'];
   @override
+  void dispose() {
+    productNameController.dispose();
+    priceController.dispose();
+    quantityController.dispose();
+    categoryController.dispose();
+    
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
