@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:small_managements/core/utils/app_colors.dart';
 import 'package:small_managements/features/products/ui/add_product.dart';
 import 'package:small_managements/features/products/ui/widgets/custom_product_container.dart';
@@ -6,11 +7,11 @@ import 'package:small_managements/features/products/ui/widgets/custom_text_form_
 import 'package:small_managements/features/products/ui/widgets/product_item.dart';
 import 'package:small_managements/generated/l10n.dart';
 
-class ProductsView extends StatelessWidget {
+class ProductsView extends ConsumerWidget {
   const ProductsView({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     TextEditingController searchController = TextEditingController();
     return Scaffold(
       floatingActionButton: FloatingActionButton(
@@ -61,7 +62,7 @@ class ProductsView extends StatelessWidget {
                 child: ListView.separated(
                   shrinkWrap: true,
                   itemBuilder: (context, index) {
-                    return ProductItem();
+                    return ProductItem(image:'' , productName:'' , quantity: '',);
                   },
                   itemCount: 10,
                   separatorBuilder: (context, index) => SizedBox(height: 10),

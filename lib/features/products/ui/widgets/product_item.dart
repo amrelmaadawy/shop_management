@@ -1,11 +1,11 @@
-
 import 'package:flutter/material.dart';
 import 'package:small_managements/core/utils/app_colors.dart';
 
 class ProductItem extends StatelessWidget {
-  const ProductItem({
-    super.key,
-  });
+  const ProductItem({super.key, required this.image, required this.productName, required this.quantity});
+  final String image;
+  final String productName;
+  final String quantity;
 
   @override
   Widget build(BuildContext context) {
@@ -22,17 +22,11 @@ class ProductItem extends StatelessWidget {
             children: [
               Text(
                 'Apple Orange',
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                ),
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
               ),
               Text(
                 '\$12.99 . 10 in stock',
-                style: TextStyle(
-                  color: AppColors.kPrimeryColor,
-                  fontSize: 14,
-                ),
+                style: TextStyle(color: AppColors.kPrimeryColor, fontSize: 14),
               ),
             ],
           ),

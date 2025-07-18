@@ -22,6 +22,7 @@ class ProductModelAdapter extends TypeAdapter<ProductModel> {
       fields[0] as String,
       fields[2] as int,
       fields[4] as String,
+      fields[5] as int,
     );
   }
 
@@ -38,7 +39,9 @@ class ProductModelAdapter extends TypeAdapter<ProductModel> {
       ..writeByte(3)
       ..write(obj.category)
       ..writeByte(4)
-      ..write(obj.image);
+      ..write(obj.image)
+      ..writeByte(5)
+      ..write(obj.id);
   }
 
   @override
