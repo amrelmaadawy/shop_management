@@ -1,17 +1,20 @@
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:small_managements/core/utils/app_colors.dart';
+import 'package:small_managements/features/products/logic/product_notifier.dart';
+import 'package:small_managements/features/products/model/product_model.dart';
 import 'package:small_managements/features/products/ui/widgets/custom_text_form_field.dart';
 import 'package:small_managements/generated/l10n.dart';
 
-class AddProduct extends StatefulWidget {
+class AddProduct extends ConsumerStatefulWidget {
   const AddProduct({super.key});
 
   @override
-  State<AddProduct> createState() => _AddProductState();
+  ConsumerState<AddProduct> createState() => _AddProductState();
 }
 
-class _AddProductState extends State<AddProduct> {
+class _AddProductState extends ConsumerState<AddProduct> {
   TextEditingController productNameController = TextEditingController();
   TextEditingController priceController = TextEditingController();
   TextEditingController quantityController = TextEditingController();
@@ -25,7 +28,7 @@ class _AddProductState extends State<AddProduct> {
     priceController.dispose();
     quantityController.dispose();
     categoryController.dispose();
-    
+
     super.dispose();
   }
 
@@ -207,6 +210,27 @@ class _AddProductState extends State<AddProduct> {
                         onPressed: () {
                           if (form.currentState!.validate()) {
                             form.currentState!.save();
+                            final product = ProductModel(
+                              categoryController.text,
+                              priceController.text,
+                              productNameController.text,
+                              quantityController.text,
+                              'assets/images/apple.png',
+                              0,
+                            );
+                            ref
+                                .read(productProviderNotifier.notifier)
+                                .addProduct(product)
+                                .then((v) {
+                                  print(
+                                    'added successfully======================================',
+                                  );
+                                });
+                            categoryController.clear();
+                            productNameController.clear();
+                            priceController.clear();
+                            quantityController.clear();
+                            Navigator.pop(context);
                           } else {
                             autovalidateMode = AutovalidateMode.always;
                           }

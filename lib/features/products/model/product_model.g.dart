@@ -18,9 +18,9 @@ class ProductModelAdapter extends TypeAdapter<ProductModel> {
     };
     return ProductModel(
       fields[3] as String,
-      fields[1] as int,
+      fields[1] as String,
       fields[0] as String,
-      fields[2] as int,
+      fields[2] as String,
       fields[4] as String,
       fields[5] as int,
     );

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:small_managements/core/utils/app_colors.dart';
+import 'package:small_managements/features/products/logic/product_notifier.dart';
 import 'package:small_managements/features/products/ui/add_product.dart';
 import 'package:small_managements/features/products/ui/widgets/custom_product_container.dart';
 import 'package:small_managements/features/products/ui/widgets/custom_text_form_field.dart';
@@ -13,6 +14,7 @@ class ProductsView extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     TextEditingController searchController = TextEditingController();
+    final products = ref.watch(productProviderNotifier);
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         backgroundColor: AppColors.kAddProductButtonColor,
@@ -28,7 +30,6 @@ class ProductsView extends ConsumerWidget {
         child: Padding(
           padding: const EdgeInsets.all(10.0),
           child: Column(
-            
             children: [
               Text(
                 S.of(context).products,
@@ -36,12 +37,13 @@ class ProductsView extends ConsumerWidget {
               ),
               SizedBox(height: 10),
               CustomTextFormField(
-                validator: (value ) {
-                      if(value!.isEmpty)
-                      {
-                        return'Please Enter The Poduct Name';
-                      }else{return null;}
-                      },
+                validator: (value) {
+                  if (value!.isEmpty) {
+                    return 'Please Enter The Poduct Name';
+                  } else {
+                    return null;
+                  }
+                },
                 prefixIcon: Icon(Icons.search),
                 controller: searchController,
                 keyboardType: TextInputType.text,
@@ -62,9 +64,15 @@ class ProductsView extends ConsumerWidget {
                 child: ListView.separated(
                   shrinkWrap: true,
                   itemBuilder: (context, index) {
-                    return ProductItem(image:'' , productName:'' , quantity: '',);
+                    final product = products[index];
+                    return ProductItem(
+                      price: product.price,
+                      image: product.image,
+                      productName: product.productName,
+                      quantity: product.quantity,
+                    );
                   },
-                  itemCount: 10,
+                  itemCount: products.length,
                   separatorBuilder: (context, index) => SizedBox(height: 10),
                 ),
               ),
