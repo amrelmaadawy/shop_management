@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:small_managements/features/home/logic/home_provider.dart';
 import 'package:small_managements/features/home/ui/home_view.dart';
 import 'package:small_managements/features/products/ui/products_view.dart';
 import 'package:small_managements/features/reports/ui/reports_view.dart';
@@ -7,14 +9,14 @@ import 'package:small_managements/features/sales/ui/sales_view.dart';
 import 'package:small_managements/features/settings/ui/settings_view.dart';
 import 'package:small_managements/generated/l10n.dart';
 
-class MainHomeView extends StatefulWidget {
+class MainHomeView extends ConsumerStatefulWidget {
   const MainHomeView({super.key});
 
   @override
-  State<MainHomeView> createState() => _MainHomeViewState();
+  ConsumerState<MainHomeView> createState() => _MainHomeViewState();
 }
 
-class _MainHomeViewState extends State<MainHomeView> {
+class _MainHomeViewState extends ConsumerState<MainHomeView> {
   List<Widget> pages = [
     HomeView(),
     ProductsView(),
@@ -22,20 +24,18 @@ class _MainHomeViewState extends State<MainHomeView> {
     ReportsView(),
     SettingsView(),
   ];
-  int currentIndex = 0;
+
   @override
   Widget build(BuildContext context) {
+   final currentindex=  ref.watch(bottomNavBarProvider);
     return Scaffold(
       bottomNavigationBar: BottomNavigationBar(
         onTap: (index) {
-          setState(() {
-            currentIndex = index;
-          });
+          ref.read(bottomNavBarProvider.notifier).state = index;
         },
-        currentIndex: currentIndex,
+        currentIndex: currentindex,
         type: BottomNavigationBarType.fixed,
         showUnselectedLabels: true,
-        
         items: [
           BottomNavigationBarItem(
             icon: Icon(CupertinoIcons.home),
@@ -59,7 +59,7 @@ class _MainHomeViewState extends State<MainHomeView> {
           ),
         ],
       ),
-      body: pages[currentIndex],
+      body: pages[currentindex],
     );
   }
 }
