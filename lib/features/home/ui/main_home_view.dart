@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:small_managements/core/utils/app_colors.dart';
 import 'package:small_managements/features/home/ui/home_view.dart';
 import 'package:small_managements/features/products/ui/products_view.dart';
 import 'package:small_managements/features/reports/ui/reports_view.dart';
@@ -24,12 +23,10 @@ class _MainHomeViewState extends State<MainHomeView> {
     SettingsView(),
   ];
   int currentIndex = 0;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: BottomNavigationBar(
-        selectedItemColor: Colors.white,
         onTap: (index) {
           setState(() {
             currentIndex = index;
@@ -38,9 +35,7 @@ class _MainHomeViewState extends State<MainHomeView> {
         currentIndex: currentIndex,
         type: BottomNavigationBarType.fixed,
         showUnselectedLabels: true,
-        backgroundColor: AppColors.kButtonNavBarColor,
-        unselectedLabelStyle: TextStyle(color: AppColors.kPrimeryColor),
-        unselectedItemColor: AppColors.kPrimeryColor,
+        
         items: [
           BottomNavigationBarItem(
             icon: Icon(CupertinoIcons.home),

@@ -14,13 +14,19 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   final prefs = await SharedPreferences.getInstance();
   final langCode = prefs.getString('lang') ?? 'en';
-
+  final isDark = prefs.getBool('isDark') ?? false;
   await Hive.initFlutter();
   Hive.registerAdapter(ProductModelAdapter());
   await Hive.openBox<ProductModel>(productBox);
   runApp(
     ProviderScope(
-      overrides: [localizationProvider.overrideWith((ref) => Locale(langCode))],
+      overrides: [
+        localizationProvider.overrideWith((ref) => Locale(langCode)),
+        themeModeProvider.overrideWith((ref)
+        {return
+          isDark? ThemeMode.dark:ThemeMode.light;
+        })
+      ],
 
       child: const MyApp(),
     ),
@@ -39,13 +45,20 @@ class MyApp extends ConsumerWidget {
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
       ],
-      supportedLocales:const [Locale('ar'), Locale('en')],
+      supportedLocales: const [Locale('ar'), Locale('en')],
       debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
-      theme: ThemeData.dark().copyWith(
+      theme: ThemeData.light(),
+      darkTheme: ThemeData.dark().copyWith(
+        bottomNavigationBarTheme: BottomNavigationBarThemeData(
+          backgroundColor: AppColors.kButtonNavBarColor,
+          unselectedItemColor: AppColors.kPrimeryColor,
+          selectedItemColor: Colors.white,
+          unselectedLabelStyle: TextStyle(color: AppColors.kPrimeryColor),
+        ),
         scaffoldBackgroundColor: AppColors.kBackgroundColor,
         textTheme: ThemeData.dark().textTheme.apply(fontFamily: 'RobotoSlab'),
       ),
+      themeMode: ref.watch(themeModeProvider),
       home: SplashView(),
     );
   }

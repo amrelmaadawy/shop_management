@@ -13,6 +13,7 @@ class SettingsView extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final locale = ref.watch(localizationProvider);
+  
     return Scaffold(
       body: SafeArea(
         child: Padding(
@@ -36,8 +37,15 @@ class SettingsView extends ConsumerWidget {
                 icon: Icon(CupertinoIcons.moon),
                 text: S.of(context).darkMode,
                 widget: Switch(
-                  value: false,
-                  onChanged: (value) {},
+                  value: ref.watch(themeModeProvider) == ThemeMode.dark,
+                  onChanged: (isDark) async {
+                    
+                    ref.read(themeModeProvider.notifier).state = isDark
+                        ? ThemeMode.dark
+                        : ThemeMode.light;
+                    final prefs = await SharedPreferences.getInstance();
+                    prefs.setBool('isDark', isDark);
+                  },
                   activeColor: AppColors.kPrimeryColor,
                 ),
               ),
