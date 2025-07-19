@@ -32,3 +32,4 @@ final productProviderNotifier =
     StateNotifierProvider<ProductProvider, List<ProductModel>>(
       (ref) => ProductProvider(),
     );
+final pickImageProvider = StateProvider<String?>((ref) => null);

@@ -15,12 +15,13 @@ class ProductModel extends HiveObject {
   final String image;
   @HiveField(5)
   final int id;
-  ProductModel(
-   this.category,
-   this.price,
-   this.productName,
-    this.quantity,
-    this.image, 
- this.id
-  );
+  ProductModel({
+  required this.productName,
+  required this.price,
+  required this.quantity,
+  required this.category,
+  required this.image,
+  required this.id,
+});
+
 }

@@ -1,6 +1,7 @@
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:small_managements/core/services/image_services.dart';
 import 'package:small_managements/core/utils/app_colors.dart';
 import 'package:small_managements/features/products/logic/product_notifier.dart';
 import 'package:small_managements/features/products/model/product_model.dart';
@@ -175,7 +176,20 @@ class _AddProductState extends ConsumerState<AddProduct> {
                               backgroundColor:
                                   AppColors.kIncreaseContainerColor,
                             ),
-                            onPressed: () {},
+                            onPressed: () async {
+                              final image =
+                                  await ImageServices.pickImageFromGalary();
+                              if (image != null) {
+                                final path =
+                                    await ImageServices.saveImageIntoAppDirectory(
+                                      image,
+                                    );
+
+                                ref.read(pickImageProvider.notifier).state =
+                                    path;
+                                print(path);
+                              }
+                            },
                             child: Text(
                               S.of(context).addImage,
                               style: TextStyle(color: Colors.white),
@@ -209,14 +223,15 @@ class _AddProductState extends ConsumerState<AddProduct> {
                         ),
                         onPressed: () {
                           if (form.currentState!.validate()) {
+                            final imagePath = ref.watch(pickImageProvider);
                             form.currentState!.save();
                             final product = ProductModel(
-                              categoryController.text,
-                              priceController.text,
-                              productNameController.text,
-                              quantityController.text,
-                              'assets/images/apple.png',
-                              0,
+                              category: categoryController.text,
+                              price: priceController.text,
+                              productName: productNameController.text,
+                              quantity: quantityController.text,
+                              image: imagePath ?? '',
+                              id: 0,
                             );
                             ref
                                 .read(productProviderNotifier.notifier)

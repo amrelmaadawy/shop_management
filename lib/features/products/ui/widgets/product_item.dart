@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:small_managements/core/utils/app_colors.dart';
 
@@ -19,7 +21,7 @@ class ProductItem extends StatelessWidget {
       height: 70,
       child: Row(
         children: [
-          Image.asset(image),
+          Image.file(File(image)),
           SizedBox(width: 10),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,

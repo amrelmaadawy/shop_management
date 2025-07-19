@@ -15,17 +15,18 @@ Future<void> main() async {
   final prefs = await SharedPreferences.getInstance();
   final langCode = prefs.getString('lang') ?? 'en';
   final isDark = prefs.getBool('isDark') ?? false;
+
   await Hive.initFlutter();
-  Hive.registerAdapter(ProductModelAdapter());
+    Hive.registerAdapter(ProductModelAdapter());
+
   await Hive.openBox<ProductModel>(productBox);
   runApp(
     ProviderScope(
       overrides: [
         localizationProvider.overrideWith((ref) => Locale(langCode)),
-        themeModeProvider.overrideWith((ref)
-        {return
-          isDark? ThemeMode.dark:ThemeMode.light;
-        })
+        themeModeProvider.overrideWith((ref) {
+          return isDark ? ThemeMode.dark : ThemeMode.light;
+        }),
       ],
 
       child: const MyApp(),
