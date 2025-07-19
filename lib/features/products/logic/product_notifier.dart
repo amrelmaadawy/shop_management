@@ -33,3 +33,4 @@ final productProviderNotifier =
       (ref) => ProductProvider(),
     );
 final pickImageProvider = StateProvider<String?>((ref) => null);
+final chooseCategoryProvider = StateProvider<String?>((ref) => null);

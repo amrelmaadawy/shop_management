@@ -120,9 +120,10 @@ class _AddProductState extends ConsumerState<AddProduct> {
                       );
 
                       if (selected != null) {
-                        setState(() {
-                          categoryController.text = selected;
-                        });
+                        ref.read(chooseCategoryProvider.notifier).state =
+                            selected;
+                        final category = ref.watch(chooseCategoryProvider);
+                        categoryController.text = category!;
                       }
                     },
                     child: AbsorbPointer(
@@ -187,7 +188,6 @@ class _AddProductState extends ConsumerState<AddProduct> {
 
                                 ref.read(pickImageProvider.notifier).state =
                                     path;
-                                print(path);
                               }
                             },
                             child: Text(
@@ -235,12 +235,8 @@ class _AddProductState extends ConsumerState<AddProduct> {
                             );
                             ref
                                 .read(productProviderNotifier.notifier)
-                                .addProduct(product)
-                                .then((v) {
-                                  print(
-                                    'added successfully======================================',
-                                  );
-                                });
+                                .addProduct(product);
+
                             categoryController.clear();
                             productNameController.clear();
                             priceController.clear();
