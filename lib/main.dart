@@ -17,8 +17,7 @@ Future<void> main() async {
   final isDark = prefs.getBool('isDark') ?? false;
 
   await Hive.initFlutter();
-    Hive.registerAdapter(ProductModelAdapter());
-
+  Hive.registerAdapter(ProductModelAdapter());
   await Hive.openBox<ProductModel>(productBox);
   runApp(
     ProviderScope(

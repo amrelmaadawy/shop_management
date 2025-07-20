@@ -69,7 +69,7 @@ class ProductsView extends ConsumerWidget {
                       price: product.price,
                       image: product.image,
                       productName: product.productName,
-                      quantity: product.quantity, index:index ,
+                      quantity: product.quantity, index:index, productModel: products[index] ,
                     );
                   },
                   itemCount: products.length,

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:small_managements/core/utils/app_colors.dart';
 import 'package:small_managements/features/products/logic/product_notifier.dart';
+import 'package:small_managements/features/products/model/product_model.dart';
 import 'package:small_managements/features/products/ui/add_product.dart';
 
 class ProductItem extends ConsumerWidget {
@@ -14,12 +15,14 @@ class ProductItem extends ConsumerWidget {
     required this.quantity,
     required this.price,
     required this.index,
+    required this.productModel,
   });
   final String image;
   final String productName;
   final String quantity;
   final String price;
   final int index;
+  final ProductModel productModel;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return SizedBox(
@@ -48,7 +51,7 @@ class ProductItem extends ConsumerWidget {
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => AddProduct()),
+                MaterialPageRoute(builder: (context) => AddProduct(productModel: productModel,index: index,)),
               );
             },
             icon: Icon(Icons.edit),

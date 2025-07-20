@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:small_managements/core/utils/app_colors.dart';
@@ -10,8 +12,9 @@ import 'package:small_managements/features/products/ui/widgets/custom_product_ap
 import 'package:small_managements/generated/l10n.dart';
 
 class AddProduct extends ConsumerStatefulWidget {
-  const AddProduct({super.key});
-
+  const AddProduct({super.key, this.productModel, this.index});
+  final ProductModel? productModel;
+  final int? index;
   @override
   ConsumerState<AddProduct> createState() => _AddProductState();
 }
@@ -23,6 +26,7 @@ class _AddProductState extends ConsumerState<AddProduct> {
   TextEditingController categoryController = TextEditingController();
   GlobalKey<FormState> form = GlobalKey();
   AutovalidateMode autovalidateMode = AutovalidateMode.disabled;
+  File? selectedImage;
   List<String> categories = ['cups', 'dishies'];
   @override
   void dispose() {
@@ -32,6 +36,17 @@ class _AddProductState extends ConsumerState<AddProduct> {
     categoryController.dispose();
 
     super.dispose();
+  }
+
+  @override
+  void initState() {
+    if (widget.productModel != null) {
+      productNameController.text = widget.productModel!.productName;
+      priceController.text = widget.productModel!.price;
+      quantityController.text = widget.productModel!.quantity;
+      categoryController.text = widget.productModel!.category;
+    }
+    super.initState();
   }
 
   @override
@@ -49,8 +64,15 @@ class _AddProductState extends ConsumerState<AddProduct> {
                 children: [
                   CustomProductAppBar(),
                   SizedBox(height: 10),
-                  AddProductTextFormFields(productNameController: productNameController, priceController: priceController, quantityController: quantityController, categories: categories, ref: ref, categoryController: categoryController),
-                  
+                  AddProductTextFormFields(
+                    productNameController: productNameController,
+                    priceController: priceController,
+                    quantityController: quantityController,
+                    categories: categories,
+                    ref: ref,
+                    categoryController: categoryController,
+                  ),
+
                   SizedBox(height: 20),
                   Text(
                     S.of(context).productImage,
@@ -63,31 +85,47 @@ class _AddProductState extends ConsumerState<AddProduct> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       CancelProductButton(),
-
                       ElevatedButton(
                         style: ElevatedButton.styleFrom(
                           backgroundColor: AppColors.kAddProductButtonColor,
                         ),
                         onPressed: () {
                           if (form.currentState!.validate()) {
-                            final imagePath = ref.watch(pickImageProvider);
-                            form.currentState!.save();
-                            final product = ProductModel(
-                              category: categoryController.text,
-                              price: priceController.text,
-                              productName: productNameController.text,
-                              quantity: quantityController.text,
-                              image: imagePath ?? '',
-                              id: 0,
-                            );
-                            ref
-                                .read(productProviderNotifier.notifier)
-                                .addProduct(product);
-                            categoryController.clear();
-                            productNameController.clear();
-                            priceController.clear();
-                            quantityController.clear();
-                            Navigator.pop(context);
+                            if (widget.productModel != null) {
+                              final imagePath = ref.watch(pickImageProvider);
+
+                              final newProduct = ProductModel(
+                                category: categoryController.text,
+                                price: priceController.text,
+                                productName: productNameController.text,
+                                quantity: quantityController.text,
+                                image: imagePath ?? widget.productModel!.image,
+                                id: 0,
+                              );
+                              ref
+                                  .read(productProviderNotifier.notifier)
+                                  .updatePrdouct(newProduct, widget.index!);
+                              Navigator.pop(context);
+                            } else {
+                              final imagePath = ref.watch(pickImageProvider);
+                              form.currentState!.save();
+                              final product = ProductModel(
+                                category: categoryController.text,
+                                price: priceController.text,
+                                productName: productNameController.text,
+                                quantity: quantityController.text,
+                                image: imagePath ?? '',
+                                id: 0,
+                              );
+                              ref
+                                  .read(productProviderNotifier.notifier)
+                                  .addProduct(product);
+                              categoryController.clear();
+                              productNameController.clear();
+                              priceController.clear();
+                              quantityController.clear();
+                              Navigator.pop(context);
+                            }
                           } else {
                             autovalidateMode = AutovalidateMode.always;
                           }
