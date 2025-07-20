@@ -14,7 +14,7 @@ class ProductLocalData {
 
   
   Future<void> deletProduct(int index) async {
-    await box.delete(index);
+    await box.deleteAt(index);
   }
   
   Future<void> editProduct(ProductModel newProduct, int index) async {

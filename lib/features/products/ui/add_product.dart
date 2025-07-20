@@ -1,10 +1,11 @@
-import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:small_managements/core/services/image_services.dart';
 import 'package:small_managements/core/utils/app_colors.dart';
 import 'package:small_managements/features/products/logic/product_notifier.dart';
 import 'package:small_managements/features/products/model/product_model.dart';
+import 'package:small_managements/features/products/ui/widgets/add_image_picker.dart';
+import 'package:small_managements/features/products/ui/widgets/cancel_product_buttom.dart';
+import 'package:small_managements/features/products/ui/widgets/custom_product_app_bar.dart';
 import 'package:small_managements/features/products/ui/widgets/custom_text_form_field.dart';
 import 'package:small_managements/generated/l10n.dart';
 
@@ -46,23 +47,7 @@ class _AddProductState extends ConsumerState<AddProduct> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Row(
-                    children: [
-                      IconButton(
-                        onPressed: () {
-                          Navigator.pop(context);
-                        },
-                        icon: Icon(Icons.arrow_back_ios),
-                      ),
-                      Text(
-                        S.of(context).addProduct,
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 20,
-                        ),
-                      ),
-                    ],
-                  ),
+                  CustomProductAppBar(),
                   SizedBox(height: 10),
 
                   CustomTextFormField(
@@ -118,7 +103,6 @@ class _AddProductState extends ConsumerState<AddProduct> {
                             .map((e) => PopupMenuItem(value: e, child: Text(e)))
                             .toList(),
                       );
-
                       if (selected != null) {
                         ref.read(chooseCategoryProvider.notifier).state =
                             selected;
@@ -147,75 +131,12 @@ class _AddProductState extends ConsumerState<AddProduct> {
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                   ),
                   SizedBox(height: 10),
-                  SizedBox(
-                    width: MediaQuery.of(context).size.width,
-                    height: 250,
-                    child: DottedBorder(
-                      options: RectDottedBorderOptions(
-                        color: AppColors.kIncreaseContainerColor,
-                        dashPattern: [10, 5],
-                        strokeWidth: 2,
-                        padding: EdgeInsets.all(16),
-                      ),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          SizedBox(height: 40),
-                          Text(
-                            S.of(context).addImage,
-                            style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          Text(S.of(context).tapToAdd),
-                          SizedBox(height: 24),
-
-                          ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor:
-                                  AppColors.kIncreaseContainerColor,
-                            ),
-                            onPressed: () async {
-                              final image =
-                                  await ImageServices.pickImageFromGalary();
-                              if (image != null) {
-                                final path =
-                                    await ImageServices.saveImageIntoAppDirectory(
-                                      image,
-                                    );
-
-                                ref.read(pickImageProvider.notifier).state =
-                                    path;
-                              }
-                            },
-                            child: Text(
-                              S.of(context).addImage,
-                              style: TextStyle(color: Colors.white),
-                            ),
-                          ),
-                          SizedBox(height: 40),
-                        ],
-                      ),
-                    ),
-                  ),
+                  AddImagePicker(ref: ref),
                   SizedBox(height: 15),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: AppColors.kIncreaseContainerColor,
-                        ),
-                        onPressed: () {
-                          Navigator.pop(context);
-                        },
-                        child: Text(
-                          S.of(context).cancel,
-                          style: TextStyle(color: Colors.white),
-                        ),
-                      ),
+                      CancelProductButton(),
 
                       ElevatedButton(
                         style: ElevatedButton.styleFrom(
@@ -262,3 +183,4 @@ class _AddProductState extends ConsumerState<AddProduct> {
     );
   }
 }
+

@@ -1,21 +1,27 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:small_managements/core/utils/app_colors.dart';
+import 'package:small_managements/features/products/logic/product_notifier.dart';
+import 'package:small_managements/features/products/ui/add_product.dart';
 
-class ProductItem extends StatelessWidget {
+class ProductItem extends ConsumerWidget {
   const ProductItem({
     super.key,
     required this.image,
     required this.productName,
-    required this.quantity, required this.price,
+    required this.quantity,
+    required this.price,
+    required this.index,
   });
   final String image;
   final String productName;
   final String quantity;
   final String price;
+  final int index;
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return SizedBox(
       width: MediaQuery.of(context).size.width,
       height: 70,
@@ -38,7 +44,46 @@ class ProductItem extends StatelessWidget {
             ],
           ),
           Spacer(),
-          IconButton(onPressed: () {}, icon: Icon(Icons.edit)),
+          IconButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => AddProduct()),
+              );
+            },
+            icon: Icon(Icons.edit),
+          ),
+          IconButton(
+            onPressed: () {
+              showDialog(
+                context: context,
+                builder: (context) => AlertDialog(
+                  title: Text('are you sure u want to delete'),
+                  actions: [
+                    ElevatedButton(
+                      onPressed: () {
+                        ref
+                            .read(productProviderNotifier.notifier)
+                            .deletProduct(index);
+                        Navigator.pop(context);
+                      },
+                      child: Text('Yes'),
+                    ),
+                    ElevatedButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      child: Text('no'),
+                    ),
+                  ],
+                ),
+              );
+            },
+            icon: Icon(
+              Icons.delete_forever_outlined,
+              color: Colors.red.shade800,
+            ),
+          ),
         ],
       ),
     );
