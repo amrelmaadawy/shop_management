@@ -4,9 +4,9 @@ import 'package:small_managements/core/utils/app_colors.dart';
 import 'package:small_managements/features/products/logic/product_notifier.dart';
 import 'package:small_managements/features/products/model/product_model.dart';
 import 'package:small_managements/features/products/ui/widgets/add_image_picker.dart';
+import 'package:small_managements/features/products/ui/widgets/add_product_text_form_feilds.dart';
 import 'package:small_managements/features/products/ui/widgets/cancel_product_buttom.dart';
 import 'package:small_managements/features/products/ui/widgets/custom_product_app_bar.dart';
-import 'package:small_managements/features/products/ui/widgets/custom_text_form_field.dart';
 import 'package:small_managements/generated/l10n.dart';
 
 class AddProduct extends ConsumerStatefulWidget {
@@ -49,82 +49,8 @@ class _AddProductState extends ConsumerState<AddProduct> {
                 children: [
                   CustomProductAppBar(),
                   SizedBox(height: 10),
-
-                  CustomTextFormField(
-                    controller: productNameController,
-                    keyboardType: TextInputType.text,
-                    labelText: S.of(context).productName,
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return 'Please Enter The Poduct Name';
-                      } else {
-                        return null;
-                      }
-                    },
-                  ),
-                  SizedBox(height: 15),
-                  CustomTextFormField(
-                    controller: priceController,
-                    keyboardType: TextInputType.number,
-                    labelText: S.of(context).price,
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return 'Please Enter The Price of the Product';
-                      } else {
-                        return null;
-                      }
-                    },
-                  ),
-                  SizedBox(height: 15),
-                  CustomTextFormField(
-                    controller: quantityController,
-                    keyboardType: TextInputType.number,
-                    labelText: S.of(context).quantity,
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return 'Please Enter The quantity';
-                      } else {
-                        return null;
-                      }
-                    },
-                  ),
-                  SizedBox(height: 15),
-                  GestureDetector(
-                    onTapDown: (details) async {
-                      final selected = await showMenu<String>(
-                        context: context,
-                        position: RelativeRect.fromLTRB(
-                          details.globalPosition.dx,
-                          details.globalPosition.dy,
-                          details.globalPosition.dx + 1,
-                          details.globalPosition.dy + 1,
-                        ),
-                        items: categories
-                            .map((e) => PopupMenuItem(value: e, child: Text(e)))
-                            .toList(),
-                      );
-                      if (selected != null) {
-                        ref.read(chooseCategoryProvider.notifier).state =
-                            selected;
-                        final category = ref.watch(chooseCategoryProvider);
-                        categoryController.text = category!;
-                      }
-                    },
-                    child: AbsorbPointer(
-                      child: CustomTextFormField(
-                        validator: (value) {
-                          if (value!.isEmpty) {
-                            return 'Please Enter The Category ';
-                          } else {
-                            return null;
-                          }
-                        },
-                        controller: categoryController,
-                        keyboardType: TextInputType.text,
-                        labelText: S.of(context).category,
-                      ),
-                    ),
-                  ),
+                  AddProductTextFormFields(productNameController: productNameController, priceController: priceController, quantityController: quantityController, categories: categories, ref: ref, categoryController: categoryController),
+                  
                   SizedBox(height: 20),
                   Text(
                     S.of(context).productImage,
@@ -157,7 +83,6 @@ class _AddProductState extends ConsumerState<AddProduct> {
                             ref
                                 .read(productProviderNotifier.notifier)
                                 .addProduct(product);
-
                             categoryController.clear();
                             productNameController.clear();
                             priceController.clear();
@@ -183,4 +108,3 @@ class _AddProductState extends ConsumerState<AddProduct> {
     );
   }
 }
-
