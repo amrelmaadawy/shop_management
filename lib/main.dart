@@ -19,6 +19,7 @@ Future<void> main() async {
   await Hive.initFlutter();
   Hive.registerAdapter(ProductModelAdapter());
   await Hive.openBox<ProductModel>(productBox);
+  await Hive.openBox<String>(categoriesBox);
   runApp(
     ProviderScope(
       overrides: [

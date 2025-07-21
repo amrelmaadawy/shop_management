@@ -17,6 +17,7 @@ class AddImagePicker extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    
     return SizedBox(
       width: MediaQuery.of(context).size.width,
       height: 250,
@@ -57,6 +58,7 @@ class AddImagePicker extends StatelessWidget {
                   ref.read(pickImageProvider.notifier).state =
                       path;
                 }
+                
               },
               child: Text(
                 S.of(context).addImage,

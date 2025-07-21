@@ -27,7 +27,6 @@ class _AddProductState extends ConsumerState<AddProduct> {
   GlobalKey<FormState> form = GlobalKey();
   AutovalidateMode autovalidateMode = AutovalidateMode.disabled;
   File? selectedImage;
-  List<String> categories = ['cups', 'dishies'];
   @override
   void dispose() {
     productNameController.dispose();
@@ -68,7 +67,6 @@ class _AddProductState extends ConsumerState<AddProduct> {
                     productNameController: productNameController,
                     priceController: priceController,
                     quantityController: quantityController,
-                    categories: categories,
                     ref: ref,
                     categoryController: categoryController,
                   ),
