@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
 import 'package:small_managements/features/products/ui/widgets/custom_text_form_field.dart';
 import 'package:small_managements/features/products/ui/widgets/select_category.dart';
 import 'package:small_managements/generated/l10n.dart';
