@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:small_managements/features/products/logic/category_notifier.dart';
@@ -22,82 +21,123 @@ class SelectCategory extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTapDown: (details) async {
+      onTap: () async {
         final categories = ref.watch(categoryProvider);
-        final menuItems = [
-          ...categories,
-          'Add New Category',
-        ]; 
-        if (menuItems.isEmpty) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text('No categories available')),
-          );
-          return;
-        }
-    
-        final selected = await showMenu<String>(
+        final products = ref.watch(
+          productProviderNotifier,
+        ); // لازم يكون عندك ده
+
+        await showModalBottomSheet(
           context: context,
-          position: RelativeRect.fromLTRB(
-            details.globalPosition.dx,
-            details.globalPosition.dy,
-            details.globalPosition.dx + 1,
-            details.globalPosition.dy + 1,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
           ),
-    
-          items: menuItems
-              .map((e) => PopupMenuItem(value: e, child: Text(e)))
-              .toList(),
-        );
-    
-        if (selected != null) {
-          if (selected == 'Add New Category') {
-            addCategoryController.clear();
-            showDialog(
-              // ignore: use_build_context_synchronously
-              context: context,
-              builder: (context) => AlertDialog(
-                title: Text('Add category'),
-                content: CustomTextFormField(
-                  controller: addCategoryController,
-                  keyboardType: TextInputType.text,
-                  labelText: S.of(context).category,
-                  validator: (value) {
-                    if (value!.isEmpty) {
-                      return 'Please Enter The Category';
-                    }
-                    return null;
+          builder: (context) {
+            return Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                ListView.builder(
+                  shrinkWrap: true,
+                  itemCount: categories.length,
+                  itemBuilder: (context, index) {
+                    final category = categories[index];
+                    final isUsed = products.any(
+                      (product) => product.category == category,
+                    );
+
+                    return ListTile(
+                      title: Text(category),
+                      trailing: IconButton(
+                        icon: Icon(Icons.delete, color: Colors.red.shade900),
+                        onPressed: () {
+                          if (isUsed) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text(
+                                  'لا يمكن حذف الفئة لأنها مرتبطة بمنتجات',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 16,
+                                  ),
+                                ),
+                                backgroundColor: Colors.red.shade900,
+                              ),
+                            );
+                            Navigator.pop(context);
+                          } else {
+                            ref
+                                .read(categoryProvider.notifier)
+                                .removeCategory(category);
+                            Navigator.pop(
+                              context,
+                            ); // اختياري لو عايز تقفل بعد الحذف
+                          }
+                        },
+                      ),
+                      onTap: () {
+                        widget.ref.read(chooseCategoryProvider.notifier).state =
+                            category;
+                        widget.categoryController.text = category;
+                        Navigator.pop(context);
+                      },
+                    );
                   },
                 ),
-                actions: [
-                  ElevatedButton(
-                    onPressed: () {
-                      final text = addCategoryController.text.trim();
-                      if (text.isNotEmpty) {
-                        ref
-                            .read(categoryProvider.notifier)
-                            .addCategory(text);
-                        Navigator.pop(context);
-                      }
-                    },
-                    child: Text(S.of(context).save),
-                  ),
-                  ElevatedButton(
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                    child: Text(S.of(context).cancel),
-                  ),
-                ],
-              ),
+                Divider(),
+                ListTile(
+                  leading: Icon(Icons.add),
+                  title: Text('إضافة فئة جديدة'),
+                  onTap: () {
+                    Navigator.pop(context);
+                    addCategoryController.clear();
+                    showDialog(
+                      context: context,
+                      builder: (context) => AlertDialog(
+                        title: Text('Add category'),
+                        content: CustomTextFormField(
+                          controller: addCategoryController,
+                          keyboardType: TextInputType.text,
+                          labelText: S.of(context).category,
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return 'Please Enter The Category';
+                            }
+                            return null;
+                          },
+                        ),
+                        actions: [
+                          ElevatedButton(
+                            onPressed: () {
+                              final text = addCategoryController.text.trim();
+                              if (text.isNotEmpty) {
+                                ref
+                                    .read(categoryProvider.notifier)
+                                    .addCategory(text);
+                                widget.ref
+                                        .read(chooseCategoryProvider.notifier)
+                                        .state =
+                                    text;
+                                widget.categoryController.text = text;
+                                Navigator.pop(context);
+                              }
+                            },
+                            child: Text(S.of(context).save),
+                          ),
+                          ElevatedButton(
+                            onPressed: () => Navigator.pop(context),
+                            child: Text(S.of(context).cancel),
+                          ),
+                        ],
+                      ),
+                    );
+                  },
+                ),
+              ],
             );
-          } else {
-            widget.ref.read(chooseCategoryProvider.notifier).state =
-                selected;
-            widget.categoryController.text = selected;
-          }
-        }
+          },
+        );
       },
-    
       child: AbsorbPointer(
         child: CustomTextFormField(
           validator: (value) {

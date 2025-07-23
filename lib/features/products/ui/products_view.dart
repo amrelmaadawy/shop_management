@@ -1,6 +1,9 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:small_managements/core/utils/app_colors.dart';
+import 'package:small_managements/features/products/logic/category_notifier.dart';
 import 'package:small_managements/features/products/logic/product_notifier.dart';
 import 'package:small_managements/features/products/ui/add_product.dart';
 import 'package:small_managements/features/products/ui/widgets/custom_product_container.dart';
@@ -14,7 +17,7 @@ class ProductsView extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     TextEditingController searchController = TextEditingController();
-    final products = ref.watch(productProviderNotifier);
+    final categories = ref.watch(categoryProvider);
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         backgroundColor: AppColors.kAddProductButtonColor,
@@ -51,29 +54,59 @@ class ProductsView extends ConsumerWidget {
               ),
               SizedBox(height: 20),
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  CustomProductContainer(text: S.of(context).category),
-                  CustomProductContainer(text: S.of(context).price),
-                  CustomProductContainer(text: S.of(context).stock),
+                  PopupMenuButton(
+                    child: CustomProductContainer(text: S.of(context).category),
+                    onSelected: (value) {
+                      ref.read(selectedCategoryProvider.notifier).state =
+                          value == 'All' ? null : value;
+                    },
+                    itemBuilder: (_) => [
+                      PopupMenuItem(value: 'All', child: Text('All')),
+                      ...categories.map(
+                        (e) => PopupMenuItem(value: e, child: Text(e)),
+                      ),
+                    ],
+                  ),
+                  // CustomProductContainer(text: S.of(context).price),
+                  // CustomProductContainer(text: S.of(context).stock),
                 ],
               ),
               SizedBox(height: 20),
               SizedBox(
                 height: MediaQuery.of(context).size.height * 0.586,
-                child: ListView.separated(
-                  shrinkWrap: true,
-                  itemBuilder: (context, index) {
-                    final product = products[index];
-                    return ProductItem(
-                      price: product.price,
-                      image: product.image,
-                      productName: product.productName,
-                      quantity: product.quantity, index:index, productModel: products[index] ,
+                child: Consumer(
+                  builder: (context, ref, _) {
+                    final products = ref.watch(productProviderNotifier);
+                    final selectedCateogry = ref.watch(
+                      selectedCategoryProvider,
+                    );
+                    final filtered = selectedCateogry == null
+                        ? products
+                        : products
+                              .where((e) => e.category == selectedCateogry)
+                              .toList();
+                    return ListView.separated(
+                      shrinkWrap: true,
+                      itemBuilder: (context, index) {
+                        final product = filtered[index];
+                        return ProductItem(
+                          price: product.price,
+                          image: product.image != null
+                              ? Image.file(File(product.image!))
+                              : Image.asset('assets/images/product.png'),
+                          productName: product.productName,
+                          quantity: product.quantity,
+                          index: index,
+                          productModel: products[index],
+                        );
+                      },
+                      itemCount: filtered.length,
+                      separatorBuilder: (context, index) =>
+                          SizedBox(height: 10),
                     );
                   },
-                  itemCount: products.length,
-                  separatorBuilder: (context, index) => SizedBox(height: 10),
                 ),
               ),
             ],

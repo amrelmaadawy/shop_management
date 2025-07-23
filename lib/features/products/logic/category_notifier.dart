@@ -1,6 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:small_managements/core/hive_boxes.dart';
+
 class CategoryNotifier extends StateNotifier<List<String>> {
   CategoryNotifier() : super([]) {
     loadCategories();
@@ -19,9 +20,14 @@ class CategoryNotifier extends StateNotifier<List<String>> {
       state = [...state, category];
     }
   }
-}
 
+  void removeCategory(String category) {
+    state = state.where((e) => e != category).toList();
+  }
+}
 
 final categoryProvider = StateNotifierProvider<CategoryNotifier, List<String>>(
   (ref) => CategoryNotifier(),
 );
+
+final selectedCategoryProvider = StateProvider<String?>((ref) => null);

@@ -45,6 +45,9 @@ class _AddProductState extends ConsumerState<AddProduct> {
       quantityController.text = widget.productModel!.quantity;
       categoryController.text = widget.productModel!.category;
     }
+    Future.microtask(() {
+      ref.read(pickImageProvider.notifier).state = widget.productModel?.image;
+    });
     super.initState();
   }
 
@@ -77,7 +80,7 @@ class _AddProductState extends ConsumerState<AddProduct> {
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                   ),
                   SizedBox(height: 10),
-                  AddImagePicker(ref: ref),
+                  AddImagePicker(),
                   SizedBox(height: 15),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -112,7 +115,7 @@ class _AddProductState extends ConsumerState<AddProduct> {
                                 price: priceController.text,
                                 productName: productNameController.text,
                                 quantity: quantityController.text,
-                                image: imagePath ?? '',
+                                image: imagePath,
                                 id: 0,
                               );
                               ref
