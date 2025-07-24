@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:small_managements/features/products/logic/category_notifier.dart';
-import 'package:small_managements/features/products/logic/product_notifier.dart';
+import 'package:small_managements/features/products/logic/notifier/category_notifier.dart';
+import 'package:small_managements/features/products/logic/notifier/product_notifier.dart';
+import 'package:small_managements/features/products/model/category_model.dart';
 import 'package:small_managements/features/products/ui/widgets/add_product_text_form_feilds.dart';
 import 'package:small_managements/features/products/ui/widgets/custom_text_form_field.dart';
 import 'package:small_managements/generated/l10n.dart';
@@ -23,10 +24,7 @@ class SelectCategory extends StatelessWidget {
     return GestureDetector(
       onTap: () async {
         final categories = ref.watch(categoryProvider);
-        final products = ref.watch(
-          productProviderNotifier,
-        ); // لازم يكون عندك ده
-
+        
         await showModalBottomSheet(
           context: context,
           shape: RoundedRectangleBorder(
@@ -41,44 +39,24 @@ class SelectCategory extends StatelessWidget {
                   itemCount: categories.length,
                   itemBuilder: (context, index) {
                     final category = categories[index];
-                    final isUsed = products.any(
-                      (product) => product.category == category,
-                    );
 
                     return ListTile(
-                      title: Text(category),
+                      title: Text(category.categoryName),
                       trailing: IconButton(
                         icon: Icon(Icons.delete, color: Colors.red.shade900),
                         onPressed: () {
-                          if (isUsed) {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
-                                content: Text(
-                                  'لا يمكن حذف الفئة لأنها مرتبطة بمنتجات',
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 16,
-                                  ),
-                                ),
-                                backgroundColor: Colors.red.shade900,
-                              ),
-                            );
-                            Navigator.pop(context);
-                          } else {
-                            ref
-                                .read(categoryProvider.notifier)
-                                .removeCategory(category);
-                            Navigator.pop(
-                              context,
-                            ); // اختياري لو عايز تقفل بعد الحذف
-                          }
+                          ref
+                              .read(categoryProvider.notifier)
+                              .removeCategory(category,context);
+                          Navigator.pop(
+                            context,
+                          ); 
                         },
                       ),
                       onTap: () {
                         widget.ref.read(chooseCategoryProvider.notifier).state =
-                            category;
-                        widget.categoryController.text = category;
+                            category.categoryName;
+                        widget.categoryController.text = category.categoryName;
                         Navigator.pop(context);
                       },
                     );
@@ -111,9 +89,12 @@ class SelectCategory extends StatelessWidget {
                             onPressed: () {
                               final text = addCategoryController.text.trim();
                               if (text.isNotEmpty) {
+                                final categoryName = CategoryModel(
+                                  categoryName: text,
+                                );
                                 ref
                                     .read(categoryProvider.notifier)
-                                    .addCategory(text);
+                                    .addCategory(categoryName);
                                 widget.ref
                                         .read(chooseCategoryProvider.notifier)
                                         .state =

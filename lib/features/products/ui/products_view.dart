@@ -3,8 +3,9 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:small_managements/core/utils/app_colors.dart';
-import 'package:small_managements/features/products/logic/category_notifier.dart';
-import 'package:small_managements/features/products/logic/product_notifier.dart';
+import 'package:small_managements/features/products/logic/notifier/category_notifier.dart';
+import 'package:small_managements/features/products/logic/notifier/product_notifier.dart';
+import 'package:small_managements/features/products/model/category_model.dart';
 import 'package:small_managements/features/products/ui/add_product.dart';
 import 'package:small_managements/features/products/ui/widgets/custom_product_container.dart';
 import 'package:small_managements/features/products/ui/widgets/custom_text_form_field.dart';
@@ -56,21 +57,28 @@ class ProductsView extends ConsumerWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  PopupMenuButton(
-                    child: CustomProductContainer(text: S.of(context).category),
-                    onSelected: (value) {
-                      ref.read(selectedCategoryProvider.notifier).state =
-                          value == 'All' ? null : value;
-                    },
-                    itemBuilder: (_) => [
-                      PopupMenuItem(value: 'All', child: Text('All')),
-                      ...categories.map(
-                        (e) => PopupMenuItem(value: e, child: Text(e)),
-                      ),
-                    ],
-                  ),
-                  // CustomProductContainer(text: S.of(context).price),
-                  // CustomProductContainer(text: S.of(context).stock),
+                  PopupMenuButton<CategoryModel?>(
+  child: CustomProductContainer(text: S.of(context).category),
+  onSelected: (value) {
+    ref.read(selectedCategoryProvider.notifier).state = value?.categoryName;
+  },
+  itemBuilder: (_) => [
+    // زر "الكل"
+    PopupMenuItem<CategoryModel?>(
+      value: null,
+      child: Text('All'),
+    ),
+    // باقي الفئات
+    ...categories.map(
+      (e) => PopupMenuItem<CategoryModel?>(
+        value: e,
+        child: Text(e.categoryName),
+      ),
+    ),
+  ],
+),
+
+                  
                 ],
               ),
               SizedBox(height: 20),
@@ -79,13 +87,18 @@ class ProductsView extends ConsumerWidget {
                 child: Consumer(
                   builder: (context, ref, _) {
                     final products = ref.watch(productProviderNotifier);
-                    final selectedCateogry = ref.watch(
+                    final selectedCategory = ref.watch(
                       selectedCategoryProvider,
                     );
-                    final filtered = selectedCateogry == null
+
+                    final filtered = selectedCategory == null
                         ? products
                         : products
-                              .where((e) => e.category == selectedCateogry)
+                              .where(
+                                (product) =>
+                                    product.category ==
+                                    selectedCategory,
+                              )
                               .toList();
                     return ListView.separated(
                       shrinkWrap: true,

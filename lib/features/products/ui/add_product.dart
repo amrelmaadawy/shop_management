@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:small_managements/core/utils/app_colors.dart';
-import 'package:small_managements/features/products/logic/product_notifier.dart';
+import 'package:small_managements/features/products/logic/notifier/product_notifier.dart';
 import 'package:small_managements/features/products/model/product_model.dart';
 import 'package:small_managements/features/products/ui/widgets/add_image_picker.dart';
 import 'package:small_managements/features/products/ui/widgets/add_product_text_form_feilds.dart';

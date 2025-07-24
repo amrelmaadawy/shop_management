@@ -21,7 +21,7 @@ class ProductModelAdapter extends TypeAdapter<ProductModel> {
       price: fields[1] as String,
       quantity: fields[2] as String,
       category: fields[3] as String,
-      image: fields[4] as String,
+      image: fields[4] as String?,
       id: fields[5] as int,
     );
   }

@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:small_managements/core/services/image_services.dart';
 import 'package:small_managements/core/utils/app_colors.dart';
-import 'package:small_managements/features/products/logic/product_notifier.dart';
+import 'package:small_managements/features/products/logic/notifier/product_notifier.dart';
 import 'package:small_managements/generated/l10n.dart';
 class AddImagePicker extends ConsumerWidget {
   const AddImagePicker({super.key});
