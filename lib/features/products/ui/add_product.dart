@@ -100,7 +100,7 @@ class _AddProductState extends ConsumerState<AddProduct> {
                                 price: priceController.text,
                                 productName: productNameController.text,
                                 quantity: quantityController.text,
-                                image: imagePath ?? widget.productModel!.image,
+                                image: imagePath,
                                 id: 0,
                               );
                               ref
