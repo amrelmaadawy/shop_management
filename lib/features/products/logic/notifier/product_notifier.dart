@@ -34,3 +34,4 @@ final productProviderNotifier =
     );
 final pickImageProvider = StateProvider<String?>((ref) => null);
 final chooseCategoryProvider = StateProvider<String?>((ref) => null);
+final searchProvider = StateProvider<String>((ref) => '');

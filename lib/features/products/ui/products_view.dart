@@ -18,6 +18,9 @@ class ProductsView extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     TextEditingController searchController = TextEditingController();
+    searchController.addListener(() {
+      ref.read(searchProvider.notifier).state = searchController.text.trim();
+    });
     final categories = ref.watch(categoryProvider);
     return Scaffold(
       floatingActionButton: FloatingActionButton(
@@ -58,27 +61,24 @@ class ProductsView extends ConsumerWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   PopupMenuButton<CategoryModel?>(
-  child: CustomProductContainer(text: S.of(context).category),
-  onSelected: (value) {
-    ref.read(selectedCategoryProvider.notifier).state = value?.categoryName;
-  },
-  itemBuilder: (_) => [
-    // زر "الكل"
-    PopupMenuItem<CategoryModel?>(
-      value: null,
-      child: Text('All'),
-    ),
-    // باقي الفئات
-    ...categories.map(
-      (e) => PopupMenuItem<CategoryModel?>(
-        value: e,
-        child: Text(e.categoryName),
-      ),
-    ),
-  ],
-),
-
-                  
+                    child: CustomProductContainer(text: S.of(context).category),
+                    onSelected: (value) {
+                      ref.read(selectedCategoryProvider.notifier).state =
+                          value?.categoryName;
+                    },
+                    itemBuilder: (_) => [
+                      PopupMenuItem<CategoryModel?>(
+                        value: null,
+                        child: Text('All'),
+                      ),
+                      ...categories.map(
+                        (e) => PopupMenuItem<CategoryModel?>(
+                          value: e,
+                          child: Text(e.categoryName),
+                        ),
+                      ),
+                    ],
+                  ),
                 ],
               ),
               SizedBox(height: 20),
@@ -90,16 +90,16 @@ class ProductsView extends ConsumerWidget {
                     final selectedCategory = ref.watch(
                       selectedCategoryProvider,
                     );
-
-                    final filtered = selectedCategory == null
-                        ? products
-                        : products
-                              .where(
-                                (product) =>
-                                    product.category ==
-                                    selectedCategory,
-                              )
-                              .toList();
+                    final searchText = ref.watch(searchProvider).toLowerCase();
+                    final filtered = products.where((product) {
+                      final matchesCategory =
+                          selectedCategory == null ||
+                          product.category == selectedCategory;
+                      final matchesSearch = product.productName
+                          .toLowerCase()
+                          .contains(searchText);
+                      return matchesSearch & matchesCategory;
+                    }).toList();
                     return ListView.separated(
                       shrinkWrap: true,
                       itemBuilder: (context, index) {
