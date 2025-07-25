@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:small_managements/core/hive_boxes.dart';
-import 'package:small_managements/features/products/logic/notifier/product_notifier.dart';
+import 'package:small_managements/features/products/logic/providers/product_providers.dart';
 import 'package:small_managements/features/products/model/category_model.dart';
 
 class CategoryNotifier extends StateNotifier<List<CategoryModel>> {
@@ -51,9 +51,3 @@ class CategoryNotifier extends StateNotifier<List<CategoryModel>> {
     }
   }
 }
-
-final categoryProvider =
-    StateNotifierProvider<CategoryNotifier, List<CategoryModel>>(
-      (ref) => CategoryNotifier(ref),
-    );
-final selectedCategoryProvider = StateProvider<String?>((ref) => null);

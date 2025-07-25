@@ -4,8 +4,8 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:small_managements/features/products/logic/notifier/category_notifier.dart';
-import 'package:small_managements/features/products/logic/notifier/product_notifier.dart';
+import 'package:small_managements/features/products/logic/providers/category_providers.dart';
+import 'package:small_managements/features/products/logic/providers/product_providers.dart';
 import 'package:small_managements/features/products/ui/widgets/product_item.dart';
 
 class ListOfProductsView extends StatelessWidget {

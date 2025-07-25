@@ -27,11 +27,3 @@ class ProductProvider extends StateNotifier<List<ProductModel>> {
     loadProducts();
   }
 }
-
-final productProviderNotifier =
-    StateNotifierProvider<ProductProvider, List<ProductModel>>(
-      (ref) => ProductProvider(),
-    );
-final pickImageProvider = StateProvider<String?>((ref) => null);
-final chooseCategoryProvider = StateProvider<String?>((ref) => null);
-final searchProvider = StateProvider<String>((ref) => '');

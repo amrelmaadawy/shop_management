@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:small_managements/features/products/logic/notifier/category_notifier.dart';
+import 'package:small_managements/features/products/logic/providers/category_providers.dart';
 import 'package:small_managements/features/products/model/category_model.dart';
 import 'package:small_managements/features/products/ui/widgets/custom_product_container.dart';
 import 'package:small_managements/generated/l10n.dart';

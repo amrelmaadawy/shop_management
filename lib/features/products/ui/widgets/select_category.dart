@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:small_managements/features/products/logic/notifier/category_notifier.dart';
-import 'package:small_managements/features/products/logic/notifier/product_notifier.dart';
+import 'package:small_managements/features/products/logic/providers/category_providers.dart';
+import 'package:small_managements/features/products/logic/providers/product_providers.dart';
 import 'package:small_managements/features/products/model/category_model.dart';
 import 'package:small_managements/features/products/ui/widgets/add_product_text_form_feilds.dart';
 import 'package:small_managements/core/utils/custom_text_form_field.dart';
