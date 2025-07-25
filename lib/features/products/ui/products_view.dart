@@ -44,7 +44,7 @@ class ProductsView extends ConsumerWidget {
               CustomTextFormField(
                 validator: (value) {
                   if (value!.isEmpty) {
-                    return 'Please Enter The Poduct Name';
+                    return S.of(context).pleaseAddProductName;
                   } else {
                     return null;
                   }

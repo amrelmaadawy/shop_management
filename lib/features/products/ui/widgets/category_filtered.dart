@@ -26,7 +26,7 @@ class CategoryFiltered extends StatelessWidget {
                 value?.categoryName;
           },
           itemBuilder: (_) => [
-            PopupMenuItem<CategoryModel?>(value: null, child: Text('All')),
+            PopupMenuItem<CategoryModel?>(value: null, child: Text(S.of(context).all)),
             ...categories.map(
               (e) => PopupMenuItem<CategoryModel?>(
                 value: e,

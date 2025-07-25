@@ -1,4 +1,3 @@
-
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -6,9 +5,9 @@ import 'package:small_managements/core/services/image_services.dart';
 import 'package:small_managements/core/utils/app_colors.dart';
 import 'package:small_managements/features/products/logic/providers/product_providers.dart';
 import 'package:small_managements/generated/l10n.dart';
+
 class AddImagePicker extends ConsumerWidget {
   const AddImagePicker({super.key});
-
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -26,48 +25,49 @@ class AddImagePicker extends ConsumerWidget {
         child: Center(
           child: imagePath == null
               ? Column(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            SizedBox(height: 40),
-            Text(
-              S.of(context).addImage,
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-            ),
-            Text(S.of(context).tapToAdd),
-            SizedBox(height: 24),
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                backgroundColor: AppColors.kIncreaseContainerColor,
-              ),
-              onPressed: () async {
-              final  image = await ImageServices.pickImageFromGalary();
-                if (image != null) {
-                  final path = await ImageServices.saveImageIntoAppDirectory(
-                    image,
-                  );
-                  ref.read(pickImageProvider.notifier).state = path;
-                }
-              },
-              child: Text(
-                S.of(context).addImage,
-                style: TextStyle(color: Colors.white),
-              ),
-            ),
-            SizedBox(height: 40),
-          ],
-        )
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    SizedBox(height: 40),
+                    Text(
+                      S.of(context).addImage,
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    Text(S.of(context).tapToAdd),
+                    SizedBox(height: 24),
+                    ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: AppColors.kIncreaseContainerColor,
+                      ),
+                      onPressed: () async {
+                        final image = await ImageServices.pickImageFromGalary();
+                        if (image != null) {
+                          final path =
+                              await ImageServices.saveImageIntoAppDirectory(
+                                image,
+                              );
+                          ref.read(pickImageProvider.notifier).state = path;
+                        }
+                      },
+                      child: Text(
+                        S.of(context).addImage,
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    ),
+                    SizedBox(height: 40),
+                  ],
+                )
               : Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Icon(Icons.check_circle, color: Colors.green, size: 48),
                     SizedBox(height: 12),
                     Text(
-                      'Image Selected',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                       
-                      ),
+                      S.of(context).imageSelected,
+                      style: TextStyle(fontWeight: FontWeight.bold),
                     ),
                     SizedBox(height: 16),
                     ElevatedButton.icon(
@@ -77,8 +77,11 @@ class AddImagePicker extends ConsumerWidget {
                       onPressed: () {
                         ref.read(pickImageProvider.notifier).state = null;
                       },
-                      icon: Icon(Icons.delete,color: Colors.white,),
-                      label: Text('Delete Image',style: TextStyle(color: Colors.white),),
+                      icon: Icon(Icons.delete, color: Colors.white),
+                      label: Text(
+                        S.of(context).deleteImage,
+                        style: TextStyle(color: Colors.white),
+                      ),
                     ),
                   ],
                 ),

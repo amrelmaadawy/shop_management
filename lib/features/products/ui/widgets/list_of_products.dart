@@ -7,6 +7,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:small_managements/features/products/logic/providers/category_providers.dart';
 import 'package:small_managements/features/products/logic/providers/product_providers.dart';
 import 'package:small_managements/features/products/ui/widgets/product_item.dart';
+import 'package:small_managements/generated/l10n.dart';
 
 class ListOfProductsView extends StatelessWidget {
   const ListOfProductsView({
@@ -36,7 +37,7 @@ class ListOfProductsView extends StatelessWidget {
           return filtered.isEmpty
               ? Center(
                   child: Text(
-                    'There is no products',
+                    S.of(context).thereIsNoProducts,
                     style: TextStyle(fontWeight: FontWeight.bold),
                   ),
                 )

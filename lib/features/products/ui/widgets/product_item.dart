@@ -5,6 +5,7 @@ import 'package:small_managements/core/utils/app_colors.dart';
 import 'package:small_managements/features/products/logic/providers/product_providers.dart';
 import 'package:small_managements/features/products/model/product_model.dart';
 import 'package:small_managements/features/products/ui/add_product.dart';
+import 'package:small_managements/generated/l10n.dart';
 
 class ProductItem extends ConsumerWidget {
   const ProductItem( {
@@ -45,7 +46,7 @@ class ProductItem extends ConsumerWidget {
                 style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
               ),
               Text(
-                '$price . $quantity in stock',
+                '$price . $quantity ${S.of(context).inStock}',
                 style: TextStyle(color: AppColors.kPrimeryColor, fontSize: 14),
               ),
             ],
@@ -68,7 +69,7 @@ class ProductItem extends ConsumerWidget {
               showDialog(
                 context: context,
                 builder: (context) => AlertDialog(
-                  title: Text('are you sure u want to delete'),
+                  title: Text(S.of(context).areYouSureYouWantToDelet),
                   actions: [
                     ElevatedButton(
                       onPressed: () {
@@ -77,13 +78,13 @@ class ProductItem extends ConsumerWidget {
                             .deletProduct(index);
                         Navigator.pop(context);
                       },
-                      child: Text('Yes'),
+                      child: Text(S.of(context).yes),
                     ),
                     ElevatedButton(
                       onPressed: () {
                         Navigator.pop(context);
                       },
-                      child: Text('no'),
+                      child: Text(S.of(context).no),
                     ),
                   ],
                 ),

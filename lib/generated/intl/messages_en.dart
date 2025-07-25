@@ -28,9 +28,15 @@ class MessageLookup extends MessageLookupByLibrary {
     "Totalproduct": MessageLookupByLibrary.simpleMessage(
       "Total Products in Stock",
     ),
+    "addCategory": MessageLookupByLibrary.simpleMessage("Add Category"),
     "addImage": MessageLookupByLibrary.simpleMessage("Add Image"),
+    "addNewCategory": MessageLookupByLibrary.simpleMessage("Add New Category"),
     "addProduct": MessageLookupByLibrary.simpleMessage("Add Product"),
+    "all": MessageLookupByLibrary.simpleMessage("All"),
     "appPrefrance": MessageLookupByLibrary.simpleMessage("App Prefrances"),
+    "areYouSureYouWantToDelet": MessageLookupByLibrary.simpleMessage(
+      "Are You Sure You Want To delete",
+    ),
     "businessInfo": MessageLookupByLibrary.simpleMessage("Business Info"),
     "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
     "category": MessageLookupByLibrary.simpleMessage("Category"),
@@ -40,15 +46,31 @@ class MessageLookup extends MessageLookupByLibrary {
     "confirmeSale": MessageLookupByLibrary.simpleMessage("Confirm Sale"),
     "darkMode": MessageLookupByLibrary.simpleMessage("Dark Mode"),
     "dateRange": MessageLookupByLibrary.simpleMessage("Date Range"),
+    "deleteImage": MessageLookupByLibrary.simpleMessage("Delete Image"),
     "home": MessageLookupByLibrary.simpleMessage("Home"),
     "homeAppBar": MessageLookupByLibrary.simpleMessage("Overview"),
+    "imageSelected": MessageLookupByLibrary.simpleMessage("Image Selected"),
+    "inStock": MessageLookupByLibrary.simpleMessage("in Storck"),
     "itemsInclude": MessageLookupByLibrary.simpleMessage(
       "Including 5 new items",
     ),
     "language": MessageLookupByLibrary.simpleMessage("Language"),
     "makeSale": MessageLookupByLibrary.simpleMessage("Make Sale"),
+    "no": MessageLookupByLibrary.simpleMessage("No"),
     "orders": MessageLookupByLibrary.simpleMessage("Orders"),
     "phoneNumber": MessageLookupByLibrary.simpleMessage("Phone Number"),
+    "pleaseAddProductName": MessageLookupByLibrary.simpleMessage(
+      "Please Add Product Name",
+    ),
+    "pleaseAddTheCategory": MessageLookupByLibrary.simpleMessage(
+      "Please Enter The Category",
+    ),
+    "pleaseAddThePrice": MessageLookupByLibrary.simpleMessage(
+      "Please Enter The Price",
+    ),
+    "pleaseAddTheQuantity": MessageLookupByLibrary.simpleMessage(
+      "Please Enter The Quantity",
+    ),
     "price": MessageLookupByLibrary.simpleMessage("Price"),
     "product": MessageLookupByLibrary.simpleMessage("Product"),
     "productImage": MessageLookupByLibrary.simpleMessage("Product Image"),
@@ -78,6 +100,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "tapToAdd": MessageLookupByLibrary.simpleMessage(
       "Tap to add an image from your gallery or take a new one.",
     ),
+    "thereIsNoProducts": MessageLookupByLibrary.simpleMessage(
+      "There is no products",
+    ),
     "thisWeek": MessageLookupByLibrary.simpleMessage("This Week"),
     "topSellingItems": MessageLookupByLibrary.simpleMessage(
       "Top Selling Items",
@@ -90,5 +115,6 @@ class MessageLookup extends MessageLookupByLibrary {
     "totalSalesToday": MessageLookupByLibrary.simpleMessage(
       "Total Sales Today",
     ),
+    "yes": MessageLookupByLibrary.simpleMessage("Yes"),
   };
 }

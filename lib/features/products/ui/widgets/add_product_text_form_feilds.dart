@@ -40,7 +40,7 @@ class _AddProductTextFormFieldsState
           labelText: S.of(context).productName,
           validator: (value) {
             if (value!.isEmpty) {
-              return 'Please Enter The Poduct Name';
+              return S.of(context).pleaseAddProductName;
             } else {
               return null;
             }
@@ -53,7 +53,7 @@ class _AddProductTextFormFieldsState
           labelText: S.of(context).price,
           validator: (value) {
             if (value!.isEmpty) {
-              return 'Please Enter The Price of the Product';
+              return S.of(context).pleaseAddThePrice;
             } else {
               return null;
             }
@@ -66,7 +66,7 @@ class _AddProductTextFormFieldsState
           labelText: S.of(context).quantity,
           validator: (value) {
             if (value!.isEmpty) {
-              return 'Please Enter The quantity';
+              return S.of(context).pleaseAddTheQuantity;
             } else {
               return null;
             }

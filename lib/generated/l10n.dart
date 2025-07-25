@@ -393,6 +393,126 @@ class S {
       args: [],
     );
   }
+
+  /// `Please Add Product Name`
+  String get pleaseAddProductName {
+    return Intl.message(
+      'Please Add Product Name',
+      name: 'pleaseAddProductName',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Image Selected`
+  String get imageSelected {
+    return Intl.message(
+      'Image Selected',
+      name: 'imageSelected',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Delete Image`
+  String get deleteImage {
+    return Intl.message(
+      'Delete Image',
+      name: 'deleteImage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please Enter The Price`
+  String get pleaseAddThePrice {
+    return Intl.message(
+      'Please Enter The Price',
+      name: 'pleaseAddThePrice',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please Enter The Quantity`
+  String get pleaseAddTheQuantity {
+    return Intl.message(
+      'Please Enter The Quantity',
+      name: 'pleaseAddTheQuantity',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please Enter The Category`
+  String get pleaseAddTheCategory {
+    return Intl.message(
+      'Please Enter The Category',
+      name: 'pleaseAddTheCategory',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `All`
+  String get all {
+    return Intl.message('All', name: 'all', desc: '', args: []);
+  }
+
+  /// `There is no products`
+  String get thereIsNoProducts {
+    return Intl.message(
+      'There is no products',
+      name: 'thereIsNoProducts',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `in Storck`
+  String get inStock {
+    return Intl.message('in Storck', name: 'inStock', desc: '', args: []);
+  }
+
+  /// `Are You Sure You Want To delete`
+  String get areYouSureYouWantToDelet {
+    return Intl.message(
+      'Are You Sure You Want To delete',
+      name: 'areYouSureYouWantToDelet',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Yes`
+  String get yes {
+    return Intl.message('Yes', name: 'yes', desc: '', args: []);
+  }
+
+  /// `No`
+  String get no {
+    return Intl.message('No', name: 'no', desc: '', args: []);
+  }
+
+  /// `Add New Category`
+  String get addNewCategory {
+    return Intl.message(
+      'Add New Category',
+      name: 'addNewCategory',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Add Category`
+  String get addCategory {
+    return Intl.message(
+      'Add Category',
+      name: 'addCategory',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

@@ -65,21 +65,21 @@ class SelectCategory extends StatelessWidget {
                 Divider(),
                 ListTile(
                   leading: Icon(Icons.add),
-                  title: Text('إضافة فئة جديدة'),
+                  title: Text(S.of(context).addNewCategory),
                   onTap: () {
                     Navigator.pop(context);
                     addCategoryController.clear();
                     showDialog(
                       context: context,
                       builder: (context) => AlertDialog(
-                        title: Text('Add category'),
+                        title: Text(S.of(context).addCategory),
                         content: CustomTextFormField(
                           controller: addCategoryController,
                           keyboardType: TextInputType.text,
                           labelText: S.of(context).category,
                           validator: (value) {
                             if (value!.isEmpty) {
-                              return 'Please Enter The Category';
+                              return S.of(context).pleaseAddTheCategory;
                             }
                             return null;
                           },
@@ -123,7 +123,7 @@ class SelectCategory extends StatelessWidget {
         child: CustomTextFormField(
           validator: (value) {
             if (value!.isEmpty) {
-              return 'Please Enter The Category ';
+              return S.of(context).pleaseAddTheCategory;
             } else {
               return null;
             }

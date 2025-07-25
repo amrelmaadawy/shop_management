@@ -28,9 +28,15 @@ class MessageLookup extends MessageLookupByLibrary {
     "Totalproduct": MessageLookupByLibrary.simpleMessage(
       "إجمالي المنتجات في المخزون",
     ),
+    "addCategory": MessageLookupByLibrary.simpleMessage("إضافة تصنيف"),
     "addImage": MessageLookupByLibrary.simpleMessage("إضافة صورة"),
+    "addNewCategory": MessageLookupByLibrary.simpleMessage("إضافة تصنيف جديد"),
     "addProduct": MessageLookupByLibrary.simpleMessage("إضافة منتج"),
+    "all": MessageLookupByLibrary.simpleMessage("الكل"),
     "appPrefrance": MessageLookupByLibrary.simpleMessage("تفضيلات التطبيق"),
+    "areYouSureYouWantToDelet": MessageLookupByLibrary.simpleMessage(
+      "هل أنت متأكد أنك تريد الحذف؟",
+    ),
     "businessInfo": MessageLookupByLibrary.simpleMessage("معلومات المتجر"),
     "cancel": MessageLookupByLibrary.simpleMessage("إلغاء"),
     "category": MessageLookupByLibrary.simpleMessage("الفئة"),
@@ -40,15 +46,31 @@ class MessageLookup extends MessageLookupByLibrary {
     "confirmeSale": MessageLookupByLibrary.simpleMessage("تأكيد البيع"),
     "darkMode": MessageLookupByLibrary.simpleMessage("الوضع الليلي"),
     "dateRange": MessageLookupByLibrary.simpleMessage("النطاق الزمني"),
+    "deleteImage": MessageLookupByLibrary.simpleMessage("حذف الصورة"),
     "home": MessageLookupByLibrary.simpleMessage("الرئيسية"),
     "homeAppBar": MessageLookupByLibrary.simpleMessage("نظرة عامة"),
+    "imageSelected": MessageLookupByLibrary.simpleMessage("تم اختيار الصورة"),
+    "inStock": MessageLookupByLibrary.simpleMessage("متوفر في المخزون"),
     "itemsInclude": MessageLookupByLibrary.simpleMessage(
       "بما في ذلك 5 عناصر جديدة",
     ),
     "language": MessageLookupByLibrary.simpleMessage("اللغة"),
     "makeSale": MessageLookupByLibrary.simpleMessage("إجراء عملية بيع"),
+    "no": MessageLookupByLibrary.simpleMessage("لا"),
     "orders": MessageLookupByLibrary.simpleMessage("الطلبات"),
     "phoneNumber": MessageLookupByLibrary.simpleMessage("رقم الهاتف"),
+    "pleaseAddProductName": MessageLookupByLibrary.simpleMessage(
+      "من فضلك أدخل اسم المنتج",
+    ),
+    "pleaseAddTheCategory": MessageLookupByLibrary.simpleMessage(
+      "من فضلك أدخل التصنيف",
+    ),
+    "pleaseAddThePrice": MessageLookupByLibrary.simpleMessage(
+      "من فضلك أدخل السعر",
+    ),
+    "pleaseAddTheQuantity": MessageLookupByLibrary.simpleMessage(
+      "من فضلك أدخل الكمية",
+    ),
     "price": MessageLookupByLibrary.simpleMessage("السعر"),
     "product": MessageLookupByLibrary.simpleMessage("المنتج"),
     "productImage": MessageLookupByLibrary.simpleMessage("صورة المنتج"),
@@ -76,6 +98,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "tapToAdd": MessageLookupByLibrary.simpleMessage(
       "اضغط لإضافة صورة من المعرض أو التقاط واحدة جديدة.",
     ),
+    "thereIsNoProducts": MessageLookupByLibrary.simpleMessage("لا يوجد منتجات"),
     "thisWeek": MessageLookupByLibrary.simpleMessage("هذا الأسبوع"),
     "topSellingItems": MessageLookupByLibrary.simpleMessage(
       "أكثر المنتجات مبيعًا",
@@ -88,5 +111,6 @@ class MessageLookup extends MessageLookupByLibrary {
     "totalSalesToday": MessageLookupByLibrary.simpleMessage(
       "إجمالي المبيعات اليوم",
     ),
+    "yes": MessageLookupByLibrary.simpleMessage("نعم"),
   };
 }
