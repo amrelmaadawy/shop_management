@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:small_managements/core/utils/app_colors.dart';
-import 'package:small_managements/features/products/ui/widgets/custom_text_form_field.dart';
+import 'package:small_managements/core/utils/custom_text_form_field.dart';
 import 'package:small_managements/generated/l10n.dart';
 
 class MakeSale extends StatefulWidget {

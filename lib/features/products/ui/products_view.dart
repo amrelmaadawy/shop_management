@@ -1,15 +1,13 @@
-import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:small_managements/core/utils/app_colors.dart';
 import 'package:small_managements/features/products/logic/notifier/category_notifier.dart';
 import 'package:small_managements/features/products/logic/notifier/product_notifier.dart';
-import 'package:small_managements/features/products/model/category_model.dart';
 import 'package:small_managements/features/products/ui/add_product.dart';
-import 'package:small_managements/features/products/ui/widgets/custom_product_container.dart';
-import 'package:small_managements/features/products/ui/widgets/custom_text_form_field.dart';
-import 'package:small_managements/features/products/ui/widgets/product_item.dart';
+import 'package:small_managements/features/products/ui/widgets/category_filtered.dart';
+import 'package:small_managements/core/utils/custom_text_form_field.dart';
+import 'package:small_managements/features/products/ui/widgets/list_of_products.dart';
 import 'package:small_managements/generated/l10n.dart';
 
 class ProductsView extends ConsumerWidget {
@@ -57,71 +55,9 @@ class ProductsView extends ConsumerWidget {
                 labelText: S.of(context).searchProduct,
               ),
               SizedBox(height: 20),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  PopupMenuButton<CategoryModel?>(
-                    child: CustomProductContainer(text: S.of(context).category),
-                    onSelected: (value) {
-                      ref.read(selectedCategoryProvider.notifier).state =
-                          value?.categoryName;
-                    },
-                    itemBuilder: (_) => [
-                      PopupMenuItem<CategoryModel?>(
-                        value: null,
-                        child: Text('All'),
-                      ),
-                      ...categories.map(
-                        (e) => PopupMenuItem<CategoryModel?>(
-                          value: e,
-                          child: Text(e.categoryName),
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
+              CategoryFiltered(categories: categories, ref: ref,),
               SizedBox(height: 20),
-              SizedBox(
-                height: MediaQuery.of(context).size.height * 0.586,
-                child: Consumer(
-                  builder: (context, ref, _) {
-                    final products = ref.watch(productProviderNotifier);
-                    final selectedCategory = ref.watch(
-                      selectedCategoryProvider,
-                    );
-                    final searchText = ref.watch(searchProvider).toLowerCase();
-                    final filtered = products.where((product) {
-                      final matchesCategory =
-                          selectedCategory == null ||
-                          product.category == selectedCategory;
-                      final matchesSearch = product.productName
-                          .toLowerCase()
-                          .contains(searchText);
-                      return matchesSearch & matchesCategory;
-                    }).toList();
-                    return ListView.separated(
-                      shrinkWrap: true,
-                      itemBuilder: (context, index) {
-                        final product = filtered[index];
-                        return ProductItem(
-                          price: product.price,
-                          image: product.image != null
-                              ? Image.file(File(product.image!))
-                              : Image.asset('assets/images/product.png'),
-                          productName: product.productName,
-                          quantity: product.quantity,
-                          index: index,
-                          productModel: products[index],
-                        );
-                      },
-                      itemCount: filtered.length,
-                      separatorBuilder: (context, index) =>
-                          SizedBox(height: 10),
-                    );
-                  },
-                ),
-              ),
+              ListOfProductsView(),
             ],
           ),
         ),

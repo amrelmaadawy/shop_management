@@ -41,7 +41,7 @@ class AddImagePicker extends ConsumerWidget {
                 backgroundColor: AppColors.kIncreaseContainerColor,
               ),
               onPressed: () async {
-               final  image = await ImageServices.pickImageFromGalary();
+              final  image = await ImageServices.pickImageFromGalary();
                 if (image != null) {
                   final path = await ImageServices.saveImageIntoAppDirectory(
                     image,

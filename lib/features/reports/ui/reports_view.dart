@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:small_managements/features/products/ui/widgets/custom_text_form_field.dart';
+import 'package:small_managements/core/utils/custom_text_form_field.dart';
 import 'package:small_managements/features/reports/logic/sales_data.dart';
 import 'package:small_managements/features/reports/ui/widgets/custom_report_container.dart';
 import 'package:small_managements/features/reports/ui/widgets/sales_chart_container.dart';

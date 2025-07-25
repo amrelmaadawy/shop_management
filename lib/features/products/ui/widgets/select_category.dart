@@ -4,7 +4,7 @@ import 'package:small_managements/features/products/logic/notifier/category_noti
 import 'package:small_managements/features/products/logic/notifier/product_notifier.dart';
 import 'package:small_managements/features/products/model/category_model.dart';
 import 'package:small_managements/features/products/ui/widgets/add_product_text_form_feilds.dart';
-import 'package:small_managements/features/products/ui/widgets/custom_text_form_field.dart';
+import 'package:small_managements/core/utils/custom_text_form_field.dart';
 import 'package:small_managements/generated/l10n.dart';
 
 class SelectCategory extends StatelessWidget {
