@@ -89,34 +89,7 @@ class _MakeSaleState extends State<MakeSale> {
                   ),
                 ),
                 SizedBox(height: 15),
-                CustomTextFormField(
-                  validator: (value) {
-                    if (value!.isEmpty) {
-                      return 'Please Enter Sold Quantity';
-                    } else {
-                      return null;
-                    }
-                  },
-                  controller: quantitySoldController,
-                  keyboardType: TextInputType.text,
-                  labelText: S.of(context).quantitySold,
-                ),
-                SizedBox(height: 15),
-
-                CustomTextFormField(
-                  validator: (value) {
-                    if (value!.isEmpty) {
-                      return 'Please Enter The Price';
-                    } else {
-                      return null;
-                    }
-                  },
-                  suffixIcon: Icon(Icons.leaderboard),
-                  controller: priceController,
-                  keyboardType: TextInputType.number,
-                  labelText: S.of(context).price,
-                ),
-                SizedBox(height: 15),
+              
                 SizedBox(
                   width: double.infinity,
                   child: ElevatedButton(
