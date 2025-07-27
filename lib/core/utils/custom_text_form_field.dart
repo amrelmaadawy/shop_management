@@ -8,8 +8,10 @@ class CustomTextFormField extends StatelessWidget {
     required this.keyboardType,
     this.prefixIcon,
     required this.labelText,
-    required this.validator, 
+    required this.validator,
     this.suffixIcon,
+    this.focusNode,
+    this.onChange,
   });
   final TextEditingController controller;
   final TextInputType keyboardType;
@@ -17,9 +19,13 @@ class CustomTextFormField extends StatelessWidget {
   final Widget? suffixIcon;
   final String labelText;
   final String? Function(String?) validator;
+  final void Function(String)? onChange;
+  final FocusNode? focusNode;
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      focusNode: focusNode,
+      onChanged: onChange,
       controller: controller,
       validator: validator,
       keyboardType: keyboardType,

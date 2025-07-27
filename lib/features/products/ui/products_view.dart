@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:small_managements/core/utils/app_colors.dart';
@@ -55,7 +54,7 @@ class ProductsView extends ConsumerWidget {
                 labelText: S.of(context).searchProduct,
               ),
               SizedBox(height: 20),
-              CategoryFiltered(categories: categories, ref: ref,),
+              CategoryFiltered(categories: categories, ref: ref),
               SizedBox(height: 20),
               ListOfProductsView(),
             ],

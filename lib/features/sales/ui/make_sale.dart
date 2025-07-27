@@ -1,31 +1,34 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:small_managements/core/utils/app_colors.dart';
 import 'package:small_managements/core/utils/custom_text_form_field.dart';
+import 'package:small_managements/features/products/logic/providers/product_providers.dart';
+import 'package:small_managements/features/products/model/product_model.dart';
+import 'package:small_managements/features/sales/logic/provider/select_product_provider.dart';
 import 'package:small_managements/generated/l10n.dart';
 
-class MakeSale extends StatefulWidget {
+class MakeSale extends ConsumerStatefulWidget {
   const MakeSale({super.key});
 
   @override
-  State<MakeSale> createState() => _MakeSaleState();
+  ConsumerState<MakeSale> createState() => _MakeSaleState();
 }
 
-class _MakeSaleState extends State<MakeSale> {
-  List<String> categories = ['cups', 'dishies'];
-
+class _MakeSaleState extends ConsumerState<MakeSale> {
   TextEditingController selectProductController = TextEditingController();
 
   TextEditingController quantitySoldController = TextEditingController();
 
-  TextEditingController priceController = TextEditingController();
+  TextEditingController discountController = TextEditingController();
   GlobalKey<FormState> formKey = GlobalKey();
   AutovalidateMode autoValidateMode = AutovalidateMode.disabled;
+
   @override
   void dispose() {
     selectProductController.dispose();
     quantitySoldController.dispose();
-    priceController.dispose();
-    
+    discountController.dispose();
+
     super.dispose();
   }
 
@@ -39,6 +42,7 @@ class _MakeSaleState extends State<MakeSale> {
             key: formKey,
             autovalidateMode: autoValidateMode,
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Row(
                   children: [
@@ -58,38 +62,134 @@ class _MakeSaleState extends State<MakeSale> {
                   ],
                 ),
                 SizedBox(height: 15),
-                GestureDetector(
-                  onTap: () async {
-                    final selected = await showMenu<String>(
-                      context: context,
-                      position: RelativeRect.fromLTRB(100, 100, 100, 100),
-                      items: categories
-                          .map((e) => PopupMenuItem(value: e, child: Text(e)))
-                          .toList(),
-                    );
-                    setState(() {
-                      if (selected != null) {
-                        selectProductController.text = selected;
-                      }
-                    });
+                Autocomplete<ProductModel>(
+                  displayStringForOption: (ProductModel option) =>
+                      option.productName,
+                  optionsBuilder: (TextEditingValue textEditingValue) {
+                    return ref
+                        .read(productProviderNotifier)
+                        .where(
+                          (product) => product.productName
+                              .toLowerCase()
+                              .contains(textEditingValue.text.toLowerCase()),
+                        );
                   },
-                  child: AbsorbPointer(
-                    child: CustomTextFormField(
-                      validator: (value) {
-                        if (value!.isEmpty) {
-                          return 'Please Enter The Poduct';
-                        } else {
-                          return null;
-                        }
+                  fieldViewBuilder:
+                      (context, controller, focusNode, onFieldSubmitted) {
+                        return CustomTextFormField(
+                          focusNode: focusNode,
+                          controller: controller,
+                          keyboardType: TextInputType.text,
+                          labelText: 'search for product',
+                          validator: (v) {
+                            return null;
+                          },
+                        );
                       },
-                      controller: selectProductController,
-                      keyboardType: TextInputType.number,
-                      labelText: S.of(context).selectProduct,
-                    ),
-                  ),
+                  optionsViewBuilder: (context, onSelected, options) {
+                    return Align(
+                      alignment: Alignment.topLeft,
+                      child: Material(
+                        elevation: 8,
+                        child: ListView(
+                          shrinkWrap: true,
+                          children: options.map((product) {
+                            return ListTile(
+                              title: Text(product.productName),
+                              trailing: Text("${product.price} \$"),
+                              onTap: () => onSelected(product),
+                            );
+                          }).toList(),
+                        ),
+                      ),
+                    );
+                  },
+                  onSelected: (ProductModel selectedProduct) {
+                    ref
+                        .read(selectProductProvider.notifier)
+                        .addProduct(selectedProduct);
+                  },
                 ),
                 SizedBox(height: 15),
-              
+
+                // Expanded هنا بس بنسكرول المنتجات
+                Expanded(
+                  child: CustomScrollView(
+                    slivers: [
+                      SliverList(
+                        delegate: SliverChildBuilderDelegate(
+                          (context, index) => Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 8.0),
+                            child: Row(
+                              children: [
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text('product A'),
+                                    SizedBox(height: 5),
+                                    Text('individual Price 5 LE'),
+                                  ],
+                                ),
+                                Spacer(),
+                                Container(
+                                  padding: EdgeInsets.all(8),
+                                  decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    color: AppColors.kIncreaseContainerColor,
+                                  ),
+                                  child: Text(
+                                    '-',
+                                    style: TextStyle(
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(width: 5),
+                                Container(
+                                  padding: EdgeInsets.all(8),
+                                  decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                  ),
+                                  child: Text(
+                                    '2',
+                                    style: TextStyle(
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(width: 5),
+                                Container(
+                                  padding: EdgeInsets.all(7),
+                                  decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    color: AppColors.kIncreaseContainerColor,
+                                  ),
+                                  child: Text(
+                                    '+',
+                                    style: TextStyle(
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          childCount: 20,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+
+                SizedBox(height: 15),
+                Text(
+                  'Total Price = 1200 LE',
+                  style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
+                ),
+                SizedBox(height: 15),
                 SizedBox(
                   width: double.infinity,
                   child: ElevatedButton(
@@ -102,6 +202,63 @@ class _MakeSaleState extends State<MakeSale> {
                       } else {
                         autoValidateMode = AutovalidateMode.always;
                       }
+                      showModalBottomSheet(
+                        context: context,
+                        builder: (context) {
+                          return Padding(
+                            padding: const EdgeInsets.all(15.0),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'additional options',
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                SizedBox(height: 10),
+                                CustomTextFormField(
+                                  controller: discountController,
+                                  keyboardType: TextInputType.number,
+                                  labelText: 'discount',
+                                  validator: (v) {
+                                    return null;
+                                  },
+                                ),
+                                SizedBox(height: 10),
+                                CustomTextFormField(
+                                  controller: discountController,
+                                  keyboardType: TextInputType.number,
+                                  labelText: 'client Name',
+                                  validator: (v) {
+                                    return null;
+                                  },
+                                ),
+                                SizedBox(height: 10),
+                                SizedBox(
+                                  width: MediaQuery.of(context).size.width,
+                                  child: ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor:
+                                          AppColors.kAddProductButtonColor,
+                                    ),
+                                    onPressed: () {},
+                                    child: Text(
+                                      'Apply discount',
+                                      style: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 17,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          );
+                        },
+                      );
                     },
                     child: Text(
                       S.of(context).confirmeSale,
