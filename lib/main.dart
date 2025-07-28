@@ -7,6 +7,7 @@ import 'package:small_managements/core/utils/app_colors.dart';
 import 'package:small_managements/features/products/model/category_model.dart';
 import 'package:small_managements/features/products/model/product_model.dart';
 import 'package:small_managements/features/sales/model/sales_model.dart';
+import 'package:small_managements/features/sales/model/sold_product_model.dart';
 import 'package:small_managements/features/settings/logic/setting_provider.dart';
 import 'package:small_managements/features/splash/ui/splash_view.dart';
 import 'package:small_managements/generated/l10n.dart';
@@ -22,6 +23,7 @@ Future<void> main() async {
   Hive.registerAdapter(ProductModelAdapter());
   Hive.registerAdapter(CategoryModelAdapter());
   Hive.registerAdapter(SalesModelAdapter());
+  Hive.registerAdapter(SoldProductModelAdapter());
   await Hive.openBox<SalesModel>(salesBox);
   await Hive.openBox<ProductModel>(productBox);
   await Hive.openBox<CategoryModel>(categoriesBox);

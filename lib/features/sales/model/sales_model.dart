@@ -1,14 +1,13 @@
 
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:small_managements/features/sales/model/sold_product_model.dart';
 part 'sales_model.g.dart';
 
 @HiveType(typeId: 2)
 class SalesModel {
   @HiveField(0)
-  final String product;
-    @HiveField(1)
-
-  final int quantitySold;
+  final List<SoldProductModel> soldProducts;
+   
     @HiveField(2)
 
   final double paid;
@@ -24,10 +23,8 @@ class SalesModel {
     @HiveField(6)
 
   final String name;
-  SalesModel({
+  SalesModel( {required this.soldProducts,
     required this.paid,
-    required this.product,
-    required this.quantitySold,
     required this.dateTime,
     required this.total,
     required this.change,

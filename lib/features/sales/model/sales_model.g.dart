@@ -17,9 +17,8 @@ class SalesModelAdapter extends TypeAdapter<SalesModel> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return SalesModel(
+      soldProducts: (fields[0] as List).cast<SoldProductModel>(),
       paid: fields[2] as double,
-      product: fields[0] as String,
-      quantitySold: fields[1] as int,
       dateTime: fields[3] as DateTime,
       total: fields[4] as double,
       change: fields[5] as double,
@@ -30,11 +29,9 @@ class SalesModelAdapter extends TypeAdapter<SalesModel> {
   @override
   void write(BinaryWriter writer, SalesModel obj) {
     writer
-      ..writeByte(7)
+      ..writeByte(6)
       ..writeByte(0)
-      ..write(obj.product)
-      ..writeByte(1)
-      ..write(obj.quantitySold)
+      ..write(obj.soldProducts)
       ..writeByte(2)
       ..write(obj.paid)
       ..writeByte(3)
