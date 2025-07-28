@@ -1,15 +1,21 @@
-
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:small_managements/core/utils/app_colors.dart';
 import 'package:small_managements/core/utils/custom_text_form_field.dart';
+import 'package:small_managements/features/sales/logic/provider/select_product_provider.dart';
 
-class AdditionalOptionsBottomSheet extends StatelessWidget {
-  const AdditionalOptionsBottomSheet({
-    super.key,
-    required this.discountController,
-  });
+class AdditionalOptionsBottomSheet extends ConsumerStatefulWidget {
+  const AdditionalOptionsBottomSheet({super.key});
 
-  final TextEditingController discountController;
+  @override
+  ConsumerState<AdditionalOptionsBottomSheet> createState() =>
+      _AdditionalOptionsBottomSheetState();
+}
+
+class _AdditionalOptionsBottomSheetState
+    extends ConsumerState<AdditionalOptionsBottomSheet> {
+  TextEditingController discountController = TextEditingController();
+  TextEditingController nameController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -20,10 +26,7 @@ class AdditionalOptionsBottomSheet extends StatelessWidget {
         children: [
           Text(
             'additional options',
-            style: TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.bold,
-            ),
+            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
           ),
           SizedBox(height: 10),
           CustomTextFormField(
@@ -36,7 +39,7 @@ class AdditionalOptionsBottomSheet extends StatelessWidget {
           ),
           SizedBox(height: 10),
           CustomTextFormField(
-            controller: discountController,
+            controller: nameController,
             keyboardType: TextInputType.number,
             labelText: 'client Name',
             validator: (v) {
@@ -48,10 +51,14 @@ class AdditionalOptionsBottomSheet extends StatelessWidget {
             width: MediaQuery.of(context).size.width,
             child: ElevatedButton(
               style: ElevatedButton.styleFrom(
-                backgroundColor:
-                    AppColors.kAddProductButtonColor,
+                backgroundColor: AppColors.kAddProductButtonColor,
               ),
-              onPressed: () {},
+              onPressed: () {
+                ref
+                    .read(selectProductProvider.notifier)
+                    .confirmSale(paid: double.parse(discountController.text));
+                Navigator.pop(context);
+              },
               child: Text(
                 'Apply discount',
                 style: TextStyle(

@@ -21,7 +21,6 @@ class _MakeSaleState extends ConsumerState<MakeSale> {
 
   TextEditingController quantitySoldController = TextEditingController();
 
-  TextEditingController discountController = TextEditingController();
   GlobalKey<FormState> formKey = GlobalKey();
   AutovalidateMode autoValidateMode = AutovalidateMode.disabled;
 
@@ -29,7 +28,6 @@ class _MakeSaleState extends ConsumerState<MakeSale> {
   void dispose() {
     selectProductController.dispose();
     quantitySoldController.dispose();
-    discountController.dispose();
 
     super.dispose();
   }
@@ -39,7 +37,7 @@ class _MakeSaleState extends ConsumerState<MakeSale> {
     final selectedProducts = ref.watch(selectProductProvider);
     final totalPrice = selectedProducts.fold<double>(
       0,
-      (sum, item) => sum +(item.totalPrice),
+      (sum, item) => sum + (item.totalPrice),
     );
     return Scaffold(
       body: SafeArea(
@@ -84,9 +82,7 @@ class _MakeSaleState extends ConsumerState<MakeSale> {
                       showModalBottomSheet(
                         context: context,
                         builder: (context) {
-                          return AdditionalOptionsBottomSheet(
-                            discountController: discountController,
-                          );
+                          return AdditionalOptionsBottomSheet();
                         },
                       );
                     },

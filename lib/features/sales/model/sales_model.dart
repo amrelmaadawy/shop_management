@@ -1,4 +1,3 @@
-
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:small_managements/features/sales/model/sold_product_model.dart';
 part 'sales_model.g.dart';
@@ -7,23 +6,21 @@ part 'sales_model.g.dart';
 class SalesModel {
   @HiveField(0)
   final List<SoldProductModel> soldProducts;
-   
-    @HiveField(2)
 
+  @HiveField(2)
   final double paid;
-    @HiveField(3)
-
+  @HiveField(3)
   final DateTime dateTime;
-    @HiveField(4)
-
+  @HiveField(4)
   final double total;
-    @HiveField(5)
-
+  @HiveField(5)
   final double change;
-    @HiveField(6)
-
+  @HiveField(6)
   final String name;
-  SalesModel( {required this.soldProducts,
+  @HiveField(7)
+  final double discount;
+  SalesModel( {required this.discount,
+    required this.soldProducts,
     required this.paid,
     required this.dateTime,
     required this.total,
