@@ -1,18 +1,16 @@
-
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:small_managements/core/utils/app_colors.dart';
-import 'package:small_managements/features/products/model/product_model.dart';
+import 'package:small_managements/features/sales/logic/provider/select_product_provider.dart';
 
-class ListOfSellingProducts extends StatelessWidget {
-  const ListOfSellingProducts({
-    super.key,
-    required this.product,
-  });
+class ListOfSellingProducts extends ConsumerWidget {
+  const ListOfSellingProducts({super.key});
 
-  final List<ProductModel> product;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+final selectedProducts = ref.watch(selectProductProvider);
+
     return SliverList(
       delegate: SliverChildBuilderDelegate(
         (context, index) => Padding(
@@ -22,61 +20,58 @@ class ListOfSellingProducts extends StatelessWidget {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(product[index].productName),
+                  Text(selectedProducts[index].product.productName),
                   SizedBox(height: 5),
-                  Text(
-                    'individual Price${product[index].price} LE',
-                  ),
+                  Text('individual Price${selectedProducts[index].product.price} LE'),
                 ],
               ),
               Spacer(),
-              Container(
-                padding: EdgeInsets.all(8),
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: AppColors.kIncreaseContainerColor,
-                ),
-                child: Text(
-                  '-',
-                  style: TextStyle(
-                    fontSize: 15,
-                    fontWeight: FontWeight.bold,
+              InkWell(
+                onTap: () {
+              ref.read(selectProductProvider.notifier).decreaseQuantity(selectedProducts[index].product);
+                },
+                child: Container(
+                  padding: EdgeInsets.all(8),
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: AppColors.kIncreaseContainerColor,
+                  ),
+                  child: Text(
+                    '-',
+                    style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
                   ),
                 ),
               ),
               SizedBox(width: 5),
               Container(
                 padding: EdgeInsets.all(8),
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                ),
+                decoration: BoxDecoration(shape: BoxShape.circle),
                 child: Text(
-                  '2',
-                  style: TextStyle(
-                    fontSize: 15,
-                    fontWeight: FontWeight.bold,
-                  ),
+                  '${selectedProducts[index].quantity}',
+                  style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
                 ),
               ),
               SizedBox(width: 5),
-              Container(
-                padding: EdgeInsets.all(7),
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: AppColors.kIncreaseContainerColor,
-                ),
-                child: Text(
-                  '+',
-                  style: TextStyle(
-                    fontSize: 15,
-                    fontWeight: FontWeight.bold,
+              InkWell(
+                onTap: () {
+              ref.read(selectProductProvider.notifier).increaseQuantity(selectedProducts[index].product);
+                },
+                child: Container(
+                  padding: EdgeInsets.all(7),
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: AppColors.kIncreaseContainerColor,
+                  ),
+                  child: Text(
+                    '+',
+                    style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
                   ),
                 ),
               ),
             ],
           ),
         ),
-        childCount: product.length,
+        childCount: selectedProducts.length,
       ),
     );
   }

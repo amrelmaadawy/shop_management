@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:small_managements/core/utils/app_colors.dart';
-
 import 'package:small_managements/features/sales/logic/provider/select_product_provider.dart';
+
 import 'package:small_managements/features/sales/ui/widgets/additonal_options_bottom_sheet.dart';
 import 'package:small_managements/features/sales/ui/widgets/list_of_selling_products.dart';
 import 'package:small_managements/features/sales/ui/widgets/make_sale_app_bar.dart';
@@ -36,7 +36,11 @@ class _MakeSaleState extends ConsumerState<MakeSale> {
 
   @override
   Widget build(BuildContext context) {
-    final product = ref.watch(selectProductProvider);
+    final selectedProducts = ref.watch(selectProductProvider);
+    final totalPrice = selectedProducts.fold<double>(
+      0,
+      (sum, item) => sum +(item.totalPrice),
+    );
     return Scaffold(
       body: SafeArea(
         child: Padding(
@@ -49,20 +53,19 @@ class _MakeSaleState extends ConsumerState<MakeSale> {
               children: [
                 MakeSaleAppBar(),
                 SizedBox(height: 15),
-                SearchForProductFormField(ref: ref, selectProductController: selectProductController),
+                SearchForProductFormField(
+                  ref: ref,
+                  selectProductController: selectProductController,
+                ),
                 SizedBox(height: 15),
 
                 Expanded(
-                  child: CustomScrollView(
-                    slivers: [
-                      ListOfSellingProducts(product: product),
-                    ],
-                  ),
+                  child: CustomScrollView(slivers: [ListOfSellingProducts()]),
                 ),
 
                 SizedBox(height: 15),
                 Text(
-                  'Total Price = 1200 LE',
+                  'Total Price = $totalPrice LE',
                   style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
                 ),
                 SizedBox(height: 15),
@@ -81,7 +84,9 @@ class _MakeSaleState extends ConsumerState<MakeSale> {
                       showModalBottomSheet(
                         context: context,
                         builder: (context) {
-                          return AdditionalOptionsBottomSheet(discountController: discountController);
+                          return AdditionalOptionsBottomSheet(
+                            discountController: discountController,
+                          );
                         },
                       );
                     },
@@ -103,4 +108,3 @@ class _MakeSaleState extends ConsumerState<MakeSale> {
     );
   }
 }
-

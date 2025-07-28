@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:small_managements/core/utils/custom_text_form_field.dart';
@@ -15,28 +14,21 @@ class SearchForProductFormField extends StatelessWidget {
 
   final WidgetRef ref;
   final TextEditingController selectProductController;
-
   @override
   Widget build(BuildContext context) {
     return Autocomplete<ProductModel>(
-      displayStringForOption: (ProductModel option) =>
-          option.productName,
+      displayStringForOption: (ProductModel option) => option.productName,
       optionsBuilder: (TextEditingValue textEditingValue) {
         return ref
             .read(productProviderNotifier)
             .where(
-              (product) => product.productName
-                  .toLowerCase()
-                  .contains(textEditingValue.text.toLowerCase()),
+              (product) => product.productName.toLowerCase().contains(
+                textEditingValue.text.toLowerCase(),
+              ),
             );
       },
       fieldViewBuilder:
-          (
-            context,
-            selectProductController,
-            focusNode,
-            onFieldSubmitted,
-          ) {
+          (context, selectProductController, focusNode, onFieldSubmitted) {
             return CustomTextFormField(
               focusNode: focusNode,
               controller: selectProductController,
