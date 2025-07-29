@@ -24,7 +24,7 @@ Future<void> main() async {
   Hive.registerAdapter(CategoryModelAdapter());
   Hive.registerAdapter(SalesModelAdapter());
   Hive.registerAdapter(SoldProductModelAdapter());
-  await Hive.openBox<SalesModel>(salesBox);
+  await Hive.openBox<SalesModel>(ksalesBox);
   await Hive.openBox<ProductModel>(productBox);
   await Hive.openBox<CategoryModel>(categoriesBox);
   runApp(

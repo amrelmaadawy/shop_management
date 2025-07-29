@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:small_managements/features/sales/logic/provider/sales_provider.dart';
 import 'package:small_managements/features/sales/ui/make_sale.dart';
 import 'package:small_managements/features/sales/ui/widgets/custom_sales_container.dart';
 import 'package:small_managements/features/sales/ui/widgets/total_profit_today.dart';
 import 'package:small_managements/features/sales/ui/widgets/transaction_item.dart';
 import 'package:small_managements/generated/l10n.dart';
 
-class SalesView extends StatelessWidget {
+class SalesView extends ConsumerWidget {
   const SalesView({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final salesProducts = ref.watch(salesProductProvider);
     return Scaffold(
       body: SafeArea(
         child: Padding(
@@ -73,10 +76,14 @@ class SalesView extends StatelessWidget {
                 child: ListView.separated(
                   shrinkWrap: true,
                   itemBuilder: (context, index) {
-                    return TransactionItem();
+                    return TransactionItem(
+                      productName: salesProducts[index].name,
+                      price: salesProducts[index].total,
+                      time: salesProducts[index].dateTime,
+                    );
                   },
                   separatorBuilder: (context, index) => SizedBox(height: 5),
-                  itemCount: 10,
+                  itemCount: salesProducts.length,
                 ),
               ),
             ],

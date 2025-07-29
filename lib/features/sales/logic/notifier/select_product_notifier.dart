@@ -2,6 +2,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive/hive.dart';
 import 'package:small_managements/core/hive_boxes.dart';
 import 'package:small_managements/features/products/model/product_model.dart';
+import 'package:small_managements/features/sales/logic/provider/sales_provider.dart';
 import 'package:small_managements/features/sales/model/sales_model.dart';
 import 'package:small_managements/features/sales/model/selected_prodcut_model.dart';
 import 'package:small_managements/features/sales/model/sold_product_model.dart';
@@ -9,20 +10,18 @@ import 'package:small_managements/features/sales/model/sold_product_model.dart';
 class SelectProductProvider extends StateNotifier<List<SelectedProdcutModel>> {
   SelectProductProvider() : super([]);
 
-  final Box<SalesModel> box = Hive.box<SalesModel>(salesBox);
+  final Box<SalesModel> box = Hive.box<SalesModel>(ksalesBox);
 
   void addProduct(ProductModel product) {
     final existingIndex = state.indexWhere(
       (p) => p.product.productName == product.productName,
     );
     if (existingIndex != -1) {
-      // لو موجود بالفعل، نزود الكمية بـ 1
       final updated = [...state];
       final oldItem = updated[existingIndex];
       updated[existingIndex] = oldItem.copyWith(quantity: oldItem.quantity + 1);
       state = updated;
     } else {
-      // لو مش موجود، نضيفه بكمية = 1
       state = [...state, SelectedProdcutModel(product: product, quantity: 1)];
     }
   }
@@ -67,40 +66,47 @@ class SelectProductProvider extends StateNotifier<List<SelectedProdcutModel>> {
   double get totalPrice {
     return state.fold(0, (sum, item) => sum + item.totalPrice);
   }
+Future<void> confirmSale({
+  required double paid,
+  required WidgetRef ref,
+  String? name,
+  double discount = 0,
+}) async {
+  if (state.isEmpty) return;
 
-  Future<void> confirmSale({
-    required double paid,
-    String? name,
-    double discount=0,
-  }) async {
-    if (state.isEmpty) return;
-    final soldProducts = state
-        .map(
-          (item) => SoldProductModel(
-            productName: item.product.productName,
-            price: double.parse(item.product.price),
-            quantity: item.quantity,
-          ),
-        )
-        .toList();
+  final soldProducts = state.map(
+    (item) => SoldProductModel(
+      productName: item.product.productName,
+      price: double.parse(item.product.price),
+      quantity: item.quantity,
+    ),
+  ).toList();
 
-    final totalBeforeDiscount = soldProducts.fold<double>(
-      0,
-      (sum, item) => sum + item.price,
-    );
-    final totalAfterDiscount = totalBeforeDiscount - discount;
-    final change = paid - totalAfterDiscount;
-    final sale = SalesModel(
-      soldProducts: soldProducts,
-      paid: paid,
-      dateTime: DateTime.now(),
-      total: totalAfterDiscount,
-      change: change,
-      name: name ?? 'Not Available',
-      discount: discount  ,
-    );
+  final totalBeforeDiscount = soldProducts.fold<double>(
+    0,
+    (sum, item) => sum + (item.price * item.quantity),
+  );
 
-    await box.add(sale);
-    clear();
-  }
+  final totalAfterDiscount = totalBeforeDiscount - discount;
+  final change = paid - totalAfterDiscount;
+
+  final sale = SalesModel(
+    soldProducts: soldProducts,
+    paid: paid,
+    dateTime: DateTime.now(),
+    total: totalAfterDiscount,
+    change: change,
+    name: name ?? 'Not Available',
+    discount: discount,
+  );
+
+  await box.add(sale);
+
+  // 🟢 نحدث قيمة المزود علشان الـ UI يتحدث
+  final updatedSales = box.values.toList().reversed.toList();
+  ref.read(salesProductProvider.notifier).state = updatedSales;
+
+  clear();
+}
+
 }

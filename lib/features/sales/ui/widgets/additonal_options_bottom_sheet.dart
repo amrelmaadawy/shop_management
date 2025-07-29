@@ -56,7 +56,7 @@ class _AdditionalOptionsBottomSheetState
               onPressed: () {
                 ref
                     .read(selectProductProvider.notifier)
-                    .confirmSale(paid: double.parse(discountController.text));
+                    .confirmSale(paid: double.parse(discountController.text), name: nameController.text, ref: ref);
                 Navigator.pop(context);
               },
               child: Text(
