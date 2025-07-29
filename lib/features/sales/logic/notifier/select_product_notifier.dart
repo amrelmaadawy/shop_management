@@ -11,7 +11,7 @@ class SelectProductProvider extends StateNotifier<List<SelectedProdcutModel>> {
   SelectProductProvider() : super([]);
 
   final Box<SalesModel> box = Hive.box<SalesModel>(ksalesBox);
-
+  
   void addProduct(ProductModel product) {
     final existingIndex = state.indexWhere(
       (p) => p.product.productName == product.productName,
@@ -102,7 +102,6 @@ Future<void> confirmSale({
 
   await box.add(sale);
 
-  // 🟢 نحدث قيمة المزود علشان الـ UI يتحدث
   final updatedSales = box.values.toList().reversed.toList();
   ref.read(salesProductProvider.notifier).state = updatedSales;
 
