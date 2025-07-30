@@ -112,8 +112,8 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "totalProfit": MessageLookupByLibrary.simpleMessage("Total Profit Today"),
     "totalSales": MessageLookupByLibrary.simpleMessage("Total Sales"),
-    "totalSalesToday": MessageLookupByLibrary.simpleMessage(
-      "Total Sales Today",
+    "totalSalesThisMonth": MessageLookupByLibrary.simpleMessage(
+      "Total Sales This Month",
     ),
     "yes": MessageLookupByLibrary.simpleMessage("Yes"),
   };

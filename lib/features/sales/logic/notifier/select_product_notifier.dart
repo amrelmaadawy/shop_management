@@ -6,12 +6,18 @@ import 'package:small_managements/features/sales/logic/provider/sales_provider.d
 import 'package:small_managements/features/sales/model/sales_model.dart';
 import 'package:small_managements/features/sales/model/selected_prodcut_model.dart';
 import 'package:small_managements/features/sales/model/sold_product_model.dart';
+import 'package:small_managements/features/sales/model/todays_total_sold.dart';
 
 class SelectProductProvider extends StateNotifier<List<SelectedProdcutModel>> {
   SelectProductProvider() : super([]);
 
   final Box<SalesModel> box = Hive.box<SalesModel>(ksalesBox);
-  
+  final Box<TodaysTotalSold> todaySoldBox = Hive.box<TodaysTotalSold>(
+    totalSoldToday,
+  );
+  int totalProductSoldToday = 0;
+  int totalSalesToday = 0;
+  int totalProfitToday = 0;
   void addProduct(ProductModel product) {
     final existingIndex = state.indexWhere(
       (p) => p.product.productName == product.productName,
@@ -66,46 +72,57 @@ class SelectProductProvider extends StateNotifier<List<SelectedProdcutModel>> {
   double get totalPrice {
     return state.fold(0, (sum, item) => sum + item.totalPrice);
   }
-Future<void> confirmSale({
-  required double paid,
-  required WidgetRef ref,
-  String? name,
-  double discount = 0,
-}) async {
-  if (state.isEmpty) return;
 
-  final soldProducts = state.map(
-    (item) => SoldProductModel(
-      productName: item.product.productName,
-      price: double.parse(item.product.price),
-      quantity: item.quantity,
-    ),
-  ).toList();
+  Future<void> confirmSale({
+    required double paid,
+    required WidgetRef ref,
+    String? name,
+    double discount = 0,
+  }) async {
+    if (state.isEmpty) return;
 
-  final totalBeforeDiscount = soldProducts.fold<double>(
-    0,
-    (sum, item) => sum + (item.price * item.quantity),
-  );
+    final soldProducts = state
+        .map(
+          (item) => SoldProductModel(
+            productName: item.product.productName,
+            price: double.parse(item.product.price),
+            quantity: item.quantity,
+          ),
+        )
+        .toList();
 
-  final totalAfterDiscount = totalBeforeDiscount - discount;
-  final change = paid - totalAfterDiscount;
+    final totalBeforeDiscount = soldProducts.fold<double>(
+      0,
+      (sum, item) => sum + (item.price * item.quantity),
+    );
 
-  final sale = SalesModel(
-    soldProducts: soldProducts,
-    paid: paid,
-    dateTime: DateTime.now(),
-    total: totalAfterDiscount,
-    change: change,
-    name: name ?? 'Not Available',
-    discount: discount,
-  );
+    final totalAfterDiscount = totalBeforeDiscount - discount;
+    final change = paid - totalAfterDiscount;
 
-  await box.add(sale);
+    final sale = SalesModel(
+      soldProducts: soldProducts,
+      paid: paid,
+      dateTime: DateTime.now(),
+      total: totalAfterDiscount,
+      change: change,
+      name: name ?? 'Not Available',
+      discount: discount,
+    );
 
-  final updatedSales = box.values.toList().reversed.toList();
-  ref.read(salesProductProvider.notifier).state = updatedSales;
+    totalProductSoldToday = state.fold(0, (sum, item) => sum + item.quantity);
+    totalSalesToday = totalAfterDiscount.toInt();
+    totalProfitToday = totalAfterDiscount.toInt();
+    final todaysTotalSold = TodaysTotalSold(
+      totalProductSoldToday: totalProductSoldToday,
+      totalSalesToday: totalSalesToday,
+      totalProfitToday: totalProfitToday,
+    );
+    await todaySoldBox.add(todaysTotalSold);
+    await box.add(sale);
 
-  clear();
-}
+    final updatedSales = box.values.toList().reversed.toList();
+    ref.read(salesProductProvider.notifier).state = updatedSales;
 
+    clear();
+  }
 }

@@ -244,11 +244,11 @@ class S {
     return Intl.message('Cancel', name: 'cancel', desc: '', args: []);
   }
 
-  /// `Total Sales Today`
-  String get totalSalesToday {
+  /// `Total Sales This Month`
+  String get totalSalesThisMonth {
     return Intl.message(
-      'Total Sales Today',
-      name: 'totalSalesToday',
+      'Total Sales This Month',
+      name: 'totalSalesThisMonth',
       desc: '',
       args: [],
     );

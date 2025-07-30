@@ -7,3 +7,4 @@ final salesProductProvider =StateProvider<List<SalesModel>>((ref) {
   final salesBox = Hive.box<SalesModel>(ksalesBox);
   return salesBox.values.toList().reversed.toList();
 });
+
