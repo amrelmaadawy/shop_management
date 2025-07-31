@@ -53,7 +53,6 @@ class _MakeSaleState extends ConsumerState<MakeSale> {
                 SizedBox(height: 15),
                 SearchForProductFormField(
                   ref: ref,
-                  selectProductController: selectProductController,
                 ),
                 SizedBox(height: 15),
 

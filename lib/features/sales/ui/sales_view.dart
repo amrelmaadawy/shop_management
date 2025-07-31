@@ -54,7 +54,7 @@ class SalesView extends ConsumerWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   CustomSalesContainer(
-                    title: S.of(context).totalSalesThisMonth,
+                    title: S.of(context).TotalSalesToday,
                     num:
                         '\$${ref.watch(salesProductProvider).fold<double>(0, (sum, item) => sum + item.total)}',
                   ),
