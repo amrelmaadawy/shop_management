@@ -16,7 +16,8 @@ class _AdditionalOptionsBottomSheetState
     extends ConsumerState<AdditionalOptionsBottomSheet> {
   TextEditingController discountController = TextEditingController();
   TextEditingController nameController = TextEditingController();
-
+  TextEditingController paidController = TextEditingController();
+  GlobalKey<FormState> key = GlobalKey();
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -25,14 +26,29 @@ class _AdditionalOptionsBottomSheetState
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'additional options',
+            'Confirm sale',
             style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+          ),
+          SizedBox(height: 10),
+          Form(
+            key: key,
+            child: CustomTextFormField(
+              controller: paidController,
+              keyboardType: TextInputType.number,
+              labelText: 'paid',
+              validator: (v) {
+                if (v == null || v.isEmpty) {
+                  return 'please Enter the paid amount';
+                }
+                return null;
+              },
+            ),
           ),
           SizedBox(height: 10),
           CustomTextFormField(
             controller: discountController,
             keyboardType: TextInputType.number,
-            labelText: 'discount',
+            labelText: 'discount(optional)',
             validator: (v) {
               return null;
             },
@@ -41,7 +57,7 @@ class _AdditionalOptionsBottomSheetState
           CustomTextFormField(
             controller: nameController,
             keyboardType: TextInputType.number,
-            labelText: 'client Name',
+            labelText: 'client Name(optional)',
             validator: (v) {
               return null;
             },
@@ -54,15 +70,18 @@ class _AdditionalOptionsBottomSheetState
                 backgroundColor: AppColors.kAddProductButtonColor,
               ),
               onPressed: () {
-                ref
-                    .read(selectProductProvider.notifier)
-                    .confirmSale(
-                      paid: double.parse(discountController.text),
-                      name: nameController.text,
-                      ref: ref,
-                    );
-                Navigator.pop(context);
-                Navigator.pop(context);
+                if (key.currentState!.validate()) {
+                  ref
+                      .read(selectProductProvider.notifier)
+                      .confirmSale(
+                        paid: double.parse(paidController.text),
+                        name: nameController.text,
+                        discount: double.tryParse(discountController.text)??0,
+                        ref: ref,
+                      );
+                  Navigator.pop(context);
+                  Navigator.pop(context);
+                }
               },
               child: Text(
                 'Apply discount',
