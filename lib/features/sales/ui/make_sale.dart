@@ -51,9 +51,7 @@ class _MakeSaleState extends ConsumerState<MakeSale> {
               children: [
                 MakeSaleAppBar(),
                 SizedBox(height: 15),
-                SearchForProductFormField(
-                  ref: ref,
-                ),
+                SearchForProductFormField(ref: ref),
                 SizedBox(height: 15),
 
                 Expanded(
@@ -73,17 +71,25 @@ class _MakeSaleState extends ConsumerState<MakeSale> {
                       backgroundColor: AppColors.kAddProductButtonColor,
                     ),
                     onPressed: () {
-                      if (formKey.currentState!.validate()) {
-                        formKey.currentState!.save();
+                      final selectedProducts = ref.watch(selectProductProvider);
+                      if (selectedProducts.isNotEmpty) {
+                        showModalBottomSheet(
+                          context: context,
+                          builder: (context) {
+                            return AdditionalOptionsBottomSheet();
+                          },
+                        );
                       } else {
-                        autoValidateMode = AutovalidateMode.always;
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text(
+                              'Please select at least one product',
+                              style: TextStyle(color: Colors.white),
+                            ),
+                            backgroundColor: const Color.fromARGB(255, 153, 11, 1),
+                          ),
+                        );
                       }
-                      showModalBottomSheet(
-                        context: context,
-                        builder: (context) {
-                          return AdditionalOptionsBottomSheet();
-                        },
-                      );
                     },
                     child: Text(
                       S.of(context).confirmeSale,
