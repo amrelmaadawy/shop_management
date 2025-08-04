@@ -184,9 +184,24 @@ class S {
     return Intl.message('Category', name: 'category', desc: '', args: []);
   }
 
-  /// `Price`
-  String get price {
-    return Intl.message('Price', name: 'price', desc: '', args: []);
+  /// `Buying Price`
+  String get buyingPrice {
+    return Intl.message(
+      'Buying Price',
+      name: 'buyingPrice',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Selling Price`
+  String get sellingPrice {
+    return Intl.message(
+      'Selling Price',
+      name: 'sellingPrice',
+      desc: '',
+      args: [],
+    );
   }
 
   /// `Stock`

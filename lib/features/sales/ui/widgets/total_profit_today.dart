@@ -1,13 +1,10 @@
-
 import 'package:flutter/material.dart';
 import 'package:small_managements/core/utils/app_colors.dart';
 import 'package:small_managements/generated/l10n.dart';
 
 class TotalProfitToday extends StatelessWidget {
-  const TotalProfitToday({
-    super.key,
-  });
-
+  const TotalProfitToday({super.key,  this.totalProfitToday});
+  final double? totalProfitToday;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -25,11 +22,8 @@ class TotalProfitToday extends StatelessWidget {
           children: [
             Text(S.of(context).totalProfit, style: TextStyle(fontSize: 15)),
             Text(
-              '500 LE',
-              style: TextStyle(
-                fontSize: 17,
-                fontWeight: FontWeight.bold,
-              ),
+              '$totalProfitToday LE',
+              style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
             ),
           ],
         ),

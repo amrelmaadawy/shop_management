@@ -38,6 +38,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Are You Sure You Want To delete",
     ),
     "businessInfo": MessageLookupByLibrary.simpleMessage("Business Info"),
+    "buyingPrice": MessageLookupByLibrary.simpleMessage("Buying Price"),
     "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
     "category": MessageLookupByLibrary.simpleMessage("Category"),
     "compareTo": MessageLookupByLibrary.simpleMessage(
@@ -71,7 +72,6 @@ class MessageLookup extends MessageLookupByLibrary {
     "pleaseAddTheQuantity": MessageLookupByLibrary.simpleMessage(
       "Please Enter The Quantity",
     ),
-    "price": MessageLookupByLibrary.simpleMessage("Price"),
     "product": MessageLookupByLibrary.simpleMessage("Product"),
     "productImage": MessageLookupByLibrary.simpleMessage("Product Image"),
     "productName": MessageLookupByLibrary.simpleMessage("Product Name"),
@@ -87,6 +87,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "save": MessageLookupByLibrary.simpleMessage("Save"),
     "searchProduct": MessageLookupByLibrary.simpleMessage("Search Product"),
     "selectProduct": MessageLookupByLibrary.simpleMessage("Select Product"),
+    "sellingPrice": MessageLookupByLibrary.simpleMessage("Selling Price"),
     "settings": MessageLookupByLibrary.simpleMessage("Settings"),
     "shopName": MessageLookupByLibrary.simpleMessage("Shop Name"),
     "sold": MessageLookupByLibrary.simpleMessage("Sold"),

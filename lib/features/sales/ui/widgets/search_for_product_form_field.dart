@@ -68,7 +68,7 @@ class SearchForProductFormFieldState extends State<SearchForProductFormField> {
                   final product = products[index];
                   return ListTile(
                     title: Text(product.productName),
-                    trailing: Text("${product.price} \$"),
+                    trailing: Text("${product.sellingPrice} \$"),
                     onTap: () {
                       widget.ref.read(selectProductProvider.notifier).addProduct(product);
                       _controller.clear();

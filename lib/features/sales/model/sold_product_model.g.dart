@@ -18,21 +18,24 @@ class SoldProductModelAdapter extends TypeAdapter<SoldProductModel> {
     };
     return SoldProductModel(
       productName: fields[0] as String,
-      price: fields[1] as double,
+      sellingPrice: fields[1] as double,
       quantity: fields[2] as int,
+      buyingPrice: fields[3] as double,
     );
   }
 
   @override
   void write(BinaryWriter writer, SoldProductModel obj) {
     writer
-      ..writeByte(3)
+      ..writeByte(4)
       ..writeByte(0)
       ..write(obj.productName)
       ..writeByte(1)
-      ..write(obj.price)
+      ..write(obj.sellingPrice)
       ..writeByte(2)
-      ..write(obj.quantity);
+      ..write(obj.quantity)
+      ..writeByte(3)
+      ..write(obj.buyingPrice);
   }
 
   @override

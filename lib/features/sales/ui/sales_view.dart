@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:small_managements/features/sales/logic/helper/get_todays_totals.dart';
 import 'package:small_managements/features/sales/logic/provider/sales_provider.dart';
 import 'package:small_managements/features/sales/ui/make_sale.dart';
 import 'package:small_managements/features/sales/ui/widgets/custom_sales_container.dart';
@@ -56,17 +57,17 @@ class SalesView extends ConsumerWidget {
                   CustomSalesContainer(
                     title: S.of(context).TotalSalesToday,
                     num:
-                        '\$${ref.watch(salesProductProvider).fold<double>(0, (sum, item) => sum + item.total)}',
+                        '\$${getTodayTotalSales(ref)}',
                   ),
                   CustomSalesContainer(
                     title: S.of(context).totalProductSold,
                     num:
-                        '${ref.watch(salesProductProvider).fold<double>(0, (sum, item) => sum + item.soldProducts.fold<int>(0, (sum, product) => sum + product.quantity))}',
+                        '${getTodayTotalProductSold(ref)}',
                   ),
                 ],
               ),
               SizedBox(height: 15),
-              TotalProfitToday(),
+              TotalProfitToday(totalProfitToday: getTodayTotalProfit(ref),),
               SizedBox(height: 15),
               Text(
                 S.of(context).recentTransactions,

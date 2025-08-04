@@ -21,7 +21,8 @@ class AddProduct extends ConsumerStatefulWidget {
 
 class _AddProductState extends ConsumerState<AddProduct> {
   TextEditingController productNameController = TextEditingController();
-  TextEditingController priceController = TextEditingController();
+  TextEditingController buyingPriceController = TextEditingController();
+  TextEditingController sellingPriceController = TextEditingController();
   TextEditingController quantityController = TextEditingController();
   TextEditingController categoryController = TextEditingController();
   GlobalKey<FormState> form = GlobalKey();
@@ -30,7 +31,8 @@ class _AddProductState extends ConsumerState<AddProduct> {
   @override
   void dispose() {
     productNameController.dispose();
-    priceController.dispose();
+    buyingPriceController.dispose();
+    sellingPriceController.dispose();
     quantityController.dispose();
     categoryController.dispose();
 
@@ -41,7 +43,7 @@ class _AddProductState extends ConsumerState<AddProduct> {
   void initState() {
     if (widget.productModel != null) {
       productNameController.text = widget.productModel!.productName;
-      priceController.text = widget.productModel!.price;
+      buyingPriceController.text = widget.productModel!.buyingPrice;
       quantityController.text = widget.productModel!.quantity;
       categoryController.text = widget.productModel!.category;
     }
@@ -68,10 +70,10 @@ class _AddProductState extends ConsumerState<AddProduct> {
                   SizedBox(height: 10),
                   AddProductTextFormFields(
                     productNameController: productNameController,
-                    priceController: priceController,
+                    buyingPriceController: buyingPriceController,
                     quantityController: quantityController,
                     ref: ref,
-                    categoryController: categoryController,
+                    categoryController: categoryController, sellingPriceController: sellingPriceController,
                   ),
 
                   SizedBox(height: 20),
@@ -97,11 +99,11 @@ class _AddProductState extends ConsumerState<AddProduct> {
 
                               final newProduct = ProductModel(
                                 category: categoryController.text,
-                                price: priceController.text,
+                                buyingPrice: buyingPriceController.text,
                                 productName: productNameController.text,
                                 quantity: quantityController.text,
                                 image: imagePath,
-                                id: 0,
+                                id: 0, sellingPrice: sellingPriceController.text,
                               );
                               ref
                                   .read(productProviderNotifier.notifier)
@@ -112,18 +114,19 @@ class _AddProductState extends ConsumerState<AddProduct> {
                               form.currentState!.save();
                               final product = ProductModel(
                                 category: categoryController.text,
-                                price: priceController.text,
+                                buyingPrice: buyingPriceController.text,
                                 productName: productNameController.text,
                                 quantity: quantityController.text,
                                 image: imagePath,
-                                id: 0,
+                                id: 0, sellingPrice: sellingPriceController.text,
                               );
                               ref
                                   .read(productProviderNotifier.notifier)
                                   .addProduct(product);
                               categoryController.clear();
                               productNameController.clear();
-                              priceController.clear();
+                              buyingPriceController.clear();
+                              sellingPriceController.clear();
                               quantityController.clear();
                               Navigator.pop(context);
                             }

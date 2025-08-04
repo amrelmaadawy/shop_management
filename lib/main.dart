@@ -38,7 +38,6 @@ Future<void> main() async {
           return isDark ? ThemeMode.dark : ThemeMode.light;
         }),
       ],
-
       child: const MyApp(),
     ),
   );

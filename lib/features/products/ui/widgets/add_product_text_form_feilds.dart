@@ -5,17 +5,19 @@ import 'package:small_managements/features/products/ui/widgets/select_category.d
 import 'package:small_managements/generated/l10n.dart';
 
 class AddProductTextFormFields extends ConsumerStatefulWidget {
-  const AddProductTextFormFields({
+  const AddProductTextFormFields( {
     super.key,
     required this.productNameController,
-    required this.priceController,
+    required this.buyingPriceController,
     required this.quantityController,
     required this.ref,
     required this.categoryController,
+   required this.sellingPriceController,
   });
 
   final TextEditingController productNameController;
-  final TextEditingController priceController;
+  final TextEditingController buyingPriceController;
+  final TextEditingController sellingPriceController;
 
   final TextEditingController quantityController;
   final WidgetRef ref;
@@ -48,9 +50,22 @@ class _AddProductTextFormFieldsState
         ),
         SizedBox(height: 15),
         CustomTextFormField(
-          controller: widget.priceController,
+          controller: widget.buyingPriceController,
           keyboardType: TextInputType.number,
-          labelText: S.of(context).price,
+          labelText: S.of(context).buyingPrice,
+          validator: (value) {
+            if (value!.isEmpty) {
+              return S.of(context).pleaseAddThePrice;
+            } else {
+              return null;
+            }
+          },
+        ),
+        SizedBox(height: 15),
+        CustomTextFormField(
+          controller: widget.sellingPriceController,
+          keyboardType: TextInputType.number,
+          labelText: S.of(context).sellingPrice,
           validator: (value) {
             if (value!.isEmpty) {
               return S.of(context).pleaseAddThePrice;

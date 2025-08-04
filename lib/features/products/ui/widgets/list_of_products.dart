@@ -46,7 +46,7 @@ class ListOfProductsView extends StatelessWidget {
                   itemBuilder: (context, index) {
                     final product = filtered[index];
                     return ProductItem(
-                      price: product.price,
+                      price: product.buyingPrice,
                       image: product.image != null
                           ? Image.file(File(product.image!))
                           : Image.asset('assets/images/product.png'),

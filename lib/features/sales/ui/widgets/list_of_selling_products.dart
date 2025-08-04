@@ -22,7 +22,7 @@ final selectedProducts = ref.watch(selectProductProvider);
                 children: [
                   Text(selectedProducts[index].product.productName),
                   SizedBox(height: 5),
-                  Text('individual Price${selectedProducts[index].product.price} LE'),
+                  Text('individual Price${selectedProducts[index].product.sellingPrice} LE'),
                 ],
               ),
               Spacer(),

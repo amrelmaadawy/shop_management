@@ -28,7 +28,7 @@ class SelectProductProvider extends StateNotifier<List<SelectedProdcutModel>> {
       updated[existingIndex] = oldItem.copyWith(quantity: oldItem.quantity + 1);
       state = updated;
     } else {
-      state = [...state, SelectedProdcutModel(product: product, quantity: 1)];
+      state = [...state, SelectedProdcutModel(product: product, quantity: 1,dateTime: DateTime.now())];
     }
   }
 
@@ -84,8 +84,9 @@ class SelectProductProvider extends StateNotifier<List<SelectedProdcutModel>> {
     final soldProducts = state
         .map(
           (item) => SoldProductModel(
+            sellingPrice: double.parse(item.product.sellingPrice), 
             productName: item.product.productName,
-            price: double.parse(item.product.price),
+            buyingPrice: double.parse(item.product.buyingPrice),
             quantity: item.quantity,
           ),
         )
@@ -93,7 +94,7 @@ class SelectProductProvider extends StateNotifier<List<SelectedProdcutModel>> {
 
     final totalBeforeDiscount = soldProducts.fold<double>(
       0,
-      (sum, item) => sum + (item.price * item.quantity),
+      (sum, item) => sum + (item.sellingPrice * item.quantity),
     );
 
     final totalAfterDiscount = totalBeforeDiscount - discount;
@@ -125,4 +126,5 @@ class SelectProductProvider extends StateNotifier<List<SelectedProdcutModel>> {
 
     clear();
   }
+
 }

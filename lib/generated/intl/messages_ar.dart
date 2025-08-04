@@ -71,7 +71,6 @@ class MessageLookup extends MessageLookupByLibrary {
     "pleaseAddTheQuantity": MessageLookupByLibrary.simpleMessage(
       "من فضلك أدخل الكمية",
     ),
-    "price": MessageLookupByLibrary.simpleMessage("السعر"),
     "product": MessageLookupByLibrary.simpleMessage("المنتج"),
     "productImage": MessageLookupByLibrary.simpleMessage("صورة المنتج"),
     "productName": MessageLookupByLibrary.simpleMessage("اسم المنتج"),

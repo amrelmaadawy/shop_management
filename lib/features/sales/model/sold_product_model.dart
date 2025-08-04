@@ -8,16 +8,19 @@ class SoldProductModel {
   final String productName;
 
   @HiveField(1)
-  final double price;
+  final double sellingPrice;
 
   @HiveField(2)
   final int quantity;
+@HiveField(3)
+  final double buyingPrice;
 
   SoldProductModel({
     required this.productName,
-    required this.price,
+    required this.sellingPrice,
     required this.quantity,
+    required this.buyingPrice,
   });
 
-  double get total => price * quantity;
+  double get total => sellingPrice * quantity;
 }

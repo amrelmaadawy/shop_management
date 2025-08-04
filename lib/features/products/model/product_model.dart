@@ -6,7 +6,7 @@ class ProductModel extends HiveObject {
   @HiveField(0)
   final String productName;
   @HiveField(1)
-  final String price;
+  final String buyingPrice;
   @HiveField(2)
   final String quantity;
   @HiveField(3)
@@ -15,13 +15,15 @@ class ProductModel extends HiveObject {
   final String? image;
   @HiveField(5)
   final int id;
-  ProductModel({
-  required this.productName,
-  required this.price,
-  required this.quantity,
-  required this.category,
-   this.image,
-  required this.id,
-});
-
+  @HiveField(6)
+  final String sellingPrice;
+  ProductModel( {
+    required this.productName,
+    required this.buyingPrice,
+    required this.quantity,
+    required this.category,
+    this.image,
+    required this.id,
+  required  this.sellingPrice,
+  });
 }
