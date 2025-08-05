@@ -79,13 +79,18 @@ class SalesView extends ConsumerWidget {
                   shrinkWrap: true,
                   itemBuilder: (context, index) {
                     return TransactionItem(
-                      clientName: salesProducts[index].name.isEmpty? 'Not Available':salesProducts[index].name,
+                      clientName: salesProducts[index].name.isEmpty
+                          ? 'Unknown'
+                          : salesProducts[index].name,
                       price: salesProducts[index].total,
-                      time: formatDateTimeTo12Hour(salesProducts[index].dateTime),
+                      time: formatDateTimeTo12Hour(
+                        salesProducts[index].dateTime,
+                      ),
                       itemCount: salesProducts[index].soldProducts.fold<int>(
                         0,
                         (sum, e) => sum + e.quantity,
-                      ), sale: salesProducts[index],
+                      ),
+                      sale: salesProducts[index],
                     );
                   },
                   separatorBuilder: (context, index) => SizedBox(height: 5),

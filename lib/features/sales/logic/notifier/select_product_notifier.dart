@@ -1,6 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive/hive.dart';
 import 'package:small_managements/core/hive_boxes.dart';
+import 'package:small_managements/features/products/logic/providers/product_providers.dart';
 import 'package:small_managements/features/products/model/product_model.dart';
 import 'package:small_managements/features/sales/logic/provider/sales_provider.dart';
 import 'package:small_managements/features/sales/model/sales_model.dart';
@@ -28,7 +29,14 @@ class SelectProductProvider extends StateNotifier<List<SelectedProdcutModel>> {
       updated[existingIndex] = oldItem.copyWith(quantity: oldItem.quantity + 1);
       state = updated;
     } else {
-      state = [...state, SelectedProdcutModel(product: product, quantity: 1,dateTime: DateTime.now())];
+      state = [
+        ...state,
+        SelectedProdcutModel(
+          product: product,
+          quantity: 1,
+          dateTime: DateTime.now(),
+        ),
+      ];
     }
   }
 
@@ -84,7 +92,7 @@ class SelectProductProvider extends StateNotifier<List<SelectedProdcutModel>> {
     final soldProducts = state
         .map(
           (item) => SoldProductModel(
-            sellingPrice: double.parse(item.product.sellingPrice), 
+            sellingPrice: double.parse(item.product.sellingPrice),
             productName: item.product.productName,
             buyingPrice: double.parse(item.product.buyingPrice),
             quantity: item.quantity,
@@ -121,10 +129,14 @@ class SelectProductProvider extends StateNotifier<List<SelectedProdcutModel>> {
     await todaySoldBox.add(todaysTotalSold);
     await box.add(sale);
 
+for (final item in soldProducts) {
+  await ref
+      .read(productProviderNotifier.notifier)
+      .decreaseProductQuantity(item.productName, item.quantity);
+}
     final updatedSales = box.values.toList().reversed.toList();
     ref.read(salesProductProvider.notifier).state = updatedSales;
 
     clear();
   }
-
 }

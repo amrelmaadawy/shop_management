@@ -17,13 +17,32 @@ class ProductModel extends HiveObject {
   final int id;
   @HiveField(6)
   final String sellingPrice;
-  ProductModel( {
+  ProductModel({
     required this.productName,
     required this.buyingPrice,
     required this.quantity,
     required this.category,
     this.image,
     required this.id,
-  required  this.sellingPrice,
+    required this.sellingPrice,
   });
+
+  ProductModel copyWith({
+    String? productName,
+    String? buyingPrice,
+    String? sellingPrice,
+    String? quantity,
+    String? category,
+    String? image,
+  }) {
+    return ProductModel(
+      productName: productName ?? this.productName,
+      buyingPrice: buyingPrice ?? this.buyingPrice,
+      quantity: quantity ?? this.quantity,
+      category: category ?? this.category,
+      id: id,
+      sellingPrice: sellingPrice??this.sellingPrice,
+      image:image??this.image
+    );
+  }
 }
