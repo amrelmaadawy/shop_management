@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:small_managements/core/utils/app_colors.dart';
+import 'package:small_managements/features/sales/model/sales_model.dart';
+import 'package:small_managements/features/sales/ui/sale_detailes_view.dart';
 import 'package:small_managements/generated/l10n.dart';
 
 class TransactionItem extends StatelessWidget {
@@ -8,17 +10,21 @@ class TransactionItem extends StatelessWidget {
     required this.clientName,
     required this.price,
     required this.time,
-    required this.itemCount,
+    required this.itemCount, required this.sale,
   });
   final String clientName;
   final double price;
   final DateTime time;
   final int itemCount;
+  final SalesModel sale;
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-       
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => SaleDetailesView(sale: sale,)),
+        );
       },
       child: Column(
         children: [

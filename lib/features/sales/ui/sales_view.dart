@@ -84,7 +84,7 @@ class SalesView extends ConsumerWidget {
                       itemCount: salesProducts[index].soldProducts.fold<int>(
                         0,
                         (sum, e) => sum + e.quantity,
-                      ),
+                      ), sale: salesProducts[index],
                     );
                   },
                   separatorBuilder: (context, index) => SizedBox(height: 5),
