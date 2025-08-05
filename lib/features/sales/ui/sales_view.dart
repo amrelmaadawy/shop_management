@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:small_managements/features/sales/logic/helper/get_todays_totals.dart';
+import 'package:small_managements/features/sales/logic/helper/time_converter.dart';
 import 'package:small_managements/features/sales/logic/provider/sales_provider.dart';
 import 'package:small_managements/features/sales/ui/make_sale.dart';
 import 'package:small_managements/features/sales/ui/widgets/custom_sales_container.dart';
@@ -80,7 +81,7 @@ class SalesView extends ConsumerWidget {
                     return TransactionItem(
                       clientName: salesProducts[index].name.isEmpty? 'Not Available':salesProducts[index].name,
                       price: salesProducts[index].total,
-                      time: salesProducts[index].dateTime,
+                      time: formatDateTimeTo12Hour(salesProducts[index].dateTime),
                       itemCount: salesProducts[index].soldProducts.fold<int>(
                         0,
                         (sum, e) => sum + e.quantity,

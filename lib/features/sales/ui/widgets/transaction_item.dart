@@ -14,7 +14,7 @@ class TransactionItem extends StatelessWidget {
   });
   final String clientName;
   final double price;
-  final DateTime time;
+  final String time;
   final int itemCount;
   final SalesModel sale;
   @override
@@ -45,7 +45,7 @@ class TransactionItem extends StatelessWidget {
               ),
               SizedBox(width: 5),
               Text(
-                '$time',
+                time,
                 style: TextStyle(fontSize: 13, color: AppColors.kPrimeryColor),
               ),
             ],

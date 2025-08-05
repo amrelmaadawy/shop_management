@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:small_managements/features/sales/logic/helper/time_converter.dart';
 import 'package:small_managements/features/sales/model/sales_model.dart';
 
 class SaleDetailesView extends StatelessWidget {
@@ -35,7 +36,7 @@ class SaleDetailesView extends StatelessWidget {
               ),
               SizedBox(height: 5),
               Text(
-                'time: ${sale.dateTime.day}/${sale.dateTime.month}/${sale.dateTime.year} ${sale.dateTime.hour}:${sale.dateTime.minute}',
+                'time: ${formatDateTimeTo12Hour(sale.dateTime)}',
                 style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
               ),
               SizedBox(height: 5),
