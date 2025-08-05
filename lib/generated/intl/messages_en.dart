@@ -41,6 +41,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "buyingPrice": MessageLookupByLibrary.simpleMessage("Buying Price"),
     "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
     "category": MessageLookupByLibrary.simpleMessage("Category"),
+    "client": MessageLookupByLibrary.simpleMessage("Client Name: "),
     "compareTo": MessageLookupByLibrary.simpleMessage(
       "Compared to \$1,100 yesterday",
     ),

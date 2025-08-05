@@ -106,7 +106,7 @@ class SelectProductProvider extends StateNotifier<List<SelectedProdcutModel>> {
       dateTime: DateTime.now(),
       total: totalAfterDiscount,
       change: change,
-      name: name ?? 'Not Available',
+      name: name!,
       discount: discount,
     );
 

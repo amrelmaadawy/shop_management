@@ -528,6 +528,11 @@ class S {
       args: [],
     );
   }
+
+  /// `Client Name: `
+  String get client {
+    return Intl.message('Client Name: ', name: 'client', desc: '', args: []);
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

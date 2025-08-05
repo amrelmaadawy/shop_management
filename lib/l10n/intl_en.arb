@@ -123,5 +123,7 @@
     "addNewCategory":"Add New Category",
     "@addNewCategory": {},
     "addCategory":"Add Category",
-    "@addCategory": {}
+    "@addCategory": {},
+     "client":"Client Name: ",
+    "@client": {}
 }

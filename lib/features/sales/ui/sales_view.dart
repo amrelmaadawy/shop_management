@@ -56,18 +56,16 @@ class SalesView extends ConsumerWidget {
                 children: [
                   CustomSalesContainer(
                     title: S.of(context).TotalSalesToday,
-                    num:
-                        '\$${getTodayTotalSales(ref)}',
+                    num: '\$${getTodayTotalSales(ref)}',
                   ),
                   CustomSalesContainer(
                     title: S.of(context).totalProductSold,
-                    num:
-                        '${getTodayTotalProductSold(ref)}',
+                    num: '${getTodayTotalProductSold(ref)}',
                   ),
                 ],
               ),
               SizedBox(height: 15),
-              TotalProfitToday(totalProfitToday: getTodayTotalProfit(ref),),
+              TotalProfitToday(totalProfitToday: getTodayTotalProfit(ref)),
               SizedBox(height: 15),
               Text(
                 S.of(context).recentTransactions,
@@ -80,9 +78,13 @@ class SalesView extends ConsumerWidget {
                   shrinkWrap: true,
                   itemBuilder: (context, index) {
                     return TransactionItem(
-                      productName: salesProducts[index].name,
+                      clientName: salesProducts[index].name.isEmpty? 'Not Available':salesProducts[index].name,
                       price: salesProducts[index].total,
                       time: salesProducts[index].dateTime,
+                      itemCount: salesProducts[index].soldProducts.fold<int>(
+                        0,
+                        (sum, e) => sum + e.quantity,
+                      ),
                     );
                   },
                   separatorBuilder: (context, index) => SizedBox(height: 5),
