@@ -60,10 +60,10 @@
     "@cancel": {},
     "totalSalesThisMonth":"Total Sales This Month",
     "@totalSalesThisMonth": {},
-    "totalProductSold":"Total Product Sold Today",
+    "totalProductSold":"Total Product Sold ",
     "@totalProductSold": {},
-    "totalProfit":"Total Profit Today",
-    "@totalProfit": {},
+    "totalProfitToday":"Total Profit Today",
+    "@totalProfitToday": {},
       "recentTransactions":"Recent Transactions",
     "@recentTransactions": {},
     "product":"Product",
@@ -125,5 +125,10 @@
     "addCategory":"Add Category",
     "@addCategory": {},
      "client":"Client Name: ",
-    "@client": {}
+    "@client": {},
+     "totalProfit":"Total Profit ",
+    "@totalProfit": {},
+"totalProductSoldToday":"Total Product Sold Today ",
+    "@totalProductSoldToday": {}
+
 }

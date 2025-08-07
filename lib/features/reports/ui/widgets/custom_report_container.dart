@@ -1,33 +1,27 @@
-
 import 'package:flutter/material.dart';
 import 'package:small_managements/core/utils/app_colors.dart';
 
 class CustomReportContainer extends StatelessWidget {
   const CustomReportContainer({
-    super.key, required this.title, required this.number, required this.percentage,
+    super.key,
+    required this.title,
+    required this.number,
+    this.width,
   });
-final String title;
-final String number;
-final String percentage;
+  final String title;
+  final String number;
+  final double? width;
   @override
   Widget build(BuildContext context) {
     return Stack(
       alignment: AlignmentDirectional.center,
       children: [
+        
         Container(
-          width: MediaQuery.of(context).size.width * 0.45,
-    
-          height: 130,
-          decoration: BoxDecoration(
-            color: AppColors.kBorderColor,
-            borderRadius: BorderRadius.circular(15),
-          ),
-        ),
-        Container(
-          width: MediaQuery.of(context).size.width * 0.445,
-    
+          width: width ?? MediaQuery.of(context).size.width * 0.45,
           height: 128,
           decoration: BoxDecoration(
+            border: Border.all(color: AppColors.kBorderColor, width: 1.5),
             color: AppColors.kBackgroundColor,
             borderRadius: BorderRadius.circular(15),
           ),
@@ -37,24 +31,12 @@ final String percentage;
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  title,
-                  style: TextStyle(fontSize: 17),
-                ),
+                Text(title, style: TextStyle(fontSize: 17)),
                 Text(
                   number,
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                  ),
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                 ),
-                Text(
-                   percentage,
-                  style: TextStyle(
-                    color: AppColors.kincreaseColor,
-                    fontSize: 17,
-                  ),
-                ),
+                
               ],
             ),
           ),

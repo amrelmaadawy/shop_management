@@ -269,10 +269,10 @@ class S {
     );
   }
 
-  /// `Total Product Sold Today`
+  /// `Total Product Sold `
   String get totalProductSold {
     return Intl.message(
-      'Total Product Sold Today',
+      'Total Product Sold ',
       name: 'totalProductSold',
       desc: '',
       args: [],
@@ -280,10 +280,10 @@ class S {
   }
 
   /// `Total Profit Today`
-  String get totalProfit {
+  String get totalProfitToday {
     return Intl.message(
       'Total Profit Today',
-      name: 'totalProfit',
+      name: 'totalProfitToday',
       desc: '',
       args: [],
     );
@@ -532,6 +532,26 @@ class S {
   /// `Client Name: `
   String get client {
     return Intl.message('Client Name: ', name: 'client', desc: '', args: []);
+  }
+
+  /// `Total Profit `
+  String get totalProfit {
+    return Intl.message(
+      'Total Profit ',
+      name: 'totalProfit',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Total Product Sold Today `
+  String get totalProductSoldToday {
+    return Intl.message(
+      'Total Product Sold Today ',
+      name: 'totalProductSoldToday',
+      desc: '',
+      args: [],
+    );
   }
 }
 

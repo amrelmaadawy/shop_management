@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:small_managements/core/utils/app_colors.dart';
-import 'package:small_managements/features/reports/logic/sales_data.dart';
+import 'package:small_managements/features/reports/logic/helper/sales_data.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
 class BarChart extends StatelessWidget {

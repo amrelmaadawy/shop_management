@@ -110,9 +110,15 @@ class MessageLookup extends MessageLookupByLibrary {
       "Top Selling Items",
     ),
     "totalProductSold": MessageLookupByLibrary.simpleMessage(
-      "Total Product Sold Today",
+      "Total Product Sold ",
     ),
-    "totalProfit": MessageLookupByLibrary.simpleMessage("Total Profit Today"),
+    "totalProductSoldToday": MessageLookupByLibrary.simpleMessage(
+      "Total Product Sold Today ",
+    ),
+    "totalProfit": MessageLookupByLibrary.simpleMessage("Total Profit "),
+    "totalProfitToday": MessageLookupByLibrary.simpleMessage(
+      "Total Profit Today",
+    ),
     "totalSales": MessageLookupByLibrary.simpleMessage("Total Sales"),
     "totalSalesThisMonth": MessageLookupByLibrary.simpleMessage(
       "Total Sales This Month",

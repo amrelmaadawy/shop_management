@@ -1,6 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:small_managements/features/reports/logic/sales_data.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:small_managements/features/reports/logic/helper/get_first_sale_date.dart';
+import 'package:small_managements/features/reports/logic/helper/get_total_sales.dart';
+import 'package:small_managements/features/reports/logic/helper/sales_data.dart';
 import 'package:small_managements/features/reports/ui/widgets/custom_dates_container.dart';
 import 'package:small_managements/features/reports/ui/widgets/custom_report_container.dart';
 import 'package:small_managements/features/reports/ui/widgets/filter_date_range.dart';
@@ -8,14 +11,14 @@ import 'package:small_managements/features/reports/ui/widgets/sales_chart_contai
 import 'package:small_managements/features/reports/ui/widgets/top_selling_item.dart';
 import 'package:small_managements/generated/l10n.dart';
 
-class ReportsView extends StatefulWidget {
+class ReportsView extends ConsumerStatefulWidget {
   const ReportsView({super.key});
 
   @override
-  State<ReportsView> createState() => _ReportsViewState();
+  ConsumerState<ReportsView> createState() => _ReportsViewState();
 }
 
-class _ReportsViewState extends State<ReportsView> {
+class _ReportsViewState extends ConsumerState<ReportsView> {
   @override
   void dispose() {
     super.dispose();
@@ -36,6 +39,17 @@ class _ReportsViewState extends State<ReportsView> {
   ];
   @override
   Widget build(BuildContext context) {
+    final startDate = getFirstSaleDate(ref);
+    final endDate = DateTime.now();
+
+    final totalSales = getTotalSalesInRange(ref, startDate, endDate);
+    final totalProductsSold = getTotalProductSoldInRange(
+      ref,
+      startDate,
+      endDate,
+    );
+    final totalProfit = getTotalProfitInRange(ref, startDate, endDate);
+
     return Scaffold(
       body: SafeArea(
         child: Padding(
@@ -71,7 +85,10 @@ class _ReportsViewState extends State<ReportsView> {
                             showModalBottomSheet(
                               context: context,
                               builder: (context) {
-                                 return FilterDateRange(startDateController: startDateController, endDateController: endDateController);
+                                return FilterDateRange(
+                                  startDateController: startDateController,
+                                  endDateController: endDateController,
+                                );
                               },
                             );
                           },
@@ -97,15 +114,19 @@ class _ReportsViewState extends State<ReportsView> {
                   children: [
                     CustomReportContainer(
                       title: S.of(context).totalSales,
-                      number: '1234 LE',
-                      percentage: '+ 12 %',
+                      number: '$totalSales LE',
                     ),
                     CustomReportContainer(
-                      title: S.of(context).orders,
-                      number: '312',
-                      percentage: '+12%',
+                      title: S.of(context).totalProductSold,
+                      number: '$totalProductsSold',
                     ),
                   ],
+                ),
+                SizedBox(height: 15),
+                CustomReportContainer(
+                  width: MediaQuery.of(context).size.width * 0.95,
+                  title: S.of(context).totalProfit,
+                  number: '$totalProfit LE',
                 ),
                 SizedBox(height: 15),
                 SalesChartContainer(data: data),
