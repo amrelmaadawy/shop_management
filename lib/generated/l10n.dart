@@ -334,9 +334,9 @@ class S {
     );
   }
 
-  /// `Date Range`
+  /// `Date Filter`
   String get dateRange {
-    return Intl.message('Date Range', name: 'dateRange', desc: '', args: []);
+    return Intl.message('Date Filter', name: 'dateRange', desc: '', args: []);
   }
 
   /// `Total Sales`

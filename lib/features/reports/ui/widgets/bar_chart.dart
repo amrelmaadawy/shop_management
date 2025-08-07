@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:small_managements/core/utils/app_colors.dart';
 import 'package:small_managements/features/reports/logic/sales_data.dart';

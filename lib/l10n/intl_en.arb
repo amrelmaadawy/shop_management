@@ -74,7 +74,7 @@
     "@quantitySold": {},
     "selectProduct":"Select Product",
     "@selectProduct": {},
-    "dateRange":"Date Range",
+    "dateRange":"Date Filter",
     "@dateRange": {},
     "totalSales":"Total Sales",
     "@totalSales": {},

@@ -1,27 +1,41 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:small_managements/core/utils/custom_text_form_field.dart';
 import 'package:small_managements/features/reports/logic/sales_data.dart';
+import 'package:small_managements/features/reports/ui/widgets/custom_dates_container.dart';
 import 'package:small_managements/features/reports/ui/widgets/custom_report_container.dart';
+import 'package:small_managements/features/reports/ui/widgets/filter_date_range.dart';
 import 'package:small_managements/features/reports/ui/widgets/sales_chart_container.dart';
 import 'package:small_managements/features/reports/ui/widgets/top_selling_item.dart';
 import 'package:small_managements/generated/l10n.dart';
 
-class ReportsView extends StatelessWidget {
+class ReportsView extends StatefulWidget {
   const ReportsView({super.key});
 
   @override
+  State<ReportsView> createState() => _ReportsViewState();
+}
+
+class _ReportsViewState extends State<ReportsView> {
+  @override
+  void dispose() {
+    super.dispose();
+    startDateController.dispose();
+    endDateController.dispose();
+  }
+
+  TextEditingController startDateController = TextEditingController();
+  TextEditingController endDateController = TextEditingController();
+  final List<SalesData> data = [
+    SalesData('Sat', 150),
+    SalesData('Sun', 200),
+    SalesData('Mon', 500),
+    SalesData('Tue', 300),
+    SalesData('Wed', 250),
+    SalesData('Thu', 600),
+    SalesData('Fri', 50),
+  ];
+  @override
   Widget build(BuildContext context) {
-    final List<SalesData> data = [
-      SalesData('Sat', 150),
-      SalesData('Sun', 200),
-      SalesData('Mon', 500),
-      SalesData('Tue', 300),
-      SalesData('Wed', 250),
-      SalesData('Thu', 600),
-      SalesData('Fri', 50),
-    ];
-    TextEditingController dateRangeController = TextEditingController();
     return Scaffold(
       body: SafeArea(
         child: Padding(
@@ -50,23 +64,34 @@ class ReportsView extends StatelessWidget {
                           icon: Icon(CupertinoIcons.printer),
                         ),
                       ),
+                      Positioned(
+                        right: 40,
+                        child: IconButton(
+                          onPressed: () {
+                            showModalBottomSheet(
+                              context: context,
+                              builder: (context) {
+                                 return FilterDateRange(startDateController: startDateController, endDateController: endDateController);
+                              },
+                            );
+                          },
+                          icon: Icon(Icons.calendar_month_outlined),
+                        ),
+                      ),
                     ],
                   ),
                 ),
-                Text(S.of(context).dateRange, style: TextStyle(fontSize: 16)),
+
                 SizedBox(height: 10),
-                CustomTextFormField(
-                  validator: (value ) {
-                      if(value!.isEmpty)
-                      {
-                        return'Please Enter The Poduct Name';
-                      }else{return null;}
-                      },
-                  controller: dateRangeController,
-                  keyboardType: TextInputType.text,
-                  labelText: '',
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    CustomDatesContainer(date: 'Today'),
+                    CustomDatesContainer(date: 'Current Week'),
+                    CustomDatesContainer(date: 'Current Month'),
+                  ],
                 ),
-                SizedBox(height: 15),
+                SizedBox(height: 10),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [

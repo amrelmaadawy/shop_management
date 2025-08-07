@@ -43,8 +43,6 @@ class ProductProvider extends StateNotifier<List<ProductModel>> {
     );
 
     await box.putAt(index, updatedProduct);
-
-    /// 👇 ضروري جدًا علشان يحدث UI
     state = box.values.toList();
   }
 }

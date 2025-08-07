@@ -47,7 +47,7 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "confirmeSale": MessageLookupByLibrary.simpleMessage("Confirm Sale"),
     "darkMode": MessageLookupByLibrary.simpleMessage("Dark Mode"),
-    "dateRange": MessageLookupByLibrary.simpleMessage("Date Range"),
+    "dateRange": MessageLookupByLibrary.simpleMessage("Date Filter"),
     "deleteImage": MessageLookupByLibrary.simpleMessage("Delete Image"),
     "home": MessageLookupByLibrary.simpleMessage("Home"),
     "homeAppBar": MessageLookupByLibrary.simpleMessage("Overview"),
