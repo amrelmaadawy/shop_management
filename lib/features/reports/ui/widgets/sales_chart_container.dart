@@ -3,14 +3,12 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:small_managements/core/utils/app_colors.dart';
 import 'package:small_managements/features/reports/logic/helper/get_start_end_of_week.dart';
 import 'package:small_managements/features/reports/logic/helper/get_total_sales.dart';
-import 'package:small_managements/features/reports/logic/helper/sales_data.dart';
 import 'package:small_managements/features/reports/ui/widgets/bar_chart.dart';
 import 'package:small_managements/generated/l10n.dart';
 
 class SalesChartContainer extends StatelessWidget {
-  const SalesChartContainer({super.key, required this.data, required this.ref});
+  const SalesChartContainer({super.key,  required this.ref});
 
-  final List<SalesData> data;
   final WidgetRef ref;
   @override
   Widget build(BuildContext context) {
@@ -51,13 +49,8 @@ final endDate = getWeekEnd(startDate);
                   '$totalSales LE',
                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                 ),
-                Row(
-                  children: [
-                    Text(' Last 7 days ', style: TextStyle(fontSize: 17)),
-                  
-                  ],
-                ),
-                BarChart(data: data),
+
+                BarChart(),
               ],
             ),
           ),

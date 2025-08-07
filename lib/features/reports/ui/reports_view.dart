@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:small_managements/features/reports/logic/helper/get_first_sale_date.dart';
 import 'package:small_managements/features/reports/logic/helper/get_total_sales.dart';
-import 'package:small_managements/features/reports/logic/helper/sales_data.dart';
 import 'package:small_managements/features/reports/ui/widgets/custom_dates_container.dart';
 import 'package:small_managements/features/reports/ui/widgets/custom_report_container.dart';
 import 'package:small_managements/features/reports/ui/widgets/filter_date_range.dart';
@@ -28,15 +27,7 @@ class _ReportsViewState extends ConsumerState<ReportsView> {
 
   TextEditingController startDateController = TextEditingController();
   TextEditingController endDateController = TextEditingController();
-  final List<SalesData> data = [
-    SalesData('Sat', 150),
-    SalesData('Sun', 200),
-    SalesData('Mon', 500),
-    SalesData('Tue', 300),
-    SalesData('Wed', 250),
-    SalesData('Thu', 600),
-    SalesData('Fri', 50),
-  ];
+
   @override
   Widget build(BuildContext context) {
     final startDate = getFirstSaleDate(ref);
@@ -129,7 +120,7 @@ class _ReportsViewState extends ConsumerState<ReportsView> {
                   number: '$totalProfit LE',
                 ),
                 SizedBox(height: 15),
-                SalesChartContainer(data: data,ref: ref,),
+                SalesChartContainer(ref: ref),
                 SizedBox(height: 15),
                 Text(
                   S.of(context).topSellingItems,
