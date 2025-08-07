@@ -129,7 +129,7 @@ class _ReportsViewState extends ConsumerState<ReportsView> {
                   number: '$totalProfit LE',
                 ),
                 SizedBox(height: 15),
-                SalesChartContainer(data: data),
+                SalesChartContainer(data: data,ref: ref,),
                 SizedBox(height: 15),
                 Text(
                   S.of(context).topSellingItems,

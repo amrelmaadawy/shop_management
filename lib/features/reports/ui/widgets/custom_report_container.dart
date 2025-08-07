@@ -16,7 +16,6 @@ class CustomReportContainer extends StatelessWidget {
     return Stack(
       alignment: AlignmentDirectional.center,
       children: [
-        
         Container(
           width: width ?? MediaQuery.of(context).size.width * 0.45,
           height: 128,
@@ -34,9 +33,8 @@ class CustomReportContainer extends StatelessWidget {
                 Text(title, style: TextStyle(fontSize: 17)),
                 Text(
                   number,
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                 ),
-                
               ],
             ),
           ),
