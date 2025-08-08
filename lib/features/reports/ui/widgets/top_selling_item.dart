@@ -1,12 +1,11 @@
-
 import 'package:flutter/material.dart';
 import 'package:small_managements/generated/l10n.dart';
 
 class TopSellingItem extends StatelessWidget {
-  const TopSellingItem({
-    super.key,
-  });
-
+  const TopSellingItem({super.key, required this.productName, required this.image, required this.quantitySold});
+  final String productName;
+  final Widget image;
+  final int quantitySold;
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -14,14 +13,16 @@ class TopSellingItem extends StatelessWidget {
       width: MediaQuery.of(context).size.width,
       child: Row(
         children: [
-          Image.asset('assets/images/apple.png'),
+          ClipRRect(
+            child:image ,
+          ),
           SizedBox(width: 20),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text('${S.of(context).product} Apple'),
+              Text(productName),
               SizedBox(height: 5),
-              Text('1231  ${S.of(context).sold}'),
+              Text('$quantitySold  ${S.of(context).sold}'),
             ],
           ),
         ],

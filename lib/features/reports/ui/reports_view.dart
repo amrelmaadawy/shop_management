@@ -1,8 +1,11 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:small_managements/features/reports/logic/helper/get_first_sale_date.dart';
 import 'package:small_managements/features/reports/logic/helper/get_total_sales.dart';
+import 'package:small_managements/features/reports/logic/helper/top_selling_products.dart';
 import 'package:small_managements/features/reports/ui/widgets/custom_dates_container.dart';
 import 'package:small_managements/features/reports/ui/widgets/custom_report_container.dart';
 import 'package:small_managements/features/reports/ui/widgets/filter_date_range.dart';
@@ -40,7 +43,7 @@ class _ReportsViewState extends ConsumerState<ReportsView> {
       endDate,
     );
     final totalProfit = getTotalProfitInRange(ref, startDate, endDate);
-
+    final topSellingItems = getTopSellingProducts(ref);
     return Scaffold(
       body: SafeArea(
         child: Padding(
@@ -89,7 +92,6 @@ class _ReportsViewState extends ConsumerState<ReportsView> {
                     ],
                   ),
                 ),
-
                 SizedBox(height: 10),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -131,8 +133,16 @@ class _ReportsViewState extends ConsumerState<ReportsView> {
                   physics: NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
                   separatorBuilder: (context, index) => SizedBox(height: 5),
-                  itemCount: 10,
-                  itemBuilder: (context, index) => TopSellingItem(),
+                  itemCount: topSellingItems.length,
+                  itemBuilder: (context, index) => 
+            
+                  TopSellingItem(
+                    productName: topSellingItems[index].key.productName,
+                    image:  topSellingItems[index].key.image != null
+                          ? Image.file(File(topSellingItems[index].key.image!))
+                          : Image.asset('assets/images/product.png'),
+                    quantitySold: topSellingItems[index].value,
+                  ),
                 ),
               ],
             ),
