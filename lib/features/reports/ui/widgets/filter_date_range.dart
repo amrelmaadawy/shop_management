@@ -160,11 +160,12 @@ class _FilterDateRangeState extends State<FilterDateRange> {
                           totalSales: totalSales,
                           totalProductSold: totalProductsSold,
                           totalProfit: totalProfit,
+                          startDate: widget.startDateController.text,
+                          endDate: widget.endDateController.text,
                         ),
                       ),
                     );
-                    widget.startDateController.clear();
-                    widget.endDateController.clear();
+                  
                   }
                 },
                 child: Text(
