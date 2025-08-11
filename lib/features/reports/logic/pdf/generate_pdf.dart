@@ -53,7 +53,6 @@ Future<void> generateAndPreviewPdf({
               ],
             ),
             pw.SizedBox(height: 5),
-
             pw.Row(
               children: [
                 pw.Text('Total Profit ', style: pw.TextStyle(fontSize: 16)),
