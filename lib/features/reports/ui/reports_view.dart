@@ -6,7 +6,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:small_managements/features/reports/logic/helper/get_first_sale_date.dart';
 import 'package:small_managements/features/reports/logic/helper/get_total_sales.dart';
 import 'package:small_managements/features/reports/logic/helper/top_selling_products.dart';
-import 'package:small_managements/features/reports/ui/widgets/custom_dates_container.dart';
 import 'package:small_managements/features/reports/ui/widgets/custom_report_container.dart';
 import 'package:small_managements/features/reports/ui/widgets/filter_date_range.dart';
 import 'package:small_managements/features/reports/ui/widgets/sales_chart_container.dart';
@@ -80,6 +79,7 @@ class _ReportsViewState extends ConsumerState<ReportsView> {
                               context: context,
                               builder: (context) {
                                 return FilterDateRange(
+                                  ref:ref,
                                   startDateController: startDateController,
                                   endDateController: endDateController,
                                 );
@@ -91,16 +91,7 @@ class _ReportsViewState extends ConsumerState<ReportsView> {
                       ),
                     ],
                   ),
-                ),
-                SizedBox(height: 10),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    CustomDatesContainer(date: 'Today'),
-                    CustomDatesContainer(date: 'Current Week'),
-                    CustomDatesContainer(date: 'Current Month'),
-                  ],
-                ),
+                ),                
                 SizedBox(height: 10),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
