@@ -1,14 +1,12 @@
 import 'dart:io';
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:small_managements/features/reports/logic/helper/get_first_sale_date.dart';
 import 'package:small_managements/features/reports/logic/helper/get_total_sales.dart';
 import 'package:small_managements/features/reports/logic/helper/top_selling_products.dart';
-import 'package:small_managements/features/reports/logic/pdf/generate_pdf.dart';
 import 'package:small_managements/features/reports/ui/widgets/custom_report_container.dart';
-import 'package:small_managements/features/reports/ui/widgets/filter_date_range.dart';
+import 'package:small_managements/features/reports/ui/widgets/filter_date_icon.dart';
+import 'package:small_managements/features/reports/ui/widgets/print_icon.dart';
 import 'package:small_managements/features/reports/ui/widgets/sales_chart_container.dart';
 import 'package:small_managements/features/reports/ui/widgets/top_selling_item.dart';
 import 'package:small_managements/generated/l10n.dart';
@@ -65,43 +63,8 @@ class _ReportsViewState extends ConsumerState<ReportsView> {
                           ),
                         ),
                       ),
-                      Positioned(
-                        right: 0,
-                        child: IconButton(
-                          onPressed: () async {
-                            
-                              await generateAndPreviewPdf(
-                                totalSales: '$totalSales',
-                                totalProductSold: '$totalProductsSold',
-                                totalProfit: '$totalProfit',
-                                startDate:
-                                    '${startDate.year}-${startDate.month}-${startDate.day}',
-                                endDate:
-                                    '${endDate.year}-${endDate.month}-${endDate.day}',
-                              );
-                            
-                          },
-                          icon: Icon(CupertinoIcons.printer),
-                        ),
-                      ),
-                      Positioned(
-                        right: 40,
-                        child: IconButton(
-                          onPressed: () {
-                            showModalBottomSheet(
-                              context: context,
-                              builder: (context) {
-                                return FilterDateRange(
-                                  ref: ref,
-                                  startDateController: startDateController,
-                                  endDateController: endDateController,
-                                );
-                              },
-                            );
-                          },
-                          icon: Icon(Icons.calendar_month_outlined),
-                        ),
-                      ),
+                      PrintIcon(totalSales: totalSales, totalProductsSold: totalProductsSold, totalProfit: totalProfit, startDate: startDate, endDate: endDate),
+                      FilterDateIcon(ref: ref, startDateController: startDateController, endDateController: endDateController),
                     ],
                   ),
                 ),

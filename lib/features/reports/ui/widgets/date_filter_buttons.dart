@@ -1,0 +1,94 @@
+
+import 'dart:ui';
+
+import 'package:flutter/material.dart';
+import 'package:small_managements/core/utils/app_colors.dart';
+import 'package:small_managements/features/reports/logic/helper/get_total_sales.dart';
+import 'package:small_managements/features/reports/ui/customized_report.dart';
+import 'package:small_managements/features/reports/ui/widgets/filter_date_range.dart';
+
+class DateFilterButtons extends StatelessWidget {
+  const DateFilterButtons({
+    super.key,
+    required this.widget,
+    required this.formKey,
+  });
+
+  final FilterDateRange widget;
+  final GlobalKey<FormState> formKey;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        ElevatedButton(
+          style: ElevatedButton.styleFrom(
+            backgroundColor: AppColors.kIncreaseContainerColor,
+          ),
+          onPressed: () {
+            widget.startDateController.clear();
+            widget.endDateController.clear();
+          },
+          child: Text(
+            'Reset',
+            style: TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ),
+        ElevatedButton(
+          style: ElevatedButton.styleFrom(
+            backgroundColor: AppColors.kAddProductButtonColor,
+          ),
+          onPressed: () {
+            if (formKey.currentState!.validate()) {
+              final startDate = DateTime.parse(
+                widget.startDateController.text,
+              );
+              final endDate = DateTime.parse(
+                widget.endDateController.text,
+              );
+              final totalSales = getTotalSalesInRange(
+                widget.ref,
+                startDate,
+                endDate,
+              );
+              final totalProductsSold = getTotalProductSoldInRange(
+                widget.ref,
+                startDate,
+                endDate,
+              );
+              final totalProfit = getTotalProfitInRange(
+                widget.ref,
+                startDate,
+                endDate,
+              );
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => CustomizedReport(
+                    totalSales: totalSales,
+                    totalProductSold: totalProductsSold,
+                    totalProfit: totalProfit,
+                    startDate: widget.startDateController.text,
+                    endDate: widget.endDateController.text,
+                  ),
+                ),
+              );
+            
+            }
+          },
+          child: Text(
+            'Apply',
+            style: TextStyle(
+              color: Colors.black,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+}
