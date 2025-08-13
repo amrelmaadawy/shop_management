@@ -4,6 +4,7 @@ import 'package:hive_flutter/adapters.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:small_managements/core/hive_boxes.dart';
 import 'package:small_managements/core/utils/app_colors.dart';
+import 'package:small_managements/features/onboarding/UI/onboarding.dart';
 import 'package:small_managements/features/products/model/category_model.dart';
 import 'package:small_managements/features/products/model/product_model.dart';
 import 'package:small_managements/features/sales/model/sales_model.dart';
@@ -19,7 +20,7 @@ Future<void> main() async {
   final prefs = await SharedPreferences.getInstance();
   final langCode = prefs.getString('lang') ?? 'en';
   final isDark = prefs.getBool('isDark') ?? false;
-
+  final showHome = prefs.getBool('showHome') ?? false;
   await Hive.initFlutter();
   Hive.registerAdapter(ProductModelAdapter());
   Hive.registerAdapter(CategoryModelAdapter());
@@ -38,13 +39,14 @@ Future<void> main() async {
           return isDark ? ThemeMode.dark : ThemeMode.light;
         }),
       ],
-      child: const MyApp(),
+      child: MyApp(showHome),
     ),
   );
 }
 
 class MyApp extends ConsumerWidget {
-  const MyApp({super.key});
+  const MyApp(this.showHome, {super.key});
+  final bool showHome;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return MaterialApp(
@@ -69,7 +71,7 @@ class MyApp extends ConsumerWidget {
         textTheme: ThemeData.dark().textTheme.apply(fontFamily: 'RobotoSlab'),
       ),
       themeMode: ref.watch(themeModeProvider),
-      home: SplashView(),
+      home: showHome ? SplashView() : Onboarding(),
     );
   }
 }
