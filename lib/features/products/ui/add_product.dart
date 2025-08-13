@@ -46,6 +46,7 @@ class _AddProductState extends ConsumerState<AddProduct> {
       buyingPriceController.text = widget.productModel!.buyingPrice;
       quantityController.text = widget.productModel!.quantity;
       categoryController.text = widget.productModel!.category;
+      sellingPriceController.text = widget.productModel!.sellingPrice;
     }
     Future.microtask(() {
       ref.read(pickImageProvider.notifier).state = widget.productModel?.image;
@@ -73,7 +74,8 @@ class _AddProductState extends ConsumerState<AddProduct> {
                     buyingPriceController: buyingPriceController,
                     quantityController: quantityController,
                     ref: ref,
-                    categoryController: categoryController, sellingPriceController: sellingPriceController,
+                    categoryController: categoryController,
+                    sellingPriceController: sellingPriceController,
                   ),
 
                   SizedBox(height: 20),
@@ -99,11 +101,13 @@ class _AddProductState extends ConsumerState<AddProduct> {
 
                               final newProduct = ProductModel(
                                 category: categoryController.text,
+
                                 buyingPrice: buyingPriceController.text,
                                 productName: productNameController.text,
                                 quantity: quantityController.text,
                                 image: imagePath,
-                                id: 0, sellingPrice: sellingPriceController.text,
+                                id: 0,
+                                sellingPrice: sellingPriceController.text,
                               );
                               ref
                                   .read(productProviderNotifier.notifier)
@@ -118,7 +122,8 @@ class _AddProductState extends ConsumerState<AddProduct> {
                                 productName: productNameController.text,
                                 quantity: quantityController.text,
                                 image: imagePath,
-                                id: 0, sellingPrice: sellingPriceController.text,
+                                id: 0,
+                                sellingPrice: sellingPriceController.text,
                               );
                               ref
                                   .read(productProviderNotifier.notifier)
