@@ -19,81 +19,88 @@ class _AdditionalOptionsBottomSheetState
   TextEditingController paidController = TextEditingController();
   GlobalKey<FormState> key = GlobalKey();
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) { 
     return Padding(
-      padding: const EdgeInsets.all(15.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            'Confirm sale',
-            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-          ),
-          SizedBox(height: 10),
-          Form(
-            key: key,
-            child: CustomTextFormField(
-              controller: paidController,
-              keyboardType: TextInputType.number,
-              labelText: 'paid',
+      padding: EdgeInsets.only(
+        bottom: MediaQuery.of(context).viewInsets.bottom,
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(20.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(
+              'Confirm sale',
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            ),
+            SizedBox(height: 10),
+            Form(
+              key: key,
+              child: CustomTextFormField(
+                controller: paidController,
+                keyboardType: TextInputType.number,
+                labelText: 'paid',
+                validator: (v) {
+                  if (v == null || v.isEmpty) {
+                    return 'please Enter the paid amount';
+                  }
+                  return null;
+                },
+              ),
+            ),
+            SizedBox(height: 10),
+            CustomTextFormField(
+              controller: discountController,
+              keyboardType: TextInputType.text,
+              labelText: 'discount(optional)',
               validator: (v) {
-                if (v == null || v.isEmpty) {
-                  return 'please Enter the paid amount';
-                }
                 return null;
               },
             ),
-          ),
-          SizedBox(height: 10),
-          CustomTextFormField(
-            controller: discountController,
-            keyboardType: TextInputType.number,
-            labelText: 'discount(optional)',
-            validator: (v) {
-              return null;
-            },
-          ),
-          SizedBox(height: 10),
-          CustomTextFormField(
-            controller: nameController,
-            keyboardType: TextInputType.number,
-            labelText: 'client Name(optional)',
-            validator: (v) {
-              return null;
-            },
-          ),
-          SizedBox(height: 10),
-          SizedBox(
-            width: MediaQuery.of(context).size.width,
-            child: ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                backgroundColor: AppColors.kAddProductButtonColor,
-              ),
-              onPressed: () {
-                if (key.currentState!.validate()) {
-                  ref
-                      .read(selectProductProvider.notifier)
-                      .confirmSale(
-                        paid: double.parse(paidController.text),
-                        name: nameController.text,
-                        discount: double.tryParse(discountController.text)??0,
-                        ref: ref,
-                      );
-                  Navigator.pop(context);
-                  Navigator.pop(context);
-                }
+            SizedBox(height: 10),
+            CustomTextFormField(
+              controller: nameController,
+              keyboardType: TextInputType.text,
+              labelText: 'client Name(optional)',
+              validator: (v) {
+                return null;
               },
-              child: Text(
-                'Apply discount',
-                style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 17,
-                  fontWeight: FontWeight.bold,
+            ),
+            SizedBox(height: 10),
+            SizedBox(
+              width: MediaQuery.of(context).size.width,
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: AppColors.kAddProductButtonColor,
+                ),
+                onPressed: () {
+                  if (key.currentState!.validate()) {
+                  
+                    ref
+                        .read(selectProductProvider.notifier)
+                        .confirmSale(
+                          paid: double.parse(paidController.text),
+                          name: nameController.text,
+                          discount:
+                              double.tryParse(discountController.text) ?? 0,
+                          ref: ref, context: context,
+                        );
+                  
+                  }
+                },
+                child: Text(
+                  'Apply discount',
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 17,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

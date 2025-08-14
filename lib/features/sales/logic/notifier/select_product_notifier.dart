@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive/hive.dart';
 import 'package:small_managements/core/hive_boxes.dart';
@@ -84,59 +85,93 @@ class SelectProductProvider extends StateNotifier<List<SelectedProdcutModel>> {
   Future<void> confirmSale({
     required double paid,
     required WidgetRef ref,
+    required BuildContext context,
     String? name,
     double discount = 0,
   }) async {
     if (state.isEmpty) return;
 
-    final soldProducts = state
-        .map(
-          (item) => SoldProductModel(
-            sellingPrice: double.parse(item.product.sellingPrice),
-            productName: item.product.productName,
-            buyingPrice: double.parse(item.product.buyingPrice),
-            quantity: item.quantity,
-          ),
-        )
-        .toList();
+    // تجهيز قائمة المنتجات المباعة
+    final soldProducts = state.map((item) {
+      return SoldProductModel(
+        sellingPrice: double.parse(item.product.sellingPrice),
+        productName: item.product.productName,
+        buyingPrice: double.parse(item.product.buyingPrice),
+        quantity: item.quantity,
+      );
+    }).toList();
 
+    // حساب الإجمالي قبل وبعد الخصم
     final totalBeforeDiscount = soldProducts.fold<double>(
       0,
       (sum, item) => sum + (item.sellingPrice * item.quantity),
     );
 
     final totalAfterDiscount = totalBeforeDiscount - discount;
+
+    // تحقق من المبلغ المدفوع
+    if (paid < totalAfterDiscount) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text(
+            'Error Please enter the correct paid amount',
+            style: TextStyle(color: Colors.white),
+          ),
+          backgroundColor: Color.fromARGB(255, 153, 11, 1),
+        ),
+      );
+      Navigator.pop(context);
+      return; // خروج مبكر
+    }
+
+    // حساب الباقي
     final change = paid - totalAfterDiscount;
 
+    // إنشاء السيل
     final sale = SalesModel(
       soldProducts: soldProducts,
       paid: paid,
       dateTime: DateTime.now(),
       total: totalAfterDiscount,
       change: change,
-      name: name!,
+      name: name ?? '',
       discount: discount,
     );
 
+    // تحديث الإحصائيات اليومية
     totalProductSoldToday = state.fold(0, (sum, item) => sum + item.quantity);
     totalSalesToday = totalAfterDiscount.toInt();
     totalProfitToday = totalAfterDiscount.toInt();
+
     final todaysTotalSold = TodaysTotalSold(
       totalProductSoldToday: totalProductSoldToday,
       totalSalesToday: totalSalesToday,
       totalProfitToday: totalProfitToday,
     );
+
+    // حفظ البيانات
     await todaySoldBox.add(todaysTotalSold);
     await box.add(sale);
 
-for (final item in soldProducts) {
-  await ref
-      .read(productProviderNotifier.notifier)
-      .decreaseProductQuantity(item.productName, item.quantity);
-}
-    final updatedSales = box.values.toList().reversed.toList();
-    ref.read(salesProductProvider.notifier).state = updatedSales;
+    // تقليل الكميات من المخزون
+    for (final item in soldProducts) {
+      await ref
+          .read(productProviderNotifier.notifier)
+          .decreaseProductQuantity(item.productName, item.quantity);
+    }
+
+    // تحديث القائمة في الـ UI
+    ref.read(salesProductProvider.notifier).state = box.values
+        .toList()
+        .reversed
+        .toList();
 
     clear();
+
+    // التأكد إن الـ context ما زال موجود قبل التنقل
+    if (context.mounted) {
+      Navigator.pop(context);
+      Navigator.pop(context);
+    }
   }
 }

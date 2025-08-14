@@ -74,6 +74,7 @@ class _MakeSaleState extends ConsumerState<MakeSale> {
                       final selectedProducts = ref.watch(selectProductProvider);
                       if (selectedProducts.isNotEmpty) {
                         showModalBottomSheet(
+                          isScrollControlled: true,
                           context: context,
                           builder: (context) {
                             return AdditionalOptionsBottomSheet();
