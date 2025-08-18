@@ -7,17 +7,17 @@ import 'package:small_managements/features/reports/ui/widgets/bar_chart.dart';
 import 'package:small_managements/generated/l10n.dart';
 
 class SalesChartContainer extends StatelessWidget {
-  const SalesChartContainer({super.key,  required this.ref});
+  const SalesChartContainer({super.key, required this.ref});
 
   final WidgetRef ref;
   @override
   Widget build(BuildContext context) {
     final today = DateTime.now();
-final startDate = getWeekStart(today);
-final endDate = getWeekEnd(startDate);
+    final startDate = getWeekStart(today);
+    final endDate = getWeekEnd(startDate);
 
     final totalSales = getTotalSalesInRange(ref, startDate, endDate);
-   
+
     return Stack(
       alignment: AlignmentDirectional.center,
       children: [
