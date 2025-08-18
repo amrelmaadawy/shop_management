@@ -47,7 +47,6 @@ class CustomizedReport extends StatelessWidget {
                           SizedBox(height: 5,),
 
               CustomTotalsRow(totals: '$totalProfit LE', label: 'Total Profit'),
-
               Spacer(),
               ElevatedButton(
                 onPressed: () async {
