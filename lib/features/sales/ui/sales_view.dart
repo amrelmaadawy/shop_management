@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:small_managements/core/utils/app_colors.dart';
 import 'package:small_managements/features/sales/logic/helper/get_todays_date.dart';
 import 'package:small_managements/features/sales/logic/helper/get_todays_totals.dart';
 import 'package:small_managements/features/sales/logic/helper/time_converter.dart';
 import 'package:small_managements/features/sales/logic/provider/sales_provider.dart';
+import 'package:small_managements/features/sales/ui/all_sales_view.dart';
 import 'package:small_managements/features/sales/ui/make_sale.dart';
 import 'package:small_managements/features/sales/ui/widgets/custom_sales_container.dart';
 import 'package:small_managements/features/sales/ui/widgets/total_profit_today.dart';
@@ -73,30 +75,53 @@ class SalesView extends ConsumerWidget {
               SizedBox(height: 15),
               TotalProfitToday(totalProfitToday: getTodayTotalProfit(ref)),
               SizedBox(height: 15),
-              Text(
-                S.of(context).recentTransactions,
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              Row(
+                children: [
+                  Text(
+                    S.of(context).recentTransactions,
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  ),
+                  Spacer(),
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: AppColors.kAddProductButtonColor,
+                    ),
+                    onPressed: () 
+                    {
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=>AllSalesView(saleItem: salesProducts,)));
+                    },
+                    child: Text(
+                      'All Sales',
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ],
               ),
               SizedBox(height: 15),
               SizedBox(
-                height: MediaQuery.of(context).size.height * 0.37,
+                height: MediaQuery.of(context).size.height * 0.345,
                 child: ListView.separated(
                   shrinkWrap: true,
                   itemBuilder: (context, index) {
-                    return   
-                    todaySales.isEmpty? Center(child: Text('There is no sales today'),):
-                    TransactionItem(
-                      clientName: todaySales[index].name.isEmpty
-                          ? 'Unknown'
-                          : todaySales[index].name,
-                      price: todaySales[index].total,
-                      time: formatDateTimeTo12Hour(todaySales[index].dateTime),
-                      itemCount: todaySales[index].soldProducts.fold<int>(
-                        0,
-                        (sum, e) => sum + e.quantity,
-                      ),
-                      sale: todaySales[index],
-                    );
+                    return todaySales.isEmpty
+                        ? Center(child: Text('There is no sales today'))
+                        : TransactionItem(
+                            clientName: todaySales[index].name.isEmpty
+                                ? 'Unknown'
+                                : todaySales[index].name,
+                            price: todaySales[index].total,
+                            time: formatDateTimeTo12Hour(
+                              todaySales[index].dateTime,
+                            ),
+                            itemCount: todaySales[index].soldProducts.fold<int>(
+                              0,
+                              (sum, e) => sum + e.quantity,
+                            ),
+                            sale: todaySales[index],
+                          );
                   },
                   separatorBuilder: (context, index) => SizedBox(height: 5),
                   itemCount: todaySales.length,
