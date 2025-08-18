@@ -104,8 +104,8 @@ class _ReportsViewState extends ConsumerState<ReportsView> {
                   itemBuilder: (context, index) => TopSellingItem(
                     productName: topSellingItems[index].key.productName,
                     image: topSellingItems[index].key.image != null
-                        ? Image.file(File(topSellingItems[index].key.image!))
-                        : Image.asset('assets/images/product.png'),
+                        ? Image.file(File(topSellingItems[index].key.image!),fit: BoxFit.cover,)
+                        : Image.asset('assets/images/product.png',fit: BoxFit.cover,),
                     quantitySold: topSellingItems[index].value,
                   ),
                 ),

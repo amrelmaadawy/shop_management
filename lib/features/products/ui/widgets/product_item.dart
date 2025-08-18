@@ -34,7 +34,9 @@ class ProductItem extends ConsumerWidget {
         children: [
           ClipRRect(
             borderRadius: BorderRadiusGeometry.circular(12),
-            child: image,
+            child:
+            SizedBox(width: 80,height: 80,child: image,)
+            
           ),
           SizedBox(width: 10),
           Column(

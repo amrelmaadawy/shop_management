@@ -48,8 +48,8 @@ class ListOfProductsView extends StatelessWidget {
                     return ProductItem(
                       price: product.buyingPrice,
                       image: product.image != null
-                          ? Image.file(File(product.image!))
-                          : Image.asset('assets/images/product.png'),
+                          ? Image.file(File(product.image!),fit: BoxFit.cover,)
+                          : Image.asset('assets/images/product.png',fit: BoxFit.cover,),
                       productName: product.productName,
                       quantity: product.quantity,
                       index: index,

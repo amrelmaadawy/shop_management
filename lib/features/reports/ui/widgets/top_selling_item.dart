@@ -2,7 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:small_managements/generated/l10n.dart';
 
 class TopSellingItem extends StatelessWidget {
-  const TopSellingItem({super.key, required this.productName, required this.image, required this.quantitySold});
+  const TopSellingItem({
+    super.key,
+    required this.productName,
+    required this.image,
+    required this.quantitySold,
+  });
   final String productName;
   final Widget image;
   final int quantitySold;
@@ -14,7 +19,9 @@ class TopSellingItem extends StatelessWidget {
       child: Row(
         children: [
           ClipRRect(
-            child:image ,
+            borderRadius: BorderRadiusGeometry.circular(12),
+
+            child: SizedBox(width: 80, height: 80, child: image),
           ),
           SizedBox(width: 20),
           Column(
