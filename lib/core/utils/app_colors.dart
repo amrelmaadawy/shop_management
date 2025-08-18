@@ -8,5 +8,7 @@ class AppColors {
   static const Color kBackgroundColor = Color(0XFF121417);
   static const Color kBorderColor = Color(0XFF404A4F);
   static const Color kincreaseColor = Color(0XFF0AD95C);
+  static const Color kUnselectedItemLightMode = Color(0XFF637887);
+  static const Color kselectedItemLightMode = Color(0XFF121417);
 
 }

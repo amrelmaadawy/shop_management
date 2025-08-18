@@ -59,7 +59,17 @@ class MyApp extends ConsumerWidget {
       ],
       supportedLocales: const [Locale('ar'), Locale('en')],
       debugShowCheckedModeBanner: false,
-      theme: ThemeData.light(),
+      theme: ThemeData.light().copyWith(
+        textTheme: ThemeData.dark().textTheme.apply(
+          fontFamily: 'RobotoSlab',
+          bodyColor: Colors.black,
+        ),
+        bottomNavigationBarTheme: BottomNavigationBarThemeData(
+          backgroundColor: Colors.white,
+          unselectedItemColor: AppColors.kUnselectedItemLightMode,
+          selectedItemColor: AppColors.kselectedItemLightMode,
+        ),
+      ),
       darkTheme: ThemeData.dark().copyWith(
         bottomNavigationBarTheme: BottomNavigationBarThemeData(
           backgroundColor: AppColors.kButtonNavBarColor,
