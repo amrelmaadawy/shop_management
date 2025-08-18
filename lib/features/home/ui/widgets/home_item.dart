@@ -24,7 +24,7 @@ class HomeItem extends StatelessWidget {
           children: [
             Text(
               title,
-              style: TextStyle(color: AppColors.kPrimeryColor, fontSize: 16),
+              style: TextStyle(color:  AppColors.kUnselectedItemDarkMode, fontSize: 16),
             ),
             SizedBox(height: 5),
             Text(
@@ -32,14 +32,14 @@ class HomeItem extends StatelessWidget {
               style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
             ),
             SizedBox(height: 5),
-            Text(description, style: TextStyle(color: AppColors.kPrimeryColor)),
+            Text(description, style: TextStyle(color:  AppColors.kUnselectedItemDarkMode)),
             SizedBox(height: 10),
             Container(
               width: 80,
               height: 30,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(15),
-                color: AppColors.kIncreaseContainerColor,
+                color: AppColors.kGreyElevatedButtonDarkMode,
               ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,

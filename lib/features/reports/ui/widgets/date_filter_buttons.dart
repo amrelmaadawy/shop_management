@@ -23,7 +23,7 @@ class DateFilterButtons extends StatelessWidget {
       children: [
         ElevatedButton(
           style: ElevatedButton.styleFrom(
-            backgroundColor: AppColors.kIncreaseContainerColor,
+            backgroundColor: AppColors.kGreyElevatedButtonDarkMode,
           ),
           onPressed: () {
             widget.startDateController.clear();
@@ -39,7 +39,7 @@ class DateFilterButtons extends StatelessWidget {
         ),
         ElevatedButton(
           style: ElevatedButton.styleFrom(
-            backgroundColor: AppColors.kAddProductButtonColor,
+            backgroundColor: AppColors.kBlueElevatedButtonDarkMode,
           ),
           onPressed: () {
             if (formKey.currentState!.validate()) {

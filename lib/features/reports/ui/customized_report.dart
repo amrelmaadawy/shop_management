@@ -57,7 +57,7 @@ class CustomizedReport extends StatelessWidget {
                   );
                 },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: AppColors.kAddProductButtonColor,
+                  backgroundColor: AppColors.kBlueElevatedButtonDarkMode,
                 ),
                 child: Text(
                   'Exprot Reprot',

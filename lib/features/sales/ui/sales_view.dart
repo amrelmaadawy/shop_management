@@ -84,7 +84,7 @@ class SalesView extends ConsumerWidget {
                   Spacer(),
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: AppColors.kAddProductButtonColor,
+                      backgroundColor: AppColors.kBlueElevatedButtonDarkMode,
                     ),
                     onPressed: () 
                     {

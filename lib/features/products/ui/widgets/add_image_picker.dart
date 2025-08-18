@@ -17,7 +17,7 @@ class AddImagePicker extends ConsumerWidget {
       height: 250,
       child: DottedBorder(
         options: RectDottedBorderOptions(
-          color: AppColors.kIncreaseContainerColor,
+          color: AppColors.kGreyElevatedButtonDarkMode,
           dashPattern: [10, 5],
           strokeWidth: 2,
           padding: EdgeInsets.all(16),
@@ -40,7 +40,7 @@ class AddImagePicker extends ConsumerWidget {
                     SizedBox(height: 24),
                     ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: AppColors.kIncreaseContainerColor,
+                        backgroundColor: AppColors.kGreyElevatedButtonDarkMode,
                       ),
                       onPressed: () async {
                         final image = await ImageServices.pickImageFromGalary();

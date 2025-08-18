@@ -21,7 +21,7 @@ class ProductsView extends ConsumerWidget {
     final categories = ref.watch(categoryProvider);
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-        backgroundColor: AppColors.kAddProductButtonColor,
+        backgroundColor:AppColors.kBlueElevatedButtonDarkMode,
         onPressed: () {
           Navigator.push(
             context,

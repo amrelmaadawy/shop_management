@@ -9,7 +9,7 @@ class CustomProductContainer extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(25),
-        color: AppColors.kIncreaseContainerColor,
+        color: AppColors.kGreyElevatedButtonDarkMode,
       ),
       child: Padding(
         padding: const EdgeInsets.all(8.0),

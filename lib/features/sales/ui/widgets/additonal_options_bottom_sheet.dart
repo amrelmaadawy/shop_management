@@ -72,7 +72,7 @@ class _AdditionalOptionsBottomSheetState
               width: MediaQuery.of(context).size.width,
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: AppColors.kAddProductButtonColor,
+                  backgroundColor: AppColors.kBlueElevatedButtonDarkMode,
                 ),
                 onPressed: () {
                   if (key.currentState!.validate()) {

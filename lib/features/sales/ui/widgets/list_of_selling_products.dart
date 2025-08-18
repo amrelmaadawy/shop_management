@@ -34,7 +34,7 @@ final selectedProducts = ref.watch(selectProductProvider);
                   padding: EdgeInsets.all(8),
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
-                    color: AppColors.kIncreaseContainerColor,
+                    color: AppColors.kGreyElevatedButtonDarkMode,
                   ),
                   child: Text(
                     '-',
@@ -60,7 +60,7 @@ final selectedProducts = ref.watch(selectProductProvider);
                   padding: EdgeInsets.all(7),
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
-                    color: AppColors.kIncreaseContainerColor,
+                    color: AppColors.kGreyElevatedButtonDarkMode,
                   ),
                   child: Text(
                     '+',

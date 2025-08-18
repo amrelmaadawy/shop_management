@@ -12,7 +12,7 @@ class CancelProductButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
-        backgroundColor: AppColors.kIncreaseContainerColor,
+        backgroundColor: AppColors.kGreyElevatedButtonDarkMode,
       ),
       onPressed: () {
         Navigator.pop(context);

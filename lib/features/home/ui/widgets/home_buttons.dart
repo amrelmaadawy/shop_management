@@ -14,7 +14,7 @@ class HomeButtons extends StatelessWidget {
       children: [
         ElevatedButton(
           style: ElevatedButton.styleFrom(
-            backgroundColor: AppColors.kAddProductButtonColor,
+            backgroundColor: AppColors.kBlueElevatedButtonDarkMode,
           ),
           onPressed: () {
             Navigator.push(
@@ -29,7 +29,7 @@ class HomeButtons extends StatelessWidget {
         ),
         ElevatedButton(
           style: ElevatedButton.styleFrom(
-            backgroundColor: AppColors.kIncreaseContainerColor,
+            backgroundColor: AppColors.kBlueElevatedButtonDarkMode,
           ),
           onPressed: () {
             Navigator.push(

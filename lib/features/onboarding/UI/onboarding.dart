@@ -60,7 +60,7 @@ class _OnboardingState extends State<Onboarding> {
                 padding: const EdgeInsets.all(20.0),
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: AppColors.kAddProductButtonColor,
+                    backgroundColor: AppColors.kBlueElevatedButtonDarkMode,
                   ),
                   onPressed: () async {
                     final prefs = await SharedPreferences.getInstance();
@@ -91,7 +91,7 @@ class _OnboardingState extends State<Onboarding> {
                     },
                     child: Text(
                       'Skip',
-                      style: TextStyle(color: AppColors.kAddProductButtonColor),
+                      style: TextStyle(color:AppColors.kBlueElevatedButtonDarkMode),
                     ),
                   ),
                   Center(
@@ -106,7 +106,7 @@ class _OnboardingState extends State<Onboarding> {
                       effect: WormEffect(
                         spacing: 16,
                         dotColor: Colors.black26,
-                        activeDotColor: AppColors.kAddProductButtonColor,
+                        activeDotColor:AppColors.kBlueElevatedButtonDarkMode,
                       ),
                     ),
                   ),
@@ -119,7 +119,7 @@ class _OnboardingState extends State<Onboarding> {
                     },
                     child: Text(
                       'Next',
-                      style: TextStyle(color: AppColors.kAddProductButtonColor),
+                      style: TextStyle(color: AppColors.kBlueElevatedButtonDarkMode),
                     ),
                   ),
                 ],

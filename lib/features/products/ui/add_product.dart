@@ -92,7 +92,7 @@ class _AddProductState extends ConsumerState<AddProduct> {
                       CancelProductButton(),
                       ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: AppColors.kAddProductButtonColor,
+                          backgroundColor:AppColors.kBlueElevatedButtonDarkMode,
                         ),
                         onPressed: () {
                           if (form.currentState!.validate()) {

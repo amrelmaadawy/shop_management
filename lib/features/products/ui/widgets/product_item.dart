@@ -49,7 +49,7 @@ class ProductItem extends ConsumerWidget {
               ),
               Text(
                 '$price . $quantity ${S.of(context).inStock}',
-                style: TextStyle(color: AppColors.kPrimeryColor, fontSize: 14),
+                style: TextStyle(color: AppColors.kUnselectedItemDarkMode, fontSize: 14),
               ),
             ],
           ),

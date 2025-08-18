@@ -68,7 +68,7 @@ class _MakeSaleState extends ConsumerState<MakeSale> {
                   width: double.infinity,
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: AppColors.kAddProductButtonColor,
+                      backgroundColor: AppColors.kBlueElevatedButtonDarkMode,
                     ),
                     onPressed: () {
                       final selectedProducts = ref.watch(selectProductProvider);

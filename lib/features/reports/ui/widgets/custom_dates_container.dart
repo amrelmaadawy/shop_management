@@ -11,7 +11,7 @@ class CustomDatesContainer extends StatelessWidget {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
 
-        color: AppColors.kIncreaseContainerColor,
+        color: AppColors.kGreyElevatedButtonDarkMode,
       ),
       child: Text(date),
     );

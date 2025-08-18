@@ -20,7 +20,7 @@ class BarChart extends ConsumerWidget {
           xValueMapper: (DailyReport sales, _) => sales.day,
           yValueMapper: (DailyReport sales, _) => sales.sales,
           name: 'Sales',
-          color: AppColors.kIncreaseContainerColor,
+          color: AppColors.kGreyElevatedButtonDarkMode,
           dataLabelSettings: DataLabelSettings(isVisible: true),
         ),
       ],

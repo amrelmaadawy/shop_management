@@ -72,10 +72,10 @@ class MyApp extends ConsumerWidget {
       ),
       darkTheme: ThemeData.dark().copyWith(
         bottomNavigationBarTheme: BottomNavigationBarThemeData(
-          backgroundColor: AppColors.kButtonNavBarColor,
-          unselectedItemColor: AppColors.kPrimeryColor,
+          backgroundColor: AppColors.kButtonNavBarColorDarkMode,
+          unselectedItemColor: AppColors.kUnselectedItemDarkMode,
           selectedItemColor: Colors.white,
-          unselectedLabelStyle: TextStyle(color: AppColors.kPrimeryColor),
+          unselectedLabelStyle: TextStyle(color: AppColors.kUnselectedItemDarkMode),
         ),
         scaffoldBackgroundColor: AppColors.kBackgroundColor,
         textTheme: ThemeData.dark().textTheme.apply(fontFamily: 'RobotoSlab'),

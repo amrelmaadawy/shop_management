@@ -41,12 +41,12 @@ class TransactionItem extends StatelessWidget {
             children: [
               Text(
                 '$itemCount Item',
-                style: TextStyle(fontSize: 13, color: AppColors.kPrimeryColor),
+                style: TextStyle(fontSize: 13, color: AppColors.kUnselectedItemDarkMode),
               ),
               SizedBox(width: 5),
               Text(
                 time,
-                style: TextStyle(fontSize: 13, color: AppColors.kPrimeryColor),
+                style: TextStyle(fontSize: 13, color: AppColors.kUnselectedItemDarkMode),
               ),
             ],
           ),

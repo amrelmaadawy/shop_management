@@ -29,33 +29,33 @@ class CustomTextFormField extends StatelessWidget {
       controller: controller,
       validator: validator,
       keyboardType: keyboardType,
-      style: const TextStyle(color: AppColors.kPrimeryColor),
-      cursorColor: AppColors.kPrimeryColor,
+      style: const TextStyle(color: AppColors.kUnselectedItemDarkMode),
+      cursorColor: AppColors.kUnselectedItemDarkMode,
       decoration: InputDecoration(
         prefixIcon: prefixIcon,
         suffixIcon: suffixIcon,
         labelText: labelText,
         labelStyle: const TextStyle(
-          color: AppColors.kPrimeryColor,
+          color:  AppColors.kUnselectedItemDarkMode,
           fontWeight: FontWeight.w500,
         ),
         filled: true,
-        fillColor: AppColors.kIncreaseContainerColor,
+        fillColor: AppColors.kGreyElevatedButtonDarkMode,
         contentPadding: const EdgeInsets.symmetric(
           horizontal: 16,
           vertical: 14,
         ),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
-          borderSide: const BorderSide(color: AppColors.kPrimeryColor),
+          borderSide: const BorderSide(color:  AppColors.kUnselectedItemDarkMode),
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
-          borderSide: const BorderSide(color: AppColors.kPrimeryColor),
+          borderSide: const BorderSide(color:  AppColors.kUnselectedItemDarkMode),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
-          borderSide: const BorderSide(color: AppColors.kPrimeryColor),
+          borderSide: const BorderSide(color: AppColors.kUnselectedItemDarkMode),
         ),
       ),
     );

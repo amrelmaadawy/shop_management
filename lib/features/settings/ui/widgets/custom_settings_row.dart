@@ -20,7 +20,7 @@ class CustomSettingsRow extends StatelessWidget {
           height: 40,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(15),
-            color: AppColors.kIncreaseContainerColor,
+            color: AppColors.kGreyElevatedButtonDarkMode,
           ),
           child: icon,
         ),

@@ -15,7 +15,7 @@ class CustomSalesContainer extends StatelessWidget {
       height: 100,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
-        color: AppColors.kIncreaseContainerColor,
+        color: AppColors.kGreyElevatedButtonDarkMode,
       ),
       child: Padding(
         padding: const EdgeInsets.all(10.0),

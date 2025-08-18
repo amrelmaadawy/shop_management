@@ -82,7 +82,7 @@ class _SettingsViewState extends ConsumerState<SettingsView> {
                       final prefs = await SharedPreferences.getInstance();
                       prefs.setBool('isDark', isDark);
                     },
-                    activeColor: AppColors.kPrimeryColor,
+                    activeColor: AppColors.kUnselectedItemDarkMode,
                   ),
                 ),
                 SizedBox(height: 15),
@@ -93,7 +93,7 @@ class _SettingsViewState extends ConsumerState<SettingsView> {
                     width: 100,
                     height: 40,
                     decoration: BoxDecoration(
-                      color: AppColors.kIncreaseContainerColor,
+                      color: AppColors.kGreyElevatedButtonDarkMode,
                       borderRadius: BorderRadius.circular(15),
                     ),
                     child: Center(
