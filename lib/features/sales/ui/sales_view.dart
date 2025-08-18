@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:small_managements/features/sales/logic/helper/get_todays_date.dart';
 import 'package:small_managements/features/sales/logic/helper/get_todays_totals.dart';
 import 'package:small_managements/features/sales/logic/helper/time_converter.dart';
 import 'package:small_managements/features/sales/logic/provider/sales_provider.dart';
@@ -15,6 +16,10 @@ class SalesView extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final salesProducts = ref.watch(salesProductProvider);
+    final todaysdate = formatDateOnly(DateTime.now());
+    final todaySales = salesProducts.where((sale) {
+      return formatDateOnly(sale.dateTime) == todaysdate;
+    }).toList();
     return Scaffold(
       body: SafeArea(
         child: Padding(
@@ -78,23 +83,23 @@ class SalesView extends ConsumerWidget {
                 child: ListView.separated(
                   shrinkWrap: true,
                   itemBuilder: (context, index) {
-                    return TransactionItem(
-                      clientName: salesProducts[index].name.isEmpty
+                    return   
+                    todaySales.isEmpty? Center(child: Text('There is no sales today'),):
+                    TransactionItem(
+                      clientName: todaySales[index].name.isEmpty
                           ? 'Unknown'
-                          : salesProducts[index].name,
-                      price: salesProducts[index].total,
-                      time: formatDateTimeTo12Hour(
-                        salesProducts[index].dateTime,
-                      ),
-                      itemCount: salesProducts[index].soldProducts.fold<int>(
+                          : todaySales[index].name,
+                      price: todaySales[index].total,
+                      time: formatDateTimeTo12Hour(todaySales[index].dateTime),
+                      itemCount: todaySales[index].soldProducts.fold<int>(
                         0,
                         (sum, e) => sum + e.quantity,
                       ),
-                      sale: salesProducts[index],
+                      sale: todaySales[index],
                     );
                   },
                   separatorBuilder: (context, index) => SizedBox(height: 5),
-                  itemCount: salesProducts.length,
+                  itemCount: todaySales.length,
                 ),
               ),
             ],
