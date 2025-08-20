@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:small_managements/core/utils/app_colors.dart';
 import 'package:small_managements/features/sales/logic/provider/select_product_provider.dart';
+import 'package:small_managements/generated/l10n.dart';
 
 class ListOfSellingProducts extends ConsumerWidget {
   const ListOfSellingProducts({super.key});
@@ -22,9 +23,7 @@ class ListOfSellingProducts extends ConsumerWidget {
                 children: [
                   Text(selectedProducts[index].product.productName),
                   SizedBox(height: 5),
-                  Text(
-                    'individual Price${selectedProducts[index].product.sellingPrice} LE',
-                  ),
+                  Text('${S.of(context).individualPrice} ${selectedProducts[index].product.sellingPrice} ${S.of(context).LE}'),
                 ],
               ),
               Spacer(),

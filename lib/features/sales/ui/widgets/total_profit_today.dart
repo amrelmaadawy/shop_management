@@ -27,7 +27,7 @@ class TotalProfitToday extends StatelessWidget {
           children: [
             Text(S.of(context).totalProfit, style: TextStyle(fontSize: 15)),
             Text(
-              '$totalProfitToday LE',
+              '$totalProfitToday ${S.of(context).LE}',
               style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
             ),
           ],

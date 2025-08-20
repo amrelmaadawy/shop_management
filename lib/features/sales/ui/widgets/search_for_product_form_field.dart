@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:small_managements/core/utils/custom_text_form_field.dart';
 import 'package:small_managements/features/products/logic/providers/product_providers.dart';
 import 'package:small_managements/features/sales/logic/provider/select_product_provider.dart';
+import 'package:small_managements/generated/l10n.dart';
 
 class SearchForProductFormField extends StatefulWidget {
   const SearchForProductFormField({
@@ -107,7 +108,7 @@ class SearchForProductFormFieldState extends State<SearchForProductFormField> {
         focusNode: _focusNode,
         controller: _controller,
         keyboardType: TextInputType.text,
-        labelText: 'search for product',
+        labelText: S.of(context).searchForProduct,
         validator: (v) {
           return null;
         },

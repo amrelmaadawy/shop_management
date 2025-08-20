@@ -3,6 +3,7 @@ import 'package:small_managements/core/utils/app_colors.dart';
 import 'package:small_managements/features/reports/logic/helper/get_total_sales.dart';
 import 'package:small_managements/features/reports/ui/customized_report.dart';
 import 'package:small_managements/features/reports/ui/widgets/filter_date_range.dart';
+import 'package:small_managements/generated/l10n.dart';
 
 class DateFilterButtons extends StatelessWidget {
   const DateFilterButtons({
@@ -33,7 +34,7 @@ class DateFilterButtons extends StatelessWidget {
             widget.endDateController.clear();
           },
           child: Text(
-            'Reset',
+           S.of(context).reset,
             style: TextStyle(
               color: isDark ? Colors.white : AppColors.kBlackTextLightMode,
               fontWeight: FontWeight.bold,
@@ -80,7 +81,7 @@ class DateFilterButtons extends StatelessWidget {
             }
           },
           child: Text(
-            'Apply',
+            S.of(context).apply,
             style: TextStyle(
               color: isDark ? Colors.black : Colors.white,
               fontWeight: FontWeight.bold,

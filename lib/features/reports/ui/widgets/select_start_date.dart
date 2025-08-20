@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:small_managements/core/utils/custom_text_form_field.dart';
 import 'package:small_managements/features/reports/logic/helper/pick_date.dart';
 import 'package:small_managements/features/reports/ui/widgets/filter_date_range.dart';
+import 'package:small_managements/generated/l10n.dart';
 
 class SelectStartDate extends StatelessWidget {
   const SelectStartDate({
@@ -19,7 +20,7 @@ class SelectStartDate extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('From', style: TextStyle(fontSize: 16)),
+          Text(S.of(context).from, style: TextStyle(fontSize: 16)),
           SizedBox(height: 10),
           GestureDetector(
             onTap: () async {
@@ -29,14 +30,14 @@ class SelectStartDate extends StatelessWidget {
               child: CustomTextFormField(
                 validator: (value) {
                   if (value!.isEmpty) {
-                    return 'Please Enter The Start Date';
+                    return S.of(context).pleaseEnterStartDate;
                   } else {
                     return null;
                   }
                 },
                 controller: widget.startDateController,
                 keyboardType: TextInputType.text,
-                labelText: 'Select Date',
+                labelText: S.of(context).selectDate,
               ),
             ),
           ),

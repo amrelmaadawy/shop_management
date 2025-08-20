@@ -553,6 +553,176 @@ class S {
       args: [],
     );
   }
+
+  /// `All Sales`
+  String get allSales {
+    return Intl.message('All Sales', name: 'allSales', desc: '', args: []);
+  }
+
+  /// `There is no sales today`
+  String get thereIsNoSalesToday {
+    return Intl.message(
+      'There is no sales today',
+      name: 'thereIsNoSalesToday',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Unknown`
+  String get unknown {
+    return Intl.message('Unknown', name: 'unknown', desc: '', args: []);
+  }
+
+  /// `Total Price = `
+  String get totalPrice {
+    return Intl.message(
+      'Total Price = ',
+      name: 'totalPrice',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `LE`
+  String get LE {
+    return Intl.message('LE', name: 'LE', desc: '', args: []);
+  }
+
+  /// `Please Select At Least One Product`
+  String get pleaseSelectAtLeastOneProduct {
+    return Intl.message(
+      'Please Select At Least One Product',
+      name: 'pleaseSelectAtLeastOneProduct',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Search For Product`
+  String get searchForProduct {
+    return Intl.message(
+      'Search For Product',
+      name: 'searchForProduct',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Individual Price`
+  String get individualPrice {
+    return Intl.message(
+      'Individual Price',
+      name: 'individualPrice',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Confirm Sale`
+  String get confirmSale {
+    return Intl.message(
+      'Confirm Sale',
+      name: 'confirmSale',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `paid`
+  String get paid {
+    return Intl.message('paid', name: 'paid', desc: '', args: []);
+  }
+
+  /// `discount`
+  String get discount {
+    return Intl.message('discount', name: 'discount', desc: '', args: []);
+  }
+
+  /// `Client Name`
+  String get clientName {
+    return Intl.message('Client Name', name: 'clientName', desc: '', args: []);
+  }
+
+  /// `Optional`
+  String get optional {
+    return Intl.message('Optional', name: 'optional', desc: '', args: []);
+  }
+
+  /// `Apply Discount`
+  String get applyDiscount {
+    return Intl.message(
+      'Apply Discount',
+      name: 'applyDiscount',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please Enter The Paid Amount`
+  String get pleaseEnterThePaidAmount {
+    return Intl.message(
+      'Please Enter The Paid Amount',
+      name: 'pleaseEnterThePaidAmount',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `There Is No Sales`
+  String get thereIsNoSales {
+    return Intl.message(
+      'There Is No Sales',
+      name: 'thereIsNoSales',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `From`
+  String get from {
+    return Intl.message('From', name: 'from', desc: '', args: []);
+  }
+
+  /// `To`
+  String get to {
+    return Intl.message('To', name: 'to', desc: '', args: []);
+  }
+
+  /// `Select Date`
+  String get selectDate {
+    return Intl.message('Select Date', name: 'selectDate', desc: '', args: []);
+  }
+
+  /// `Apply`
+  String get apply {
+    return Intl.message('Apply', name: 'apply', desc: '', args: []);
+  }
+
+  /// `Reset`
+  String get reset {
+    return Intl.message('Reset', name: 'reset', desc: '', args: []);
+  }
+
+  /// `Please Enter Start Date`
+  String get pleaseEnterStartDate {
+    return Intl.message(
+      'Please Enter Start Date',
+      name: 'pleaseEnterStartDate',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please Enter End Date`
+  String get pleaseEnterEndDate {
+    return Intl.message(
+      'Please Enter End Date',
+      name: 'pleaseEnterEndDate',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

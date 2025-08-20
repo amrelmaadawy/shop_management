@@ -52,7 +52,7 @@ class SalesChartContainer extends StatelessWidget {
               children: [
                 Text(S.of(context).sales, style: TextStyle(fontSize: 17)),
                 Text(
-                  '$totalSales LE',
+                  '$totalSales ${S.of(context).LE}',
                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                 ),
 

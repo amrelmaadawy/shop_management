@@ -62,7 +62,7 @@ class _MakeSaleState extends ConsumerState<MakeSale> {
 
                 SizedBox(height: 15),
                 Text(
-                  'Total Price = $totalPrice LE',
+                  '${S.of(context).totalPrice} $totalPrice ${S.of(context).LE}',
                   style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
                 ),
                 SizedBox(height: 15),
@@ -86,7 +86,7 @@ class _MakeSaleState extends ConsumerState<MakeSale> {
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
                             content: Text(
-                              'Please select at least one product',
+                              S.of(context).pleaseSelectAtLeastOneProduct,
                               style: TextStyle(color:isDark? Colors.white:AppColors.kBlackTextLightMode),
                             ),
                             backgroundColor: const Color.fromARGB(255, 153, 11, 1),

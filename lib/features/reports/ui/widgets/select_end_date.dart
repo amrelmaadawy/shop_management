@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:small_managements/core/utils/custom_text_form_field.dart';
 import 'package:small_managements/features/reports/logic/helper/pick_date.dart';
 import 'package:small_managements/features/reports/ui/widgets/filter_date_range.dart';
+import 'package:small_managements/generated/l10n.dart';
 
 class SelectEndDate extends StatelessWidget {
   const SelectEndDate({
@@ -21,7 +22,7 @@ class SelectEndDate extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
     
         children: [
-          Text('To', style: TextStyle(fontSize: 16)),
+          Text(S.of(context).to, style: TextStyle(fontSize: 16)),
           SizedBox(height: 10),
           GestureDetector(
             onTap: () async {
@@ -31,14 +32,14 @@ class SelectEndDate extends StatelessWidget {
               child: CustomTextFormField(
                 validator: (value) {
                   if (value!.isEmpty) {
-                    return 'Please Enter The End Date';
+                    return S.of(context).pleaseEnterEndDate;
                   } else {
                     return null;
                   }
                 },
                 controller: widget.endDateController,
                 keyboardType: TextInputType.text,
-                labelText: 'Select Date',
+                labelText: S.of(context).selectDate,
               ),
             ),
           ),

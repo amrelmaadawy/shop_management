@@ -21,7 +21,7 @@ class AddImagePicker extends ConsumerWidget {
         options: RectDottedBorderOptions(
           color: isDark
               ? AppColors.kGreyElevatedButtonDarkMode
-              : AppColors.kGreyElevatedButtonLightMode,
+              : AppColors.kUnselectedItemLightMode,
           dashPattern: [10, 5],
           strokeWidth: 2,
           padding: EdgeInsets.all(16),
@@ -44,7 +44,9 @@ class AddImagePicker extends ConsumerWidget {
                     SizedBox(height: 24),
                     ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: AppColors.kGreyElevatedButtonDarkMode,
+                        backgroundColor: isDark
+                            ? AppColors.kGreyElevatedButtonDarkMode
+                            : AppColors.kGreyElevatedButtonLightMode,
                       ),
                       onPressed: () async {
                         final image = await ImageServices.pickImageFromGalary();
@@ -58,7 +60,11 @@ class AddImagePicker extends ConsumerWidget {
                       },
                       child: Text(
                         S.of(context).addImage,
-                        style: TextStyle(color: Colors.white),
+                        style: TextStyle(
+                          color: isDark
+                              ? Colors.white
+                              : AppColors.kBlackTextLightMode,
+                        ),
                       ),
                     ),
                     SizedBox(height: 40),

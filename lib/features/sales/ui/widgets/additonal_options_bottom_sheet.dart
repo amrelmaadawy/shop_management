@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:small_managements/core/utils/app_colors.dart';
 import 'package:small_managements/core/utils/custom_text_form_field.dart';
 import 'package:small_managements/features/sales/logic/provider/select_product_provider.dart';
+import 'package:small_managements/generated/l10n.dart';
 
 class AdditionalOptionsBottomSheet extends ConsumerStatefulWidget {
   const AdditionalOptionsBottomSheet({super.key});
@@ -31,7 +32,7 @@ class _AdditionalOptionsBottomSheetState
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(
-              'Confirm sale',
+              S.of(context).confirmSale,
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
             SizedBox(height: 10),
@@ -40,10 +41,10 @@ class _AdditionalOptionsBottomSheetState
               child: CustomTextFormField(
                 controller: paidController,
                 keyboardType: TextInputType.number,
-                labelText: 'paid',
+                labelText: S.of(context).paid,
                 validator: (v) {
                   if (v == null || v.isEmpty) {
-                    return 'please Enter the paid amount';
+                    return S.of(context).pleaseEnterThePaidAmount;
                   }
                   return null;
                 },
@@ -53,7 +54,7 @@ class _AdditionalOptionsBottomSheetState
             CustomTextFormField(
               controller: discountController,
               keyboardType: TextInputType.text,
-              labelText: 'discount(optional)',
+              labelText: '${S.of(context).discount} (${S.of(context).optional})',
               validator: (v) {
                 return null;
               },
@@ -62,7 +63,7 @@ class _AdditionalOptionsBottomSheetState
             CustomTextFormField(
               controller: nameController,
               keyboardType: TextInputType.text,
-              labelText: 'client Name(optional)',
+              labelText: '${S.of(context).clientName} (${S.of(context).optional})',
               validator: (v) {
                 return null;
               },
@@ -90,7 +91,7 @@ class _AdditionalOptionsBottomSheetState
                   }
                 },
                 child: Text(
-                  'Apply discount',
+                  S.of(context).applyDiscount,
                   style: TextStyle(
                     color: Colors.black,
                     fontSize: 17,

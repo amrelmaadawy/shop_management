@@ -17,7 +17,7 @@ class SalesView extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-        final isDark = Theme.of(context).brightness == Brightness.dark;
+    final isDark = Theme.of(context).brightness == Brightness.dark;
 
     final salesProducts = ref.watch(salesProductProvider);
     final todaysdate = formatDateOnly(DateTime.now());
@@ -86,16 +86,25 @@ class SalesView extends ConsumerWidget {
                   Spacer(),
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      backgroundColor:isDark? AppColors.kBlueElevatedButtonDarkMode:AppColors.kBlueElevatedButtonLightMode,
+                      backgroundColor: isDark
+                          ? AppColors.kBlueElevatedButtonDarkMode
+                          : AppColors.kBlueElevatedButtonLightMode,
                     ),
-                    onPressed: () 
-                    {
-                      Navigator.push(context, MaterialPageRoute(builder: (context)=>AllSalesView(saleItem: salesProducts,)));
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) =>
+                              AllSalesView(saleItem: salesProducts),
+                        ),
+                      );
                     },
                     child: Text(
-                      'All Sales',
+                      S.of(context).allSales,
                       style: TextStyle(
-                        color:isDark? AppColors.kBlackTextLightMode:Colors.white,
+                        color: isDark
+                            ? AppColors.kBlackTextLightMode
+                            : Colors.white,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -109,10 +118,10 @@ class SalesView extends ConsumerWidget {
                   shrinkWrap: true,
                   itemBuilder: (context, index) {
                     return todaySales.isEmpty
-                        ? Center(child: Text('There is no sales today'))
+                        ? Center(child: Text(S.of(context).thereIsNoSalesToday))
                         : TransactionItem(
                             clientName: todaySales[index].name.isEmpty
-                                ? 'Unknown'
+                                ? S.of(context).unknown
                                 : todaySales[index].name,
                             price: todaySales[index].total,
                             time: formatDateTimeTo12Hour(

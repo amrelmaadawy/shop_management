@@ -74,7 +74,7 @@ class _ReportsViewState extends ConsumerState<ReportsView> {
                   children: [
                     CustomReportContainer(
                       title: S.of(context).totalSales,
-                      number: '$totalSales LE',
+                      number: '$totalSales ${S.of(context).LE}',
                     ),
                     CustomReportContainer(
                       title: S.of(context).totalProductSold,
@@ -86,7 +86,7 @@ class _ReportsViewState extends ConsumerState<ReportsView> {
                 CustomReportContainer(
                   width: MediaQuery.of(context).size.width * 0.95,
                   title: S.of(context).totalProfit,
-                  number: '$totalProfit LE',
+                  number: '$totalProfit ${S.of(context).LE}',
                 ),
                 SizedBox(height: 15),
                 SalesChartContainer(ref: ref),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:small_managements/features/sales/logic/helper/time_converter.dart';
 import 'package:small_managements/features/sales/model/sales_model.dart';
 import 'package:small_managements/features/sales/ui/widgets/transaction_item.dart';
+import 'package:small_managements/generated/l10n.dart';
 
 class AllSalesView extends StatelessWidget {
   const AllSalesView({super.key, required this.saleItem});
@@ -23,7 +24,7 @@ class AllSalesView extends StatelessWidget {
                     icon: Icon(Icons.arrow_back_ios),
                   ),
                   Text(
-                    'All Sales',
+                    S.of(context).allSales,
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                   ),
                 ],
@@ -34,10 +35,10 @@ class AllSalesView extends StatelessWidget {
                   shrinkWrap: true,
                   itemBuilder: (context, index) {
                     return saleItem.isEmpty
-                        ? Center(child: Text('There is no sales today'))
+                        ? Center(child: Text(S.of(context).thereIsNoSales))
                         : TransactionItem(
                             clientName: saleItem[index].name.isEmpty
-                                ? 'Unknown'
+                                ? S.of(context).unknown
                                 : saleItem[index].name,
                             price: saleItem[index].total,
                             time: formatDateTimeTo12Hour(
