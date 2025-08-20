@@ -14,6 +14,8 @@ class ProductsView extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+
     TextEditingController searchController = TextEditingController();
     searchController.addListener(() {
       ref.read(searchProvider.notifier).state = searchController.text.trim();
@@ -21,14 +23,16 @@ class ProductsView extends ConsumerWidget {
     final categories = ref.watch(categoryProvider);
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-        backgroundColor:AppColors.kBlueElevatedButtonDarkMode,
+        backgroundColor: isDark
+            ? AppColors.kBlueElevatedButtonDarkMode
+            : AppColors.kBlueElevatedButtonLightMode,
         onPressed: () {
           Navigator.push(
             context,
             MaterialPageRoute(builder: (context) => AddProduct()),
           );
         },
-        child: Icon(Icons.add, color: Colors.black),
+        child: Icon(Icons.add, color:isDark? AppColors.kBlackTextLightMode:Colors.white),
       ),
       body: SafeArea(
         child: Padding(

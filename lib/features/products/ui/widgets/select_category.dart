@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:small_managements/core/utils/app_colors.dart';
 import 'package:small_managements/features/products/logic/providers/category_providers.dart';
 import 'package:small_managements/features/products/logic/providers/product_providers.dart';
 import 'package:small_managements/features/products/model/category_model.dart';
@@ -24,7 +25,8 @@ class SelectCategory extends StatelessWidget {
     return GestureDetector(
       onTap: () async {
         final categories = ref.watch(categoryProvider);
-        
+        final isDark = Theme.of(context).brightness == Brightness.dark;
+
         await showModalBottomSheet(
           context: context,
           shape: RoundedRectangleBorder(
@@ -47,10 +49,8 @@ class SelectCategory extends StatelessWidget {
                         onPressed: () {
                           ref
                               .read(categoryProvider.notifier)
-                              .removeCategory(category,context);
-                          Navigator.pop(
-                            context,
-                          ); 
+                              .removeCategory(category, context);
+                          Navigator.pop(context);
                         },
                       ),
                       onTap: () {
@@ -86,6 +86,11 @@ class SelectCategory extends StatelessWidget {
                         ),
                         actions: [
                           ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: isDark
+                                  ? AppColors.kGreyElevatedButtonDarkMode
+                                  : AppColors.kGreyElevatedButtonLightMode,
+                            ),
                             onPressed: () {
                               final text = addCategoryController.text.trim();
                               if (text.isNotEmpty) {
@@ -103,11 +108,28 @@ class SelectCategory extends StatelessWidget {
                                 Navigator.pop(context);
                               }
                             },
-                            child: Text(S.of(context).save),
+                            child: Text(
+                              S.of(context).save,
+                              style: TextStyle(
+                                color: isDark ? Colors.white : Colors.black,
+                              ),
+                            ),
                           ),
+                          Spacer(),
                           ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: isDark
+                                  ? AppColors.kGreyElevatedButtonDarkMode
+                                  : AppColors.kGreyElevatedButtonLightMode,
+                            ),
+
                             onPressed: () => Navigator.pop(context),
-                            child: Text(S.of(context).cancel),
+                            child: Text(
+                              S.of(context).cancel,
+                              style: TextStyle(
+                                color: isDark ? Colors.white : Colors.black,
+                              ),
+                            ),
                           ),
                         ],
                       ),

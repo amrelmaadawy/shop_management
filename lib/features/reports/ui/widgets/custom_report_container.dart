@@ -13,15 +13,18 @@ class CustomReportContainer extends StatelessWidget {
   final double? width;
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      alignment: AlignmentDirectional.center,
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+
+    return Column(
       children: [
         Container(
           width: width ?? MediaQuery.of(context).size.width * 0.45,
           height: 128,
           decoration: BoxDecoration(
-            border: Border.all(color: AppColors.kBorderColor, width: 1.5),
-            color: AppColors.kBackgroundColor,
+            border: Border.all(color:AppColors.kGreyElevatedButtonDarkMode, width: 1),
+            color: isDark
+                ? AppColors.kGreyElevatedButtonDarkMode
+                : AppColors.kGreyElevatedButtonLightMode,
             borderRadius: BorderRadius.circular(15),
           ),
           child: Padding(

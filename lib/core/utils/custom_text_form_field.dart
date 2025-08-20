@@ -23,39 +23,41 @@ class CustomTextFormField extends StatelessWidget {
   final FocusNode? focusNode;
   @override
   Widget build(BuildContext context) {
+  final isDark = Theme.of(context).brightness == Brightness.dark;
+
     return TextFormField(
       focusNode: focusNode,
       onChanged: onChange,
       controller: controller,
       validator: validator,
       keyboardType: keyboardType,
-      style: const TextStyle(color: AppColors.kUnselectedItemDarkMode),
-      cursorColor: AppColors.kUnselectedItemDarkMode,
+      style:  TextStyle(color:isDark? AppColors.kUnselectedItemDarkMode:AppColors.kUnselectedItemLightMode),
+      cursorColor: isDark? AppColors.kUnselectedItemDarkMode:AppColors.kUnselectedItemLightMode,
       decoration: InputDecoration(
         prefixIcon: prefixIcon,
         suffixIcon: suffixIcon,
         labelText: labelText,
-        labelStyle: const TextStyle(
-          color:  AppColors.kUnselectedItemDarkMode,
+        labelStyle:  TextStyle(
+          color:  isDark? AppColors.kUnselectedItemDarkMode:AppColors.kUnselectedItemLightMode,
           fontWeight: FontWeight.w500,
         ),
         filled: true,
-        fillColor: AppColors.kGreyElevatedButtonDarkMode,
+        fillColor:isDark? AppColors.kGreyElevatedButtonDarkMode:AppColors.kGreyElevatedButtonLightMode,
         contentPadding: const EdgeInsets.symmetric(
           horizontal: 16,
           vertical: 14,
         ),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
-          borderSide: const BorderSide(color:  AppColors.kUnselectedItemDarkMode),
+          borderSide:  BorderSide(color:  isDark? AppColors.kUnselectedItemDarkMode:AppColors.kUnselectedItemLightMode),
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
-          borderSide: const BorderSide(color:  AppColors.kUnselectedItemDarkMode),
+          borderSide:  BorderSide(color: isDark? AppColors.kUnselectedItemDarkMode:AppColors.kUnselectedItemLightMode),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
-          borderSide: const BorderSide(color: AppColors.kUnselectedItemDarkMode),
+          borderSide:  BorderSide(color: isDark? AppColors.kUnselectedItemDarkMode:AppColors.kUnselectedItemLightMode),
         ),
       ),
     );

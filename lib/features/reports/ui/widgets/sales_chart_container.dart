@@ -12,30 +12,36 @@ class SalesChartContainer extends StatelessWidget {
   final WidgetRef ref;
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+
     final today = DateTime.now();
     final startDate = getWeekStart(today);
     final endDate = getWeekEnd(startDate);
 
     final totalSales = getTotalSalesInRange(ref, startDate, endDate);
 
-    return Stack(
-      alignment: AlignmentDirectional.center,
+    return Column(
       children: [
-        Container(
-          width: MediaQuery.of(context).size.width * 0.95,
-          height: 440,
-          decoration: BoxDecoration(
-            color: AppColors.kBorderColor,
-            borderRadius: BorderRadius.circular(15),
-          ),
-        ),
-
+        // Container(
+        //   width: MediaQuery.of(context).size.width * 0.95,
+        //   height: 440,
+        //   decoration: BoxDecoration(
+        //     border: BoxBorder.all(color: AppColors.kGreyElevatedButtonDarkMode),
+        //     color: isDark
+        //         ? AppColors.kGreyElevatedButtonDarkMode
+        //         : AppColors.kGreyElevatedButtonLightMode,
+        //     borderRadius: BorderRadius.circular(15),
+        //   ),
+        // ),
         Container(
           width: MediaQuery.of(context).size.width * 0.94,
 
           height: 438,
           decoration: BoxDecoration(
-            color: AppColors.kBackgroundColor,
+            border: BoxBorder.all(color: AppColors.kGreyElevatedButtonDarkMode),
+            color: isDark
+                ? AppColors.kGreyElevatedButtonDarkMode
+                : AppColors.kGreyElevatedButtonLightMode,
             borderRadius: BorderRadius.circular(15),
           ),
           child: Padding(

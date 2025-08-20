@@ -17,6 +17,8 @@ class CustomizedReport extends StatelessWidget {
   final String endDate;
   @override
   Widget build(BuildContext context) {
+                final isDark = Theme.of(context).brightness == Brightness.dark;
+
     return Scaffold(
       appBar: AppBar(
         title: Text('Sales Reprot'),
@@ -57,12 +59,12 @@ class CustomizedReport extends StatelessWidget {
                   );
                 },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: AppColors.kBlueElevatedButtonDarkMode,
+                  backgroundColor:isDark? AppColors.kBlueElevatedButtonDarkMode:AppColors.kBlueElevatedButtonLightMode,
                 ),
                 child: Text(
                   'Exprot Reprot',
                   style: TextStyle(
-                    color: Colors.black,
+                    color:isDark? Colors.black:Colors.white,
                     fontWeight: FontWeight.bold,
                   ),
                 ),

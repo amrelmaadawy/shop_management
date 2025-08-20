@@ -13,6 +13,8 @@ class CustomSettingsRow extends StatelessWidget {
   final Widget widget;
   @override
   Widget build(BuildContext context) {
+            final isDark = Theme.of(context).brightness == Brightness.dark;
+
     return Row(
       children: [
         Container(
@@ -20,7 +22,7 @@ class CustomSettingsRow extends StatelessWidget {
           height: 40,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(15),
-            color: AppColors.kGreyElevatedButtonDarkMode,
+                      color:isDark? AppColors.kGreyElevatedButtonDarkMode:AppColors.kGreyElevatedButtonLightMode,
           ),
           child: icon,
         ),

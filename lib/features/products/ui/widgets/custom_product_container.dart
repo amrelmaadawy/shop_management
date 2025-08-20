@@ -6,10 +6,12 @@ class CustomProductContainer extends StatelessWidget {
   final String text;
   @override
   Widget build(BuildContext context) {
+        final isDark = Theme.of(context).brightness == Brightness.dark;
+
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(25),
-        color: AppColors.kGreyElevatedButtonDarkMode,
+        color:isDark? AppColors.kGreyElevatedButtonDarkMode:AppColors.kGreyElevatedButtonLightMode,
       ),
       child: Padding(
         padding: const EdgeInsets.all(8.0),

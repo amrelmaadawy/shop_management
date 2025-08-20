@@ -17,6 +17,8 @@ class SalesView extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+        final isDark = Theme.of(context).brightness == Brightness.dark;
+
     final salesProducts = ref.watch(salesProductProvider);
     final todaysdate = formatDateOnly(DateTime.now());
     final todaySales = salesProducts.where((sale) {
@@ -84,7 +86,7 @@ class SalesView extends ConsumerWidget {
                   Spacer(),
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: AppColors.kBlueElevatedButtonDarkMode,
+                      backgroundColor:isDark? AppColors.kBlueElevatedButtonDarkMode:AppColors.kBlueElevatedButtonLightMode,
                     ),
                     onPressed: () 
                     {
@@ -93,7 +95,7 @@ class SalesView extends ConsumerWidget {
                     child: Text(
                       'All Sales',
                       style: TextStyle(
-                        color: Colors.black,
+                        color:isDark? AppColors.kBlackTextLightMode:Colors.white,
                         fontWeight: FontWeight.bold,
                       ),
                     ),

@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:small_managements/core/utils/app_colors.dart';
 import 'package:small_managements/features/reports/logic/helper/get_total_sales.dart';
@@ -18,13 +16,18 @@ class DateFilterButtons extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         ElevatedButton(
           style: ElevatedButton.styleFrom(
-            backgroundColor: AppColors.kGreyElevatedButtonDarkMode,
+            backgroundColor: isDark
+                ? AppColors.kGreyElevatedButtonDarkMode
+                : AppColors.kGreyElevatedButtonLightMode,
           ),
+
           onPressed: () {
             widget.startDateController.clear();
             widget.endDateController.clear();
@@ -32,23 +35,21 @@ class DateFilterButtons extends StatelessWidget {
           child: Text(
             'Reset',
             style: TextStyle(
-              color: Colors.white,
+              color: isDark ? Colors.white : AppColors.kBlackTextLightMode,
               fontWeight: FontWeight.bold,
             ),
           ),
         ),
         ElevatedButton(
           style: ElevatedButton.styleFrom(
-            backgroundColor: AppColors.kBlueElevatedButtonDarkMode,
+            backgroundColor: isDark
+                ? AppColors.kBlueElevatedButtonDarkMode
+                : AppColors.kBlueElevatedButtonLightMode,
           ),
           onPressed: () {
             if (formKey.currentState!.validate()) {
-              final startDate = DateTime.parse(
-                widget.startDateController.text,
-              );
-              final endDate = DateTime.parse(
-                widget.endDateController.text,
-              );
+              final startDate = DateTime.parse(widget.startDateController.text);
+              final endDate = DateTime.parse(widget.endDateController.text);
               final totalSales = getTotalSalesInRange(
                 widget.ref,
                 startDate,
@@ -76,13 +77,12 @@ class DateFilterButtons extends StatelessWidget {
                   ),
                 ),
               );
-            
             }
           },
           child: Text(
             'Apply',
             style: TextStyle(
-              color: Colors.black,
+              color: isDark ? Colors.black : Colors.white,
               fontWeight: FontWeight.bold,
             ),
           ),

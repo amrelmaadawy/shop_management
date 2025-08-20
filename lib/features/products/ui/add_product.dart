@@ -56,6 +56,8 @@ class _AddProductState extends ConsumerState<AddProduct> {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+
     return Scaffold(
       body: SafeArea(
         child: Padding(
@@ -92,7 +94,9 @@ class _AddProductState extends ConsumerState<AddProduct> {
                       CancelProductButton(),
                       ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                          backgroundColor:AppColors.kBlueElevatedButtonDarkMode,
+                          backgroundColor: isDark
+                              ? AppColors.kBlueElevatedButtonDarkMode
+                              : AppColors.kBlueElevatedButtonLightMode,
                         ),
                         onPressed: () {
                           if (form.currentState!.validate()) {
@@ -141,7 +145,9 @@ class _AddProductState extends ConsumerState<AddProduct> {
                         },
                         child: Text(
                           S.of(context).save,
-                          style: TextStyle(color: Colors.black),
+                          style: TextStyle(
+                            color: isDark ? Colors.black : Colors.white,
+                          ),
                         ),
                       ),
                     ],

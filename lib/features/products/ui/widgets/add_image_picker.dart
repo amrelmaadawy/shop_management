@@ -12,12 +12,16 @@ class AddImagePicker extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final imagePath = ref.watch(pickImageProvider);
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+
     return SizedBox(
       width: MediaQuery.of(context).size.width,
       height: 250,
       child: DottedBorder(
         options: RectDottedBorderOptions(
-          color: AppColors.kGreyElevatedButtonDarkMode,
+          color: isDark
+              ? AppColors.kGreyElevatedButtonDarkMode
+              : AppColors.kGreyElevatedButtonLightMode,
           dashPattern: [10, 5],
           strokeWidth: 2,
           padding: EdgeInsets.all(16),

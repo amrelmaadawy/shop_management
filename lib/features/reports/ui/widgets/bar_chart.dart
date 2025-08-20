@@ -9,7 +9,9 @@ class BarChart extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    List<DailyReport> dailyReport= getWeeklySalesData(ref);
+    List<DailyReport> dailyReport = getWeeklySalesData(ref);
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+
     return SfCartesianChart(
       primaryXAxis: CategoryAxis(),
       primaryYAxis: NumericAxis(isVisible: false, minimum: 0, interval: 50),
@@ -20,7 +22,9 @@ class BarChart extends ConsumerWidget {
           xValueMapper: (DailyReport sales, _) => sales.day,
           yValueMapper: (DailyReport sales, _) => sales.sales,
           name: 'Sales',
-          color: AppColors.kGreyElevatedButtonDarkMode,
+          color: isDark
+              ? AppColors.kGreyElevatedButtonDarkMode
+              : AppColors.kBlueElevatedButtonDarkMode,
           dataLabelSettings: DataLabelSettings(isVisible: true),
         ),
       ],

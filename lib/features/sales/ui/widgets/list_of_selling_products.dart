@@ -6,10 +6,10 @@ import 'package:small_managements/features/sales/logic/provider/select_product_p
 class ListOfSellingProducts extends ConsumerWidget {
   const ListOfSellingProducts({super.key});
 
-
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-final selectedProducts = ref.watch(selectProductProvider);
+    final selectedProducts = ref.watch(selectProductProvider);
+    final isDark = Theme.of(context).brightness == Brightness.dark;
 
     return SliverList(
       delegate: SliverChildBuilderDelegate(
@@ -22,19 +22,25 @@ final selectedProducts = ref.watch(selectProductProvider);
                 children: [
                   Text(selectedProducts[index].product.productName),
                   SizedBox(height: 5),
-                  Text('individual Price${selectedProducts[index].product.sellingPrice} LE'),
+                  Text(
+                    'individual Price${selectedProducts[index].product.sellingPrice} LE',
+                  ),
                 ],
               ),
               Spacer(),
               InkWell(
                 onTap: () {
-              ref.read(selectProductProvider.notifier).decreaseQuantity(selectedProducts[index].product);
+                  ref
+                      .read(selectProductProvider.notifier)
+                      .decreaseQuantity(selectedProducts[index].product);
                 },
                 child: Container(
                   padding: EdgeInsets.all(8),
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
-                    color: AppColors.kGreyElevatedButtonDarkMode,
+                    color: isDark
+                        ? AppColors.kGreyElevatedButtonDarkMode
+                        : AppColors.kGreyElevatedButtonLightMode,
                   ),
                   child: Text(
                     '-',
@@ -54,13 +60,17 @@ final selectedProducts = ref.watch(selectProductProvider);
               SizedBox(width: 5),
               InkWell(
                 onTap: () {
-              ref.read(selectProductProvider.notifier).increaseQuantity(selectedProducts[index].product);
+                  ref
+                      .read(selectProductProvider.notifier)
+                      .increaseQuantity(selectedProducts[index].product);
                 },
                 child: Container(
                   padding: EdgeInsets.all(7),
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
-                    color: AppColors.kGreyElevatedButtonDarkMode,
+                    color: isDark
+                        ? AppColors.kGreyElevatedButtonDarkMode
+                        : AppColors.kGreyElevatedButtonLightMode,
                   ),
                   child: Text(
                     '+',

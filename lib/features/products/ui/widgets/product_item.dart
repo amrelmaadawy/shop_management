@@ -26,6 +26,8 @@ class ProductItem extends ConsumerWidget {
   final Widget image;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+        final isDark = Theme.of(context).brightness == Brightness.dark;
+
     return SizedBox(
       width: MediaQuery.of(context).size.width,
       height: 70,
@@ -49,7 +51,7 @@ class ProductItem extends ConsumerWidget {
               ),
               Text(
                 '$price . $quantity ${S.of(context).inStock}',
-                style: TextStyle(color: AppColors.kUnselectedItemDarkMode, fontSize: 14),
+                style: TextStyle(color:isDark? AppColors.kUnselectedItemDarkMode:AppColors.kUnselectedItemLightMode, fontSize: 14),
               ),
             ],
           ),

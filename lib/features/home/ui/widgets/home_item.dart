@@ -17,6 +17,8 @@ class HomeItem extends StatelessWidget {
   final String percentage;
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+
     return Row(
       children: [
         Column(
@@ -24,7 +26,12 @@ class HomeItem extends StatelessWidget {
           children: [
             Text(
               title,
-              style: TextStyle(color:  AppColors.kUnselectedItemDarkMode, fontSize: 16),
+              style: TextStyle(
+                color: isDark
+                    ? AppColors.kUnselectedItemDarkMode
+                    : AppColors.kUnselectedItemLightMode,
+                fontSize: 16,
+              ),
             ),
             SizedBox(height: 5),
             Text(
@@ -32,24 +39,31 @@ class HomeItem extends StatelessWidget {
               style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
             ),
             SizedBox(height: 5),
-            Text(description, style: TextStyle(color:  AppColors.kUnselectedItemDarkMode)),
-            SizedBox(height: 10),
-            Container(
-              width: 80,
-              height: 30,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(15),
-                color: AppColors.kGreyElevatedButtonDarkMode,
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(percentage),
-                  SizedBox(width: 5),
-                  Icon(Icons.north_east, size: 18),
-                ],
+            Text(
+              description,
+              style: TextStyle(
+                color: isDark
+                    ? AppColors.kUnselectedItemDarkMode
+                    : AppColors.kUnselectedItemLightMode,
               ),
             ),
+            SizedBox(height: 10),
+            // Container(
+            //   width: 80,
+            //   height: 30,
+            //   decoration: BoxDecoration(
+            //     borderRadius: BorderRadius.circular(15),
+            //     color: AppColors.kGreyElevatedButtonDarkMode,
+            //   ),
+            //   child: Row(
+            //     mainAxisAlignment: MainAxisAlignment.center,
+            //     children: [
+            //       Text(percentage),
+            //       SizedBox(width: 5),
+            //       Icon(Icons.north_east, size: 18),
+            //     ],
+            //   ),
+            // ),
           ],
         ),
         Spacer(),

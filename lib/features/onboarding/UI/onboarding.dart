@@ -23,6 +23,8 @@ class _OnboardingState extends State<Onboarding> {
   bool isLastPage = false;
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+
     return Scaffold(
       body: Container(
         padding: EdgeInsets.only(bottom: 80),
@@ -60,7 +62,9 @@ class _OnboardingState extends State<Onboarding> {
                 padding: const EdgeInsets.all(20.0),
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: AppColors.kBlueElevatedButtonDarkMode,
+                    backgroundColor: isDark
+                        ? AppColors.kBlueElevatedButtonDarkMode
+                        : AppColors.kBlueElevatedButtonLightMode,
                   ),
                   onPressed: () async {
                     final prefs = await SharedPreferences.getInstance();
@@ -72,7 +76,7 @@ class _OnboardingState extends State<Onboarding> {
                   child: Text(
                     'Get Start',
                     style: TextStyle(
-                      color: Colors.black,
+                      color: isDark ? Colors.black : Colors.white,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
@@ -81,7 +85,7 @@ class _OnboardingState extends State<Onboarding> {
             )
           : SizedBox(
               height: 80,
-                  
+
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -91,7 +95,9 @@ class _OnboardingState extends State<Onboarding> {
                     },
                     child: Text(
                       'Skip',
-                      style: TextStyle(color:AppColors.kBlueElevatedButtonDarkMode),
+                      style: TextStyle(
+                        color: AppColors.kBlueElevatedButtonDarkMode,
+                      ),
                     ),
                   ),
                   Center(
@@ -106,7 +112,7 @@ class _OnboardingState extends State<Onboarding> {
                       effect: WormEffect(
                         spacing: 16,
                         dotColor: Colors.black26,
-                        activeDotColor:AppColors.kBlueElevatedButtonDarkMode,
+                        activeDotColor: AppColors.kBlueElevatedButtonDarkMode,
                       ),
                     ),
                   ),
@@ -119,7 +125,9 @@ class _OnboardingState extends State<Onboarding> {
                     },
                     child: Text(
                       'Next',
-                      style: TextStyle(color: AppColors.kBlueElevatedButtonDarkMode),
+                      style: TextStyle(
+                        color: AppColors.kBlueElevatedButtonDarkMode,
+                      ),
                     ),
                   ),
                 ],

@@ -34,6 +34,8 @@ class _MakeSaleState extends ConsumerState<MakeSale> {
 
   @override
   Widget build(BuildContext context) {
+                final isDark = Theme.of(context).brightness == Brightness.dark;
+
     final selectedProducts = ref.watch(selectProductProvider);
     final totalPrice = selectedProducts.fold<double>(
       0,
@@ -68,7 +70,7 @@ class _MakeSaleState extends ConsumerState<MakeSale> {
                   width: double.infinity,
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: AppColors.kBlueElevatedButtonDarkMode,
+                      backgroundColor:isDark? AppColors.kBlueElevatedButtonDarkMode:AppColors.kBlueElevatedButtonLightMode,
                     ),
                     onPressed: () {
                       final selectedProducts = ref.watch(selectProductProvider);
@@ -85,7 +87,7 @@ class _MakeSaleState extends ConsumerState<MakeSale> {
                           SnackBar(
                             content: Text(
                               'Please select at least one product',
-                              style: TextStyle(color: Colors.white),
+                              style: TextStyle(color:isDark? Colors.white:AppColors.kBlackTextLightMode),
                             ),
                             backgroundColor: const Color.fromARGB(255, 153, 11, 1),
                           ),
@@ -95,7 +97,7 @@ class _MakeSaleState extends ConsumerState<MakeSale> {
                     child: Text(
                       S.of(context).confirmeSale,
                       style: TextStyle(
-                        color: Colors.black,
+                        color:isDark? Colors.black:Colors.white,
                         fontWeight: FontWeight.bold,
                         fontSize: 16,
                       ),

@@ -19,12 +19,6 @@ class HomeView extends ConsumerWidget {
           style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
-        actions: [
-          IconButton(
-            onPressed: () {},
-            icon: Icon(CupertinoIcons.settings_solid),
-          ),
-        ],
       ),
       body: SafeArea(
         child: Padding(

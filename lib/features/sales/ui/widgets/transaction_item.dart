@@ -10,7 +10,8 @@ class TransactionItem extends StatelessWidget {
     required this.clientName,
     required this.price,
     required this.time,
-    required this.itemCount, required this.sale,
+    required this.itemCount,
+    required this.sale,
   });
   final String clientName;
   final double price;
@@ -19,11 +20,13 @@ class TransactionItem extends StatelessWidget {
   final SalesModel sale;
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+
     return InkWell(
       onTap: () {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => SaleDetailesView(sale: sale,)),
+          MaterialPageRoute(builder: (context) => SaleDetailesView(sale: sale)),
         );
       },
       child: Column(
@@ -41,12 +44,22 @@ class TransactionItem extends StatelessWidget {
             children: [
               Text(
                 '$itemCount Item',
-                style: TextStyle(fontSize: 13, color: AppColors.kUnselectedItemDarkMode),
+                style: TextStyle(
+                  fontSize: 13,
+                  color: isDark
+                      ? AppColors.kUnselectedItemDarkMode
+                      : AppColors.kUnselectedItemLightMode,
+                ),
               ),
               SizedBox(width: 5),
               Text(
                 time,
-                style: TextStyle(fontSize: 13, color: AppColors.kUnselectedItemDarkMode),
+                style: TextStyle(
+                  fontSize: 13,
+                  color: isDark
+                      ? AppColors.kUnselectedItemDarkMode
+                      : AppColors.kUnselectedItemLightMode,
+                ),
               ),
             ],
           ),

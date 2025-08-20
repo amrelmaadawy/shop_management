@@ -48,6 +48,7 @@ class _SettingsViewState extends ConsumerState<SettingsView> {
   @override
   Widget build(BuildContext context) {
     final locale = ref.watch(localizationProvider);
+            final isDark = Theme.of(context).brightness == Brightness.dark;
 
     return Scaffold(
       body: SafeArea(
@@ -93,7 +94,7 @@ class _SettingsViewState extends ConsumerState<SettingsView> {
                     width: 100,
                     height: 40,
                     decoration: BoxDecoration(
-                      color: AppColors.kGreyElevatedButtonDarkMode,
+                      color:isDark? AppColors.kGreyElevatedButtonDarkMode:AppColors.kGreyElevatedButtonLightMode,
                       borderRadius: BorderRadius.circular(15),
                     ),
                     child: Center(
