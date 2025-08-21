@@ -197,5 +197,13 @@
     "thePhoneNumberCannotBeEmpty":"رقم الهاتف لايمكن ان يكون فارغ",
     "@thePhoneNumberCannotBeEmpty":{},
      "empty":"فارغ",
-    "@empty":{}
+    "@empty":{},
+    "salesReprot":"تقرير المبيعات",
+    "@salesReprot":{},
+    "itemsSold":"قطعه مباعه",
+    "@itemsSold":{},
+    "exprotReprot":"طباعه التقرير",
+    "@exprotReprot":{},
+    "item":"قطعه",
+    "@item":{}
 }

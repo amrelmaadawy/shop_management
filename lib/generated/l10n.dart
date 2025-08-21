@@ -818,6 +818,36 @@ class S {
   String get empty {
     return Intl.message('Empty', name: 'empty', desc: '', args: []);
   }
+
+  /// `Sales Reprot`
+  String get salesReprot {
+    return Intl.message(
+      'Sales Reprot',
+      name: 'salesReprot',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Items Sold`
+  String get itemsSold {
+    return Intl.message('Items Sold', name: 'itemsSold', desc: '', args: []);
+  }
+
+  /// `Exprot Reprot`
+  String get exprotReprot {
+    return Intl.message(
+      'Exprot Reprot',
+      name: 'exprotReprot',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Item`
+  String get item {
+    return Intl.message('Item', name: 'item', desc: '', args: []);
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

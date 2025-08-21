@@ -197,5 +197,13 @@
     "thePhoneNumberCannotBeEmpty":"The phone number cannot be empty",
     "@thePhoneNumberCannotBeEmpty":{},
      "empty":"Empty",
-    "@empty":{}
+    "@empty":{},
+    "salesReprot":"Sales Reprot",
+    "@salesReprot":{},
+    "itemsSold":"Items Sold",
+    "@itemsSold":{},
+    "exprotReprot":"Exprot Reprot",
+    "@exprotReprot":{},
+    "item":"Item",
+    "@item":{}
 }

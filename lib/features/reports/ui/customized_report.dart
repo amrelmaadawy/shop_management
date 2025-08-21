@@ -3,6 +3,7 @@ import 'package:small_managements/core/utils/app_colors.dart';
 import 'package:small_managements/features/reports/logic/pdf/generate_pdf.dart';
 import 'package:small_managements/features/reports/ui/widgets/custom_total_row.dart';
 import 'package:small_managements/features/sales/model/sold_product_model.dart';
+import 'package:small_managements/generated/l10n.dart';
 
 class CustomizedReport extends StatelessWidget {
   const CustomizedReport({
@@ -26,7 +27,7 @@ class CustomizedReport extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Sales Reprot'),
+        title: Text(S.of(context).salesReprot),
         leading: IconButton(
           onPressed: () {
             Navigator.pop(context);
@@ -41,19 +42,19 @@ class CustomizedReport extends StatelessWidget {
           child: Column(
             children: [
               Text(
-                'Date Range : $startDate to $endDate',
+                '${S.of(context).dateRange} : $startDate ${S.of(context).to} $endDate',
                 style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
               ),
               Divider(),
-              CustomTotalsRow(totals: '$totalSales LE', label: 'Total Sales'),
+              CustomTotalsRow(totals: '$totalSales ${S.of(context).LE}', label: S.of(context).totalSales),
               SizedBox(height: 5),
               CustomTotalsRow(
-                totals: '$totalProductSold Item',
-                label: 'Total Product Sold',
+                totals: '$totalProductSold ${S.of(context).item}',
+                label: S.of(context).totalProductSold,
               ),
               SizedBox(height: 5),
 
-              CustomTotalsRow(totals: '$totalProfit LE', label: 'Total Profit'),
+              CustomTotalsRow(totals: '$totalProfit ${S.of(context).LE}', label: S.of(context).totalProfit),
               SizedBox(height: 10),
               SizedBox(
                 height: 400,
@@ -63,7 +64,7 @@ class CustomizedReport extends StatelessWidget {
                       children: [
                         Text(soldProducts[index].productName),
                         Spacer(),
-                        Text("${soldProducts[index].quantity} Items Sold"),
+                        Text("${soldProducts[index].quantity} ${S.of(context).itemsSold}"),
                       ],
                     );
                   },
@@ -88,7 +89,7 @@ class CustomizedReport extends StatelessWidget {
                       : AppColors.kBlueElevatedButtonLightMode,
                 ),
                 child: Text(
-                  'Exprot Reprot',
+                  S.of(context).exprotReprot,
                   style: TextStyle(
                     color: isDark ? Colors.black : Colors.white,
                     fontWeight: FontWeight.bold,
