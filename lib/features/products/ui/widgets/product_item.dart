@@ -50,7 +50,9 @@ class ProductItem extends ConsumerWidget {
                 Text(
                   '$price ${S.of(context).LE} . $quantity ${S.of(context).inStock}',
                   style: TextStyle(
-                    color: isDark
+                    color: int.parse(quantity) <= 5
+                        ? const Color.fromARGB(255, 191, 15, 3)
+                        : isDark
                         ? AppColors.kUnselectedItemDarkMode
                         : AppColors.kUnselectedItemLightMode,
                     fontSize: 14,

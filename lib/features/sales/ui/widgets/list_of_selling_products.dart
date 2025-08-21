@@ -23,7 +23,28 @@ class ListOfSellingProducts extends ConsumerWidget {
                 children: [
                   Text(selectedProducts[index].product.productName),
                   SizedBox(height: 5),
-                  Text('${S.of(context).individualPrice} ${selectedProducts[index].product.sellingPrice} ${S.of(context).LE}'),
+                  Row(
+                    children: [
+                      Text(
+                        '${S.of(context).individualPrice} ${selectedProducts[index].product.sellingPrice} ${S.of(context).LE}',
+                      ),
+                      SizedBox(width: 3),
+                      Text(
+                        '${selectedProducts[index].product.quantity} ${S.of(context).inStock}',
+                        style: TextStyle(
+                          color:
+                              int.parse(
+                                    selectedProducts[index].product.quantity,
+                                  ) <=
+                                  5
+                              ? Color.fromARGB(255, 191, 15, 3)
+                              : isDark
+                              ? Colors.white
+                              : AppColors.kBlackTextLightMode,
+                        ),
+                      ),
+                    ],
+                  ),
                 ],
               ),
               Spacer(),
