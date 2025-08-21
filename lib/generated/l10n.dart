@@ -748,6 +748,26 @@ class S {
   String get available {
     return Intl.message('Available', name: 'available', desc: '', args: []);
   }
+
+  /// `Reset Application`
+  String get resetApplication {
+    return Intl.message(
+      'Reset Application',
+      name: 'resetApplication',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Are You Sure You Want To Reset The App`
+  String get areYouSureYouWantToResetTheApp {
+    return Intl.message(
+      'Are You Sure You Want To Reset The App',
+      name: 'areYouSureYouWantToResetTheApp',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

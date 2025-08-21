@@ -41,6 +41,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "areYouSureYouWantToDelet": MessageLookupByLibrary.simpleMessage(
       "Are You Sure You Want To delete",
     ),
+    "areYouSureYouWantToResetTheApp": MessageLookupByLibrary.simpleMessage(
+      "Are You Sure You Want To Reset The App",
+    ),
     "available": MessageLookupByLibrary.simpleMessage("Available"),
     "businessInfo": MessageLookupByLibrary.simpleMessage("Business Info"),
     "buyingPrice": MessageLookupByLibrary.simpleMessage("Buying Price"),
@@ -114,6 +117,9 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "reports": MessageLookupByLibrary.simpleMessage("Insights"),
     "reset": MessageLookupByLibrary.simpleMessage("Reset"),
+    "resetApplication": MessageLookupByLibrary.simpleMessage(
+      "Reset Application",
+    ),
     "sales": MessageLookupByLibrary.simpleMessage("Sales"),
     "salesSummary": MessageLookupByLibrary.simpleMessage("Sales Summary"),
     "save": MessageLookupByLibrary.simpleMessage("Save"),

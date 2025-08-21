@@ -181,5 +181,9 @@
     "notEnoughStockFor":"Not enough stock for ",
     "@notEnoughStockFor":{},
      "available":"Available",
-    "@available":{}
+    "@available":{},
+    "resetApplication":"Reset Application",
+    "@resetApplication":{},
+    "areYouSureYouWantToResetTheApp":"Are You Sure You Want To Reset The App",
+    "@areYouSureYouWantToResetTheApp":{}
 }

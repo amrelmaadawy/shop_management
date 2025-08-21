@@ -41,6 +41,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "areYouSureYouWantToDelet": MessageLookupByLibrary.simpleMessage(
       "هل أنت متأكد أنك تريد الحذف؟",
     ),
+    "areYouSureYouWantToResetTheApp": MessageLookupByLibrary.simpleMessage(
+      "هل انت متاكد من انك تريد ضبط مصنع التطبيق",
+    ),
     "available": MessageLookupByLibrary.simpleMessage("المتاح"),
     "businessInfo": MessageLookupByLibrary.simpleMessage(
       "معلومات النشاط التجاري",
@@ -114,6 +117,7 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "reports": MessageLookupByLibrary.simpleMessage("الإحصائيات"),
     "reset": MessageLookupByLibrary.simpleMessage("إعادة تعيين"),
+    "resetApplication": MessageLookupByLibrary.simpleMessage("اعادة ضبط مصنع"),
     "sales": MessageLookupByLibrary.simpleMessage("المبيعات"),
     "salesSummary": MessageLookupByLibrary.simpleMessage("ملخص المبيعات"),
     "save": MessageLookupByLibrary.simpleMessage("حفظ"),

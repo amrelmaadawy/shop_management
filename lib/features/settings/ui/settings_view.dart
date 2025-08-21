@@ -3,7 +3,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hive/hive.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:small_managements/core/hive_boxes.dart';
 import 'package:small_managements/core/utils/app_colors.dart';
 import 'package:small_managements/core/utils/custom_text_form_field.dart';
 import 'package:small_managements/features/settings/logic/setting_provider.dart';
@@ -48,7 +50,7 @@ class _SettingsViewState extends ConsumerState<SettingsView> {
   @override
   Widget build(BuildContext context) {
     final locale = ref.watch(localizationProvider);
-            final isDark = Theme.of(context).brightness == Brightness.dark;
+    final isDark = Theme.of(context).brightness == Brightness.dark;
 
     return Scaffold(
       body: SafeArea(
@@ -94,7 +96,9 @@ class _SettingsViewState extends ConsumerState<SettingsView> {
                     width: 100,
                     height: 40,
                     decoration: BoxDecoration(
-                      color:isDark? AppColors.kGreyElevatedButtonDarkMode:AppColors.kGreyElevatedButtonLightMode,
+                      color: isDark
+                          ? AppColors.kGreyElevatedButtonDarkMode
+                          : AppColors.kGreyElevatedButtonLightMode,
                       borderRadius: BorderRadius.circular(15),
                     ),
                     child: Center(
@@ -240,6 +244,51 @@ class _SettingsViewState extends ConsumerState<SettingsView> {
                     icon: Icon(CupertinoIcons.phone),
                     text: S.of(context).phoneNumber,
                     widget: Text(phoneNumber ?? 'Empty'),
+                  ),
+                ),
+                Spacer(),
+                SizedBox(
+                  width: double.infinity,
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: isDark
+                          ? AppColors.kBlueElevatedButtonDarkMode
+                          : AppColors.kBlueElevatedButtonLightMode,
+                    ),
+                    onPressed: () async {
+                      showDialog(
+                        context: context,
+                        builder: (context) => AlertDialog(
+                          title: Text(S.of(context).areYouSureYouWantToResetTheApp),
+                          actions: [
+                            ElevatedButton(
+                              onPressed: () async {
+                                await Hive.deleteBoxFromDisk(totalSoldToday);
+                                await Hive.deleteBoxFromDisk(ksalesBox);
+                                await Hive.deleteBoxFromDisk(productBox);
+                                await Hive.deleteBoxFromDisk(categoriesBox);
+                                Navigator.pop(context);
+                              },
+                              child: Text(S.of(context).yes),
+                            ),
+                            ElevatedButton(
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
+                              child: Text(S.of(context).no),
+                            ),
+                          ],
+                        ),
+                      );
+                    },
+                    child: Text(
+                      S.of(context).resetApplication,
+                      style: TextStyle(
+                        color: isDark
+                            ? AppColors.kBlackTextLightMode
+                            : Colors.white,
+                      ),
+                    ),
                   ),
                 ),
               ],

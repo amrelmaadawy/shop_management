@@ -181,5 +181,9 @@
   "notEnoughStockFor":"لايوجد مخزون يكفي من ",
     "@notEnoughStockFor":{},
     "available":"المتاح",
-    "@available":{}
+    "@available":{},
+    "resetApplication":"اعادة ضبط مصنع",
+    "@resetApplication":{},
+    "areYouSureYouWantToResetTheApp":"هل انت متاكد من انك تريد ضبط مصنع التطبيق",
+    "@areYouSureYouWantToResetTheApp":{}
 }
