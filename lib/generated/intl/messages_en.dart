@@ -147,6 +147,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "splashWelcome": MessageLookupByLibrary.simpleMessage(
       "Welcome To Shope Manager",
     ),
+    "startDateCannotBeAfterEndDate": MessageLookupByLibrary.simpleMessage(
+      "Start Date Cannot Be After EndDate",
+    ),
     "stock": MessageLookupByLibrary.simpleMessage("Stock"),
     "tapToAdd": MessageLookupByLibrary.simpleMessage(
       "Tap to add an image from your gallery or take a new one.",

@@ -51,34 +51,49 @@ class DateFilterButtons extends StatelessWidget {
             if (formKey.currentState!.validate()) {
               final startDate = DateTime.parse(widget.startDateController.text);
               final endDate = DateTime.parse(widget.endDateController.text);
-              final totalSales = getTotalSalesInRange(
-                widget.ref,
-                startDate,
-                endDate,
-              );
-              final totalProductsSold = getTotalProductSoldInRange(
-                widget.ref,
-                startDate,
-                endDate,
-              );
-              final totalProfit = getTotalProfitInRange(
-                widget.ref,
-                startDate,
-                endDate,
-              );
-              final soldProdcuts = getSoldProductsInRange(widget.ref,startDate,endDate);
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => CustomizedReport(
-                    totalSales: totalSales,
-                    totalProductSold: totalProductsSold,
-                    totalProfit: totalProfit,
-                    startDate: widget.startDateController.text,
-                    endDate: widget.endDateController.text, soldProducts: soldProdcuts,
+              if (startDate.isAfter(endDate)) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    content: Text("Start date cannot be after end date"),
+                    backgroundColor: Color.fromARGB(255, 207, 19, 5),
                   ),
-                ),
-              );
+                );
+                Navigator.pop(context);
+              } else {
+                final totalSales = getTotalSalesInRange(
+                  widget.ref,
+                  startDate,
+                  endDate,
+                );
+                final totalProductsSold = getTotalProductSoldInRange(
+                  widget.ref,
+                  startDate,
+                  endDate,
+                );
+                final totalProfit = getTotalProfitInRange(
+                  widget.ref,
+                  startDate,
+                  endDate,
+                );
+                final soldProdcuts = getSoldProductsInRange(
+                  widget.ref,
+                  startDate,
+                  endDate,
+                );
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => CustomizedReport(
+                      totalSales: totalSales,
+                      totalProductSold: totalProductsSold,
+                      totalProfit: totalProfit,
+                      startDate: widget.startDateController.text,
+                      endDate: widget.endDateController.text,
+                      soldProducts: soldProdcuts,
+                    ),
+                  ),
+                );
+              }
             }
           },
           child: Text(

@@ -205,5 +205,7 @@
     "exprotReprot":"طباعه التقرير",
     "@exprotReprot":{},
     "item":"قطعه",
-    "@item":{}
+    "@item":{},
+    "startDateCannotBeAfterEndDate":"تاريخ البدايه لا يمكن ان يكون بعد تارخ الانتهاء",
+    "@startDateCannotBeAfterEndDate":{}
 }

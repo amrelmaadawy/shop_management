@@ -143,6 +143,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "splashWelcome": MessageLookupByLibrary.simpleMessage(
       "مرحباً بك في مدير المتجر",
     ),
+    "startDateCannotBeAfterEndDate": MessageLookupByLibrary.simpleMessage(
+      "تاريخ البدايه لا يمكن ان يكون بعد تارخ الانتهاء",
+    ),
     "stock": MessageLookupByLibrary.simpleMessage("المخزون"),
     "tapToAdd": MessageLookupByLibrary.simpleMessage(
       "اضغط لإضافة صورة من المعرض أو التقاط صورة جديدة.",

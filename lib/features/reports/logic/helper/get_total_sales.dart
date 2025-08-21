@@ -37,7 +37,6 @@ double getTotalProductSoldInRange(
   });
 }
 
-
 double getTotalProfitInRange(
   WidgetRef ref,
   DateTime startDate,
@@ -74,14 +73,17 @@ double getTotalProfitInRange(
     return sum + saleProfit;
   });
 }
+
 List<SoldProductModel> getSoldProductsInRange(
   WidgetRef ref,
   DateTime startDate,
   DateTime endDate,
 ) {
   final salesInRange = ref.watch(salesProductProvider).where((sale) {
-    return sale.dateTime.isAfter(startDate.subtract(const Duration(seconds: 1))) &&
-           sale.dateTime.isBefore(endDate.add(const Duration(days: 1)));
+    return sale.dateTime.isAfter(
+          startDate.subtract(const Duration(seconds: 1)),
+        ) &&
+        sale.dateTime.isBefore(endDate.add(const Duration(days: 1)));
   });
 
   final Map<String, SoldProductModel> summary = {};

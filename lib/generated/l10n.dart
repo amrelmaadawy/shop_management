@@ -848,6 +848,16 @@ class S {
   String get item {
     return Intl.message('Item', name: 'item', desc: '', args: []);
   }
+
+  /// `Start Date Cannot Be After EndDate`
+  String get startDateCannotBeAfterEndDate {
+    return Intl.message(
+      'Start Date Cannot Be After EndDate',
+      name: 'startDateCannotBeAfterEndDate',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
