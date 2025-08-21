@@ -40,10 +40,26 @@ double getTodayTotalProfit(WidgetRef ref) {
   });
 
   return todaySales.fold<double>(0, (sum, sale) {
-    final saleProfit = sale.soldProducts.fold<double>(0, (innerSum, product) {
-      return innerSum +
-          ((product.sellingPrice - product.buyingPrice) * product.quantity);
-    });
+    final totalBeforeDiscount = sale.soldProducts.fold<double>(
+      0,
+      (innerSum, product) =>
+          innerSum + (product.sellingPrice * product.quantity),
+    );
+
+    double saleProfit = 0;
+    for (final product in sale.soldProducts) {
+      final itemTotal = product.sellingPrice * product.quantity;
+      final itemCost = product.buyingPrice * product.quantity;
+      final itemProfitBeforeDiscount = itemTotal - itemCost;
+
+      // توزيع الخصم بنسبة المساهمة
+      final ratio = itemTotal / totalBeforeDiscount;
+      final itemDiscount = sale.discount * ratio;
+
+      final itemProfit = itemProfitBeforeDiscount - itemDiscount;
+      saleProfit += itemProfit;
+    }
+
     return sum + saleProfit;
   });
 }

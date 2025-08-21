@@ -101,12 +101,13 @@ class SelectProductProvider extends StateNotifier<List<SelectedProdcutModel>> {
       );
     }).toList();
 
-    // حساب الإجمالي قبل وبعد الخصم
+    // إجمالي المبيعات قبل الخصم
     final totalBeforeDiscount = soldProducts.fold<double>(
       0,
       (sum, item) => sum + (item.sellingPrice * item.quantity),
     );
 
+    // إجمالي المبيعات بعد الخصم
     final totalAfterDiscount = totalBeforeDiscount - discount;
 
     // تحقق من المبلغ المدفوع
@@ -121,11 +122,27 @@ class SelectProductProvider extends StateNotifier<List<SelectedProdcutModel>> {
         ),
       );
       Navigator.pop(context);
-      return; // خروج مبكر
+      return;
     }
 
     // حساب الباقي
     final change = paid - totalAfterDiscount;
+
+    // إجمالي الربح قبل الخصم
+    final totalProfitBeforeDiscount = soldProducts.fold<double>(
+      0,
+      (sum, item) =>
+          sum + ((item.sellingPrice - item.buyingPrice) * item.quantity),
+    );
+
+    // توزيع الخصم على الربح بشكل نسبي
+    double totalProfitAfterDiscount = totalProfitBeforeDiscount;
+    if (discount > 0 && totalBeforeDiscount > 0) {
+      final discountRatio = discount / totalBeforeDiscount; // نسبة الخصم
+      totalProfitAfterDiscount =
+          totalProfitBeforeDiscount -
+          (totalProfitBeforeDiscount * discountRatio);
+    }
 
     // إنشاء السيل
     final sale = SalesModel(
@@ -141,7 +158,7 @@ class SelectProductProvider extends StateNotifier<List<SelectedProdcutModel>> {
     // تحديث الإحصائيات اليومية
     totalProductSoldToday = state.fold(0, (sum, item) => sum + item.quantity);
     totalSalesToday = totalAfterDiscount.toInt();
-    totalProfitToday = totalAfterDiscount.toInt();
+    totalProfitToday = totalProfitAfterDiscount.toInt();
 
     final todaysTotalSold = TodaysTotalSold(
       totalProductSoldToday: totalProductSoldToday,
@@ -168,7 +185,6 @@ class SelectProductProvider extends StateNotifier<List<SelectedProdcutModel>> {
 
     clear();
 
-    // التأكد إن الـ context ما زال موجود قبل التنقل
     if (context.mounted) {
       Navigator.pop(context);
       Navigator.pop(context);
