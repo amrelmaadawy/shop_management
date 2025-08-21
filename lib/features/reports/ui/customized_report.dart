@@ -2,22 +2,27 @@ import 'package:flutter/material.dart';
 import 'package:small_managements/core/utils/app_colors.dart';
 import 'package:small_managements/features/reports/logic/pdf/generate_pdf.dart';
 import 'package:small_managements/features/reports/ui/widgets/custom_total_row.dart';
+import 'package:small_managements/features/sales/model/sold_product_model.dart';
 
 class CustomizedReport extends StatelessWidget {
   const CustomizedReport({
     super.key,
     required this.totalSales,
     required this.totalProductSold,
-    required this.totalProfit, required this.startDate, required this.endDate,
+    required this.totalProfit,
+    required this.startDate,
+    required this.endDate,
+    required this.soldProducts,
   });
   final double totalSales;
   final double totalProductSold;
   final double totalProfit;
   final String startDate;
   final String endDate;
+  final List<SoldProductModel> soldProducts;
   @override
   Widget build(BuildContext context) {
-                final isDark = Theme.of(context).brightness == Brightness.dark;
+    final isDark = Theme.of(context).brightness == Brightness.dark;
 
     return Scaffold(
       appBar: AppBar(
@@ -41,30 +46,51 @@ class CustomizedReport extends StatelessWidget {
               ),
               Divider(),
               CustomTotalsRow(totals: '$totalSales LE', label: 'Total Sales'),
-            SizedBox(height: 5,),
+              SizedBox(height: 5),
               CustomTotalsRow(
                 totals: '$totalProductSold Item',
                 label: 'Total Product Sold',
               ),
-                          SizedBox(height: 5,),
+              SizedBox(height: 5),
 
               CustomTotalsRow(totals: '$totalProfit LE', label: 'Total Profit'),
+              SizedBox(height: 10),
+              SizedBox(
+                height: 400,
+                child: ListView.separated(
+                  itemBuilder: (context, index) {
+                    return Row(
+                      children: [
+                        Text(soldProducts[index].productName),
+                        Spacer(),
+                        Text("${soldProducts[index].quantity} Items Sold"),
+                      ],
+                    );
+                  },
+                  separatorBuilder: (context, index) => Divider(),
+                  itemCount: soldProducts.length,
+                ),
+              ),
               Spacer(),
               ElevatedButton(
                 onPressed: () async {
                   await generateAndPreviewPdf(
                     totalSales: '$totalSales',
                     totalProductSold: '$totalProductSold',
-                    totalProfit: '$totalProfit', startDate: startDate, endDate: endDate,
+                    totalProfit: '$totalProfit',
+                    startDate: startDate,
+                    endDate: endDate, soldProducts: soldProducts,
                   );
                 },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor:isDark? AppColors.kBlueElevatedButtonDarkMode:AppColors.kBlueElevatedButtonLightMode,
+                  backgroundColor: isDark
+                      ? AppColors.kBlueElevatedButtonDarkMode
+                      : AppColors.kBlueElevatedButtonLightMode,
                 ),
                 child: Text(
                   'Exprot Reprot',
                   style: TextStyle(
-                    color:isDark? Colors.black:Colors.white,
+                    color: isDark ? Colors.black : Colors.white,
                     fontWeight: FontWeight.bold,
                   ),
                 ),

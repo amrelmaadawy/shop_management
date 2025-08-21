@@ -1,6 +1,7 @@
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:printing/printing.dart';
+import 'package:small_managements/features/sales/model/sold_product_model.dart';
 
 Future<void> generateAndPreviewPdf({
   required String totalSales,
@@ -8,6 +9,7 @@ Future<void> generateAndPreviewPdf({
   required String totalProfit,
   required String startDate,
   required String endDate,
+  required List<SoldProductModel>soldProducts
 }) async {
   final pdf = pw.Document();
 
@@ -66,6 +68,23 @@ Future<void> generateAndPreviewPdf({
                 ),
               ],
             ),
+            pw.SizedBox(height: 10),
+          pw.SizedBox(
+                height: 400,
+                child: pw.ListView.separated(
+                  itemBuilder: (context, index) {
+                    return pw. Row(
+                      children: [
+                        pw.Text(soldProducts[index].productName),
+                        pw.Spacer(),
+                        pw.Text("${soldProducts[index].quantity} Items Sold"),
+                      ],
+                    );
+                  },
+                  separatorBuilder: (context, index) => pw.Divider(),
+                  itemCount: soldProducts.length,
+                ),
+              ),
           ],
         );
       },

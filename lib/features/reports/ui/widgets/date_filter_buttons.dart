@@ -34,7 +34,7 @@ class DateFilterButtons extends StatelessWidget {
             widget.endDateController.clear();
           },
           child: Text(
-           S.of(context).reset,
+            S.of(context).reset,
             style: TextStyle(
               color: isDark ? Colors.white : AppColors.kBlackTextLightMode,
               fontWeight: FontWeight.bold,
@@ -66,6 +66,7 @@ class DateFilterButtons extends StatelessWidget {
                 startDate,
                 endDate,
               );
+              final soldProdcuts = getSoldProductsInRange(widget.ref,startDate,endDate);
               Navigator.push(
                 context,
                 MaterialPageRoute(
@@ -74,7 +75,7 @@ class DateFilterButtons extends StatelessWidget {
                     totalProductSold: totalProductsSold,
                     totalProfit: totalProfit,
                     startDate: widget.startDateController.text,
-                    endDate: widget.endDateController.text,
+                    endDate: widget.endDateController.text, soldProducts: soldProdcuts,
                   ),
                 ),
               );

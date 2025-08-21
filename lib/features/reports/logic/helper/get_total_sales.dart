@@ -1,5 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:small_managements/features/sales/logic/provider/sales_provider.dart';
+import 'package:small_managements/features/sales/model/sold_product_model.dart';
 
 double getTotalSalesInRange(
   WidgetRef ref,
@@ -72,4 +73,39 @@ double getTotalProfitInRange(
 
     return sum + saleProfit;
   });
+}
+List<SoldProductModel> getSoldProductsInRange(
+  WidgetRef ref,
+  DateTime startDate,
+  DateTime endDate,
+) {
+  final salesInRange = ref.watch(salesProductProvider).where((sale) {
+    return sale.dateTime.isAfter(startDate.subtract(const Duration(seconds: 1))) &&
+           sale.dateTime.isBefore(endDate.add(const Duration(days: 1)));
+  });
+
+  final Map<String, SoldProductModel> summary = {};
+
+  for (final sale in salesInRange) {
+    for (final product in sale.soldProducts) {
+      if (summary.containsKey(product.productName)) {
+        final existing = summary[product.productName]!;
+        summary[product.productName] = SoldProductModel(
+          productName: existing.productName,
+          sellingPrice: existing.sellingPrice,
+          buyingPrice: existing.buyingPrice,
+          quantity: existing.quantity + product.quantity,
+        );
+      } else {
+        summary[product.productName] = SoldProductModel(
+          productName: product.productName,
+          sellingPrice: product.sellingPrice,
+          buyingPrice: product.buyingPrice,
+          quantity: product.quantity,
+        );
+      }
+    }
+  }
+
+  return summary.values.toList();
 }

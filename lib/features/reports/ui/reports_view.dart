@@ -42,6 +42,7 @@ class _ReportsViewState extends ConsumerState<ReportsView> {
     );
     final totalProfit = getTotalProfitInRange(ref, startDate, endDate);
     final topSellingItems = getTopSellingProducts(ref);
+    final soldProducts=getSoldProductsInRange(ref,startDate,endDate);
     return Scaffold(
       body: SafeArea(
         child: Padding(
@@ -63,8 +64,19 @@ class _ReportsViewState extends ConsumerState<ReportsView> {
                           ),
                         ),
                       ),
-                      PrintIcon(totalSales: totalSales, totalProductsSold: totalProductsSold, totalProfit: totalProfit, startDate: startDate, endDate: endDate),
-                      FilterDateIcon(ref: ref, startDateController: startDateController, endDateController: endDateController),
+                      PrintIcon(
+                        totalSales: totalSales,
+                        totalProductsSold: totalProductsSold,
+                        totalProfit: totalProfit,
+                        startDate: startDate,
+                        endDate: endDate,
+                        soldProducts:soldProducts ,
+                      ),
+                      FilterDateIcon(
+                        ref: ref,
+                        startDateController: startDateController,
+                        endDateController: endDateController,
+                      ),
                     ],
                   ),
                 ),
@@ -104,8 +116,14 @@ class _ReportsViewState extends ConsumerState<ReportsView> {
                   itemBuilder: (context, index) => TopSellingItem(
                     productName: topSellingItems[index].key.productName,
                     image: topSellingItems[index].key.image != null
-                        ? Image.file(File(topSellingItems[index].key.image!),fit: BoxFit.cover,)
-                        : Image.asset('assets/images/product.png',fit: BoxFit.cover,),
+                        ? Image.file(
+                            File(topSellingItems[index].key.image!),
+                            fit: BoxFit.cover,
+                          )
+                        : Image.asset(
+                            'assets/images/product.png',
+                            fit: BoxFit.cover,
+                          ),
                     quantitySold: topSellingItems[index].value,
                   ),
                 ),
