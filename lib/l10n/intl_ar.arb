@@ -175,5 +175,7 @@
   "pleaseEnterStartDate":"يرجى إدخال تاريخ البداية",
   "@pleaseEnterStartDate": {},
   "pleaseEnterEndDate":"يرجى إدخال تاريخ النهاية",
-  "@pleaseEnterEndDate": {}
+  "@pleaseEnterEndDate": {},
+  "productWithTheSameNameAlreadyExists":"يوجد منتج بنفس الاسم",
+  "@productWithTheSameNameAlreadyExists": {}
 }

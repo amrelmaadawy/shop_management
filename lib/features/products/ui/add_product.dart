@@ -128,16 +128,18 @@ class _AddProductState extends ConsumerState<AddProduct> {
                                 image: imagePath,
                                 id: 0,
                                 sellingPrice: sellingPriceController.text,
-                              );
-                              ref
-                                  .read(productProviderNotifier.notifier)
-                                  .addProduct(product);
-                              categoryController.clear();
-                              productNameController.clear();
-                              buyingPriceController.clear();
-                              sellingPriceController.clear();
-                              quantityController.clear();
-                              Navigator.pop(context);
+                            );
+
+                                ref
+                                    .read(productProviderNotifier.notifier)
+                                    .addProduct(product,context);
+                                categoryController.clear();
+                                productNameController.clear();
+                                buyingPriceController.clear();
+                                sellingPriceController.clear();
+                                quantityController.clear();
+                                Navigator.pop(context);
+                              
                             }
                           } else {
                             autovalidateMode = AutovalidateMode.always;

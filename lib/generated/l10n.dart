@@ -723,6 +723,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Product with the same name already exists`
+  String get productWithTheSameNameAlreadyExists {
+    return Intl.message(
+      'Product with the same name already exists',
+      name: 'productWithTheSameNameAlreadyExists',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

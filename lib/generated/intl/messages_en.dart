@@ -99,6 +99,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "product": MessageLookupByLibrary.simpleMessage("Product"),
     "productImage": MessageLookupByLibrary.simpleMessage("Product Image"),
     "productName": MessageLookupByLibrary.simpleMessage("Product Name"),
+    "productWithTheSameNameAlreadyExists": MessageLookupByLibrary.simpleMessage(
+      "Product with the same name already exists",
+    ),
     "products": MessageLookupByLibrary.simpleMessage("Products"),
     "quantity": MessageLookupByLibrary.simpleMessage("Quantity"),
     "quantitySold": MessageLookupByLibrary.simpleMessage("Quantity Sold"),
