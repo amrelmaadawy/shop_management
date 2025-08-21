@@ -9,6 +9,7 @@ import 'package:small_managements/features/sales/model/sales_model.dart';
 import 'package:small_managements/features/sales/model/selected_prodcut_model.dart';
 import 'package:small_managements/features/sales/model/sold_product_model.dart';
 import 'package:small_managements/features/sales/model/todays_total_sold.dart';
+import 'package:small_managements/generated/l10n.dart';
 
 class SelectProductProvider extends StateNotifier<List<SelectedProdcutModel>> {
   SelectProductProvider() : super([]);
@@ -91,6 +92,46 @@ class SelectProductProvider extends StateNotifier<List<SelectedProdcutModel>> {
   }) async {
     if (state.isEmpty) return;
 
+    final products = ref.watch(productProviderNotifier); // كل المنتجات
+
+    // تحقق من توفر الكمية قبل الخصم والحفظ
+    for (final item in state) {
+      final product = products.firstWhere(
+        (p) => p.productName == item.product.productName,
+        orElse: () => ProductModel(
+          productName: '',
+          buyingPrice: '0',
+          sellingPrice: '0',
+          quantity: '0',
+          category: '',
+          id: 0,
+        ),
+      );
+
+      if (product.productName.isEmpty) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Product ${item.product.productName} not found'),
+          ),
+        );
+        return;
+      }
+
+      if (item.quantity > int.parse(product.quantity)) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            backgroundColor: const Color.fromARGB(255, 197, 16, 3),
+            content: Text(
+              '${S.of(context).notEnoughStockFor} ${item.product.productName}.${S.of(context).available} : ${product.quantity}',
+            
+            ),
+          ),
+        );
+        Navigator.pop(context);
+        return;
+      }
+    }
+
     // تجهيز قائمة المنتجات المباعة
     final soldProducts = state.map((item) {
       return SoldProductModel(
@@ -101,16 +142,13 @@ class SelectProductProvider extends StateNotifier<List<SelectedProdcutModel>> {
       );
     }).toList();
 
-    // إجمالي المبيعات قبل الخصم
     final totalBeforeDiscount = soldProducts.fold<double>(
       0,
       (sum, item) => sum + (item.sellingPrice * item.quantity),
     );
 
-    // إجمالي المبيعات بعد الخصم
     final totalAfterDiscount = totalBeforeDiscount - discount;
 
-    // تحقق من المبلغ المدفوع
     if (paid < totalAfterDiscount) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
@@ -125,26 +163,22 @@ class SelectProductProvider extends StateNotifier<List<SelectedProdcutModel>> {
       return;
     }
 
-    // حساب الباقي
     final change = paid - totalAfterDiscount;
 
-    // إجمالي الربح قبل الخصم
     final totalProfitBeforeDiscount = soldProducts.fold<double>(
       0,
       (sum, item) =>
           sum + ((item.sellingPrice - item.buyingPrice) * item.quantity),
     );
 
-    // توزيع الخصم على الربح بشكل نسبي
     double totalProfitAfterDiscount = totalProfitBeforeDiscount;
     if (discount > 0 && totalBeforeDiscount > 0) {
-      final discountRatio = discount / totalBeforeDiscount; // نسبة الخصم
+      final discountRatio = discount / totalBeforeDiscount;
       totalProfitAfterDiscount =
           totalProfitBeforeDiscount -
           (totalProfitBeforeDiscount * discountRatio);
     }
 
-    // إنشاء السيل
     final sale = SalesModel(
       soldProducts: soldProducts,
       paid: paid,
@@ -155,7 +189,6 @@ class SelectProductProvider extends StateNotifier<List<SelectedProdcutModel>> {
       discount: discount,
     );
 
-    // تحديث الإحصائيات اليومية
     totalProductSoldToday = state.fold(0, (sum, item) => sum + item.quantity);
     totalSalesToday = totalAfterDiscount.toInt();
     totalProfitToday = totalProfitAfterDiscount.toInt();
@@ -166,18 +199,15 @@ class SelectProductProvider extends StateNotifier<List<SelectedProdcutModel>> {
       totalProfitToday: totalProfitToday,
     );
 
-    // حفظ البيانات
     await todaySoldBox.add(todaysTotalSold);
     await box.add(sale);
 
-    // تقليل الكميات من المخزون
     for (final item in soldProducts) {
       await ref
           .read(productProviderNotifier.notifier)
           .decreaseProductQuantity(item.productName, item.quantity);
     }
 
-    // تحديث القائمة في الـ UI
     ref.read(salesProductProvider.notifier).state = box.values
         .toList()
         .reversed

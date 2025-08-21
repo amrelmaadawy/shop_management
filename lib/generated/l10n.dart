@@ -733,6 +733,21 @@ class S {
       args: [],
     );
   }
+
+  /// `Not enough stock for `
+  String get notEnoughStockFor {
+    return Intl.message(
+      'Not enough stock for ',
+      name: 'notEnoughStockFor',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Available`
+  String get available {
+    return Intl.message('Available', name: 'available', desc: '', args: []);
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

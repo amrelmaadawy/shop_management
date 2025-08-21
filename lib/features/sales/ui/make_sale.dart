@@ -87,7 +87,7 @@ class _MakeSaleState extends ConsumerState<MakeSale> {
                           SnackBar(
                             content: Text(
                               S.of(context).pleaseSelectAtLeastOneProduct,
-                              style: TextStyle(color:isDark? Colors.white:AppColors.kBlackTextLightMode),
+                              style: TextStyle(color: Colors.white),
                             ),
                             backgroundColor: const Color.fromARGB(255, 153, 11, 1),
                           ),

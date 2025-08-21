@@ -177,5 +177,9 @@
       "pleaseEnterEndDate":"Please Enter End Date",
     "@pleaseEnterEndDate":{},
     "productWithTheSameNameAlreadyExists":"Product with the same name already exists",
-    "@productWithTheSameNameAlreadyExists": {}
+    "@productWithTheSameNameAlreadyExists": {},
+    "notEnoughStockFor":"Not enough stock for ",
+    "@notEnoughStockFor":{},
+     "available":"Available",
+    "@available":{}
 }

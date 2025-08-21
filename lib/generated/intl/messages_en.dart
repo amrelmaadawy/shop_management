@@ -41,6 +41,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "areYouSureYouWantToDelet": MessageLookupByLibrary.simpleMessage(
       "Are You Sure You Want To delete",
     ),
+    "available": MessageLookupByLibrary.simpleMessage("Available"),
     "businessInfo": MessageLookupByLibrary.simpleMessage("Business Info"),
     "buyingPrice": MessageLookupByLibrary.simpleMessage("Buying Price"),
     "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
@@ -68,6 +69,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "language": MessageLookupByLibrary.simpleMessage("Language"),
     "makeSale": MessageLookupByLibrary.simpleMessage("Make Sale"),
     "no": MessageLookupByLibrary.simpleMessage("No"),
+    "notEnoughStockFor": MessageLookupByLibrary.simpleMessage(
+      "Not enough stock for ",
+    ),
     "optional": MessageLookupByLibrary.simpleMessage("Optional"),
     "orders": MessageLookupByLibrary.simpleMessage("Orders"),
     "paid": MessageLookupByLibrary.simpleMessage("paid"),

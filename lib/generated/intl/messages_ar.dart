@@ -41,6 +41,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "areYouSureYouWantToDelet": MessageLookupByLibrary.simpleMessage(
       "هل أنت متأكد أنك تريد الحذف؟",
     ),
+    "available": MessageLookupByLibrary.simpleMessage("المتاح"),
     "businessInfo": MessageLookupByLibrary.simpleMessage(
       "معلومات النشاط التجاري",
     ),
@@ -68,6 +69,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "language": MessageLookupByLibrary.simpleMessage("اللغة"),
     "makeSale": MessageLookupByLibrary.simpleMessage("إجراء عملية بيع"),
     "no": MessageLookupByLibrary.simpleMessage("لا"),
+    "notEnoughStockFor": MessageLookupByLibrary.simpleMessage(
+      "لايوجد مخزون يكفي من ",
+    ),
     "optional": MessageLookupByLibrary.simpleMessage("اختياري"),
     "orders": MessageLookupByLibrary.simpleMessage("الطلبات"),
     "paid": MessageLookupByLibrary.simpleMessage("المدفوع"),

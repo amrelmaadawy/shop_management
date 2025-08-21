@@ -177,5 +177,9 @@
   "pleaseEnterEndDate":"يرجى إدخال تاريخ النهاية",
   "@pleaseEnterEndDate": {},
   "productWithTheSameNameAlreadyExists":"يوجد منتج بنفس الاسم",
-  "@productWithTheSameNameAlreadyExists": {}
+  "@productWithTheSameNameAlreadyExists": {},
+  "notEnoughStockFor":"لايوجد مخزون يكفي من ",
+    "@notEnoughStockFor":{},
+    "available":"المتاح",
+    "@available":{}
 }
