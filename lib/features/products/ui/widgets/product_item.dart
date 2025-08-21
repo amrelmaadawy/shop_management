@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:small_managements/core/utils/app_colors.dart';
@@ -8,15 +7,14 @@ import 'package:small_managements/features/products/ui/add_product.dart';
 import 'package:small_managements/generated/l10n.dart';
 
 class ProductItem extends ConsumerWidget {
-  const ProductItem( {
-    
+  const ProductItem({
     super.key,
     required this.productName,
     required this.quantity,
     required this.price,
     required this.index,
     required this.productModel,
-    required this.image
+    required this.image,
   });
   final String productName;
   final String quantity;
@@ -26,7 +24,7 @@ class ProductItem extends ConsumerWidget {
   final Widget image;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-        final isDark = Theme.of(context).brightness == Brightness.dark;
+    final isDark = Theme.of(context).brightness == Brightness.dark;
 
     return SizedBox(
       width: MediaQuery.of(context).size.width,
@@ -36,24 +34,30 @@ class ProductItem extends ConsumerWidget {
         children: [
           ClipRRect(
             borderRadius: BorderRadiusGeometry.circular(12),
-            child:
-            SizedBox(width: 80,height: 80,child: image,)
-            
+            child: SizedBox(width: 80, height: 80, child: image),
           ),
           SizedBox(width: 10),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Text(
-                productName,
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-              ),
-              Text(
-                '$price . $quantity ${S.of(context).inStock}',
-                style: TextStyle(color:isDark? AppColors.kUnselectedItemDarkMode:AppColors.kUnselectedItemLightMode, fontSize: 14),
-              ),
-            ],
+          SizedBox(
+            width: MediaQuery.of(context).size.width * 0.42,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Text(
+                  productName,
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                ),
+                Text(
+                  '$price ${S.of(context).LE} . $quantity ${S.of(context).inStock}',
+                  style: TextStyle(
+                    color: isDark
+                        ? AppColors.kUnselectedItemDarkMode
+                        : AppColors.kUnselectedItemLightMode,
+                    fontSize: 14,
+                  ),
+                ),
+              ],
+            ),
           ),
           Spacer(),
           IconButton(
