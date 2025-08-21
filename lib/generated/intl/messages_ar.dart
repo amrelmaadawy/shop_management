@@ -23,6 +23,7 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
     "LE": MessageLookupByLibrary.simpleMessage("ج.م"),
+    "ShopName": MessageLookupByLibrary.simpleMessage("اسم المتجر"),
     "TotalSalesToday": MessageLookupByLibrary.simpleMessage(
       "إجمالي المبيعات اليوم",
     ),
@@ -32,7 +33,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "addCategory": MessageLookupByLibrary.simpleMessage("إضافة فئة"),
     "addImage": MessageLookupByLibrary.simpleMessage("إضافة صورة"),
     "addNewCategory": MessageLookupByLibrary.simpleMessage("إضافة فئة جديدة"),
+    "addPhoneNumber": MessageLookupByLibrary.simpleMessage("اضيف رقم الهاتف"),
     "addProduct": MessageLookupByLibrary.simpleMessage("إضافة منتج"),
+    "addShopName": MessageLookupByLibrary.simpleMessage("اضيف اسم المتجر"),
     "all": MessageLookupByLibrary.simpleMessage("الكل"),
     "allSales": MessageLookupByLibrary.simpleMessage("كل المبيعات"),
     "appPrefrance": MessageLookupByLibrary.simpleMessage("تفضيلات التطبيق"),
@@ -60,6 +63,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "dateRange": MessageLookupByLibrary.simpleMessage("تصفية حسب التاريخ"),
     "deleteImage": MessageLookupByLibrary.simpleMessage("حذف الصورة"),
     "discount": MessageLookupByLibrary.simpleMessage("الخصم"),
+    "empty": MessageLookupByLibrary.simpleMessage("فارغ"),
     "from": MessageLookupByLibrary.simpleMessage("من"),
     "home": MessageLookupByLibrary.simpleMessage("الرئيسية"),
     "homeAppBar": MessageLookupByLibrary.simpleMessage("نظرة عامة"),
@@ -138,6 +142,12 @@ class MessageLookup extends MessageLookupByLibrary {
     "stock": MessageLookupByLibrary.simpleMessage("المخزون"),
     "tapToAdd": MessageLookupByLibrary.simpleMessage(
       "اضغط لإضافة صورة من المعرض أو التقاط صورة جديدة.",
+    ),
+    "thePhoneNumberCannotBeEmpty": MessageLookupByLibrary.simpleMessage(
+      "رقم الهاتف لايمكن ان يكون فارغ",
+    ),
+    "theShopNameCannotBeEmpty": MessageLookupByLibrary.simpleMessage(
+      "اسم المتجر لا يمكن ان يكون فارغ",
     ),
     "thereIsNoProducts": MessageLookupByLibrary.simpleMessage("لا توجد منتجات"),
     "thereIsNoSales": MessageLookupByLibrary.simpleMessage("لا توجد مبيعات"),

@@ -185,5 +185,17 @@
     "resetApplication":"اعادة ضبط مصنع",
     "@resetApplication":{},
     "areYouSureYouWantToResetTheApp":"هل انت متاكد من انك تريد ضبط مصنع التطبيق",
-    "@areYouSureYouWantToResetTheApp":{}
+    "@areYouSureYouWantToResetTheApp":{},
+    "addShopName":"اضيف اسم المتجر",
+    "@addShopName":{},
+    "ShopName":"اسم المتجر",
+    "@ShopName":{},
+    "theShopNameCannotBeEmpty":"اسم المتجر لا يمكن ان يكون فارغ",
+    "@theShopNameCannotBeEmpty":{},
+    "addPhoneNumber":"اضيف رقم الهاتف",
+    "@addPhoneNumber":{},
+    "thePhoneNumberCannotBeEmpty":"رقم الهاتف لايمكن ان يكون فارغ",
+    "@thePhoneNumberCannotBeEmpty":{},
+     "empty":"فارغ",
+    "@empty":{}
 }

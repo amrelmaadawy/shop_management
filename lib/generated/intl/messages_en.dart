@@ -23,6 +23,7 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
     "LE": MessageLookupByLibrary.simpleMessage("LE"),
+    "ShopName": MessageLookupByLibrary.simpleMessage("Shop Name"),
     "TotalSalesToday": MessageLookupByLibrary.simpleMessage(
       "Total Sales Today",
     ),
@@ -32,7 +33,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "addCategory": MessageLookupByLibrary.simpleMessage("Add Category"),
     "addImage": MessageLookupByLibrary.simpleMessage("Add Image"),
     "addNewCategory": MessageLookupByLibrary.simpleMessage("Add New Category"),
+    "addPhoneNumber": MessageLookupByLibrary.simpleMessage("Add Phone Number"),
     "addProduct": MessageLookupByLibrary.simpleMessage("Add Product"),
+    "addShopName": MessageLookupByLibrary.simpleMessage("Add Shop Name"),
     "all": MessageLookupByLibrary.simpleMessage("All"),
     "allSales": MessageLookupByLibrary.simpleMessage("All Sales"),
     "appPrefrance": MessageLookupByLibrary.simpleMessage("App Prefrances"),
@@ -60,6 +63,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "dateRange": MessageLookupByLibrary.simpleMessage("Date Filter"),
     "deleteImage": MessageLookupByLibrary.simpleMessage("Delete Image"),
     "discount": MessageLookupByLibrary.simpleMessage("discount"),
+    "empty": MessageLookupByLibrary.simpleMessage("Empty"),
     "from": MessageLookupByLibrary.simpleMessage("From"),
     "home": MessageLookupByLibrary.simpleMessage("Home"),
     "homeAppBar": MessageLookupByLibrary.simpleMessage("Overview"),
@@ -142,6 +146,12 @@ class MessageLookup extends MessageLookupByLibrary {
     "stock": MessageLookupByLibrary.simpleMessage("Stock"),
     "tapToAdd": MessageLookupByLibrary.simpleMessage(
       "Tap to add an image from your gallery or take a new one.",
+    ),
+    "thePhoneNumberCannotBeEmpty": MessageLookupByLibrary.simpleMessage(
+      "The phone number cannot be empty",
+    ),
+    "theShopNameCannotBeEmpty": MessageLookupByLibrary.simpleMessage(
+      "The shop name cannot be empty",
     ),
     "thereIsNoProducts": MessageLookupByLibrary.simpleMessage(
       "There is no products",

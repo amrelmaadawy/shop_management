@@ -142,14 +142,14 @@ class _SettingsViewState extends ConsumerState<SettingsView> {
                       context: context,
                       builder: (BuildContext context) {
                         return AlertDialog(
-                          title: Text('Add Shop Name'),
+                          title: Text(S.of(context).addShopName),
                           content: CustomTextFormField(
                             controller: shopNameController,
                             keyboardType: TextInputType.text,
-                            labelText: 'Shop Name',
+                            labelText:S.of(context).shopName,
                             validator: (value) {
                               if (value!.isEmpty) {
-                                return 'The shop name cannot be empty';
+                                return S.of(context).theShopNameCannotBeEmpty;
                               }
                               return null;
                             },
@@ -171,13 +171,13 @@ class _SettingsViewState extends ConsumerState<SettingsView> {
                                   Navigator.pop(context);
                                 }
                               },
-                              child: Text('Save'),
+                              child: Text(S.of(context).save),
                             ),
                             ElevatedButton(
                               onPressed: () {
                                 Navigator.pop(context);
                               },
-                              child: Text('Cancel'),
+                              child: Text(S.of(context).cancel),
                             ),
                           ],
                         );
@@ -187,7 +187,7 @@ class _SettingsViewState extends ConsumerState<SettingsView> {
                   child: CustomSettingsRow(
                     icon: Icon(Icons.store_outlined),
                     text: S.of(context).shopName,
-                    widget: Text(shopName ?? 'Shop Name'),
+                    widget: Text(shopName ?? S.of(context).shopName),
                   ),
                 ),
                 SizedBox(height: 15),
@@ -198,14 +198,14 @@ class _SettingsViewState extends ConsumerState<SettingsView> {
                       context: context,
                       builder: (BuildContext context) {
                         return AlertDialog(
-                          title: Text('Add phone Number'),
+                          title: Text(S.of(context).addPhoneNumber),
                           content: CustomTextFormField(
                             controller: phoneNumberController,
                             keyboardType: TextInputType.number,
-                            labelText: 'phone number',
+                            labelText: S.of(context).phoneNumber,
                             validator: (value) {
                               if (value!.isEmpty) {
-                                return 'The phone number cannot be empty';
+                                return S.of(context).thePhoneNumberCannotBeEmpty;
                               }
                               return null;
                             },
@@ -227,13 +227,13 @@ class _SettingsViewState extends ConsumerState<SettingsView> {
                                   Navigator.pop(context);
                                 }
                               },
-                              child: Text('Save'),
+                              child: Text(S.of(context).save),
                             ),
                             ElevatedButton(
                               onPressed: () {
                                 Navigator.pop(context);
                               },
-                              child: Text('Cancel'),
+                              child: Text(S.of(context).cancel),
                             ),
                           ],
                         );
@@ -243,7 +243,7 @@ class _SettingsViewState extends ConsumerState<SettingsView> {
                   child: CustomSettingsRow(
                     icon: Icon(CupertinoIcons.phone),
                     text: S.of(context).phoneNumber,
-                    widget: Text(phoneNumber ?? 'Empty'),
+                    widget: Text(phoneNumber ?? S.of(context).empty),
                   ),
                 ),
                 Spacer(),

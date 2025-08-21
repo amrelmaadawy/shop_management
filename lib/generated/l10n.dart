@@ -768,6 +768,56 @@ class S {
       args: [],
     );
   }
+
+  /// `Add Shop Name`
+  String get addShopName {
+    return Intl.message(
+      'Add Shop Name',
+      name: 'addShopName',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Shop Name`
+  String get ShopName {
+    return Intl.message('Shop Name', name: 'ShopName', desc: '', args: []);
+  }
+
+  /// `The shop name cannot be empty`
+  String get theShopNameCannotBeEmpty {
+    return Intl.message(
+      'The shop name cannot be empty',
+      name: 'theShopNameCannotBeEmpty',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Add Phone Number`
+  String get addPhoneNumber {
+    return Intl.message(
+      'Add Phone Number',
+      name: 'addPhoneNumber',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `The phone number cannot be empty`
+  String get thePhoneNumberCannotBeEmpty {
+    return Intl.message(
+      'The phone number cannot be empty',
+      name: 'thePhoneNumberCannotBeEmpty',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Empty`
+  String get empty {
+    return Intl.message('Empty', name: 'empty', desc: '', args: []);
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
