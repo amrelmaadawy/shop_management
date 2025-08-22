@@ -36,14 +36,17 @@ class TransactionItem extends StatelessWidget {
               Text('${S.of(context).client} ', style: TextStyle(fontSize: 16)),
               Text(clientName, style: TextStyle(fontSize: 16)),
               Spacer(),
-              Text('$price LE', style: TextStyle(fontSize: 16)),
+              Text(
+                '$price ${S.of(context).LE}',
+                style: TextStyle(fontSize: 16),
+              ),
             ],
           ),
           SizedBox(height: 5),
           Row(
             children: [
               Text(
-                '$itemCount Item',
+                '$itemCount ${S.of(context).item}',
                 style: TextStyle(
                   fontSize: 13,
                   color: isDark
