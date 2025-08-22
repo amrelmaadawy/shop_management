@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:small_managements/features/sales/logic/helper/time_converter.dart';
-import 'package:small_managements/features/sales/model/sales_model.dart';
+import 'package:small_managements/features/sales/logic/provider/sales_provider.dart';
 import 'package:small_managements/features/sales/ui/widgets/transaction_item.dart';
 import 'package:small_managements/generated/l10n.dart';
+class AllSalesView extends ConsumerWidget {
+  const AllSalesView({super.key});
 
-class AllSalesView extends StatelessWidget {
-  const AllSalesView({super.key, required this.saleItem});
-  final List<SalesModel> saleItem;
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final saleItem = ref.watch(salesProductProvider);
+
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(10.0),
@@ -29,14 +31,12 @@ class AllSalesView extends StatelessWidget {
                   ),
                 ],
               ),
-              SizedBox(
-                height: MediaQuery.of(context).size.height * 0.83,
-                child: ListView.separated(
-                  shrinkWrap: true,
-                  itemBuilder: (context, index) {
-                    return saleItem.isEmpty
-                        ? Center(child: Text(S.of(context).thereIsNoSales))
-                        : TransactionItem(
+              Expanded(
+                child: saleItem.isEmpty
+                    ? Center(child: Text(S.of(context).thereIsNoSales))
+                    : ListView.separated(
+                        itemBuilder: (context, index) {
+                          return TransactionItem(
                             clientName: saleItem[index].name.isEmpty
                                 ? S.of(context).unknown
                                 : saleItem[index].name,
@@ -50,10 +50,11 @@ class AllSalesView extends StatelessWidget {
                             ),
                             sale: saleItem[index],
                           );
-                  },
-                  separatorBuilder: (context, index) => SizedBox(height: 5),
-                  itemCount: saleItem.length,
-                ),
+                        },
+                        separatorBuilder: (context, index) =>
+                            SizedBox(height: 5),
+                        itemCount: saleItem.length,
+                      ),
               ),
             ],
           ),

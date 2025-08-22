@@ -95,7 +95,7 @@ class SalesView extends ConsumerWidget {
                         context,
                         MaterialPageRoute(
                           builder: (context) =>
-                              AllSalesView(saleItem: salesProducts),
+                              AllSalesView(),
                         ),
                       );
                     },

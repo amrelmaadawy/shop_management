@@ -123,7 +123,6 @@ class SelectProductProvider extends StateNotifier<List<SelectedProdcutModel>> {
             backgroundColor: const Color.fromARGB(255, 197, 16, 3),
             content: Text(
               '${S.of(context).notEnoughStockFor} ${item.product.productName}.${S.of(context).available} : ${product.quantity}',
-            
             ),
           ),
         );
@@ -219,5 +218,92 @@ class SelectProductProvider extends StateNotifier<List<SelectedProdcutModel>> {
       Navigator.pop(context);
       Navigator.pop(context);
     }
+  }
+
+  Future<void> returnMultipleProducts({
+    required SalesModel sale,
+    required Map<String, int> quantitiesToReturn,
+    required WidgetRef ref,
+  }) async {
+    final salesBox = Hive.box<SalesModel>(ksalesBox);
+    final productsBox = Hive.box<ProductModel>(productBox);
+
+    // 1) عدل على المنتجات في المخزون
+    for (var entry in quantitiesToReturn.entries) {
+      final productName = entry.key;
+      final returnQty = entry.value;
+
+      if (returnQty > 0) {
+        final productIndex = productsBox.values.toList().indexWhere(
+          (p) => p.productName == productName,
+        );
+        if (productIndex != -1) {
+          final product = productsBox.getAt(productIndex)!;
+          final quantity = int.parse(product.quantity) + returnQty;
+          final updatedProduct = product.copyWith(
+            quantity:'$quantity',
+          );
+          productsBox.putAt(productIndex, updatedProduct);
+        }
+      }
+    }
+
+    // 2) عدل على soldProducts
+    final updatedSoldProducts = sale.soldProducts
+        .map((sp) {
+          final returnQty = quantitiesToReturn[sp.productName] ?? 0;
+          if (returnQty > 0) {
+            final newQty = sp.quantity - returnQty;
+            if (newQty > 0) {
+              return SoldProductModel(
+                productName: sp.productName,
+                sellingPrice: sp.sellingPrice,
+                quantity: newQty,
+                buyingPrice: sp.buyingPrice,
+              );
+            } else {
+              return null; // المنتج رجع كله → هنشيله من الليستة
+            }
+          }
+          return sp;
+        })
+        .whereType<SoldProductModel>()
+        .toList();
+
+    // 3) احسب total جديد
+    final newTotal = updatedSoldProducts.fold<double>(
+      0,
+      (sum, p) => sum + (p.sellingPrice * p.quantity),
+    );
+
+    // 4) اعمل نسخة جديدة من عملية البيع
+    final updatedSale = SalesModel(
+      discount: sale.discount,
+      soldProducts: updatedSoldProducts,
+      paid: sale.paid,
+      dateTime: sale.dateTime,
+      total: newTotal,
+      change: sale.paid - newTotal,
+      name: sale.name,
+    );
+
+    // 5) عدل العملية في الـ Hive
+   // 5) عدل العملية في الـ Hive
+final saleIndex = salesBox.values.toList().indexOf(sale);
+if (saleIndex != -1) {
+  if (updatedSoldProducts.isEmpty) {
+    // مفيش منتجات خلاص → نشيل العملية من Hive
+    await salesBox.deleteAt(saleIndex);
+  } else {
+    // لسه في منتجات → نعدلها
+    await salesBox.putAt(saleIndex, updatedSale);
+  }
+}
+
+    // 6) حدث الـ provider
+    ref.read(salesProductProvider.notifier).state = salesBox.values
+        .toList()
+        .reversed
+        .toList();
   }
 }
