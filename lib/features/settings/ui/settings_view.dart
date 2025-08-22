@@ -9,7 +9,9 @@ import 'package:small_managements/core/hive_boxes.dart';
 import 'package:small_managements/core/utils/app_colors.dart';
 import 'package:small_managements/core/utils/custom_text_form_field.dart';
 import 'package:small_managements/features/settings/logic/setting_provider.dart';
+import 'package:small_managements/features/settings/ui/widgets/change_language_row.dart';
 import 'package:small_managements/features/settings/ui/widgets/custom_settings_row.dart';
+import 'package:small_managements/features/settings/ui/widgets/reset_application_button.dart';
 import 'package:small_managements/generated/l10n.dart';
 
 class SettingsView extends ConsumerStatefulWidget {
@@ -89,46 +91,7 @@ class _SettingsViewState extends ConsumerState<SettingsView> {
                   ),
                 ),
                 SizedBox(height: 15),
-                CustomSettingsRow(
-                  icon: Icon(Icons.language_outlined),
-                  text: S.of(context).language,
-                  widget: Container(
-                    width: 100,
-                    height: 40,
-                    decoration: BoxDecoration(
-                      color: isDark
-                          ? AppColors.kGreyElevatedButtonDarkMode
-                          : AppColors.kGreyElevatedButtonLightMode,
-                      borderRadius: BorderRadius.circular(15),
-                    ),
-                    child: Center(
-                      child: DropdownButton<Locale>(
-                        value: locale,
-                        items: const [
-                          DropdownMenuItem(
-                            value: Locale('en'),
-                            child: Text('English'),
-                          ),
-                          DropdownMenuItem(
-                            value: Locale('ar'),
-                            child: Text('العربية'),
-                          ),
-                        ],
-                        onChanged: (Locale? selected) async {
-                          if (selected != null) {
-                            ref.read(localizationProvider.notifier).state =
-                                selected;
-                            final prefs = await SharedPreferences.getInstance();
-                            await prefs.setString(
-                              'lang',
-                              selected.languageCode,
-                            );
-                          }
-                        },
-                      ),
-                    ),
-                  ),
-                ),
+                ChangeLanguageRow(isDark: isDark, locale: locale, ref: ref),
                 SizedBox(height: 15),
                 Text(
                   S.of(context).businessInfo,
@@ -247,50 +210,7 @@ class _SettingsViewState extends ConsumerState<SettingsView> {
                   ),
                 ),
                 Spacer(),
-                SizedBox(
-                  width: double.infinity,
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: isDark
-                          ? AppColors.kBlueElevatedButtonDarkMode
-                          : AppColors.kBlueElevatedButtonLightMode,
-                    ),
-                    onPressed: () async {
-                      showDialog(
-                        context: context,
-                        builder: (context) => AlertDialog(
-                          title: Text(S.of(context).areYouSureYouWantToResetTheApp),
-                          actions: [
-                            ElevatedButton(
-                              onPressed: () async {
-                                await Hive.deleteBoxFromDisk(totalSoldToday);
-                                await Hive.deleteBoxFromDisk(ksalesBox);
-                                await Hive.deleteBoxFromDisk(productBox);
-                                await Hive.deleteBoxFromDisk(categoriesBox);
-                                Navigator.pop(context);
-                              },
-                              child: Text(S.of(context).yes),
-                            ),
-                            ElevatedButton(
-                              onPressed: () {
-                                Navigator.pop(context);
-                              },
-                              child: Text(S.of(context).no),
-                            ),
-                          ],
-                        ),
-                      );
-                    },
-                    child: Text(
-                      S.of(context).resetApplication,
-                      style: TextStyle(
-                        color: isDark
-                            ? AppColors.kBlackTextLightMode
-                            : Colors.white,
-                      ),
-                    ),
-                  ),
-                ),
+                ResetApplicationButton(isDark: isDark),
               ],
             ),
           ),

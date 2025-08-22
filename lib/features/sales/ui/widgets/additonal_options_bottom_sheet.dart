@@ -20,7 +20,9 @@ class _AdditionalOptionsBottomSheetState
   TextEditingController paidController = TextEditingController();
   GlobalKey<FormState> key = GlobalKey();
   @override
-  Widget build(BuildContext context) { 
+  Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+
     return Padding(
       padding: EdgeInsets.only(
         bottom: MediaQuery.of(context).viewInsets.bottom,
@@ -54,7 +56,8 @@ class _AdditionalOptionsBottomSheetState
             CustomTextFormField(
               controller: discountController,
               keyboardType: TextInputType.text,
-              labelText: '${S.of(context).discount} (${S.of(context).optional})',
+              labelText:
+                  '${S.of(context).discount} (${S.of(context).optional})',
               validator: (v) {
                 return null;
               },
@@ -63,7 +66,8 @@ class _AdditionalOptionsBottomSheetState
             CustomTextFormField(
               controller: nameController,
               keyboardType: TextInputType.text,
-              labelText: '${S.of(context).clientName} (${S.of(context).optional})',
+              labelText:
+                  '${S.of(context).clientName} (${S.of(context).optional})',
               validator: (v) {
                 return null;
               },
@@ -73,11 +77,12 @@ class _AdditionalOptionsBottomSheetState
               width: MediaQuery.of(context).size.width,
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: AppColors.kBlueElevatedButtonDarkMode,
+                  backgroundColor: isDark
+                      ? AppColors.kBlueElevatedButtonDarkMode
+                      : AppColors.kBlueElevatedButtonLightMode,
                 ),
                 onPressed: () {
                   if (key.currentState!.validate()) {
-                  
                     ref
                         .read(selectProductProvider.notifier)
                         .confirmSale(
@@ -85,15 +90,15 @@ class _AdditionalOptionsBottomSheetState
                           name: nameController.text,
                           discount:
                               double.tryParse(discountController.text) ?? 0,
-                          ref: ref, context: context,
+                          ref: ref,
+                          context: context,
                         );
-                  
                   }
                 },
                 child: Text(
                   S.of(context).applyDiscount,
                   style: TextStyle(
-                    color: Colors.black,
+                    color: isDark ? Colors.black : Colors.white,
                     fontSize: 17,
                     fontWeight: FontWeight.bold,
                   ),
