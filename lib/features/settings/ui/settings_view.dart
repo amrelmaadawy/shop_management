@@ -3,9 +3,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:hive/hive.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:small_managements/core/hive_boxes.dart';
 import 'package:small_managements/core/utils/app_colors.dart';
 import 'package:small_managements/core/utils/custom_text_form_field.dart';
 import 'package:small_managements/features/settings/logic/setting_provider.dart';
