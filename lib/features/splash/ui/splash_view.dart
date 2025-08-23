@@ -51,7 +51,8 @@ class _SplashScreenState extends State<SplashView>
   Route _createRoute() {
     return PageRouteBuilder(
       transitionDuration: const Duration(milliseconds: 600),
-      pageBuilder: (context, animation, secondaryAnimation) => const MainHomeView(),
+      pageBuilder: (context, animation, secondaryAnimation) =>
+          const MainHomeView(),
       transitionsBuilder: (context, animation, secondaryAnimation, child) {
         final offsetAnimation = Tween<Offset>(
           begin: const Offset(1.0, 0.0),
@@ -70,6 +71,8 @@ class _SplashScreenState extends State<SplashView>
 
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+
     return Scaffold(
       body: SafeArea(
         child: FadeTransition(
@@ -82,7 +85,9 @@ class _SplashScreenState extends State<SplashView>
                 child: Padding(
                   padding: const EdgeInsets.all(20.0),
                   child: Image.asset(
-                    'assets/images/stocklylightmode.png',
+                    isDark
+                        ? 'assets/images/stocklydarkmode.png'
+                        : 'assets/images/stocklylightmode.png',
                     height: 220,
                   ),
                 ),
