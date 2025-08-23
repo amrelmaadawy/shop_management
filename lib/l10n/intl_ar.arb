@@ -207,5 +207,7 @@
     "item":"قطعه",
     "@item":{},
     "startDateCannotBeAfterEndDate":"تاريخ البدايه لا يمكن ان يكون بعد تارخ الانتهاء",
-    "@startDateCannotBeAfterEndDate":{}
+    "@startDateCannotBeAfterEndDate":{},
+     "thisMonth":"هذا الشهر",
+    "@thisMonth":{}
 }

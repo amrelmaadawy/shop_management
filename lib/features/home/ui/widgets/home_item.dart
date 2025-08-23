@@ -6,15 +6,11 @@ class HomeItem extends StatelessWidget {
     super.key,
     required this.title,
     required this.numbers,
-    required this.description,
     required this.imagePath,
-    required this.percentage,
   });
   final String title;
   final String numbers;
-  final String description;
   final String imagePath;
-  final String percentage;
   @override
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
@@ -38,32 +34,8 @@ class HomeItem extends StatelessWidget {
               numbers,
               style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
             ),
-            SizedBox(height: 5),
-            Text(
-              description,
-              style: TextStyle(
-                color: isDark
-                    ? AppColors.kUnselectedItemDarkMode
-                    : AppColors.kUnselectedItemLightMode,
-              ),
-            ),
-            SizedBox(height: 10),
-            // Container(
-            //   width: 80,
-            //   height: 30,
-            //   decoration: BoxDecoration(
-            //     borderRadius: BorderRadius.circular(15),
-            //     color: AppColors.kGreyElevatedButtonDarkMode,
-            //   ),
-            //   child: Row(
-            //     mainAxisAlignment: MainAxisAlignment.center,
-            //     children: [
-            //       Text(percentage),
-            //       SizedBox(width: 5),
-            //       Icon(Icons.north_east, size: 18),
-            //     ],
-            //   ),
-            // ),
+          
+          
           ],
         ),
         Spacer(),

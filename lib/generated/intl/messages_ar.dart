@@ -161,6 +161,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "thereIsNoSalesToday": MessageLookupByLibrary.simpleMessage(
       "لا توجد مبيعات اليوم",
     ),
+    "thisMonth": MessageLookupByLibrary.simpleMessage("هذا الشهر"),
     "thisWeek": MessageLookupByLibrary.simpleMessage("هذا الأسبوع"),
     "to": MessageLookupByLibrary.simpleMessage("إلى"),
     "topSellingItems": MessageLookupByLibrary.simpleMessage("الأكثر مبيعاً"),

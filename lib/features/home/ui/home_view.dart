@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:small_managements/features/home/ui/widgets/home_buttons.dart';
 import 'package:small_managements/features/home/ui/widgets/home_item.dart';
 import 'package:small_managements/features/products/logic/providers/product_providers.dart';
-import 'package:small_managements/features/sales/logic/provider/sales_provider.dart';
+import 'package:small_managements/features/reports/logic/helper/get_total_sales.dart';
 import 'package:small_managements/generated/l10n.dart';
 
 class HomeView extends ConsumerWidget {
@@ -11,6 +11,12 @@ class HomeView extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final now = DateTime.now();
+    final startDate = DateTime(now.year, now.month, 1);
+    final endDate = now;
+    final totalSales = getTotalSalesInRange(ref, startDate, endDate);
+
+    final totalProfit = getTotalProfitInRange(ref, startDate, endDate);
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -26,26 +32,19 @@ class HomeView extends ConsumerWidget {
             children: [
               HomeItem(
                 title: S.of(context).totalSalesThisMonth,
-                numbers:
-                    '${ref.watch(salesProductProvider).fold<double>(0, (sum, item) => sum + item.total)}',
-                description: S.of(context).compareTo,
+                numbers: '$totalSales ${S.of(context).LE}',
                 imagePath: 'assets/images/top sales.png',
-                percentage: '+ 16%',
               ),
               HomeItem(
                 title: S.of(context).Totalproduct,
                 numbers:
-                    '${ref.watch(productProviderNotifier).fold<int>(0, (sum, item) => sum + int.parse(item.quantity))}',
-                description: S.of(context).itemsInclude,
+                    '${ref.watch(productProviderNotifier).fold<int>(0, (sum, item) => sum + int.parse(item.quantity))} ${S.of(context).item}',
                 imagePath: 'assets/images/sales.png',
-                percentage: '+ 2%',
               ),
               HomeItem(
-                title: S.of(context).salesSummary,
-                numbers: '5000LE',
-                description: S.of(context).thisWeek,
+                title: '${S.of(context).totalProfit}${S.of(context).thisMonth}',
+                numbers: '$totalProfit ${S.of(context).LE}',
                 imagePath: 'assets/images/product.png',
-                percentage: '+ 10%',
               ),
               SizedBox(height: 20),
               HomeButtons(),
