@@ -10,7 +10,7 @@ class HomeItem extends StatelessWidget {
   });
   final String title;
   final String numbers;
-  final String imagePath;
+  final String imagePath; 
   @override
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
