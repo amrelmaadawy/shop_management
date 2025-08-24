@@ -61,9 +61,8 @@ class MyApp extends ConsumerWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData.light().copyWith(
         textTheme: ThemeData.dark().textTheme.apply(
-          
           fontFamily: 'RobotoSlab',
-          bodyColor:AppColors.kBlackTextLightMode,
+          bodyColor: AppColors.kBlackTextLightMode,
         ),
         bottomNavigationBarTheme: BottomNavigationBarThemeData(
           backgroundColor: Colors.white,
@@ -76,7 +75,9 @@ class MyApp extends ConsumerWidget {
           backgroundColor: AppColors.kButtonNavBarColorDarkMode,
           unselectedItemColor: AppColors.kUnselectedItemDarkMode,
           selectedItemColor: Colors.white,
-          unselectedLabelStyle: TextStyle(color: AppColors.kUnselectedItemDarkMode),
+          unselectedLabelStyle: TextStyle(
+            color: AppColors.kUnselectedItemDarkMode,
+          ),
         ),
         scaffoldBackgroundColor: AppColors.kBackgroundColor,
         textTheme: ThemeData.dark().textTheme.apply(fontFamily: 'RobotoSlab'),

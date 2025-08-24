@@ -59,7 +59,7 @@ class _OnboardingState extends State<Onboarding> {
           ? SizedBox(
               width: MediaQuery.of(context).size.width,
               child: Padding(
-                padding: const EdgeInsets.all(20.0),
+                padding: const EdgeInsets.all(40.0),
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     backgroundColor: isDark
@@ -86,51 +86,54 @@ class _OnboardingState extends State<Onboarding> {
           : SizedBox(
               height: 80,
 
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  TextButton(
-                    onPressed: () {
-                      pageController.jumpToPage(2);
-                    },
-                    child: Text(
-                      'Skip',
-                      style: TextStyle(
-                        color: AppColors.kBlueElevatedButtonDarkMode,
+              child: Padding(
+                padding: const EdgeInsets.only(bottom: 20),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    TextButton(
+                      onPressed: () {
+                        pageController.jumpToPage(2);
+                      },
+                      child: Text(
+                        'Skip',
+                        style: TextStyle(
+                          color: AppColors.kBlueElevatedButtonDarkMode,
+                        ),
                       ),
                     ),
-                  ),
-                  Center(
-                    child: SmoothPageIndicator(
-                      onDotClicked: (index) => pageController.animateToPage(
-                        index,
-                        duration: Duration(milliseconds: 500),
-                        curve: Curves.easeIn,
-                      ),
-                      controller: pageController,
-                      count: 3,
-                      effect: WormEffect(
-                        spacing: 16,
-                        dotColor: Colors.black26,
-                        activeDotColor: AppColors.kBlueElevatedButtonDarkMode,
-                      ),
-                    ),
-                  ),
-                  TextButton(
-                    onPressed: () {
-                      pageController.nextPage(
-                        duration: Duration(milliseconds: 500),
-                        curve: Curves.easeInOut,
-                      );
-                    },
-                    child: Text(
-                      'Next',
-                      style: TextStyle(
-                        color: AppColors.kBlueElevatedButtonDarkMode,
+                    Center(
+                      child: SmoothPageIndicator(
+                        onDotClicked: (index) => pageController.animateToPage(
+                          index,
+                          duration: Duration(milliseconds: 500),
+                          curve: Curves.easeIn,
+                        ),
+                        controller: pageController,
+                        count: 3,
+                        effect: WormEffect(
+                          spacing: 16,
+                          dotColor: Colors.black26,
+                          activeDotColor: AppColors.kBlueElevatedButtonDarkMode,
+                        ),
                       ),
                     ),
-                  ),
-                ],
+                    TextButton(
+                      onPressed: () {
+                        pageController.nextPage(
+                          duration: Duration(milliseconds: 500),
+                          curve: Curves.easeInOut,
+                        );
+                      },
+                      child: Text(
+                        'Next',
+                        style: TextStyle(
+                          color: AppColors.kBlueElevatedButtonDarkMode,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
     );

@@ -28,27 +28,29 @@ class HomeView extends ConsumerWidget {
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(10.0),
-          child: Column(
-            children: [
-              HomeItem(
-                title: S.of(context).totalSalesThisMonth,
-                numbers: '$totalSales ${S.of(context).LE}',
-                imagePath: 'assets/images/top sales.png',
-              ),
-              HomeItem(
-                title: S.of(context).Totalproduct,
-                numbers:
-                    '${ref.watch(productProviderNotifier).fold<int>(0, (sum, item) => sum + int.parse(item.quantity))} ${S.of(context).item}',
-                imagePath: 'assets/images/sales.png',
-              ),
-              HomeItem(
-                title: '${S.of(context).totalProfit}${S.of(context).thisMonth}',
-                numbers: '$totalProfit ${S.of(context).LE}',
-                imagePath: 'assets/images/product.png',
-              ),
-              SizedBox(height: 20),
-              HomeButtons(),
-            ],
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                HomeItem(
+                  title: S.of(context).totalSalesThisMonth,
+                  numbers: '$totalSales ${S.of(context).LE}',
+                  imagePath: 'assets/images/top sales.png',
+                ),
+                HomeItem(
+                  title: S.of(context).Totalproduct,
+                  numbers:
+                      '${ref.watch(productProviderNotifier).fold<int>(0, (sum, item) => sum + int.parse(item.quantity))} ${S.of(context).item}',
+                  imagePath: 'assets/images/sales.png',
+                ),
+                HomeItem(
+                  title: '${S.of(context).totalProfit}${S.of(context).thisMonth}',
+                  numbers: '$totalProfit ${S.of(context).LE}',
+                  imagePath: 'assets/images/product.png',
+                ),
+                SizedBox(height: 20),
+                HomeButtons(),
+              ],
+            ),
           ),
         ),
       ),
