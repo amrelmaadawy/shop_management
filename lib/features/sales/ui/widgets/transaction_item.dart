@@ -20,10 +20,12 @@ class TransactionItem extends ConsumerWidget {
   final String time;
   final int itemCount;
   final SalesModel sale;
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
     final returnProducts = ref.watch(selectProductProvider.notifier);
+
     return InkWell(
       onTap: () {
         Navigator.push(
@@ -35,16 +37,16 @@ class TransactionItem extends ConsumerWidget {
         children: [
           Row(
             children: [
-              Text('${S.of(context).client} ', style: TextStyle(fontSize: 16)),
-              Text(clientName, style: TextStyle(fontSize: 16)),
-              Spacer(),
+              Text('${S.of(context).client} ', style: const TextStyle(fontSize: 16)),
+              Text(clientName, style: const TextStyle(fontSize: 16)),
+              const Spacer(),
               Text(
                 '$price ${S.of(context).LE}',
-                style: TextStyle(fontSize: 16),
+                style: const TextStyle(fontSize: 16),
               ),
             ],
           ),
-          SizedBox(height: 5),
+          const SizedBox(height: 5),
           Row(
             children: [
               Text(
@@ -56,7 +58,7 @@ class TransactionItem extends ConsumerWidget {
                       : AppColors.kUnselectedItemLightMode,
                 ),
               ),
-              SizedBox(width: 5),
+              const SizedBox(width: 5),
               Text(
                 time,
                 style: TextStyle(
@@ -66,100 +68,76 @@ class TransactionItem extends ConsumerWidget {
                       : AppColors.kUnselectedItemLightMode,
                 ),
               ),
-              Spacer(),
-              IconButton(
-                onPressed: () async {
-                  final Map<String, int> quantitiesToReturn = {};
+              const Spacer(),
+             IconButton(
+  onPressed: () async {
+    // نجهز خريطة فاضية للكميات اللي هيرجعها اليوزر
+    final Map<String, int> quantitiesToReturn = {};
 
-                  final result = await showDialog<Map<String, int>>(
-                    context: context,
-                    builder: (context) {
-                      return AlertDialog(
-                        title: const Text("اختيار الكميات المرتجعة"),
-                        content: StatefulBuilder(
-                          builder: (context, setState) {
-                            return SizedBox(
-                              width: double.maxFinite,
-                              child: ListView.builder(
-                                shrinkWrap: true,
-                                itemCount: sale.soldProducts.length,
-                                itemBuilder: (context, index) {
-                                  final product = sale.soldProducts[index];
-                                  return Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Expanded(
-                                        child: Text(product.productName),
-                                      ),
-                                      IconButton(
-                                        icon: const Icon(Icons.remove),
-                                        onPressed: () {
-                                          setState(() {
-                                            final current =
-                                                quantitiesToReturn[product
-                                                    .productName] ??
-                                                0;
-                                            if (current > 0) {
-                                              quantitiesToReturn[product
-                                                      .productName] =
-                                                  current - 1;
-                                            }
-                                          });
-                                        },
-                                      ),
-                                      Text(
-                                        "${quantitiesToReturn[product.productName] ?? 0}",
-                                      ),
-                                      IconButton(
-                                        icon: const Icon(Icons.add),
-                                        onPressed: () {
-                                          setState(() {
-                                            final current =
-                                                quantitiesToReturn[product
-                                                    .productName] ??
-                                                0;
-                                            if (current < product.quantity) {
-                                              quantitiesToReturn[product
-                                                      .productName] =
-                                                  current + 1;
-                                            }
-                                          });
-                                        },
-                                      ),
-                                    ],
-                                  );
-                                },
-                              ),
-                            );
-                          },
-                        ),
-                        actions: [
-                          TextButton(
-                            onPressed: () => Navigator.pop(context, null),
-                            child: const Text("إلغاء"),
-                          ),
-                          ElevatedButton(
-                            onPressed: () =>
-                                Navigator.pop(context, quantitiesToReturn),
-                            child: const Text("تنفيذ"),
-                          ),
-                        ],
-                      );
-                    },
-                  );
+    // نعرض Dialog عشان المستخدم يحدد الكمية لكل منتج
+    await showDialog(
+      context: context,
+      builder: (ctx) {
+        return AlertDialog(
+          title: Text('select quantity'),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: sale.soldProducts.map((soldProduct) {
+              final controller = TextEditingController(text: "0");
+              return Row(
+                children: [
+                  Expanded(child: Text(soldProduct.productName)),
+                  SizedBox(
+                    width: 60,
+                    child: TextField(
+                      controller: controller,
+                      keyboardType: TextInputType.number,
+                      decoration: InputDecoration(
+                        hintText: "0",
+                      ),
+                      onChanged: (val) {
+                        final qty = int.tryParse(val) ?? 0;
+                        if (qty > 0 && qty <= soldProduct.quantity) {
+                          quantitiesToReturn[soldProduct.productName] = qty;
+                        } else {
+                          quantitiesToReturn[soldProduct.productName] = 0;
+                        }
+                      },
+                    ),
+                  ),
+                ],
+              );
+            }).toList(),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(ctx),
+              child: Text(S.of(context).cancel),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pop(ctx);
+              },
+              child: Text('confirm'),
+            ),
+          ],
+        );
+      },
+    );
 
-                  if (result != null && result.isNotEmpty) {
-                    // هنا بنده بس على اللوجيك
-                 returnProducts. returnMultipleProducts(
-                      sale: sale,
-                      quantitiesToReturn: result,
-                      ref: ref,
-                    );
-                  }
-                },
-                icon: const Icon(Icons.assignment_return, color: Colors.red),
-              ),
+    // بعد ما اليوزر يختار الكميات نرجع المنتجات
+    if (quantitiesToReturn.isNotEmpty) {
+      returnProducts.returnProductsFromSale(
+        sale: sale,
+        quantitiesToReturn: quantitiesToReturn,
+        ref: ref,
+        context: context,
+      );
+    }
+  },
+  icon: const Icon(Icons.assignment_return, color: Colors.red),
+)
+
             ],
           ),
         ],

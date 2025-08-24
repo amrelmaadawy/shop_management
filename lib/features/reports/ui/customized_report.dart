@@ -64,7 +64,6 @@ class CustomizedReport extends StatelessWidget {
               ),
               const SizedBox(height: 10),
 
-              // جدول المنتجات
               Expanded(
                 child: SingleChildScrollView(
                   scrollDirection: Axis.horizontal,

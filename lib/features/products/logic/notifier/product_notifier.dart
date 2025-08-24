@@ -69,4 +69,25 @@ class ProductProvider extends StateNotifier<List<ProductModel>> {
       state = box.values.toList();
     }
   }
+  Future<void> increaseProductQuantity(
+  String productName,
+  int quantityToAdd,
+) async {
+  final hiveBox = Hive.box<ProductModel>(productBox);
+
+  final index = hiveBox.values.toList().indexWhere(
+    (p) => p.productName == productName,
+  );
+
+  if (index != -1) {
+    final product = hiveBox.getAt(index)!;
+    final currentQuantity = int.parse(product.quantity);
+    final updatedProduct = product.copyWith(
+      quantity: (currentQuantity + quantityToAdd).toString(),
+    );
+    await hiveBox.putAt(index, updatedProduct);
+    state = hiveBox.values.toList();
+  }
+}
+
 }

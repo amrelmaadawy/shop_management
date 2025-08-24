@@ -7,6 +7,7 @@ import 'package:small_managements/core/utils/app_colors.dart';
 import 'package:small_managements/features/onboarding/UI/onboarding.dart';
 import 'package:small_managements/features/products/model/category_model.dart';
 import 'package:small_managements/features/products/model/product_model.dart';
+import 'package:small_managements/features/sales/model/return_transaction_model.dart';
 import 'package:small_managements/features/sales/model/sales_model.dart';
 import 'package:small_managements/features/sales/model/sold_product_model.dart';
 import 'package:small_managements/features/sales/model/todays_total_sold.dart';
@@ -27,10 +28,15 @@ Future<void> main() async {
   Hive.registerAdapter(SalesModelAdapter());
   Hive.registerAdapter(SoldProductModelAdapter());
   Hive.registerAdapter(TodaysTotalSoldAdapter());
+  Hive.registerAdapter(ReturnTransactionAdapter());
+  Hive.registerAdapter(ReturnedProductAdapter()); 
+
   await Hive.openBox<TodaysTotalSold>(totalSoldToday);
   await Hive.openBox<SalesModel>(ksalesBox);
   await Hive.openBox<ProductModel>(productBox);
   await Hive.openBox<CategoryModel>(categoriesBox);
+  await Hive.openBox<ReturnTransaction>(kReturnsBox);
+
   runApp(
     ProviderScope(
       overrides: [
