@@ -115,7 +115,6 @@ class SelectCategory extends StatelessWidget {
                               ),
                             ),
                           ),
-                          Spacer(),
                           ElevatedButton(
                             style: ElevatedButton.styleFrom(
                               backgroundColor: isDark
