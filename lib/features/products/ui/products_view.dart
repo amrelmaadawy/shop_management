@@ -1,6 +1,8 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:small_managements/core/utils/app_colors.dart';
+import 'package:small_managements/features/products/logic/helper/generate_product_pdf.dart';
 import 'package:small_managements/features/products/logic/providers/category_providers.dart';
 import 'package:small_managements/features/products/logic/providers/product_providers.dart';
 import 'package:small_managements/features/products/ui/add_product.dart';
@@ -15,6 +17,7 @@ class ProductsView extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
+          final products = ref.watch(productProviderNotifier);
 
     TextEditingController searchController = TextEditingController();
     searchController.addListener(() {
@@ -22,6 +25,21 @@ class ProductsView extends ConsumerWidget {
     });
     final categories = ref.watch(categoryProvider);
     return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          S.of(context).products,
+          style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+        ),
+        centerTitle: true,
+        actions: [
+          IconButton(
+            onPressed: () {
+              generateAndPreviewProductPdf(products);
+            },
+            icon: Icon(CupertinoIcons.printer),
+          ),
+        ],
+      ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: isDark
             ? AppColors.kBlueElevatedButtonDarkMode
@@ -32,18 +50,16 @@ class ProductsView extends ConsumerWidget {
             MaterialPageRoute(builder: (context) => AddProduct()),
           );
         },
-        child: Icon(Icons.add, color:isDark? AppColors.kBlackTextLightMode:Colors.white),
+        child: Icon(
+          Icons.add,
+          color: isDark ? AppColors.kBlackTextLightMode : Colors.white,
+        ),
       ),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(10.0),
           child: Column(
             children: [
-              Text(
-                S.of(context).products,
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-              ),
-              SizedBox(height: 10),
               CustomTextFormField(
                 validator: (value) {
                   if (value!.isEmpty) {

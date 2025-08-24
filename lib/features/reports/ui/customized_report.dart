@@ -15,12 +15,14 @@ class CustomizedReport extends StatelessWidget {
     required this.endDate,
     required this.soldProducts,
   });
+
   final double totalSales;
   final double totalProductSold;
   final double totalProfit;
   final String startDate;
   final String endDate;
   final List<SoldProductModel> soldProducts;
+
   @override
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
@@ -33,7 +35,7 @@ class CustomizedReport extends StatelessWidget {
             Navigator.pop(context);
             Navigator.pop(context);
           },
-          icon: Icon(Icons.arrow_back_ios_new_outlined),
+          icon: const Icon(Icons.arrow_back_ios_new_outlined),
         ),
       ),
       body: SafeArea(
@@ -43,36 +45,59 @@ class CustomizedReport extends StatelessWidget {
             children: [
               Text(
                 '${S.of(context).dateRange} : $startDate ${S.of(context).to} $endDate',
-                style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
+                style: const TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
               ),
-              Divider(),
-              CustomTotalsRow(totals: '$totalSales ${S.of(context).LE}', label: S.of(context).totalSales),
-              SizedBox(height: 5),
+              const Divider(),
+              CustomTotalsRow(
+                totals: '$totalSales ${S.of(context).LE}',
+                label: S.of(context).totalSales,
+              ),
+              const SizedBox(height: 5),
               CustomTotalsRow(
                 totals: '$totalProductSold ${S.of(context).item}',
                 label: S.of(context).totalProductSold,
               ),
-              SizedBox(height: 5),
+              const SizedBox(height: 5),
+              CustomTotalsRow(
+                totals: '$totalProfit ${S.of(context).LE}',
+                label: S.of(context).totalProfit,
+              ),
+              const SizedBox(height: 10),
 
-              CustomTotalsRow(totals: '$totalProfit ${S.of(context).LE}', label: S.of(context).totalProfit),
-              SizedBox(height: 10),
-              SizedBox(
-                height: 400,
-                child: ListView.separated(
-                  itemBuilder: (context, index) {
-                    return Row(
-                      children: [
-                        Text(soldProducts[index].productName),
-                        Spacer(),
-                        Text("${soldProducts[index].quantity} ${S.of(context).itemsSold}"),
-                      ],
-                    );
-                  },
-                  separatorBuilder: (context, index) => Divider(),
-                  itemCount: soldProducts.length,
+              // جدول المنتجات
+              Expanded(
+                child: SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: DataTable(
+                    headingRowColor: WidgetStatePropertyAll(
+                      isDark ? Colors.grey[800] : Colors.grey[300],
+                    ),
+                    border: TableBorder.all(color: Colors.grey),
+                    columns: [
+                      DataColumn(label: Text(S.of(context).product)),
+                      DataColumn(label: Text(S.of(context).quantity)),
+                      DataColumn(label: Text(S.of(context).sellingPrice)),
+                      DataColumn(label: Text(S.of(context).totalPrice)),
+                    ],
+                    rows: soldProducts.map((p) {
+                      final qty = p.quantity;
+                      final price = p.sellingPrice;
+                      final total = qty * price;
+
+                      return DataRow(
+                        cells: [
+                          DataCell(Text(p.productName)),
+                          DataCell(Text("${p.quantity}")),
+                          DataCell(Text("${p.sellingPrice} ${S.of(context).LE}")),
+                          DataCell(Text("$total ${S.of(context).LE}")),
+                        ],
+                      );
+                    }).toList(),
+                  ),
                 ),
               ),
-              Spacer(),
+
+              const SizedBox(height: 16),
               ElevatedButton(
                 onPressed: () async {
                   await generateAndPreviewPdf(
@@ -80,7 +105,8 @@ class CustomizedReport extends StatelessWidget {
                     totalProductSold: '$totalProductSold',
                     totalProfit: '$totalProfit',
                     startDate: startDate,
-                    endDate: endDate, soldProducts: soldProducts,
+                    endDate: endDate,
+                    soldProducts: soldProducts,
                   );
                 },
                 style: ElevatedButton.styleFrom(
