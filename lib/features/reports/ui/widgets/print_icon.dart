@@ -25,6 +25,7 @@ class PrintIcon extends StatelessWidget {
       right: 0,
       child: IconButton(
         onPressed: () async {
+          
           await generateAndPreviewPdf(
             totalSales: '$totalSales',
             totalProductSold: '$totalProductsSold',

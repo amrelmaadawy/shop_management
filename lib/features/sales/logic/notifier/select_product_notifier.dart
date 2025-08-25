@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive/hive.dart';
 import 'package:small_managements/core/hive_boxes.dart';
+import 'package:small_managements/core/utils/app_colors.dart';
 import 'package:small_managements/features/products/logic/providers/product_providers.dart';
 import 'package:small_managements/features/products/model/product_model.dart';
 import 'package:small_managements/features/sales/logic/provider/sales_provider.dart';
@@ -113,6 +114,7 @@ class SelectProductProvider extends StateNotifier<List<SelectedProdcutModel>> {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text('Product ${item.product.productName} not found'),
+            backgroundColor: AppColors.kScaffoldMessageRedColors,
           ),
         );
         return;
@@ -121,9 +123,9 @@ class SelectProductProvider extends StateNotifier<List<SelectedProdcutModel>> {
       if (item.quantity > int.parse(product.quantity)) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            backgroundColor: const Color.fromARGB(255, 197, 16, 3),
+            backgroundColor: AppColors.kScaffoldMessageRedColors,
             content: Text(
-              '${S.of(context).notEnoughStockFor} ${item.product.productName}.${S.of(context).available} : ${product.quantity}',
+              '${S.of(context).notEnoughStockFor} ${item.product.productName}.${S.of(context).available} : ${product.quantity}', style: TextStyle(color: Colors.white),
             ),
           ),
         );
@@ -132,7 +134,6 @@ class SelectProductProvider extends StateNotifier<List<SelectedProdcutModel>> {
       }
     }
 
-    // تجهيز قائمة المنتجات المباعة
     final soldProducts = state.map((item) {
       return SoldProductModel(
         sellingPrice: double.parse(item.product.sellingPrice),
@@ -156,7 +157,7 @@ class SelectProductProvider extends StateNotifier<List<SelectedProdcutModel>> {
             'Error Please enter the correct paid amount',
             style: TextStyle(color: Colors.white),
           ),
-          backgroundColor: Color.fromARGB(255, 153, 11, 1),
+          backgroundColor: AppColors.kScaffoldMessageRedColors,
         ),
       );
       Navigator.pop(context);
@@ -222,187 +223,193 @@ class SelectProductProvider extends StateNotifier<List<SelectedProdcutModel>> {
   }
 
   Future<void> returnProductsFromSale({
-  required SalesModel sale,
-  required Map<String, int> quantitiesToReturn, // {productName: qty}
-  required WidgetRef ref,
-  required BuildContext context,
-}) async {
-  if (quantitiesToReturn.isEmpty) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('No quantities selected to return')),
-    );
-    return;
-  }
-
-  final salesBox = Hive.box<SalesModel>(ksalesBox);
-  final productsHive = Hive.box<ProductModel>(productBox);
-  final returnsBox = Hive.box<ReturnTransaction>(kReturnsBox);
-
-  // 1) Subtotal الأصلي قبل الخصم
-  final double originalSubtotal = sale.soldProducts.fold<double>(
-    0,
-    (sum, p) => sum + (p.sellingPrice * p.quantity),
-  );
-
-  double discountRatioOnOriginal;
-  try {
-    discountRatioOnOriginal = originalSubtotal > 0
-        ? (sale.discount / originalSubtotal)
-        : 0.0;
-  } catch (e) {
-    debugPrint('Error calculating discount ratio: $e');
-    return;
-  }
-
-  // 2) حضّر المتغيرات
-  double returnedSubtotal = 0.0;
-  double totalProfitReduced = 0.0;
-  final List<ReturnedProduct> returnedProducts = [];
-
-  // 3) لف على الأصناف المطلوبة
-  for (final entry in quantitiesToReturn.entries) {
-    final productName = entry.key;
-    final qtyRequested = entry.value;
-
-    if (qtyRequested <= 0) continue;
-
-    final SoldProductModel soldItem = sale.soldProducts
-        .firstWhere((sp) => sp.productName == productName);
-
-    if (qtyRequested > soldItem.quantity) {
+    required SalesModel sale,
+    required Map<String, int> quantitiesToReturn, 
+    required WidgetRef ref,
+    required BuildContext context,
+  }) async {
+    if (quantitiesToReturn.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Cannot return more than sold for $productName')),
+        const SnackBar(
+          content: Text('No quantities selected to return', style: TextStyle(color: Colors.white),),
+          backgroundColor: AppColors.kScaffoldMessageRedColors,
+        ),
       );
-      return; // وقف هنا
-    }
-
-    final int qtyToReturn = qtyRequested;
-
-    final double itemSubtotal = soldItem.sellingPrice * qtyToReturn;
-    final double itemAllocatedDiscount = itemSubtotal * discountRatioOnOriginal;
-
-    final double itemGrossProfit =
-        (soldItem.sellingPrice - soldItem.buyingPrice) * qtyToReturn;
-
-    final double itemProfitReduced = itemGrossProfit - itemAllocatedDiscount;
-
-    try {
-      await ref
-          .read(productProviderNotifier.notifier)
-          .increaseProductQuantity(productName, qtyToReturn);
-    } on Exception catch (e) {
-      debugPrint('Error increasing product quantity: $e');
       return;
     }
 
-    final prodIndex = productsHive.values.toList().indexWhere(
-      (p) => p.productName == productName,
+    final salesBox = Hive.box<SalesModel>(ksalesBox);
+    final productsHive = Hive.box<ProductModel>(productBox);
+    final returnsBox = Hive.box<ReturnTransaction>(kReturnsBox);
+
+    final double originalSubtotal = sale.soldProducts.fold<double>(
+      0,
+      (sum, p) => sum + (p.sellingPrice * p.quantity),
     );
-    String productIdStr = '';
-    if (prodIndex != -1) {
-      final p = productsHive.getAt(prodIndex)!;
-      productIdStr = p.id.toString();
+
+    double discountRatioOnOriginal;
+    try {
+      discountRatioOnOriginal = originalSubtotal > 0
+          ? (sale.discount / originalSubtotal)
+          : 0.0;
+    } catch (e) {
+      debugPrint('Error calculating discount ratio: $e');
+      return;
     }
 
-    returnedProducts.add(
-      ReturnedProduct(
-        productId: productIdStr,
-        name: productName,
-        quantity: qtyToReturn,
-        price: soldItem.sellingPrice,
-        profitReduced: itemProfitReduced,
+    double returnedSubtotal = 0.0;
+    double totalProfitReduced = 0.0;
+    final List<ReturnedProduct> returnedProducts = [];
+
+    for (final entry in quantitiesToReturn.entries) {
+      final productName = entry.key;
+      final qtyRequested = entry.value;
+
+      if (qtyRequested <= 0) continue;
+
+      final SoldProductModel soldItem = sale.soldProducts.firstWhere(
+        (sp) => sp.productName == productName,
+      );
+
+      if (qtyRequested > soldItem.quantity) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Cannot return more than sold for $productName', style: TextStyle(color: Colors.white),),
+            backgroundColor: AppColors.kScaffoldMessageRedColors,
+          ),
+        );
+        return; 
+      }
+
+      final int qtyToReturn = qtyRequested;
+
+      final double itemSubtotal = soldItem.sellingPrice * qtyToReturn;
+      final double itemAllocatedDiscount =
+          itemSubtotal * discountRatioOnOriginal;
+
+      final double itemGrossProfit =
+          (soldItem.sellingPrice - soldItem.buyingPrice) * qtyToReturn;
+
+      final double itemProfitReduced = itemGrossProfit - itemAllocatedDiscount;
+
+      try {
+        await ref
+            .read(productProviderNotifier.notifier)
+            .increaseProductQuantity(productName, qtyToReturn);
+      } on Exception catch (e) {
+        debugPrint('Error increasing product quantity: $e');
+        return;
+      }
+
+      final prodIndex = productsHive.values.toList().indexWhere(
+        (p) => p.productName == productName,
+      );
+      String productIdStr = '';
+      if (prodIndex != -1) {
+        final p = productsHive.getAt(prodIndex)!;
+        productIdStr = p.id.toString();
+      }
+
+      returnedProducts.add(
+        ReturnedProduct(
+          productId: productIdStr,
+          name: productName,
+          quantity: qtyToReturn,
+          price: soldItem.sellingPrice,
+          profitReduced: itemProfitReduced,
+        ),
+      );
+
+      returnedSubtotal += itemSubtotal;
+      totalProfitReduced += itemProfitReduced;
+    }
+
+    if (returnedProducts.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Nothing to return', style: TextStyle(color: Colors.white)),
+          backgroundColor: AppColors.kScaffoldMessageRedColors,
+        ),
+      );
+      return;
+    }
+
+    final double discountReturned = returnedSubtotal * discountRatioOnOriginal;
+    final double totalRefund = returnedSubtotal - discountReturned;
+
+    final updatedSoldProducts = sale.soldProducts
+        .map((sp) {
+          final r = quantitiesToReturn[sp.productName] ?? 0;
+          final newQty = sp.quantity - (r > sp.quantity ? sp.quantity : r);
+          if (newQty > 0) {
+            return SoldProductModel(
+              productName: sp.productName,
+              sellingPrice: sp.sellingPrice,
+              buyingPrice: sp.buyingPrice,
+              quantity: newQty,
+            );
+          } else {
+            return null;
+          }
+        })
+        .whereType<SoldProductModel>()
+        .toList();
+
+    final double remainingSubtotal =
+        originalSubtotal - returnedSubtotal; 
+    final double discountRemaining = sale.discount - discountReturned;
+    final double newTotal = remainingSubtotal - discountRemaining;
+    final double newChange = sale.paid - newTotal;
+
+    final saleIndex = salesBox.values.toList().indexOf(sale);
+    if (saleIndex != -1) {
+      if (updatedSoldProducts.isEmpty) {
+        try {
+          await salesBox.deleteAt(saleIndex);
+        } on Exception catch (e) {
+          debugPrint('Error deleting sale: $e');
+        }
+      } else {
+        final updatedSale = SalesModel(
+          discount: discountRemaining,
+          soldProducts: updatedSoldProducts,
+          paid: sale.paid,
+          dateTime: sale.dateTime,
+          total: newTotal,
+          change: newChange,
+          name: sale.name,
+        );
+        try {
+          await salesBox.putAt(saleIndex, updatedSale);
+        } on Exception catch (e) {
+          debugPrint('Error updating sale: $e');
+        }
+      }
+    }
+
+    final returnTx = ReturnTransaction(
+      id: DateTime.now().microsecondsSinceEpoch.toString(),
+      date: DateTime.now(),
+      products: returnedProducts,
+      totalRefund: totalRefund,
+      totalProfitReduced: totalProfitReduced,
+    );
+    try {
+      await returnsBox.add(returnTx);
+    } on Exception catch (e) {
+      debugPrint('Error adding return transaction: $e');
+    }
+
+    ref.read(salesProductProvider.notifier).state = salesBox.values
+        .toList()
+        .reversed
+        .toList();
+
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text('Return processed successfully', style: TextStyle(color: Colors.white)),
+        backgroundColor: Colors.green,
       ),
     );
-
-    returnedSubtotal += itemSubtotal;
-    totalProfitReduced += itemProfitReduced;
   }
-
-  if (returnedProducts.isEmpty) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('Nothing to return')),
-    );
-    return;
-  }
-
-  // 4) احسب الخصم المسترجع وقيمة الاسترجاع
-  final double discountReturned = returnedSubtotal * discountRatioOnOriginal;
-  final double totalRefund = returnedSubtotal - discountReturned;
-
-  // 5) عدل عملية البيع
-  final updatedSoldProducts = sale.soldProducts.map((sp) {
-    final r = quantitiesToReturn[sp.productName] ?? 0;
-    final newQty = sp.quantity - (r > sp.quantity ? sp.quantity : r);
-    if (newQty > 0) {
-      return SoldProductModel(
-        productName: sp.productName,
-        sellingPrice: sp.sellingPrice,
-        buyingPrice: sp.buyingPrice,
-        quantity: newQty,
-      );
-    } else {
-      return null;
-    }
-  }).whereType<SoldProductModel>().toList();
-
-  // 6) إجمالي جديد
-  final double remainingSubtotal =
-      originalSubtotal - returnedSubtotal; // قبل الخصم
-  final double discountRemaining = sale.discount - discountReturned;
-  final double newTotal = remainingSubtotal - discountRemaining;
-  final double newChange = sale.paid - newTotal;
-
-  // 7) اكتب في Hive
-  final saleIndex = salesBox.values.toList().indexOf(sale);
-  if (saleIndex != -1) {
-    if (updatedSoldProducts.isEmpty) {
-      try {
-        await salesBox.deleteAt(saleIndex);
-      } on Exception catch (e) {
-        debugPrint('Error deleting sale: $e');
-      }
-    } else {
-      final updatedSale = SalesModel(
-        discount: discountRemaining,
-        soldProducts: updatedSoldProducts,
-        paid: sale.paid,
-        dateTime: sale.dateTime,
-        total: newTotal,
-        change: newChange,
-        name: sale.name,
-      );
-      try {
-        await salesBox.putAt(saleIndex, updatedSale);
-      } on Exception catch (e) {
-        debugPrint('Error updating sale: $e');
-      }
-    }
-  }
-
-  // 8) سجل عملية الإرجاع
-  final returnTx = ReturnTransaction(
-    id: DateTime.now().microsecondsSinceEpoch.toString(),
-    date: DateTime.now(),
-    products: returnedProducts,
-    totalRefund: totalRefund,
-    totalProfitReduced: totalProfitReduced,
-  );
-  try {
-    await returnsBox.add(returnTx);
-  } on Exception catch (e) {
-    debugPrint('Error adding return transaction: $e');
-  }
-
-  // 9) حدث UI
-  ref.read(salesProductProvider.notifier).state =
-      salesBox.values.toList().reversed.toList();
-
-  // 10) رسالة نجاح
-  ScaffoldMessenger.of(context).showSnackBar(
-    const SnackBar(content: Text('Return processed successfully')),
-  );
-}
-
-
-
 }

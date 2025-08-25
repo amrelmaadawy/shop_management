@@ -68,7 +68,7 @@ class SalesView extends ConsumerWidget {
                             ),
                           );
                         },
-                        icon: Icon(Icons.assessment_rounded),
+                        icon: Icon(Icons.assignment_return),
                       ),
                     ),
                   ],
@@ -126,12 +126,17 @@ class SalesView extends ConsumerWidget {
               SizedBox(height: 15),
               SizedBox(
                 height: MediaQuery.of(context).size.height * 0.345,
-                child: ListView.separated(
-                  shrinkWrap: true,
-                  itemBuilder: (context, index) {
-                    return todaySales.isEmpty
-                        ? Center(child: Text(S.of(context).thereIsNoSalesToday))
-                        : TransactionItem(
+                child: todaySales.isEmpty
+                    ? Center(
+                        child: Text(
+                          S.of(context).thereIsNoSalesToday,
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                      )
+                    : ListView.separated(
+                        shrinkWrap: true,
+                        itemBuilder: (context, index) {
+                          return TransactionItem(
                             clientName: todaySales[index].name.isEmpty
                                 ? S.of(context).unknown
                                 : todaySales[index].name,
@@ -145,10 +150,11 @@ class SalesView extends ConsumerWidget {
                             ),
                             sale: todaySales[index],
                           );
-                  },
-                  separatorBuilder: (context, index) => SizedBox(height: 5),
-                  itemCount: todaySales.length,
-                ),
+                        },
+                        separatorBuilder: (context, index) =>
+                            SizedBox(height: 5),
+                        itemCount: todaySales.length,
+                      ),
               ),
             ],
           ),

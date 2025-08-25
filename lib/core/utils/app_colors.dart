@@ -14,5 +14,6 @@ class AppColors {
   static const Color kGreyElevatedButtonDarkMode = Color(0XFF2B3036);
   static const Color kLabelFormFeildLightMode = Color(0XFF637887);
   static const Color kBlackTextLightMode = Color(0XFF121417);
+  static const Color kScaffoldMessageRedColors = Color(0xFF8B0000);
 
 }

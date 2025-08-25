@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive/hive.dart';
 import 'package:small_managements/core/hive_boxes.dart';
+import 'package:small_managements/core/utils/app_colors.dart';
 import 'package:small_managements/features/products/data/product_local_data.dart';
 import 'package:small_managements/features/products/model/product_model.dart';
 import 'package:small_managements/generated/l10n.dart';
@@ -27,15 +28,13 @@ class ProductProvider extends StateNotifier<List<ProductModel>> {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(S.of(context).productWithTheSameNameAlreadyExists),
-          backgroundColor: Colors.red,
+          backgroundColor: AppColors.kScaffoldMessageRedColors,
         ),
       );
-    }else
-    {
- await productLocalData.addProduct(product);
-    loadProducts();
+    } else {
+      await productLocalData.addProduct(product);
+      loadProducts();
     }
-   
   }
 
   Future<void> deletProduct(int index) async {
@@ -69,25 +68,25 @@ class ProductProvider extends StateNotifier<List<ProductModel>> {
       state = box.values.toList();
     }
   }
+
   Future<void> increaseProductQuantity(
-  String productName,
-  int quantityToAdd,
-) async {
-  final hiveBox = Hive.box<ProductModel>(productBox);
+    String productName,
+    int quantityToAdd,
+  ) async {
+    final hiveBox = Hive.box<ProductModel>(productBox);
 
-  final index = hiveBox.values.toList().indexWhere(
-    (p) => p.productName == productName,
-  );
-
-  if (index != -1) {
-    final product = hiveBox.getAt(index)!;
-    final currentQuantity = int.parse(product.quantity);
-    final updatedProduct = product.copyWith(
-      quantity: (currentQuantity + quantityToAdd).toString(),
+    final index = hiveBox.values.toList().indexWhere(
+      (p) => p.productName == productName,
     );
-    await hiveBox.putAt(index, updatedProduct);
-    state = hiveBox.values.toList();
-  }
-}
 
+    if (index != -1) {
+      final product = hiveBox.getAt(index)!;
+      final currentQuantity = int.parse(product.quantity);
+      final updatedProduct = product.copyWith(
+        quantity: (currentQuantity + quantityToAdd).toString(),
+      );
+      await hiveBox.putAt(index, updatedProduct);
+      state = hiveBox.values.toList();
+    }
+  }
 }

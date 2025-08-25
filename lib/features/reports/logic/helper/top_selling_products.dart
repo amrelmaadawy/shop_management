@@ -5,19 +5,25 @@ import 'package:small_managements/features/sales/logic/provider/sales_provider.d
 
 List<MapEntry<ProductModel, int>> getTopSellingProducts(WidgetRef ref) {
   final allSales = ref.watch(salesProductProvider);
-  final allProducts = ref.read(productProviderNotifier); // حسب ما سميت البروفايدر
+  final allProducts = ref.read(productProviderNotifier);
 
   final Map<ProductModel, int> productQuantities = {};
 
   for (final sale in allSales) {
     for (final soldProduct in sale.soldProducts) {
-      final product = allProducts.firstWhere((p) => p.productName == soldProduct.productName);
+      final product = allProducts.where((p) => p.productName == soldProduct.productName);
 
-      productQuantities.update(
-        product,
-        (existingQuantity) => existingQuantity + soldProduct.quantity,
-        ifAbsent: () => soldProduct.quantity,
-      );
+      if (product.isNotEmpty) {
+        final foundProduct = product.first;
+
+        productQuantities.update(
+          foundProduct,
+          (existingQuantity) => existingQuantity + soldProduct.quantity,
+          ifAbsent: () => soldProduct.quantity,
+        );
+      } else {
+        continue;
+      }
     }
   }
 
