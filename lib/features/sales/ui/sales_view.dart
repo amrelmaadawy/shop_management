@@ -7,6 +7,7 @@ import 'package:small_managements/features/sales/logic/helper/time_converter.dar
 import 'package:small_managements/features/sales/logic/provider/sales_provider.dart';
 import 'package:small_managements/features/sales/ui/all_sales_view.dart';
 import 'package:small_managements/features/sales/ui/make_sale.dart';
+import 'package:small_managements/features/sales/ui/returned_products.dart';
 import 'package:small_managements/features/sales/ui/widgets/custom_sales_container.dart';
 import 'package:small_managements/features/sales/ui/widgets/total_profit_today.dart';
 import 'package:small_managements/features/sales/ui/widgets/transaction_item.dart';
@@ -56,6 +57,20 @@ class SalesView extends ConsumerWidget {
                         icon: Icon(Icons.add),
                       ),
                     ),
+                    Positioned(
+                      right: 50,
+                      child: IconButton(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => ReturnedSalesPage(),
+                            ),
+                          );
+                        },
+                        icon: Icon(Icons.assessment_rounded),
+                      ),
+                    ),
                   ],
                 ),
               ),
@@ -93,10 +108,7 @@ class SalesView extends ConsumerWidget {
                     onPressed: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(
-                          builder: (context) =>
-                              AllSalesView(),
-                        ),
+                        MaterialPageRoute(builder: (context) => AllSalesView()),
                       );
                     },
                     child: Text(
