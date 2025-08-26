@@ -5,7 +5,7 @@ import 'package:printing/printing.dart';
 import 'package:small_managements/features/sales/model/sold_product_model.dart';
 Future<void> generateAndPreviewPdf(List<SoldProductModel> sales) async {
   final pdf = pw.Document();
-  final arabicFont = pw.Font.ttf(await rootBundle.load("assets/fonts/Cairo-Regular.ttf"));
+  final arabicFont = pw.Font.ttf(await rootBundle.load("assets/fonts/Amiri-Regular.ttf"));
 
   final totalSales = sales.fold<double>(
     0,
