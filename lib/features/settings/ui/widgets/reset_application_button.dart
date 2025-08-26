@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
+import 'package:restart_app/restart_app.dart';
 import 'package:small_managements/core/hive_boxes.dart';
 import 'package:small_managements/core/utils/app_colors.dart';
 import 'package:small_managements/generated/l10n.dart';
@@ -35,7 +36,8 @@ class ResetApplicationButton extends StatelessWidget {
                     await Hive.deleteBoxFromDisk(ksalesBox);
                     await Hive.deleteBoxFromDisk(productBox);
                     await Hive.deleteBoxFromDisk(categoriesBox);
-                    Navigator.pop(context);
+                    await Hive.deleteBoxFromDisk(kReturnsBox);
+                      Restart.restartApp(); 
                   },
                   child: Text(S.of(context).yes),
                 ),
