@@ -100,12 +100,7 @@ class CustomizedReport extends StatelessWidget {
               ElevatedButton(
                 onPressed: () async {
                   await generateAndPreviewPdf(
-                    totalSales: '$totalSales',
-                    totalProductSold: '$totalProductSold',
-                    totalProfit: '$totalProfit',
-                    startDate: startDate,
-                    endDate: endDate,
-                    soldProducts: soldProducts,
+                   soldProducts
                   );
                 },
                 style: ElevatedButton.styleFrom(

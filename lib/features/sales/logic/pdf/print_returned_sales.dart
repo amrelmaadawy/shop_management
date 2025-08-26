@@ -1,3 +1,4 @@
+import 'package:flutter/services.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:printing/printing.dart';
@@ -12,6 +13,7 @@ Future<void> generateReturnReport({
   required String endDate,
   required List<ReturnTransaction> returnTransactions,
 }) async {
+  final font = pw.Font.ttf(await rootBundle.load("assets/fonts/Amiri-Regular.ttf"));
   final pdf = pw.Document();
 
   pdf.addPage(
@@ -23,13 +25,17 @@ Future<void> generateReturnReport({
           /// العنوان الرئيسي
           pw.Center(
             child: pw.Text(
-              "Returned Sales Report",
-              style: pw.TextStyle(fontSize: 22, fontWeight: pw.FontWeight.bold),
+              "تقرير المبيعات المُرتجعة",
+              style: pw.TextStyle(
+                fontSize: 22,
+                fontWeight: pw.FontWeight.bold,
+                font: font,
+              ),
             ),
           ),
           pw.SizedBox(height: 10),
-          pw.Text("Period: $startDate → $endDate",
-              style: const pw.TextStyle(fontSize: 14)),
+          pw.Text("الفترة: $startDate → $endDate",
+              style: pw.TextStyle(fontSize: 14, font: font)),
 
           pw.SizedBox(height: 20),
 
@@ -43,12 +49,12 @@ Future<void> generateReturnReport({
             child: pw.Column(
               crossAxisAlignment: pw.CrossAxisAlignment.start,
               children: [
-                pw.Text("Total Refund: $totalRefund",
-                    style: pw.TextStyle(fontWeight: pw.FontWeight.bold)),
-                pw.Text("Total Products Returned: $totalProductsReturned",
-                    style: pw.TextStyle(fontWeight: pw.FontWeight.bold)),
-                pw.Text("Total Profit Reduced: $totalProfitReduced",
-                    style: pw.TextStyle(fontWeight: pw.FontWeight.bold)),
+                pw.Text("إجمالي المبالغ المُرتجعة: $totalRefund",
+                    style: pw.TextStyle(fontWeight: pw.FontWeight.bold, font: font)),
+                pw.Text("إجمالي المنتجات المُرتجعة: $totalProductsReturned",
+                    style: pw.TextStyle(fontWeight: pw.FontWeight.bold, font: font)),
+                pw.Text("إجمالي الأرباح المخصومة: $totalProfitReduced",
+                    style: pw.TextStyle(fontWeight: pw.FontWeight.bold, font: font)),
               ],
             ),
           ),
@@ -60,13 +66,13 @@ Future<void> generateReturnReport({
             return pw.Column(
               crossAxisAlignment: pw.CrossAxisAlignment.start,
               children: [
-              
-                pw.Text("Date: ${formatDateTimeTo12Hour(transaction.date.toLocal())}"),
+                pw.Text("التاريخ: ${formatDateTimeTo12Hour(transaction.date.toLocal())}",
+                    style: pw.TextStyle(font: font)),
 
                 pw.SizedBox(height: 10),
                 pw.TableHelper.fromTextArray(
                   border: pw.TableBorder.all(width: 1, color: PdfColors.black),
-                  headers: ["Product", "Qty", "Price", "Profit Reduced"],
+                  headers: ["المنتج", "الكمية", "السعر", "الأرباح المخصومة"],
                   data: transaction.products.map((p) {
                     return [
                       p.name,
@@ -75,13 +81,16 @@ Future<void> generateReturnReport({
                       "-${p.profitReduced.toStringAsFixed(2)}"
                     ];
                   }).toList(),
+                  headerStyle: pw.TextStyle(
+                      fontWeight: pw.FontWeight.bold, font: font),
+                  cellStyle: pw.TextStyle(font: font),
                 ),
                 pw.SizedBox(height: 10),
 
-                pw.Text("Refund: ${transaction.totalRefund}",
-                    style: pw.TextStyle(fontWeight: pw.FontWeight.bold)),
-                pw.Text("Profit Reduced: ${transaction.totalProfitReduced}",
-                    style: pw.TextStyle(fontWeight: pw.FontWeight.bold)),
+                pw.Text("المبلغ المُرتجع: ${transaction.totalRefund}",
+                    style: pw.TextStyle(fontWeight: pw.FontWeight.bold, font: font)),
+                pw.Text("الأرباح المخصومة: ${transaction.totalProfitReduced}",
+                    style: pw.TextStyle(fontWeight: pw.FontWeight.bold, font: font)),
                 pw.Divider(),
                 pw.SizedBox(height: 15),
               ],

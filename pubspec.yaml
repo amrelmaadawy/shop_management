@@ -101,6 +101,10 @@ flutter:
         - asset: assets\fonts\RobotoSlab-Regular.ttf
         - asset: assets\fonts\RobotoSlab-SemiBold.ttf
         - asset: assets\fonts\RobotoSlab-Thin.ttf
+        - asset: assets\fonts\Amiri-Bold.ttf
+        - asset: assets\fonts\Amiri-BoldItalic.ttf
+        - asset: assets\fonts\Amiri-Italic.ttf
+        - asset: assets\fonts\Amiri-Regular.ttf
   #         style: italic
   #   - family: Trajan Pro
   #     fonts:

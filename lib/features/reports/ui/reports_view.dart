@@ -65,11 +65,7 @@ class _ReportsViewState extends ConsumerState<ReportsView> {
                         ),
                       ),
                       PrintIcon(
-                        totalSales: totalSales,
-                        totalProductsSold: totalProductsSold,
-                        totalProfit: totalProfit,
-                        startDate: startDate,
-                        endDate: endDate,
+                    
                         soldProducts:soldProducts ,
                       ),
                       FilterDateIcon(
