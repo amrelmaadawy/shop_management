@@ -19,6 +19,7 @@ class ListOfProductsView extends StatelessWidget {
           final products = ref.watch(productProviderNotifier);
           final selectedCategory = ref.watch(selectedCategoryProvider);
           final searchText = ref.watch(searchProvider).toLowerCase();
+          
           final filtered = products.where((product) {
             final matchesCategory =
                 selectedCategory == null ||
@@ -26,8 +27,10 @@ class ListOfProductsView extends StatelessWidget {
             final matchesSearch = product.productName.toLowerCase().contains(
               searchText,
             );
-            return matchesSearch & matchesCategory;
+            // الحل: غيّر & لـ &&
+            return matchesSearch && matchesCategory;
           }).toList();
+          
           return filtered.isEmpty
               ? Center(
                   child: Text(
@@ -50,7 +53,7 @@ class ListOfProductsView extends StatelessWidget {
                       productName: product.productName,
                       quantity: product.quantity,
                       index: index,
-                      productModel: products[index],
+                      productModel: product, // كمان غيّرت products[index] لـ product
                     );
                   },
                   itemCount: filtered.length,

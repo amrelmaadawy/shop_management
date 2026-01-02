@@ -3,6 +3,7 @@ import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:printing/printing.dart';
 import 'package:small_managements/features/sales/model/sold_product_model.dart';
+
 Future<void> generateAndPreviewPdf(List<SoldProductModel> sales) async {
   final pdf = pw.Document();
   final arabicFont = pw.Font.ttf(await rootBundle.load("assets/fonts/Amiri-Regular.ttf"));
@@ -29,7 +30,7 @@ Future<void> generateAndPreviewPdf(List<SoldProductModel> sales) async {
               pw.SizedBox(height: 20),
               pw.TableHelper.fromTextArray(
                 headers: ["المنتج", "الكمية", "الإجمالي"],
-                data: sales.map((s) => [s.productName, s.quantity, s.total]).toList(),
+                data: sales.map((s) => [s.productName, s.quantity.toString(), s.total.toStringAsFixed(2)]).toList(),
                 headerStyle: pw.TextStyle(font: arabicFont, fontWeight: pw.FontWeight.bold),
                 headerDecoration: pw.BoxDecoration(color: PdfColors.grey300),
                 cellStyle: pw.TextStyle(font: arabicFont, fontSize: 12),
@@ -37,7 +38,7 @@ Future<void> generateAndPreviewPdf(List<SoldProductModel> sales) async {
               ),
               pw.SizedBox(height: 20),
               pw.Text(
-                "إجمالي المبيعات: $totalSales",
+                "إجمالي المبيعات: ${totalSales.toStringAsFixed(2)}",
                 style: pw.TextStyle(font: arabicFont, fontSize: 16, fontWeight: pw.FontWeight.bold),
               ),
             ],
@@ -47,5 +48,9 @@ Future<void> generateAndPreviewPdf(List<SoldProductModel> sales) async {
     ),
   );
 
-  await Printing.layoutPdf(onLayout: (PdfPageFormat format) async => pdf.save());
+  // بدل layoutPdf
+  await Printing.sharePdf(
+    bytes: await pdf.save(),
+    filename: 'تقرير_المبيعات_${DateTime.now().millisecondsSinceEpoch}.pdf',
+  );
 }

@@ -14,23 +14,60 @@ class CategoryFiltered extends StatelessWidget {
 
   final List<CategoryModel> categories;
   final WidgetRef ref;
+
+  // قيمة خاصة لـ "All"
+  static const String allCategoriesValue = '__ALL_CATEGORIES__';
+
   @override
   Widget build(BuildContext context) {
+    final selectedCategory = ref.watch(selectedCategoryProvider);
+    
     return Row(
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
-        PopupMenuButton<CategoryModel?>(
-          child: CustomProductContainer(text: S.of(context).category),
+        PopupMenuButton<String>(
+          // عرض النص الحالي
+          child: CustomProductContainer(
+            text: selectedCategory == null || selectedCategory == allCategoriesValue
+                ? S.of(context).all
+                : selectedCategory,
+          ),
           onSelected: (value) {
-            ref.read(selectedCategoryProvider.notifier).state =
-                value?.categoryName;
+            print('Selected: $value'); // للـ debugging
+            // لو اختار "All"، حط null
+            if (value == allCategoriesValue) {
+              ref.read(selectedCategoryProvider.notifier).state = null;
+            } else {
+              ref.read(selectedCategoryProvider.notifier).state = value;
+            }
           },
           itemBuilder: (_) => [
-            PopupMenuItem<CategoryModel?>(value: null, child: Text(S.of(context).all)),
+            // خيار "All" بقيمة خاصة
+            PopupMenuItem<String>(
+              value: allCategoriesValue,
+              child: Row(
+                children: [
+                  if (selectedCategory == null || selectedCategory == allCategoriesValue)
+                    Icon(Icons.check, size: 18),
+                  if (selectedCategory == null || selectedCategory == allCategoriesValue)
+                    SizedBox(width: 8),
+                  Text(S.of(context).all),
+                ],
+              ),
+            ),
+            // الفئات الباقية
             ...categories.map(
-              (e) => PopupMenuItem<CategoryModel?>(
-                value: e,
-                child: Text(e.categoryName),
+              (e) => PopupMenuItem<String>(
+                value: e.categoryName,
+                child: Row(
+                  children: [
+                    if (selectedCategory == e.categoryName)
+                      Icon(Icons.check, size: 18),
+                    if (selectedCategory == e.categoryName)
+                      SizedBox(width: 8),
+                    Text(e.categoryName),
+                  ],
+                ),
               ),
             ),
           ],

@@ -16,12 +16,12 @@ class SearchForProductFormField extends StatefulWidget {
   @override
   SearchForProductFormFieldState createState() => SearchForProductFormFieldState();
 }
-
 class SearchForProductFormFieldState extends State<SearchForProductFormField> {
   final TextEditingController _controller = TextEditingController();
   final FocusNode _focusNode = FocusNode();
   OverlayEntry? _overlayEntry;
   final LayerLink _layerLink = LayerLink();
+  bool _isSelectingProduct = false; // متغير جديد
 
   @override
   void initState() {
@@ -31,8 +31,12 @@ class SearchForProductFormFieldState extends State<SearchForProductFormField> {
   }
 
   void _handleFocusChange() {
-    if (!_focusNode.hasFocus) {
-      _removeOverlay();
+    if (!_focusNode.hasFocus && !_isSelectingProduct) {
+      Future.delayed(Duration(milliseconds: 150), () {
+        if (!_isSelectingProduct) {
+          _removeOverlay();
+        }
+      });
     }
   }
 
@@ -57,7 +61,7 @@ class SearchForProductFormFieldState extends State<SearchForProductFormField> {
         child: CompositedTransformFollower(
           link: _layerLink,
           showWhenUnlinked: false,
-          offset: Offset(0, 60), // اضبط الموضع حسب الـ TextField
+          offset: Offset(0, 60),
           child: Material(
             elevation: 8,
             child: Container(
@@ -67,15 +71,34 @@ class SearchForProductFormFieldState extends State<SearchForProductFormField> {
                 itemCount: products.length,
                 itemBuilder: (context, index) {
                   final product = products[index];
-                  return ListTile(
-                    title: Text(product.productName),
-                    trailing: Text("${product.sellingPrice} \$"),
-                    onTap: () {
-                      widget.ref.read(selectProductProvider.notifier).addProduct(product);
-                      _controller.clear();
-                      _removeOverlay();
-                      _focusNode.requestFocus(); // إعادة التركيز للحقل
-                    },
+                  return MouseRegion(
+                    cursor: SystemMouseCursors.click,
+                    onEnter: (_) => _isSelectingProduct = true,
+                    onExit: (_) => _isSelectingProduct = false,
+                    child: InkWell(
+                      onTap: () {
+                        _isSelectingProduct = false;
+                        widget.ref.read(selectProductProvider.notifier).addProduct(product);
+                        _controller.clear();
+                        _removeOverlay();
+                        Future.delayed(Duration(milliseconds: 100), () {
+                          _focusNode.requestFocus();
+                        });
+                      },
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Expanded(child: Text(product.productName)),
+                            Text(
+                              "${product.sellingPrice} \$",
+                              style: TextStyle(fontWeight: FontWeight.bold),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
                   );
                 },
               ),

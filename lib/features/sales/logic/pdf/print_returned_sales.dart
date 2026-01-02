@@ -26,7 +26,6 @@ Future<void> generateReturnReport({
           child: pw.Column(
             crossAxisAlignment: pw.CrossAxisAlignment.start,
             children: [
-              /// العنوان
               pw.Text(
                 "تقرير المبيعات المُرتجعة",
                 style: pw.TextStyle(
@@ -42,7 +41,6 @@ Future<void> generateReturnReport({
               ),
               pw.SizedBox(height: 20),
 
-              /// جدول المرتجعات
               pw.TableHelper.fromTextArray(
                 headers: ["التاريخ", "المنتج", "الكمية", "السعر", "الأرباح المخصومة", "المبلغ المُرتجع"],
                 data: returnTransactions.expand((transaction) {
@@ -65,7 +63,6 @@ Future<void> generateReturnReport({
 
               pw.SizedBox(height: 20),
 
-              /// الإجماليات
               pw.Text(
                 "إجمالي المبالغ المُرتجعة: $totalRefund",
                 style: pw.TextStyle(fontWeight: pw.FontWeight.bold, font: font, fontSize: 14),
@@ -85,7 +82,10 @@ Future<void> generateReturnReport({
     ),
   );
 
-  await Printing.layoutPdf(
-    onLayout: (PdfPageFormat format) async => pdf.save(),
+  // بدل layoutPdf استخدم sharePdf
+  // ده بيفتح preview window فيها خيارات: Print, Save, Share
+  await Printing.sharePdf(
+    bytes: await pdf.save(),
+    filename: 'تقرير_المرتجعات_${DateTime.now().millisecondsSinceEpoch}.pdf',
   );
 }

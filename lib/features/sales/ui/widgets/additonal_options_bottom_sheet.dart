@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:small_managements/core/utils/app_colors.dart';
 import 'package:small_managements/core/utils/custom_text_form_field.dart';
@@ -41,8 +42,11 @@ class _AdditionalOptionsBottomSheetState
             Form(
               key: key,
               child: CustomTextFormField(
+                inputFormatters: [
+                  FilteringTextInputFormatter.allow(RegExp(r'^\d*\.?\d*$')),
+                ],
                 controller: paidController,
-                keyboardType: TextInputType.number,
+                keyboardType: TextInputType.numberWithOptions(decimal: true),
                 labelText: S.of(context).paid,
                 validator: (v) {
                   if (v == null || v.isEmpty) {
@@ -54,8 +58,11 @@ class _AdditionalOptionsBottomSheetState
             ),
             SizedBox(height: 10),
             CustomTextFormField(
+              inputFormatters: [
+                  FilteringTextInputFormatter.allow(RegExp(r'^\d*\.?\d*$')),
+                ],
               controller: discountController,
-              keyboardType: TextInputType.text,
+                keyboardType: TextInputType.numberWithOptions(decimal: true),
               labelText:
                   '${S.of(context).discount} (${S.of(context).optional})',
               validator: (v) {

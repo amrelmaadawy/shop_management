@@ -48,5 +48,9 @@ Future<void> generateAndPreviewProductPdf(List<ProductModel> products) async {
     ),
   );
 
-  await Printing.layoutPdf(onLayout: (PdfPageFormat format) async => pdf.save());
+  // بدل layoutPdf
+  await Printing.sharePdf(
+    bytes: await pdf.save(),
+    filename: 'تقرير_المنتجات_${DateTime.now().millisecondsSinceEpoch}.pdf',
+  );
 }
