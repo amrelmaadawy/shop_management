@@ -1,4 +1,4 @@
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_riverpod/legacy.dart';
 import 'package:small_managements/features/sales/logic/notifier/select_product_notifier.dart';
 import 'package:small_managements/features/sales/model/selected_prodcut_model.dart';
 

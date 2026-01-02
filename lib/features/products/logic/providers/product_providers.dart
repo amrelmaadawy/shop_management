@@ -1,5 +1,5 @@
 
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_riverpod/legacy.dart';
 import 'package:small_managements/features/products/logic/notifier/product_notifier.dart';
 import 'package:small_managements/features/products/model/product_model.dart';
 
