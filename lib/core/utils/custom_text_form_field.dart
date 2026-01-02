@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:small_managements/core/utils/app_colors.dart';
 
 class CustomTextFormField extends StatelessWidget {
@@ -12,6 +13,7 @@ class CustomTextFormField extends StatelessWidget {
     this.suffixIcon,
     this.focusNode,
     this.onChange,
+    this.inputFormatters,
   });
   final TextEditingController controller;
   final TextInputType keyboardType;
@@ -21,11 +23,13 @@ class CustomTextFormField extends StatelessWidget {
   final String? Function(String?) validator;
   final void Function(String)? onChange;
   final FocusNode? focusNode;
+ final List<TextInputFormatter>? inputFormatters;
   @override
   Widget build(BuildContext context) {
   final isDark = Theme.of(context).brightness == Brightness.dark;
 
     return TextFormField(
+       inputFormatters:inputFormatters,
       focusNode: focusNode,
       onChanged: onChange,
       controller: controller,

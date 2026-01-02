@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:small_managements/core/utils/custom_text_form_field.dart';
 import 'package:small_managements/features/products/ui/widgets/select_category.dart';
 import 'package:small_managements/generated/l10n.dart';
 
 class AddProductTextFormFields extends ConsumerStatefulWidget {
-  const AddProductTextFormFields( {
+  const AddProductTextFormFields({
     super.key,
     required this.productNameController,
     required this.buyingPriceController,
     required this.quantityController,
     required this.ref,
     required this.categoryController,
-   required this.sellingPriceController,
+    required this.sellingPriceController,
   });
 
   final TextEditingController productNameController;
@@ -50,8 +51,11 @@ class _AddProductTextFormFieldsState
         ),
         SizedBox(height: 15),
         CustomTextFormField(
+          inputFormatters: [
+            FilteringTextInputFormatter.allow(RegExp(r'^\d*\.?\d*$')),
+          ],
           controller: widget.buyingPriceController,
-          keyboardType: TextInputType.number,
+          keyboardType: const TextInputType.numberWithOptions(decimal: true),
           labelText: S.of(context).buyingPrice,
           validator: (value) {
             if (value!.isEmpty) {
@@ -63,8 +67,11 @@ class _AddProductTextFormFieldsState
         ),
         SizedBox(height: 15),
         CustomTextFormField(
+           inputFormatters: [
+            FilteringTextInputFormatter.allow(RegExp(r'^\d*\.?\d*$')),
+          ],
           controller: widget.sellingPriceController,
-          keyboardType: TextInputType.number,
+          keyboardType: const TextInputType.numberWithOptions(decimal: true),
           labelText: S.of(context).sellingPrice,
           validator: (value) {
             if (value!.isEmpty) {
@@ -76,6 +83,9 @@ class _AddProductTextFormFieldsState
         ),
         SizedBox(height: 15),
         CustomTextFormField(
+          inputFormatters: [
+            FilteringTextInputFormatter.digitsOnly
+          ],
           controller: widget.quantityController,
           keyboardType: TextInputType.number,
           labelText: S.of(context).quantity,
@@ -88,7 +98,11 @@ class _AddProductTextFormFieldsState
           },
         ),
         SizedBox(height: 15),
-        SelectCategory(ref: ref, addCategoryController: addCategoryController, widget: widget),
+        SelectCategory(
+          ref: ref,
+          addCategoryController: addCategoryController,
+          widget: widget,
+        ),
       ],
     );
   }
