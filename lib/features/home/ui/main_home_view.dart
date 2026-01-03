@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:small_managements/core/services/check_updates.dart';
 import 'package:small_managements/features/home/logic/home_provider.dart';
 import 'package:small_managements/features/home/ui/home_view.dart';
 import 'package:small_managements/features/products/ui/products_view.dart';
@@ -24,6 +25,13 @@ class _MainHomeViewState extends ConsumerState<MainHomeView> {
     ReportsView(),
     SettingsView(),
   ];
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      UpdateChecker.checkForUpdates(context);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {

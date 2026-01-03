@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:small_managements/core/services/hive_backup.dart';
 import 'package:small_managements/core/utils/app_colors.dart';
 import 'package:small_managements/core/utils/custom_text_form_field.dart';
 import 'package:small_managements/features/settings/logic/setting_provider.dart';
@@ -85,7 +86,7 @@ class _SettingsViewState extends ConsumerState<SettingsView> {
                       final prefs = await SharedPreferences.getInstance();
                       prefs.setBool('isDark', isDark);
                     },
-                    activeColor: AppColors.kUnselectedItemDarkMode,
+                    activeThumbColor: AppColors.kUnselectedItemDarkMode,
                   ),
                 ),
                 SizedBox(height: 15),
@@ -152,7 +153,6 @@ class _SettingsViewState extends ConsumerState<SettingsView> {
                   ),
                 ),
                 SizedBox(height: 15),
-
                 InkWell(
                   onTap: () {
                     showDialog(
@@ -207,6 +207,45 @@ class _SettingsViewState extends ConsumerState<SettingsView> {
                     widget: Text(phoneNumber ?? S.of(context).empty),
                   ),
                 ),
+          // CustomSettingsRow(
+          //         icon: Icon(Icons.restore),
+          //         text:'Restore Backup Data',
+          //         widget: ElevatedButton(
+          //           onPressed: () async {
+          //             final success =
+          //                 await HiveBackupManager.restoreBackup();
+          //             final snackBar = SnackBar(
+          //               content: Text(
+          //                 success
+          //                     ? '✅ Backup restored successfully'
+          //                     : '❌ Restore error occurred',
+          //               ),
+          //             );
+          //             if (!mounted) return;
+          //             ScaffoldMessenger.of(context).showSnackBar(snackBar);
+          //           },
+          //           child: Text('Restore'))
+          //       ),
+                CustomSettingsRow(
+                  icon: Icon(Icons.backup_outlined),
+                  text:' Backup Data',
+                  widget: ElevatedButton(
+                    onPressed: () async {
+                      final success =
+                          await HiveBackupManager.createManualBackup();
+                      final snackBar = SnackBar(
+                        content: Text(
+                          success
+                              ? '✅ Backup  successfully'
+                              : '❌ Backup error occurred',
+                        ),
+                      );
+                      if (!mounted) return;
+                      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                    },
+                    child: Text('BackUp'))
+                ),
+
                 Spacer(),
                 ResetApplicationButton(isDark: isDark),
               ],

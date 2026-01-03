@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:small_managements/core/hive_boxes.dart';
+import 'package:small_managements/core/services/hive_backup.dart';
 import 'package:small_managements/core/utils/app_colors.dart';
 import 'package:small_managements/features/onboarding/UI/onboarding.dart';
 import 'package:small_managements/features/products/model/category_model.dart';
@@ -36,6 +37,8 @@ Future<void> main() async {
   await Hive.openBox<ProductModel>(productBox);
   await Hive.openBox<CategoryModel>(categoriesBox);
   await Hive.openBox<ReturnTransaction>(kReturnsBox);
+  await HiveBackupManager.createAutoBackup();
+  HiveBackupManager.scheduleAutoBackup();
 
   runApp(
     ProviderScope(

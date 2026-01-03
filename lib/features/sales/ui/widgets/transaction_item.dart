@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:small_managements/core/utils/app_colors.dart';
 import 'package:small_managements/features/sales/logic/provider/select_product_provider.dart';
@@ -91,6 +92,9 @@ class TransactionItem extends ConsumerWidget {
                     width: 60,
                     child: TextField(
                       controller: controller,
+                      inputFormatters: [
+                  FilteringTextInputFormatter.digitsOnly,
+                ],
                       keyboardType: TextInputType.number,
                       decoration: InputDecoration(
                         hintText: "0",
